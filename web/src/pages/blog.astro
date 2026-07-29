@@ -6,10 +6,10 @@ import BlogFilter from '../components/BlogFilter.svelte';
 import Footer from '../components/Footer.svelte';
 import { MessageCircle, ArrowRight, BookOpen } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%20konsultasi%20gratis";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27d%20like%20a%20free%20consultation";
 ---
 
-<Layout title="Blog Digital Marketing — Tips Iklan, Google Ads, Meta & TikTok | Beriklan" description="Tips, strategi, dan studi kasus digital marketing dari tim Beriklan. Pelajari Facebook Ads, Google Ads, TikTok Ads, Instagram, YouTube, dan strategi performance marketing lainnya." canonical="https://beriklan.my/blog/" nextUrl="https://beriklan.my/blog/page/2/">
+<Layout title="Digital Marketing Blog — Ads Tips, Google Ads, Meta & TikTok | Beriklan" description="Digital marketing tips, strategies and case studies from the Beriklan team. Learn Facebook Ads, Google Ads, TikTok Ads, Instagram, YouTube and performance marketing." canonical="https://beriklan.my/blog/" nextUrl="https://beriklan.my/blog/page/2/">
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -23,16 +23,16 @@ const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%2
         <div class="container mx-auto px-6 text-center max-w-3xl relative z-10">
             <div class="hero-eyebrow inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-ink font-semibold rounded-full text-xs tracking-wider uppercase shadow-sm mb-6">
                 <BookOpen class="w-3.5 h-3.5" />
-                Blog · Belajar Digital Marketing Indonesia
+                Blog · Learn Digital Marketing
             </div>
 
             <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] tracking-tight mb-6 anim-fade-up">
                 Belajar Digital Marketing<br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent">dari Pengalaman Nyata.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent">from Real Experience.</span>
             </h1>
 
             <p class="text-base md:text-lg text-muted leading-relaxed mb-8 anim-fade-up" style="animation-delay: 120ms;">
-                Artikel, panduan, dan studi kasus dari tim Beriklan. Tidak ada teori kosong — semuanya berdasarkan data dan pengalaman mengelola campaign lintas industri sejak 2016.
+                Articles, guides and case studies from the Beriklan team. No empty theory — everything based on data and experience managing campaigns across industries since 2016.
             </p>
         </div>
     </header>
@@ -44,7 +44,7 @@ const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%2
         </div>
         <div class="container mx-auto px-6 mt-10 text-center">
             <a href="/blog/page/2/" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-bold bg-ink text-white hover:bg-primary-2 transition-all">
-                Lihat artikel lainnya <ArrowRight class="w-4 h-4" />
+                See more articles <ArrowRight class="w-4 h-4" />
             </a>
         </div>
     </section>
@@ -59,19 +59,19 @@ const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%2
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Butuh diskusi langsung?
+                    Need to talk it through?
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-4xl leading-[1.1] tracking-tight mb-6">
-                    Punya pertanyaan spesifik<br/>
-                    <span class="text-accent">yang tidak ada di blog?</span>
+                    Have a specific question<br/>
+                    <span class="text-accent">not covered on the blog?</span>
                 </h2>
                 <p class="text-white/70 text-base leading-relaxed mb-8">
-                    Sesi konsultasi 15-30 menit gratis via WhatsApp. Tim kami akan berdiskusi langsung dengan Anda.
+                    A free 15-30 minute consultation session via WhatsApp. Our team will speak with you directly.
                 </p>
                 <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-7 py-3.5 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                     <span class="relative z-10 flex items-center gap-2">
                         <MessageCircle class="w-4 h-4" />
-                        Mulai Konsultasi
+                        Start a Consultation
                         <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                 </a>

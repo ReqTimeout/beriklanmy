@@ -33,7 +33,7 @@
 
     function formatNumber(n) {
         if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'K';
-        return n.toLocaleString('id-ID');
+        return n.toLocaleString('en-MY');
     }
 </script>
 
@@ -72,7 +72,7 @@
 
             <!-- Skip button -->
             <button class="absolute bottom-3 right-3 px-3 py-1.5 bg-black/80 backdrop-blur-sm rounded text-[10px] font-bold text-white hover:bg-black transition-colors">
-                Lewati iklan →
+                Skip Ad →
             </button>
 
             <!-- Center play -->
@@ -89,28 +89,28 @@
 
             <!-- Ad label -->
             <div class="absolute top-3 left-3 px-2 py-1 bg-black/70 backdrop-blur-sm rounded text-[9px] font-bold text-white uppercase tracking-wider">
-                Iklan · 6 detik
+                Ad · 6 seconds
             </div>
         </div>
 
         <!-- Video info -->
         <div class="p-4 space-y-3">
             <div>
-                <h3 class="font-display font-bold text-base text-ink leading-tight">Skincare Lokal yang Bikin Kulit Cerah dalam 7 Hari</h3>
+                <h3 class="font-display font-bold text-base text-ink leading-tight">Local Skincare that Brightens Your Skin in 7 Days</h3>
                 <div class="flex items-center gap-3 mt-1.5 text-[11px] text-muted">
                     <span>Brand Beauty Official</span>
                     <span>·</span>
                     <span class="flex items-center gap-1"><Eye class="w-3 h-3" /> {formatNumber(views)} views</span>
                     <span>·</span>
-                    <span>2 hari lalu</span>
+                    <span>2 days ago</span>
                 </div>
             </div>
             <div class="flex items-center gap-2">
                 <button class="flex items-center gap-1.5 px-3 py-1.5 bg-soft hover:bg-ink hover:text-white rounded-full text-xs font-bold transition-colors">
-                    <ThumbsUp class="w-3.5 h-3.5" /> 2,4K
+                    <ThumbsUp class="w-3.5 h-3.5" /> 2.4K
                 </button>
                 <button class="px-3 py-1.5 bg-soft hover:bg-ink hover:text-white rounded-full text-xs font-bold transition-colors">
-                    Bagikan
+                    Share
                 </button>
                 <button class="ml-auto w-8 h-8 rounded-full bg-soft hover:bg-ink hover:text-white flex items-center justify-center transition-colors">
                     <Settings class="w-3.5 h-3.5" />
@@ -126,7 +126,7 @@
                 <Eye class="w-4 h-4 text-red-600" />
             </div>
             <div>
-                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimasi Tayangan</p>
+                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimated Views</p>
                 <p class="text-base font-display font-extrabold text-ink leading-tight">35K–75K</p>
             </div>
         </div>
@@ -134,7 +134,7 @@
 
     <!-- FLOATING: Watch time -->
     <div class="hv-float-2 absolute -right-2 md:-right-12 top-8 bg-white rounded-xl shadow-pop border border-gray-100 p-3 w-44 hidden md:block">
-        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Rata-rata Watch Time</p>
+        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Avg. Watch Time</p>
         <p class="text-2xl font-display font-extrabold text-ink mt-1">{watchTime}<span class="text-sm text-muted">s</span></p>
         <div class="mt-2 h-1.5 bg-soft rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-red-500 to-orange-500 rounded-full" style="width: {Math.min((watchTime / 30) * 100, 95)}%; transition: width 0.4s ease;"></div>

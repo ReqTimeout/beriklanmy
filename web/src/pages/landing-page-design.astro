@@ -17,54 +17,36 @@ import Footer from '../components/Footer.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20paket%20promo%20Landing%20Page%20%2B%20Google%20Ads.%20Mohon%20info%20lebih%20lanjut.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20the%20Landing%20Page%20%2B%20Google%20Ads%20bundle.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'Landing Page + Google Ads',
-        priceLabel: '1.999.000',
-        duration: '1 LP + 1 bulan iklan',
-        tagline: 'Paket promo all-in-one untuk Anda yang ingin langsung dapat leads dari internet.',
-        features: [
-            '1 Landing Page profesional (desain custom)',
-            'Copywriting yang teruji konversi',
-            'Form kontak / WhatsApp integration',
-            '1 bulan Google Ads (budget harian Rp 50.000)',
-            'Setup conversion tracking',
-            'Riset kata kunci + analisis kompetitor',
-            'Tracking & analisis performa',
-            'Akses penuh ke akun Google Ads',
-        ],
-        priceNote: 'sudah termasuk 1 bulan ad spend Rp 1,5jt',
-        disclaimer: 'Paket khusus promo. Berlaku untuk periode terbatas.',
-        highlight: true,
-    },
+    { name: 'Landing Page + Google Ads', priceLabel: '1,299', duration: '7–10 working days', tagline: 'One high-converting page plus your first month of Google Ads — all-in.', features: ['Custom 1-page design & copywriting', 'Mobile-first, sub-2s load time', 'Google Ads setup + 1 month management', 'Conversion tracking (WhatsApp, calls, forms)', 'A/B headline variants', 'You own the page and the ad account'], priceNote: 'one-time bundle, excludes ad spend', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Multi-Page Funnel', priceLabel: '2,999', duration: '14–21 working days', tagline: 'Multi-step funnel for higher-ticket offers.', features: ['Up to 4 funnel pages', 'Lead magnet / opt-in integration', 'Email automation hooks', 'Google Ads setup + 1 month management', 'Full analytics wiring', 'Conversion-focused copywriting'], priceNote: 'one-time bundle, excludes ad spend', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
+    { name: 'Custom Web App', priceLabel: 'Custom', duration: '21–60 working days', tagline: 'Calculators, portals, booking systems — scoped to your needs.', features: ['Custom functionality scoping', 'UI/UX design', 'Integration with your tools', 'Staging & testing environment', 'Training & documentation', 'Get a tailored quote'], priceNote: 'tailored quote', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
 
 const features = [
-    { iconName: 'Sparkles', title: 'Copywriting Teruji', desc: 'Headline, sub-headline, dan CTA yang dirancang untuk konversi. Copy yang sama pentingnya dengan desain.' },
-    { iconName: 'Eye', title: 'Desain Conversion-Focused', desc: 'Setiap elemen mengarahkan visitor ke action: WhatsApp button, form kontak, atau telepon.' },
-    { iconName: 'Search', title: 'Riset Kata Kunci', desc: 'Analisis kata kunci Google yang relevan: volume pencarian, kompetisi, dan intent di baliknya.' },
-    { iconName: 'Target', title: 'Targeting Google Ads', desc: 'Penargetan berdasarkan lokasi, waktu, device, dan audience yang sesuai dengan bisnis Anda.' },
-    { iconName: 'BarChart3', title: 'Tracking & Analisis', desc: 'Conversion tracking ter-setup dari hari pertama. Anda melihat: kata kunci mana yang mendatangkan leads.' },
-    { iconName: 'TrendingUp', title: 'Optimasi Berkelanjutan', desc: 'Selama 1 bulan, kami optimasi keyword, copy, dan bidding strategy untuk hasil terbaik.' },
+    { iconName: 'Sparkles', title: 'Proven Copywriting', desc: 'Headlines, sub-headlines and CTAs engineered for conversion. Copy matters just as much as design.' },
+    { iconName: 'Eye', title: 'Conversion-Focused Design', desc: 'Every element steers visitors toward action: WhatsApp button, contact form or phone call.' },
+    { iconName: 'Search', title: 'Keyword Research', desc: 'Analysis of relevant Google keywords: search volume, competition and the intent behind them.' },
+    { iconName: 'Target', title: 'Google Ads Targeting', desc: 'Targeting by location, time, device and audience — matched to your business.' },
+    { iconName: 'BarChart3', title: 'Tracking & Analytics', desc: 'Conversion tracking set up from day one. You see exactly which keywords bring in leads.' },
+    { iconName: 'TrendingUp', title: 'Ongoing Optimisation', desc: 'For a full month we optimise keywords, copy and bidding strategy for the best results.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI 1-2', title: 'Brief & Riset', desc: 'Diskusi 30 menit untuk menggali produk, target market, dan layanan Anda. Kami riset kata kunci Google yang relevan.' },
-    { num: '02', tag: 'HARI 3-5', title: 'Desain & Copywriting', desc: 'Tim kami desain landing page dan撰写 copywriting yang relevan untuk setiap section. Anda approve konsep dan hasil akhir.' },
-    { num: '03', tag: 'HARI 6-7', title: 'Launch Landing Page', desc: 'Landing page live dengan domain aktif, SSL, dan tracking ter-setup. Conversion tracking siap menerima data dari hari pertama.' },
-    { num: '04', tag: 'MINGGU 2+', title: 'Launch Google Ads', desc: 'Google Ads tayang dengan targeting yang sudah disesuaikan. Selama 1 bulan, kami monitor performa dan optimasi keyword untuk hasil terbaik.' },
+    { num: '01', tag: 'DAY 1-2', title: 'Offer & Angle', desc: 'We define the offer, audience and the one action the page must drive.' },
+    { num: '02', tag: 'DAY 3-6', title: 'Page Build', desc: 'Design, copy and build — reviewed and approved by you.' },
+    { num: '03', tag: 'DAY 7-10', title: 'Ads Live', desc: 'Google Ads campaign configured, tracking verified, campaign launched.' },
+    { num: '04', tag: 'DAY 10-30', title: 'Optimise', desc: 'First month of management included — bids, keywords and page tweaks.' },
 ];
 
 const faqs = [
-    { q: 'Apa yang sudah termasuk dalam paket Rp 1.999.000 ini?', a: 'Paket ini all-in-one: 1 landing page profesional (desain custom + copywriting), form kontak / integrasi WhatsApp, 1 bulan Google Ads (budget harian Rp 50.000, total Rp 1,5 juta), conversion tracking, riset kata kunci, dan akses penuh ke akun Google Ads Anda.' },
-    { q: 'Apa yang perlu saya siapkan untuk paket ini?', a: 'Materi produk Anda (foto, deskripsi singkat, benefit utama), akses ke akun Google Ads jika sudah ada (kalau belum, kami buat dari awal). Sisanya kami yang urus.' },
-    { q: 'Berapa lama sampai landing page dan Google Ads live?', a: 'Landing page live dalam 7 hari setelah brief. Google Ads mulai tayang setelahnya — umumnya minggu ke-2. Jadi total sekitar 10-14 hari sampai iklan tayang.' },
-    { q: 'Bagaimana jika landing page saya butuh revisi?', a: 'Kami sediakan 2-3x ronde revisi untuk desain dan copy. Setelah approve dan live, revisi besar akan dikenakan biaya tambahan. Revisi minor (typo, warna, detail kecil) gratis.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Paket promo ini tidak ada kontrak. Setelah 1 bulan, Anda bebas: lanjut dengan paket Google Ads bulanan (mulai Rp 1,75jt/bln), atau berhenti. Tidak ada pinalti.' },
-    { q: 'Setelah 1 bulan, bagaimana jika saya ingin lanjut?', a: 'Anda bisa lanjut ke paket Google Ads bulanan Standart (Rp 3,75jt/bln) untuk pengelolaan iklan jangka panjang, atau paket Business (Rp 6jt/bln) untuk iklan + maintenance landing page sekaligus.' },
-    { q: 'Bagaimana laporan yang diberikan?', a: 'Laporan mingguan: jumlah visitor landing page, kata kunci yang mendatangkan klik, jumlah chat WhatsApp yang masuk, dan rekomendasi iterasi untuk minggu depan. Formatnya satu halaman, bahasa yang mudah dipahami.' },
+    { q: 'What exactly is included in the bundle?', a: 'A custom one-page landing page (design + copy + build), Google Ads account setup, conversion tracking, and the first month of campaign management — RM 1,299 all-in, excluding ad spend.' },
+    { q: 'How long until my campaign is live?', a: 'Typically 7–10 working days from brief to live campaign, including your approval rounds.' },
+    { q: 'Why bundle the page with the ads?', a: 'Because the page and the ad must tell one story. When the same team builds both, message match improves and cost per enquiry drops.' },
+    { q: 'Is ad spend included?', a: 'No — ad budget is paid directly to Google through your own account. We recommend starting from RM 1,500/month in ad spend for meaningful data.' },
+    { q: 'What happens after the first month?', a: 'You can continue with a Google Ads management plan (from RM 990/month), or keep the landing page and run it yourself — you own everything we build.' },
 ];
 
 const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item => ({
@@ -75,28 +57,31 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
 }));
 ---
 
-<Layout title="Landing Page + Google Ads Bundle — Beriklan" description="Paket promo eksklusif: 1 landing page profesional + 1 bulan Google Ads. Copywriting persuasif, form integrasi, tracking analytics — siap generate leads dari hari pertama. Limited slot per bulan." canonical="https://beriklan.my/landing-page-design/"
+<Layout
+    title="Landing Page + Google Ads Malaysia | Conversion Bundle — Beriklan"
+    description="One professional landing page + one month of managed Google Ads. Leads from day one, full conversion tracking. From RM 1,299. Free 15-minute consultation."
+    canonical="https://beriklan.my/landing-page-design/"
     faq={[
-            { question: 'Berapa harga landing page?', answer: 'Mulai dari Rp 1.000.000 (single page) atau Rp 1.500.000 (paket landing page + Google Ads setup).' },
-            { question: 'Berapa lama pengerjaan?', answer: '3-5 hari kerja untuk landing page sederhana. 7-10 hari untuk yang kompleks dengan copywriting dan A/B testing.' },
-            { question: 'Apakah termasuk copywriting?', answer: 'Ya, copywriter kami yang handle headline, body text, dan CTA. Anda tinggal review dan approve.' },
-            { question: 'Apakah ada A/B testing?', answer: 'Bisa. Setup 2-3 variasi headline/CTA, lalu test mana yang convert lebih tinggi.' },
-            { question: 'Apakah bisa integrasi dengan WhatsApp?', answer: 'Ya, default semua landing page kami ada WhatsApp button yang langsung chat ke nomor bisnis Anda.' }
-        ]}
+        { question: 'What exactly is included in the bundle?', answer: 'A custom one-page landing page (design + copy + build), Google Ads account setup, conversion tracking, and the first month of campaign management — RM 1,299 all-in, excluding ad spend.' },
+        { question: 'How long until my campaign is live?', answer: 'Typically 7–10 working days from brief to live campaign, including your approval rounds.' },
+        { question: 'Why bundle the page with the ads?', answer: 'Because the page and the ad must tell one story. When the same team builds both, message match improves and cost per enquiry drops.' },
+        { question: 'Is ad spend included?', answer: 'No — ad budget is paid directly to Google through your own account. We recommend starting from RM 1,500/month in ad spend for meaningful data.' },
+        { question: 'What happens after the first month?', answer: 'You can continue with a Google Ads management plan (from RM 990/month), or keep the landing page and run it yourself — you own everything we build.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Pembuatan Landing Page", url: "https://beriklan.my/landing-page-design/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Landing Page + Google Ads", url: "https://beriklan.my/landing-page-design/" }
     ]}
     service={{
-        name: "Jasa Pembuatan Landing Page",
-        description: "Jasa Jasa Pembuatan Landing Page profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "Landing Page + Google Ads",
+        description: "High-converting landing page bundled with Google Ads setup and first-month management — one funnel, one team.",
         url: "https://beriklan.my/landing-page-design/",
-        priceRange: "Rp 1.000.000 - Rp 1.500.000",
-        serviceType: "Landing Page",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        priceRange: "RM 1,299 - RM 2,999",
+        serviceType: "Landing Page & Google Ads",
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -118,36 +103,36 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Landing Page + Google Ads · Paket Konversi</span>
+                    <span class="opacity-0 anim-fade-in">Landing Page + Google Ads · Conversion Bundle</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
                     <span class="anim-fade-up">Landing Page + Google Ads</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Langsung Dapat Leads</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">dari Hari Pertama.</span>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Start Getting Leads</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">From Day One.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    Paket promo khusus untuk Anda yang ingin langsung mendatangkan pelanggan lewat internet: 1 landing page profesional + 1 bulan Google Ads. Kami yang bangun halaman, tulis copy, jalankan iklan — Anda tinggal terima leads.
+                    A special bundle for anyone who wants customers straight from the internet: 1 professional landing page + 1 month of Google Ads. We build the page, write the copy and run the ads — you just receive the leads.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -161,15 +146,15 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -184,15 +169,15 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa Paket Ini
+                    Why This Bundle
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar landing page dan iklan,<br/>
-                    <span class="text-accent">tapi sistem yang menghasilkan leads dari hari pertama.</span>
+                    Not just a landing page and ads,<br/>
+                    <span class="text-accent">but a system that generates leads from day one.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Paket ini dirancang untuk satu outcome spesifik: leads masuk ke WhatsApp atau kontak Anda. Landing page yang conversion-focused, copy yang teruji, plus Google Ads yang sudah tertarget dengan riset kata kunci. Tidak perlu pusing setup teknis — tim kami yang urus semuanya.
+                    This bundle is designed for one specific outcome: leads arriving in your WhatsApp or inbox. A conversion-focused landing page, proven copy, plus Google Ads targeted with keyword research. No technical setup headaches — our team handles everything.
                 </p>
             </div>
 
@@ -200,17 +185,17 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
                 <div class="why-card group">
                     <div class="why-icon">⚡</div>
                     <h3 class="why-title">Cepat & Conversion-Ready</h3>
-                    <p class="why-desc">Landing page dioptimasi untuk kecepatan dan konversi. Copywriting teruji, CTA yang jelas, dan form yang sederhana untuk visitor yang siap berkonsultasi.</p>
+                    <p class="why-desc">The landing page is optimised for speed and conversion. Proven copywriting, clear CTAs and a simple form for visitors ready to talk.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">🔍</div>
                     <h3 class="why-title">Target Google Ads</h3>
-                    <p class="why-desc">Google Ads menjangkau orang yang sedang aktif mencari — intent-nya sudah tinggi. Kami riset kata kunci dan atur targeting yang relevan dengan bisnis Anda.</p>
+                    <p class="why-desc">Google Ads reaches people actively searching — intent is already high. We research keywords and set targeting relevant to your business.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">📊</div>
-                    <h3 class="why-title">Tracking Lengkap</h3>
-                    <p class="why-desc">Conversion tracking ter-setup dari hari pertama. Anda dapat melihat: kata kunci mana yang menghasilkan leads, dan berapa biaya per lead yang Anda dapatkan.</p>
+                    <h3 class="why-title">Full Tracking</h3>
+                    <p class="why-desc">Conversion tracking is set up from day one. You can see exactly which keywords generate leads, and what each lead costs.</p>
                 </div>
             </div>
         </div>
@@ -226,8 +211,8 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -243,12 +228,12 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -263,19 +248,19 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="Landing Page + Google Ads" highlightIndex={0} columns={1} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="Landing Page + Google Ads" highlightIndex={0} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -284,10 +269,10 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -310,33 +295,33 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -348,49 +333,49 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">🧴</div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">💆</div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">💼</div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -415,12 +400,12 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -435,7 +420,7 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="landing-page-design" pageUrl="https://beriklan.my/landing-page-design/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/landing-page-design/pilar/" pillarLabel="Panduan Lengkap Pembuatan Landing Page" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/landing-page-design/pilar/" pillarLabel="Complete Landing Page Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -449,27 +434,27 @@ const relatedItems = (relatedMap.services['landing-page-design'] || []).map(item
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar landing page dan iklan. Kami bangun sistem yang menghasilkan leads dari hari pertama — agar setiap klik menjadi peluang pelanggan baru.
+                    Not just a landing page and ads. We build a system that generates leads from day one — so every click becomes a potential new customer.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

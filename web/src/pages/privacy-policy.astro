@@ -4,19 +4,19 @@ import Navbar from '../components/Navbar.svelte';
 import Footer from '../components/Footer.svelte';
 import StickyCTA from '../components/StickyCTA.svelte';
 
-const lastUpdated = "14 Juli 2026";
+const lastUpdated = "14 July 2026";
 const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Kebijakan Privasi Beriklan.co.id",
-    "description": "Bagaimana Beriklan.co.id mengumpulkan, menggunakan, dan melindungi data pribadi Anda.",
+    "name": "Beriklan.my Privacy Policy",
+    "description": "How Beriklan.my collects, uses and protects your personal data.",
     "dateModified": "2026-07-14"
 };
 ---
 
 <Layout
-    title="Kebijakan Privasi — Beriklan.co.id | UU PDP & GDPR Compliance"
-    description="Kebijakan privasi Beriklan.co.id sesuai UU PDP No. 27/2022 dan GDPR. Hak akses, koreksi, penghapusan data. Konta DPO: dpo@beriklan.my."
+    title="Privacy Policy — Beriklan.my | PDPA & GDPR Compliance"
+    description="Beriklan.my privacy policy aligned with Malaysia's PDPA 2010 and the GDPR. Rights of access, correction and erasure. DPO contact: dpo@beriklan.my."
     canonical="https://beriklan.my/privacy-policy/"
 >
     <Navbar client:only="svelte" />
@@ -28,108 +28,109 @@ const schema = {
 
                 <header class="mb-10 pb-8 border-b border-gray-100">
                     <p class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Legal</p>
-                    <h1 class="font-display font-extrabold text-3xl md:text-4xl text-ink mb-3">Kebijakan Privasi</h1>
-                    <p class="text-sm text-muted">Terakhir diperbarui: <strong>{lastUpdated}</strong></p>
+                    <h1 class="font-display font-extrabold text-3xl md:text-4xl text-ink mb-3">Privacy Policy</h1>
+                    <p class="text-sm text-muted">Last updated: <strong>{lastUpdated}</strong></p>
                 </header>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">1. Pendahuluan</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">1. Introduction</h2>
                     <p>
-                        Beriklan Digital Agency ("Beriklan", "kami", "kita") menghormati privasi
-                        setiap pengunjung website <strong>beriklan.my</strong>. Kebijakan ini
-                        menjelaskan data apa yang kami kumpulkan, bagaimana kami menggunakannya,
-                        dan hak-hak Anda sebagai pengguna sesuai <strong>Undang-Undang Republik
-                        Indonesia No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP)</strong>
-                        dan <strong>GDPR</strong> untuk pengguna Uni Eropa.
+                        Beriklan Digital Agency ("Beriklan", "we", "us") respects the privacy of
+                        every visitor to <strong>beriklan.my</strong>. This policy explains what
+                        data we collect, how we use it, and your rights as a user under
+                        <strong>Malaysia's Personal Data Protection Act 2010 (PDPA)</strong>,
+                        <strong>Indonesia's Personal Data Protection Law No. 27/2022</strong>
+                        (where we are incorporated) and the <strong>GDPR</strong> for
+                        European Union users.
                     </p>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">2. Data yang Kami Kumpulkan</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">2. Data We Collect</h2>
                     <ul>
-                        <li><strong>Data yang Anda berikan langsung:</strong> nama, nomor WhatsApp, alamat email, nama bisnis/brand, dan informasi relevan saat mengisi form inquiry atau menghubungi kami.</li>
-                        <li><strong>Data otomatis:</strong> alamat IP, browser, device type, halaman yang dikunjungi, durasi kunjungan, referrer — dikumpulkan via Cloudflare Web Analytics & Google Analytics.</li>
-                        <li><strong>Cookie:</strong> untuk iklan (Google AdSense), analitik, dan preferensi. Anda bisa kelola melalui banner consent.</li>
+                        <li><strong>Data you provide directly:</strong> name, WhatsApp number, email address, business/brand name, and relevant information when you fill in an inquiry form or contact us.</li>
+                        <li><strong>Automatic data:</strong> IP address, browser, device type, pages visited, visit duration, referrer — collected via Cloudflare Web Analytics & Google Analytics.</li>
+                        <li><strong>Cookies:</strong> for advertising (Google AdSense), analytics and preferences. You can manage these through the consent banner.</li>
                     </ul>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">3. Tujuan Penggunaan Data</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">3. How We Use Your Data</h2>
                     <ul>
-                        <li>Merespon inquiry dan konsultasi</li>
-                        <li>Mengelola campaign iklan (Meta, Google, TikTok) untuk Anda</li>
-                        <li>Mengirim laporan mingguan via WhatsApp/email</li>
-                        <li>Meningkatkan kualitas layanan & konten website</li>
-                        <li>Personalisasi iklan Google AdSense (konsentasi Cookie)</li>
+                        <li>Responding to inquiries and consultations</li>
+                        <li>Managing ad campaigns (Meta, Google, TikTok) on your behalf</li>
+                        <li>Sending weekly reports via WhatsApp/email</li>
+                        <li>Improving our services & website content</li>
+                        <li>Google AdSense ad personalisation (cookie consent)</li>
                     </ul>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">4. Penyimpanan & Retention</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">4. Storage & Retention</h2>
                     <ul>
-                        <li>Data inquiry (WA / form): <strong>90 hari</strong> setelah inquiry terakhir, kecuali ada kontrak aktif.</li>
-                        <li>Data klien aktif: sepanjang kontrak + 2 tahun setelah kontrak berakhir (untuk kewajiban pajak).</li>
-                        <li>Analytics (aggregated, anonymous): <strong>24 bulan</strong>.</li>
+                        <li>Inquiry data (WhatsApp / form): <strong>90 days</strong> after the last inquiry, unless an active engagement exists.</li>
+                        <li>Active client data: for the duration of the engagement + 2 years afterwards (for tax obligations).</li>
+                        <li>Analytics (aggregated, anonymous): <strong>24 months</strong>.</li>
                     </ul>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">5. Pihak Ketiga (Processor)</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">5. Third Parties (Processors)</h2>
                     <ul>
                         <li><strong>Cloudflare</strong> — CDN & Workers (hosting)</li>
                         <li><strong>GitHub</strong> — code repository</li>
                         <li><strong>Google</strong> — AdSense, Analytics, Tag Manager</li>
-                        <li><strong>Meta (Facebook)</strong>, <strong>TikTok</strong> — platform iklan untuk klien</li>
-                        <li><strong>OpenAI / Google Gemini</strong> — proses generasi konten AI (data tidak digunakan training)</li>
+                        <li><strong>Meta (Facebook)</strong>, <strong>TikTok</strong> — ad platforms for clients</li>
+                        <li><strong>OpenAI / Google Gemini</strong> — AI content generation (data not used for training)</li>
                     </ul>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">6. Hak Anda</h2>
-                    <p>Anda berhak untuk:</p>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">6. Your Rights</h2>
+                    <p>You have the right to:</p>
                     <ul>
-                        <li><strong>Akses</strong> — meminta salinan data pribadi Anda</li>
-                        <li><strong>Koreksi</strong> — memperbarui data yang tidak akurat</li>
-                        <li><strong>Penghapusan</strong> — meminta hapus data (right to be forgotten)</li>
-                        <li><strong>Membatasi pemrosesan</strong></li>
-                        <li><strong>Portabilitas data</strong> — menerima data dalam format terstruktur</li>
-                        <li><strong>Menarik consent</strong> — kapan saja, tanpa mempengaruhi pemrosesan sebelumnya</li>
+                        <li><strong>Access</strong> — request a copy of your personal data</li>
+                        <li><strong>Correction</strong> — update inaccurate data</li>
+                        <li><strong>Erasure</strong> — request deletion of your data (right to be forgotten)</li>
+                        <li><strong>Restrict processing</strong></li>
+                        <li><strong>Data portability</strong> — receive your data in a structured format</li>
+                        <li><strong>Withdraw consent</strong> — at any time, without affecting prior processing</li>
                     </ul>
-                    <p>Untuk menggunakan hak-hak ini, hubungi <strong>dpo@beriklan.my</strong> dengan subjek "Permohonan Data Pribadi". Kami respon dalam 7 hari kerja.</p>
+                    <p>To exercise these rights, contact <strong>dpo@beriklan.my</strong> with the subject "Personal Data Request". We respond within 7 working days.</p>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">7. Keamanan Data</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">7. Data Security</h2>
                     <p>
-                        Kami menerapkan standar keamanan umum industri: HTTPS/TLS untuk semua transmisi,
-                        akses database terbatas pada tim yang berkewajiban, backup harian terenkripsi,
-                        dan audit berkala.
+                        We apply common industry security standards: HTTPS/TLS for all transmissions,
+                        database access restricted to the team that needs it, encrypted daily backups,
+                        and periodic audits.
                     </p>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">8. Data Anak-Anak</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">8. Children's Data</h2>
                     <p>
-                        Layanan kami tidak ditujukan untuk anak di bawah 17 tahun. Kami tidak sengaja
-                        mengumpulkan data pribadi anak-anak. Jika Anda yakin kami memiliki data anak,
-                        hubungi <strong>dpo@beriklan.my</strong> untuk penghapusan.
+                        Our services are not intended for anyone under 17 years old. We do not
+                        knowingly collect children's personal data. If you believe we hold data
+                        about a child, contact <strong>dpo@beriklan.my</strong> for deletion.
                     </p>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">9. Perubahan Kebijakan</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">9. Changes to This Policy</h2>
                     <p>
-                        Kami dapat memperbarui kebijakan ini sewaktu-waktu. Versi terbaru selalu
-                        tersedia di halaman ini dengan tanggal pembaruan di atas. Untuk perubahan
-                        material, kami informasikan via banner di website atau email.
+                        We may update this policy from time to time. The latest version is always
+                        available on this page with the update date shown above. For material
+                        changes, we will notify you via a banner on the website or by email.
                     </p>
                 </section>
 
                 <section class="mb-8">
-                    <h2 class="font-display font-bold text-xl text-ink mb-3">10. Kontak DPO</h2>
+                    <h2 class="font-display font-bold text-xl text-ink mb-3">10. DPO Contact</h2>
                     <div class="bg-soft p-5 rounded-xl">
                         <p class="mb-1"><strong>Beriklan Digital Agency</strong></p>
-                        <p class="mb-1">Jl. Arcamanik Endah No.76, Bandung 40195, Jawa Barat</p>
+                        <p class="mb-1">Jl. Arcamanik Endah No.76, Bandung 40195, Indonesia</p>
                         <p class="mb-1">Email: <a href="mailto:dpo@beriklan.my" class="text-accent hover:underline">dpo@beriklan.my</a></p>
                         <p>WhatsApp: <a href="https://wa.me/62811919328" class="text-accent hover:underline">+62 81-1919-328</a></p>
                     </div>

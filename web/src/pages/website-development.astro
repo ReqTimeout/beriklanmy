@@ -18,88 +18,36 @@ import TechStack from '../components/TechStack.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp, Zap, Smartphone, Lock, Search, Eye, Layers, Code, Server, Shield, Globe, FileText, Mail, MessageSquare, Briefcase, HeartHandshake, Sprout, Building2, BarChart3 } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20website.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20website%20development.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'Basic (Starter)',
-        priceLabel: '999.000',
-        duration: '1 tahun',
-        tagline: 'Untuk UMKM atau personal brand yang membutuhkan landing page profesional.',
-        features: [
-            '1 halaman landing',
-            '1 akun email profesional',
-            '1x revisi desain',
-            'Basic SEO setup',
-            'SSL + responsive design',
-            'Domain + hosting 1 tahun',
-        ],
-        priceNote: 'sudah termasuk domain & hosting 1 tahun',
-        disclaimer: 'Perpanjangan tahun berikutnya di luar paket.',
-    },
-    {
-        name: 'Professional (Corporate)',
-        priceLabel: 'Call us',
-        duration: '1 tahun',
-        tagline: 'Untuk bisnis yang membutuhkan company profile multi-halaman dengan desain premium.',
-        features: [
-            '5 halaman (Home, About, Services, Portfolio, Contact)',
-            '5 akun email profesional',
-            '2x revisi desain',
-            'Basic SEO setup + Google Analytics',
-            'SSL + responsive design',
-            'Domain + hosting 1 tahun',
-            'CMS untuk update konten sendiri',
-        ],
-        priceNote: 'harga disesuaikan dengan kompleksitas',
-        disclaimer: 'Perpanjangan tahun berikutnya di luar paket.',
-        highlight: true,
-    },
-    {
-        name: 'Business (E-commerce)',
-        priceLabel: 'Call us',
-        duration: '1 tahun',
-        tagline: 'Untuk bisnis yang membutuhkan toko online dengan integrasi payment & shipping.',
-        features: [
-            'Hingga 25 halaman + katalog produk',
-            '25 akun email profesional',
-            '3x revisi desain',
-            'Basic SEO + product schema',
-            'SSL + responsive design',
-            'Domain + hosting 1 tahun',
-            'Payment gateway (Midtrans, Xendit, dll.)',
-            'Shipping gateway (JNE, J&T, SiCepat)',
-            'CMS + dashboard admin',
-        ],
-        priceNote: 'harga disesuaikan dengan kompleksitas',
-        disclaimer: 'Perpanjangan tahun berikutnya di luar paket.',
-    },
+    { name: 'Starter', priceLabel: '1,499', duration: '7–14 working days', tagline: 'A professional business website that loads fast and converts.', features: ['Up to 5 pages', 'Mobile-first responsive design', 'WhatsApp & enquiry form integration', 'Basic on-page SEO', 'Domain + 1 year hosting included', 'Google Analytics & Search Console setup'], priceNote: 'one-time', disclaimer: 'Includes first-year domain and hosting.' },
+    { name: 'Corporate', priceLabel: '3,999', duration: '3–4 weeks', tagline: 'For established companies that need depth and polish.', features: ['Up to 15 pages', 'Custom design system', 'Blog / news module', 'Advanced on-page SEO + schema markup', 'Multi-language ready (EN/BM)', 'Priority support after launch'], priceNote: 'one-time', disclaimer: 'Includes first-year domain and hosting.', highlight: true },
+    { name: 'E-commerce', priceLabel: 'from 6,999', duration: '4–6 weeks', tagline: 'Online store with payments, inventory and marketing hooks.', features: ['Product catalogue & inventory', 'Local payment gateway integration', 'Shipping configuration for Malaysia', 'Marketing & analytics integration', 'Staff training session', 'Get a tailored quote'], priceNote: 'from, one-time', disclaimer: 'Final quote depends on catalogue size and integrations.' },
 ];
 
 const features = [
-    { iconName: 'Smartphone', title: 'Responsive Design', desc: 'Website tampil sempurna di desktop, tablet, dan mobile. Standar industri saat ini yang menjadi keharusan.' },
-    { iconName: 'Zap', title: 'Fast Load Time', desc: 'Dioptimasi untuk kecepatan: page load di bawah 3 detik. Pengalaman cepat meningkatkan konversi dan ranking SEO.' },
-    { iconName: 'Search', title: 'SEO Ready', desc: 'Struktur website ramah mesin pencari: meta tags, schema markup, sitemap XML. Fondasi untuk ditemukan di Google.' },
-    { iconName: 'Lock', title: 'SSL & Security', desc: 'Sertifikat SSL untuk HTTPS, monitoring uptime, dan backup rutin. Website aman dan selalu dapat diakses.' },
-    { iconName: 'Eye', title: 'Conversion Focused', desc: 'Setiap elemen didesain untuk mengarah ke action: WhatsApp button, form kontak, atau katalog produk.' },
-    { iconName: 'Layers', title: 'CMS (untuk paket tertentu)', desc: 'Paket Professional dan Business termasuk CMS sehingga Anda dapat update konten sendiri tanpa coding.' },
+    { iconName: 'Smartphone', title: 'Responsive Design', desc: 'Your website renders perfectly on desktop, tablet and mobile. Today’s industry standard — and a necessity.' },
+    { iconName: 'Zap', title: 'Fast Load Time', desc: 'Optimised for speed: page loads under 3 seconds. A fast experience lifts both conversion and SEO ranking.' },
+    { iconName: 'Search', title: 'SEO Ready', desc: 'Clean structure, proper meta tags and sitemaps from day one — so Google can find and rank your pages.' },
+    { iconName: 'Lock', title: 'SSL & Security', desc: 'SSL certificate for HTTPS, uptime monitoring and routine backups. Your website stays secure and always reachable.' },
+    { iconName: 'Eye', title: 'Conversion Focused', desc: 'Every element is designed to drive action: WhatsApp buttons, contact forms or a product catalogue.' },
+    { iconName: 'Layers', title: 'CMS (on selected plans)', desc: 'The Corporate and E-commerce plans include a CMS so you can update content yourself — no coding needed.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI 1-3', title: 'Brief & Riset', desc: 'Diskusi 30 menit untuk menggali produk, target market, dan referensi desain. Kami susun sitemap dan wireframe sebagai pondasi.' },
-    { num: '02', tag: 'HARI 4-10', title: 'Desain & Development', desc: 'Tim kami desain visual dan develop website. Anda melihat progress secara berkala dan memberikan feedback.' },
-    { num: '03', tag: 'HARI 11-14', title: 'Testing & Revisi', desc: 'Website diuji di berbagai device dan browser. Anda mencoba dan memberikan feedback revisi (sesuai paket).' },
-    { num: '04', tag: 'HARI 15+', title: 'Launch & Handover', desc: 'Website live, domain aktif, email profesional siap dipakai. Tim kami memberikan training singkat untuk pengelolaan mandiri (untuk paket Professional dan Business).' },
+    { num: '01', tag: 'WEEK 1', title: 'Scope & Sitemap', desc: 'We define pages, structure and the action you want visitors to take.' },
+    { num: '02', tag: 'WEEK 1-2', title: 'Design & Content', desc: 'Design direction and copywriting support — you approve before we build.' },
+    { num: '03', tag: 'WEEK 2-3', title: 'Build & Test', desc: 'Development, mobile testing and speed optimisation.' },
+    { num: '04', tag: 'LAUNCH', title: 'Launch & Handover', desc: 'Domain, hosting, analytics and a walkthrough so you own everything.' },
 ];
 
 const faqs = [
-    { q: 'Apa yang sudah termasuk dalam setiap paket?', a: 'Semua paket sudah termasuk domain (.com/.id/.co.id) dan hosting 1 tahun, SSL, responsive design, dan setup SEO dasar. Paket Professional dan Business menambahkan CMS untuk update konten sendiri, Google Analytics, dan integrasi payment gateway.' },
-    { q: 'Apakah domain dan hosting sudah termasuk?', a: 'Ya, untuk tahun pertama. Perpanjangan tahun depan menyesuaikan harga berlaku (biasanya Rp 350rb–500rb/tahun untuk domain + hosting standar). Kami ingatkan sebelum masa berlaku berakhir.' },
-    { q: 'Berapa lama website live?', a: 'Untuk paket Basic, 7–14 hari. Untuk paket Professional (multi-halaman), 14–21 hari. Untuk paket Business (e-commerce), 21–30 hari karena ada setup payment gateway dan testing yang lebih detail.' },
-    { q: 'Bisakah website di-update sendiri setelah live?', a: 'Untuk paket Basic, tidak — update konten perlu request tim kami (dikenakan biaya terpisah). Untuk paket Professional dan Business, sudah termasuk CMS sehingga Anda bisa update sendiri seperti posting blog atau ganti foto produk.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Tidak ada kontrak panjang. Pembayaran satu kali untuk satu tahun masa aktif. Anda bebas memperpanjang atau tidak di tahun berikutnya.' },
-    { q: 'Apa perbedaan paket Basic, Professional, dan Business?', a: 'Basic adalah 1 halaman landing untuk UMKM atau personal brand dengan budget terbatas. Professional adalah company profile multi-halaman (5 halaman) dengan CMS. Business adalah toko online lengkap dengan payment & shipping gateway.' },
-    { q: 'Bagaimana proses maintenance dan update?', a: 'Untuk paket Professional dan Business, tim kami tersedia untuk maintenance dan update konten terpisah — bisa bulanan atau per request. Untuk paket Basic, update sepenuhnya lewat tim kami.' },
+    { q: 'How much does a website cost at Beriklan?', a: 'Our Starter business website is RM 1,499 one-time. Corporate websites are RM 3,999 and e-commerce builds start from RM 6,999 depending on scope. All prices include design, development and launch.' },
+    { q: 'How long does it take to build?', a: 'A Starter website launches in 7–14 working days after content is ready. Corporate and e-commerce builds typically take 3–6 weeks.' },
+    { q: 'Is hosting and domain included?', a: 'First-year domain and fast cloud hosting are included in every package. Renewals are billed at cost — no hidden markup.' },
+    { q: 'Will my website work on mobile?', a: 'Yes — every build is mobile-first, tested on real devices, and optimised for Core Web Vitals so it loads fast on Malaysian mobile networks.' },
+    { q: 'Can you also bring traffic to the website?', a: 'Yes. Most clients pair a build with Google Ads or Facebook Ads management. We design the site and the campaign as one funnel, which is why our builds convert.' },
 ];
 
 const relatedItems = (relatedMap.services['website-development'] || []).map(item => ({
@@ -110,28 +58,31 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
 }));
 ---
 
-<Layout title="Jasa Pembuatan Website Profesional — Beriklan" description="Website cepat, SEO-ready, mobile responsive — built untuk bisnis Indonesia. Landing page, company profile, e-commerce. Mulai Rp 999rb per tahun sudah termasuk hosting & domain. Garansi maintenance 30 hari." canonical="https://beriklan.my/website-development/"
+<Layout
+    title="Website Development Malaysia | Fast, SEO-Ready & Custom — Beriklan"
+    description="Professional website development: fast loading, mobile responsive, SEO-ready and conversion-focused. Starter sites from RM 1,499. Free 15-minute consultation."
+    canonical="https://beriklan.my/website-development/"
     faq={[
-            { question: 'Berapa harga buat website?', answer: 'Mulai dari Rp 1.500.000 (company profile) dan Rp 3.500.000 (e-commerce basic). Custom design, mobile responsive, SEO ready.' },
-            { question: 'Berapa lama pengerjaan website?', answer: 'Company profile: 7-14 hari kerja. E-commerce: 14-21 hari kerja. Custom: 21-30 hari kerja (tergantung kompleksitas).' },
-            { question: 'Apakah termasuk domain + hosting?', answer: 'Ya, free domain .com/.id + hosting 1 tahun untuk paket Standart+. Setelah itu renewal Rp 350.000/tahun.' },
-            { question: 'CMS apa yang dipakai?', answer: 'WordPress (paling user-friendly untuk client update sendiri) atau Laravel (untuk custom logic). Diskusi dulu untuk pilih yang sesuai.' },
-            { question: 'Apakah termasuk SEO optimization?', answer: 'Ya, semua website kami SEO-friendly: meta tags, schema markup, sitemap, fast loading, mobile responsive.' }
-        ]}
+        { question: 'How much does a website cost at Beriklan?', answer: 'Our Starter business website is RM 1,499 one-time. Corporate websites are RM 3,999 and e-commerce builds start from RM 6,999 depending on scope. All prices include design, development and launch.' },
+        { question: 'How long does it take to build?', answer: 'A Starter website launches in 7–14 working days after content is ready. Corporate and e-commerce builds typically take 3–6 weeks.' },
+        { question: 'Is hosting and domain included?', answer: 'First-year domain and fast cloud hosting are included in every package. Renewals are billed at cost — no hidden markup.' },
+        { question: 'Will my website work on mobile?', answer: 'Yes — every build is mobile-first, tested on real devices, and optimised for Core Web Vitals so it loads fast on Malaysian mobile networks.' },
+        { question: 'Can you also bring traffic to the website?', answer: 'Yes. Most clients pair a build with Google Ads or Facebook Ads management. We design the site and the campaign as one funnel, which is why our builds convert.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Pembuatan Website", url: "https://beriklan.my/website-development/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Website Development", url: "https://beriklan.my/website-development/" }
     ]}
     service={{
-        name: "Jasa Pembuatan Website",
-        description: "Jasa Jasa Pembuatan Website profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "Website Development",
+        description: "Professional website development — fast, SEO-ready and built to convert visitors into enquiries.",
         url: "https://beriklan.my/website-development/",
-        priceRange: "Rp 1.500.000 - Rp 5.000.000",
+        priceRange: "RM 1,499 - RM 6,999",
         serviceType: "Web Development",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -153,36 +104,36 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Jasa Pembuatan Website Profesional · Custom & CMS</span>
+                    <span class="opacity-0 anim-fade-in">Professional Website Development · Custom & CMS</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Jasa Pembuatan Website</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Profesional, Cepat,</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">Siap Menarik Pelanggan.</span>
+                    <span class="anim-fade-up">Website Development</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Professional, Fast,</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">Ready to Win Customers.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    Website yang baik bukan sekadar tampil — ia harus load dengan cepat, responsif di semua device, mudah ditemukan di Google, dan conversion-ready. Kami bangun website Anda dengan teknologi modern dan standar industri.
+                    A good website does more than look the part — it must load fast, stay responsive on every device, be easy to find on Google, and be conversion-ready. We build your website with modern technology and industry standards.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -196,15 +147,15 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -219,15 +170,15 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa Jasa Website
+                    Why Our Websites
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar website yang terlihat bagus,<br/>
-                    <span class="text-accent">tapi website yang menghasilkan leads.</span>
+                    Not just a good-looking website,<br/>
+                    <span class="text-accent">but a website that generates leads.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Website yang baik adalah pondasi digital sebuah bisnis: ia menjadi pusat dari seluruh aktivitas online — landing untuk iklan, tempat verifikasi untuk customer, hingga katalog produk untuk transaksi. Kami bangun website dengan standar modern: fast load, SEO-ready, mobile responsive, dan conversion-focused.
+                    A good website is a business’s digital foundation: the hub of every online activity — the landing spot for ads, the verification point for customers, the product catalogue for transactions. We build to modern standards: fast load, SEO-ready, mobile responsive and conversion-focused.
                 </p>
             </div>
 
@@ -237,21 +188,21 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                         <Zap class="w-6 h-6" strokeWidth="2.2" />
                     </div>
                     <h3 class="why-title">Fast Load & SEO</h3>
-                    <p class="why-desc">Website dioptimasi untuk kecepatan dan mesin pencari. Page speed di bawah 3 detik dan struktur SEO yang baik menjadi standar.</p>
+                    <p class="why-desc">Optimised for speed and search engines. Page speed under 3 seconds and solid SEO structure come as standard.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">
                         <Smartphone class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="why-title">Responsive Semua Device</h3>
-                    <p class="why-desc">Website tampil sempurna di desktop, tablet, dan mobile. Lebih dari 70% traffic Indonesia berasal dari mobile — ini bukan opsi, melainkan keharusan.</p>
+                    <h3 class="why-title">Responsive on Every Device</h3>
+                    <p class="why-desc">Your website renders perfectly on desktop, tablet and mobile. Over 70% of Malaysian traffic is mobile — this is a necessity, not an option.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">
                         <Shield class="w-6 h-6" strokeWidth="2.2" />
                     </div>
                     <h3 class="why-title">Aman & Stabil</h3>
-                    <p class="why-desc">SSL certificate, backup rutin, dan monitoring uptime. Website Anda aman dari ancaman umum dan selalu dapat diakses customer.</p>
+                    <p class="why-desc">SSL certificate, routine backups and uptime monitoring. Your website stays safe from common threats and always reachable by customers.</p>
                 </div>
             </div>
         </div>
@@ -267,8 +218,8 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -284,12 +235,12 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -307,19 +258,19 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="Pembuatan Website" highlightIndex={1} columns={3} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="Website Development" highlightIndex={1} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -328,10 +279,10 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -354,15 +305,15 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
@@ -371,22 +322,22 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                     <div class="trust-icon-dark">
                         <Lock class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">
                         <BarChart3 class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">
                         <Repeat class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -398,55 +349,55 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">
                             <Sparkles class="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">
                             <HeartHandshake class="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">
                             <Briefcase class="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -471,12 +422,12 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -491,7 +442,7 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="website-development" pageUrl="https://beriklan.my/website-development/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/website-development/pilar/" pillarLabel="Panduan Lengkap Pembuatan Website" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/website-development/pilar/" pillarLabel="Complete Website Development Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -505,27 +456,27 @@ const relatedItems = (relatedMap.services['website-development'] || []).map(item
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar website yang cantik. Kami bangun dengan standar industri yang menghasilkan leads dan meningkatkan trust — agar setiap kunjungan berpotensi menjadi pelanggan.
+                    More than a pretty website. We build to industry standards that generate leads and grow trust — so every visit can become a customer.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

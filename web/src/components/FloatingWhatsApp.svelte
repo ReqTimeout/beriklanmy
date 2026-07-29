@@ -4,10 +4,10 @@
     import { MessageCircle, X, Phone, Mail, Clock } from 'lucide-svelte';
 
     const phoneNumber = '62811919328';
-    const defaultMessage = 'Halo Beriklan, saya ingin berdiskusi mengenai kebutuhan iklan digital bisnis saya.';
+    const defaultMessage = 'Hello Beriklan, I would like to discuss digital advertising for my business.';
     const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
     const phoneLink = 'tel:+62811919328';
-    const mailLink = 'mailto:info@beriklan.my?subject=Konsultasi%20Iklan%20Digital';
+    const mailLink = 'mailto:info@beriklan.my?subject=Digital%20Advertising%20Consultation';
 
     let visible = false;
     let isOpen = false;
@@ -25,7 +25,7 @@
         // Auto-collapse label di mobile setelah 4 detik
         const collapse = setTimeout(() => { labelExpanded = false; }, 4000);
 
-        // Auto-hide FAB saat user scroll banyak (mobile only) untuk tidak menutupi konten
+        // Auto-hide the FAB after heavy scrolling (mobile only) so it never covers content
         let lastY = 0;
         let rafId = null;
         const onScroll = () => {
@@ -63,7 +63,7 @@
     <button
         type="button"
         class="fixed inset-0 z-[58] bg-ink/55 backdrop-blur-sm"
-        aria-label="Tutup menu chat"
+        aria-label="Close chat menu"
         on:click={toggleOpen}
         transition:fade={{ duration: 200 }}
     ></button>
@@ -83,18 +83,18 @@
                         <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-ink live-dot"></span>
                     </div>
                     <div class="min-w-0 flex-1">
-                        <p class="font-display font-bold text-[15px] leading-tight">Konsultan Beriklan</p>
+                        <p class="font-display font-bold text-[15px] leading-tight">Beriklan Consultant</p>
                         <p class="text-[11px] text-white/65 mt-0.5 flex items-center gap-1.5">
                             <Clock class="w-3 h-3" />
-                            Respon dalam 1 jam &middot; jam kerja
+                            Replies within 1 hour &middot; business hours
                         </p>
                     </div>
                     <button
                         type="button"
                         on:click={toggleOpen}
                         on:pointerdown|stopPropagation
-                        aria-label="Tutup menu"
-                        title="Tutup"
+                        aria-label="Close menu"
+                        title="Close"
                         class="w-11 h-11 -mr-2 rounded-full bg-white/15 hover:bg-white/30 active:bg-white/40 flex items-center justify-center transition shrink-0"
                     >
                         <X class="w-5 h-5" strokeWidth="2.5" />
@@ -108,9 +108,9 @@
                     </span>
                     <span class="flex-1 min-w-0">
                         <span class="block font-bold text-ink text-sm">Chat via WhatsApp</span>
-                        <span class="block text-[11px] text-muted">Respon paling cepat</span>
+                        <span class="block text-[11px] text-muted">Fastest response</span>
                     </span>
-                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">Rekomendasi</span>
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">Recommended</span>
                 </a>
                 <a href={phoneLink} class="quick-row">
                     <span class="quick-row-icon bg-blue-50 text-blue-600">
@@ -118,7 +118,7 @@
                     </span>
                     <span class="flex-1 min-w-0">
                         <span class="block font-bold text-ink text-sm">+62 81.1919.328</span>
-                        <span class="block text-[11px] text-muted">Telepon langsung</span>
+                        <span class="block text-[11px] text-muted">Direct phone line</span>
                     </span>
                 </a>
                 <a href={mailLink} class="quick-row">
@@ -127,7 +127,7 @@
                     </span>
                     <span class="flex-1 min-w-0">
                         <span class="block font-bold text-ink text-sm">info@beriklan.my</span>
-                        <span class="block text-[11px] text-muted">Untuk pertanyaan detail</span>
+                        <span class="block text-[11px] text-muted">For detailed enquiries</span>
                     </span>
                 </a>
             </div>
@@ -140,7 +140,7 @@
 <button
     type="button"
     on:click={toggleOpen}
-    aria-label="Buka menu chat WhatsApp"
+    aria-label="Open WhatsApp chat menu"
     class="wa-float group md:!hidden"
     class:visible
     class:is-mobile={isMobile}
@@ -153,9 +153,9 @@
         >
             <span class="wa-label-dot"></span>
             {#if isMobile}
-                Chat sekarang
+                Chat now
             {:else}
-                Diskusi via WhatsApp
+                Chat on WhatsApp
             {/if}
         </span>
     {/if}

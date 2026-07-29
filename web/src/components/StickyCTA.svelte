@@ -10,9 +10,9 @@
     let rafId = null;
     let isMobile = false;
 
-    const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20ingin%20mendiskusikan%20strategi%20campaign%20iklan%20untuk%20bisnis%20saya";
+    const waLink = "https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20to%20discuss%20an%20ad%20campaign%20strategy%20for%20my%20business";
     const phoneLink = "tel:+62811919328";
-    const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Iklan";
+    const mailLink = "mailto:info@beriklan.my?subject=Advertising%20Consultation";
 
     onMount(() => {
         const checkMobile = () => {
@@ -69,7 +69,7 @@
         <button
             type="button"
             class="fixed inset-0 z-40 bg-ink/55 backdrop-blur-sm md:hidden"
-            aria-label="Tutup menu"
+            aria-label="Close menu"
             on:click={closeAll}
         ></button>
     {/if}
@@ -84,7 +84,7 @@
                         <button
                             type="button"
                             on:click={closeAll}
-                            aria-label="Tutup"
+                            aria-label="Close"
                             class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 active:bg-white/40 flex items-center justify-center transition"
                         >
                             <X class="w-5 h-5" strokeWidth="2.5" />
@@ -97,8 +97,8 @@
                                 <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-ink live-dot"></span>
                             </div>
                             <div>
-                                <p class="font-display font-bold text-base leading-tight">Konsultan Beriklan</p>
-                                <p class="text-xs text-white/70 mt-0.5">Merespons dalam 1 jam · jam kerja</p>
+                                <p class="font-display font-bold text-base leading-tight">Beriklan Consultant</p>
+                                <p class="text-xs text-white/70 mt-0.5">Replies within 1 hour · business hours</p>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="flex-1 min-w-0 text-left">
                                 <p class="font-display font-extrabold text-[15px] leading-tight">Chat WhatsApp</p>
-                                <p class="text-[11px] opacity-70 leading-tight">Konsultasi 15 menit · tanpa biaya</p>
+                                <p class="text-[11px] opacity-70 leading-tight">15-minute consultation · free</p>
                             </div>
                             <ArrowRight class="w-4 h-4 opacity-70 group-hover:translate-x-0.5 transition" />
                         </a>
@@ -128,8 +128,8 @@
                                 <Phone class="w-4 h-4 text-ink" />
                             </div>
                             <div class="flex-1 min-w-0 text-left">
-                                <p class="font-bold text-sm text-ink leading-tight">Telepon Langsung</p>
-                                <p class="text-[11px] text-muted leading-tight">Diskusi mendalam</p>
+                                <p class="font-bold text-sm text-ink leading-tight">Call Us</p>
+                                <p class="text-[11px] text-muted leading-tight">For deeper discussion</p>
                             </div>
                         </a>
                         <a
@@ -140,8 +140,8 @@
                                 <Mail class="w-4 h-4 text-ink" />
                             </div>
                             <div class="flex-1 min-w-0 text-left">
-                                <p class="font-bold text-sm text-ink leading-tight">Kirim Email</p>
-                                <p class="text-[11px] text-muted leading-tight">Brief terstruktur</p>
+                                <p class="font-bold text-sm text-ink leading-tight">Send an Email</p>
+                                <p class="text-[11px] text-muted leading-tight">Send a structured brief</p>
                             </div>
                         </a>
                         <div class="pt-1 border-t border-gray-100 text-center">
@@ -150,7 +150,7 @@
                                 on:click={dismiss}
                                 class="text-[11px] text-muted hover:text-ink transition"
                             >
-                                Sembunyikan sementara
+                                Hide for now
                             </button>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                     <button
                         type="button"
                         on:click={closePanel}
-                        aria-label="Sembunyikan panel"
+                        aria-label="Hide panel"
                         class="absolute top-2.5 right-2.5 z-10 w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 active:bg-white/40 flex items-center justify-center transition"
                     >
                         <X class="w-4 h-4" strokeWidth="2.5" />
@@ -177,8 +177,8 @@
                             <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-ink live-dot"></span>
                         </div>
                         <div class="min-w-0">
-                            <p class="font-display font-bold text-sm leading-tight">Konsultan Beriklan</p>
-                            <p class="text-[10px] text-white/70 mt-0.5">Respon 1 jam · jam kerja</p>
+                            <p class="font-display font-bold text-sm leading-tight">Beriklan Consultant</p>
+                            <p class="text-[10px] text-white/70 mt-0.5">1-hour response · business hours</p>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                         </div>
                         <div class="flex-1 min-w-0 text-left">
                             <p class="font-bold text-sm leading-tight">Chat WhatsApp</p>
-                            <p class="text-[10px] opacity-70 leading-tight">Konsultasi 15 menit</p>
+                            <p class="text-[10px] opacity-70 leading-tight">15-minute consultation</p>
                         </div>
                         <ArrowRight class="w-3.5 h-3.5 opacity-70 group-hover:translate-x-0.5 transition" />
                     </a>
@@ -207,7 +207,7 @@
                         </div>
                         <div class="flex-1 min-w-0 text-left">
                             <p class="font-bold text-[13px] text-ink leading-tight">+62 81.1919.328</p>
-                            <p class="text-[10px] text-muted leading-tight">Telepon langsung</p>
+                            <p class="text-[10px] text-muted leading-tight">Direct phone line</p>
                         </div>
                     </a>
                     <a
@@ -219,7 +219,7 @@
                         </div>
                         <div class="flex-1 min-w-0 text-left">
                             <p class="font-bold text-[13px] text-ink leading-tight">info@beriklan.my</p>
-                            <p class="text-[10px] text-muted leading-tight">Email detail</p>
+                            <p class="text-[10px] text-muted leading-tight">For detailed enquiries</p>
                         </div>
                     </a>
                 </div>
@@ -232,7 +232,7 @@
                 type="button"
                 on:click={toggle}
                 class="pointer-events-auto relative w-14 h-14 rounded-full bg-gradient-to-br from-accent to-orange-500 text-ink shadow-2xl flex items-center justify-center fab-btn group"
-                aria-label={isOpen ? 'Tutup menu kontak' : 'Buka menu kontak'}
+                aria-label={isOpen ? 'Close contact menu' : 'Open contact menu'}
                 aria-expanded={isOpen}
             >
                 {#if !isOpen && unread}
@@ -255,7 +255,7 @@
                 type="button"
                 on:click={toggle}
                 class="pointer-events-auto relative w-12 h-12 rounded-full bg-gradient-to-br from-accent to-orange-500 text-ink shadow-xl flex items-center justify-center fab-btn group"
-                aria-label="Buka panel kontak"
+                aria-label="Open contact panel"
                 aria-expanded={panelOpen}
             >
                 <span class="relative w-5 h-5">

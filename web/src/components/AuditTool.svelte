@@ -21,50 +21,50 @@
     ];
 
     const budgets = [
-        { id: '<5', Icon: Sprout, label: '< Rp 5jt', sub: 'Testing awal' },
-        { id: '5-15', Icon: Leaf, label: 'Rp 5–15jt', sub: 'Sudah berjalan' },
-        { id: '15-50', Icon: TreePine, label: 'Rp 15–50jt', sub: 'Siap scale' },
-        { id: '50+', Icon: Rocket, label: 'Rp 50jt+', sub: 'Enterprise' },
+        { id: '<5', Icon: Sprout, label: '< RM 2k', sub: 'Early testing' },
+        { id: '5-15', Icon: Leaf, label: 'RM 2–5k', sub: 'Already running' },
+        { id: '15-50', Icon: TreePine, label: 'RM 5–15k', sub: 'Ready to scale' },
+        { id: '50+', Icon: Rocket, label: 'RM 15k+', sub: 'Enterprise' },
     ];
 
     const durations = [
-        { id: '<3', Icon: Timer, label: '< 3 bulan', sub: 'Baru mulai' },
-        { id: '3-6', Icon: Calendar, label: '3–6 bulan', sub: 'Cari validasi' },
-        { id: '6-12', Icon: CalendarDays, label: '6–12 bulan', sub: 'Sudah PMF' },
-        { id: '12+', Icon: Trophy, label: '> 1 tahun', sub: 'Mapan, optimasi' },
+        { id: '<3', Icon: Timer, label: '< 3 months', sub: 'Just started' },
+        { id: '3-6', Icon: Calendar, label: '3–6 months', sub: 'Seeking validation' },
+        { id: '6-12', Icon: CalendarDays, label: '6–12 months', sub: 'Found PMF' },
+        { id: '12+', Icon: Trophy, label: '> 1 year', sub: 'Established, optimising' },
     ];
 
     const goals = [
-        { id: 'leads', Icon: Phone, label: 'Leads / Inquiry', sub: 'Penjualan via chat/call' },
-        { id: 'sales', Icon: ShoppingCart, label: 'Direct Sales', sub: 'Transaksi langsung' },
-        { id: 'awareness', Icon: MegaphoneIcon, label: 'Brand Awareness', sub: 'Jangkauan luas' },
-        { id: 'traffic', Icon: Globe, label: 'Website Traffic', sub: 'Kunjungan organik' },
+        { id: 'leads', Icon: Phone, label: 'Leads / Enquiries', sub: 'Sales via chat/call' },
+        { id: 'sales', Icon: ShoppingCart, label: 'Direct Sales', sub: 'Direct transactions' },
+        { id: 'awareness', Icon: MegaphoneIcon, label: 'Brand Awareness', sub: 'Broad reach' },
+        { id: 'traffic', Icon: Globe, label: 'Website Traffic', sub: 'Organic visits' },
     ];
 
     const questions = [
-        { key: 'platform', title: 'Platform iklan mana yang jadi fokus utama?', sub: 'Pilih yang paling dominan di campaign Anda saat ini.', data: platforms },
-        { key: 'budget', title: 'Berapa budget iklan yang Anda alokasikan per bulan?', sub: 'Termasuk ad spend + biaya agency (kalau ada).', data: budgets },
-        { key: 'duration', title: 'Sudah berapa lama Anda jalanin iklan digital?', sub: 'Termasuk yang Anda kelola sendiri atau pakai agency lain.', data: durations },
-        { key: 'goal', title: 'Apa objective utama campaign Anda?', sub: 'Fokus goal yang paling ingin dicapai 6 bulan ke depan.', data: goals },
+        { key: 'platform', title: 'Which ad platform is your main focus?', sub: 'Pick the most dominant one in your current campaigns.', data: platforms },
+        { key: 'budget', title: 'How much ad budget do you allocate per month?', sub: 'Including ad spend + agency fees (if any).', data: budgets },
+        { key: 'duration', title: 'How long have you been running digital ads?', sub: 'Including self-managed or with another agency.', data: durations },
+        { key: 'goal', title: 'What is your main campaign objective?', sub: 'The goal you most want to reach in the next 6 months.', data: goals },
     ];
 
     // Recommendation matrix — heuristic
     function getRecommendation() {
         const { platform, budget, duration, goal } = answers;
         let pkg = 'Starter';
-        let price = '2.500.000';
+        let price = '990';
         let matchScore = 95;
         let reasoning = [];
 
-        if (budget === '<5') { pkg = 'Starter'; price = '2.500.000'; reasoning.push('Cocok untuk tahap testing awal.'); matchScore = 92; }
-        else if (budget === '5-15') { pkg = 'Growth'; price = '5.000.000'; reasoning.push('Sudah menemukan product-market fit, siap untuk scale-up.'); matchScore = 96; }
-        else if (budget === '15-50') { pkg = 'Scale'; price = '10.000.000+'; reasoning.push('Budget besar butuh full funnel management.'); matchScore = 98; }
-        else { pkg = 'Scale'; price = 'Custom'; reasoning.push('Custom retainer — dedicated team untuk hasil maksimal.'); matchScore = 99; }
+        if (budget === '<5') { pkg = 'Starter'; price = '990'; reasoning.push('A good fit for the early testing stage.'); matchScore = 92; }
+        else if (budget === '5-15') { pkg = 'Growth'; price = '1,990'; reasoning.push('You have found product-market fit and are ready to scale up.'); matchScore = 96; }
+        else if (budget === '15-50') { pkg = 'Scale'; price = '2,990+'; reasoning.push('A bigger budget needs full-funnel management.'); matchScore = 98; }
+        else { pkg = 'Scale'; price = 'Custom'; reasoning.push('Custom retainer — a dedicated team for maximum results.'); matchScore = 99; }
 
-        if (duration === '<3' && goal === 'awareness') reasoning.push('Fokus ke creative testing di awal untuk find winning formula.');
-        if (duration === '12+' && goal === 'sales') reasoning.push('Tinggal refine — optimasi CPA + scale yang sudah jalan.');
-        if (platform === 'multi') reasoning.push('Multi-platform perlu creative variant per channel.');
-        if (platform === 'tiktok' && goal === 'leads') reasoning.push('TikTok cocok untuk top funnel, perlu pairing Meta untuk retargeting.');
+        if (duration === '<3' && goal === 'awareness') reasoning.push('Focus on creative testing early to find the winning formula.');
+        if (duration === '12+' && goal === 'sales') reasoning.push('Just refine — optimise CPA and scale what already works.');
+        if (platform === 'multi') reasoning.push('Multi-platform requires creative variants per channel.');
+        if (platform === 'tiktok' && goal === 'leads') reasoning.push('TikTok works for top of funnel; pair it with Meta for retargeting.');
 
         return { pkg, price, matchScore, reasoning };
     }
@@ -124,21 +124,21 @@
         <div class="text-center max-w-2xl mx-auto mb-10">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
                 <span class="w-8 h-px bg-accent"></span>
-                AI Audit · 60 detik
+                AI Audit · 60 seconds
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl leading-[1.15] tracking-tight">
-                Jawab 4 pertanyaan,
-                <span class="block mt-2 text-accent">kami rekomendasikan paket Anda.</span>
+                Answer 4 questions,
+                <span class="block mt-2 text-accent">we recommend your package.</span>
             </h2>
-            <p class="mt-4 text-white/60 text-sm md:text-base">Bukan kuis tanpa isi — Anda akan memperoleh estimasi paket + range harga yang cocok untuk situasi Anda saat ini.</p>
+            <p class="mt-4 text-white/60 text-sm md:text-base">Not an empty quiz — you get a package estimate + a price range that fits your current situation.</p>
         </div>
 
         <!-- Progress bar -->
         <div class="max-w-3xl mx-auto mb-8">
             <div class="flex items-center justify-between mb-2 text-xs text-white/60">
                 <span>Step {!done ? currentStep + 1 : questions.length} / {questions.length}</span>
-                <span>{Math.round(progress)}% selesai</span>
+                <span>{Math.round(progress)}% done</span>
             </div>
             <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-accent to-orange-400 rounded-full transition-all duration-700" style="width: {progress}%"></div>
@@ -185,9 +185,9 @@
                                 class="text-sm text-white/60 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition flex items-center gap-1"
                             >
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                                Kembali
+                                Back
                             </button>
-                            <span class="text-xs text-white/40">Klik salah satu opsi untuk lanjut</span>
+                            <span class="text-xs text-white/40">Click an option to continue</span>
                         </div>
                     </div>
                 {/key}
@@ -197,15 +197,15 @@
                     <div class="text-center mb-6">
                         <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-xs font-bold mb-4">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            Audit selesai · Match score {recommendation.matchScore}%
+                            Audit complete · Match score {recommendation.matchScore}%
                         </div>
-                        <p class="text-white/60 text-sm mb-2">Berdasarkan jawaban Anda, kami rekomendasikan:</p>
-                        <h3 class="font-display font-extrabold text-4xl md:text-5xl text-accent mb-2">Paket {recommendation.pkg}</h3>
-                        <p class="text-white/70 text-sm">Estimasi biaya: <span class="font-bold text-white">Rp {recommendation.price}</span> / bulan</p>
+                        <p class="text-white/60 text-sm mb-2">Based on your answers, we recommend:</p>
+                        <h3 class="font-display font-extrabold text-4xl md:text-5xl text-accent mb-2">{recommendation.pkg} Package</h3>
+                        <p class="text-white/70 text-sm">Estimated fee: <span class="font-bold text-white">RM {recommendation.price}</span> / month</p>
                     </div>
 
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6">
-                        <p class="text-xs font-bold uppercase tracking-wider text-accent mb-3">💡 Kenapa paket ini:</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-accent mb-3">💡 Why this package:</p>
                         <ul class="space-y-2">
                             {#each recommendation.reasoning as r}
                                 <li class="flex items-start gap-2 text-sm text-white/80">
@@ -217,12 +217,12 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20baru%20selesai%20audit%20dan%20direkomendasikan%20paket%20{recommendation.pkg}" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 bg-accent text-ink px-6 py-3 rounded-full font-bold hover:bg-accent-2 hover:shadow-pop transition-all">
+                        <a href="https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%20just%20completed%20the%20audit%20and%20was%20recommended%20the%20{recommendation.pkg}%20package" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 bg-accent text-ink px-6 py-3 rounded-full font-bold hover:bg-accent-2 hover:shadow-pop transition-all">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24z"/></svg>
-                            Diskusi Paket Ini
+                            Discuss This Package
                         </a>
                         <button type="button" on:click={reset} class="px-6 py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/5 transition">
-                            Ulangi Audit
+                            Restart Audit
                         </button>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
         </div>
 
         <p class="text-center text-xs text-white/40 mt-6">
-            🔒 Data Anda aman — tidak disimpan, hanya untuk rekomendasi langsung.
+            🔒 Your data is safe — nothing is stored, it is only used for this recommendation.
         </p>
     </div>
 </section>

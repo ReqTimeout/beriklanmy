@@ -1,11 +1,11 @@
 ---
 /**
- * CookieConsent.svelte - UU PDP + GDPR compliant cookie consent banner
+ * CookieConsent.svelte - PDPA + GDPR compliant cookie consent banner
  *
  * - Show only once per user (localStorage)
  * - "Accept All" / "Reject" / "Settings" buttons
  * - Granular: necessary (always), analytics, advertising (AdSense)
- * - Emit event untuk activate AdSense kalau advertising consent
+ * - Emits an event to activate AdSense when advertising consent is given
  */
 ---
 <div
@@ -18,44 +18,44 @@
 >
   <div class="cookie-card">
     <div class="cookie-text">
-      <p class="cookie-title">Kami Pakai Cookie — Setuju?</p>
+      <p class="cookie-title">We Use Cookies — OK?</p>
       <p class="cookie-desc">
-        Kami menggunakan cookie untuk iklan (AdSense), analitik, dan personalisasi.
-        Data diproses sesuai <a href="/privacy-policy/" class="cookie-link">Kebijakan Privasi</a>.
-        Setuju atau kelola preferensi Anda.
+        We use cookies for advertising (AdSense), analytics and personalisation.
+        Data is processed according to our <a href="/privacy-policy/" class="cookie-link">Privacy Policy</a>.
+        Accept all or manage your preferences.
       </p>
     </div>
     <div class="cookie-actions">
       <button type="button" id="cookie-accept" class="cookie-btn cookie-btn-primary">
-        Setuju Semua
+        Accept All
       </button>
       <button type="button" id="cookie-reject" class="cookie-btn cookie-btn-secondary">
-        Tolak
+        Reject
       </button>
       <button type="button" id="cookie-settings" class="cookie-btn cookie-btn-text">
-        Kelola
+        Manage
       </button>
     </div>
   </div>
 
   <div id="cookie-prefs" class="cookie-prefs" hidden>
     <div class="cookie-card">
-      <p class="cookie-title">Pengaturan Cookie</p>
+      <p class="cookie-title">Cookie Settings</p>
       <label class="cookie-pref">
         <input type="checkbox" checked disabled />
-        <span><strong>Wajib</strong> · Untuk fitur dasar (autentikasi, keamanan)</span>
+        <span><strong>Necessary</strong> · Core site features (authentication, security)</span>
       </label>
       <label class="cookie-pref">
         <input type="checkbox" id="cookie-pref-analytics" />
-        <span><strong>Analitik</strong> · Untuk memahami penggunaan situs</span>
+        <span><strong>Analytics</strong> · To understand how the site is used</span>
       </label>
       <label class="cookie-pref">
         <input type="checkbox" id="cookie-pref-ads" />
-        <span><strong>Iklan (AdSense)</strong> · Untuk personalisasi iklan Google AdSense</span>
+        <span><strong>Advertising (AdSense)</strong> · Google AdSense ad personalisation</span>
       </label>
       <div class="cookie-actions">
         <button type="button" id="cookie-save" class="cookie-btn cookie-btn-primary">
-          Simpan Preferensi
+          Save Preferences
         </button>
       </div>
     </div>

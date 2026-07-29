@@ -15,14 +15,14 @@
 
     const SERVICE_NAME = {
         'digital-marketing-agency': 'Digital Marketing',
-        'facebook-ads-management': 'Iklan Facebook',
-        'instagram-ads-management': 'Iklan Instagram',
-        'tiktok-ads-management': 'Iklan TikTok',
-        'google-ads-management': 'Iklan Google Ads',
-        'youtube-ads-management': 'Iklan YouTube',
-        'instagram-management': 'Kelola Instagram',
-        'tiktok-management': 'Kelola TikTok',
-        'website-development': 'Pembuatan Website',
+        'facebook-ads-management': 'Facebook Ads',
+        'instagram-ads-management': 'Instagram Ads',
+        'tiktok-ads-management': 'TikTok Ads',
+        'google-ads-management': 'Google Ads',
+        'youtube-ads-management': 'YouTube Ads',
+        'instagram-management': 'Instagram Management',
+        'tiktok-management': 'TikTok Management',
+        'website-development': 'Website Development',
         'landing-page-design': 'Landing Page',
     };
 
@@ -55,7 +55,7 @@
                             title: cd.title || tag,
                             desc: cd.desc || '',
                             serviceName: SERVICE_NAME[service] || service,
-                            pillarHref: `/${service}/pilar/`,
+                            pillarHref: `/${service}/pillar/`,
                         };
                         clusterPosts = cd.posts || [];
                         loaded = true;
@@ -101,13 +101,13 @@
     });
 
     const categories = [
-        { id: 'all', label: 'Semua Topik' },
+        { id: 'all', label: 'All Topics' },
         { id: 'meta', label: 'Facebook & Instagram' },
         { id: 'tiktok', label: 'TikTok' },
         { id: 'google', label: 'Google Ads' },
         { id: 'youtube', label: 'YouTube' },
-        { id: 'strategy', label: 'Strategi' },
-        { id: 'case-study', label: 'Studi Kasus' },
+        { id: 'strategy', label: 'Strategy' },
+        { id: 'case-study', label: 'Case Studies' },
     ];
 
     $: filteredPosts = activeCategory === 'all' ? allPosts : allPosts.filter(p => p.category === activeCategory);
@@ -120,7 +120,7 @@
         <!-- ====================== CLUSTER VIEW (pillar cluster) ====================== -->
         <a href={clusterMeta.pillarHref} class="inline-flex items-center gap-1.5 text-sm font-bold text-muted hover:text-accent transition-colors mb-6">
             <ArrowLeft class="w-4 h-4" />
-            Kembali ke Panduan {clusterMeta.serviceName}
+            Back to the {clusterMeta.serviceName} Guide
         </a>
         <div class="mb-2 inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 text-accent text-[11px] font-bold uppercase tracking-wider rounded-full">
             Cluster · {clusterMeta.serviceName}
@@ -132,7 +132,7 @@
             <p class="text-base md:text-lg text-muted leading-relaxed max-w-2xl mb-3">{clusterMeta.desc}</p>
         {/if}
         <p class="text-sm text-muted mb-8">
-            {clusterPosts.length} artikel terkait {clusterMeta.serviceName.toLowerCase()}. Semua dibahas dari pengalaman mengelola campaign sejak 2016.
+            {clusterPosts.length} articles related to {clusterMeta.serviceName.toLowerCase()}. All written from hands-on experience managing campaigns since 2016.
         </p>
 
         {#if clusterPosts.length > 0}
@@ -147,7 +147,7 @@
                             <h4 class="font-display font-bold text-base text-ink mb-2 leading-snug group-hover:text-accent transition-colors line-clamp-2">{post.title}</h4>
                             <p class="text-xs text-muted leading-relaxed line-clamp-3">{post.excerpt}</p>
                             <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-accent transition-colors">
-                                Baca selengkapnya
+                                Read more
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </div>
@@ -156,14 +156,14 @@
             </div>
         {:else}
             <div class="text-center py-12 border border-dashed border-gray-200 rounded-2xl">
-                <p class="text-muted">Belum ada artikel khusus untuk cluster ini. Kembali ke panduan untuk topik lain.</p>
+                <p class="text-muted">No articles for this cluster yet. Head back to the guide for other topics.</p>
             </div>
         {/if}
 
         <div class="mt-12 text-center">
             <a href={clusterMeta.pillarHref} class="group inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full font-bold shadow-pop hover:shadow-lg transition-all">
                 <span class="flex items-center gap-2">
-                    Lihat Panduan Lengkap {clusterMeta.serviceName}
+                    View the Full {clusterMeta.serviceName} Guide
                     <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
             </a>
@@ -173,7 +173,7 @@
     <div class="mb-10">
         <div class="flex items-center gap-2 mb-3">
             <Filter class="w-4 h-4 text-muted" />
-            <span class="text-xs font-bold uppercase tracking-wider text-muted">Filter Topik:</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-muted">Filter by Topic:</span>
         </div>
         <div class="flex flex-wrap gap-2">
             {#each categories as cat}
@@ -208,7 +208,7 @@
                             <h4 class="font-display font-extrabold text-lg text-ink leading-tight mb-2 group-hover:text-accent transition-colors line-clamp-2">{post.title}</h4>
                             <p class="text-xs text-muted leading-relaxed line-clamp-2">{post.excerpt}</p>
                             <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-ink group-hover:text-accent transition-colors">
-                                Baca selengkapnya <ArrowRight class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                                Read more <ArrowRight class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                             </span>
                         </div>
                     </a>
@@ -220,7 +220,7 @@
     <!-- Grid posts -->
     {#if gridPosts.length > 0}
 <div bind:this={rootEl}>
-            <h3 class="text-xs font-bold uppercase tracking-wider text-muted mb-4">Artikel Lainnya</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-muted mb-4">More Articles</h3>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal-stagger" data-reveal-stagger>
                         {#each gridPosts as post}
                             <a href="/blog/{post.slug}" class="grid-card group">
@@ -242,7 +242,7 @@
         </div>
     {:else if filteredPosts.length === 0}
         <div class="text-center py-12">
-            <p class="text-muted">Tidak ada artikel dalam topik ini. Coba topik lain.</p>
+            <p class="text-muted">No articles in this topic. Try another one.</p>
         </div>
     {/if}
     <!-- /clusterMode else -->

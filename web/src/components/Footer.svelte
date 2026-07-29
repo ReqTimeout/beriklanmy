@@ -19,28 +19,28 @@
         { label: 'Twitch Live', href: '/twitch-live-viewers' },
     ];
 
-    const harga = [
-        { label: 'Facebook Ads', href: '/facebook-ads-cost/bandung' },
-        { label: 'Instagram Ads', href: '/instagram-ads-cost/bandung' },
-        { label: 'Google Ads', href: '/google-ads-cost/bandung' },
-        { label: 'TikTok Ads', href: '/tiktok-ads-cost/bandung' },
-        { label: 'YouTube Ads', href: '/youtube-ads-cost/bandung' },
-        { label: 'Buzzer Live', href: '/tiktok-live-viewers/bandung' },
+    const pricing = [
+        { label: 'Facebook Ads', href: '/facebook-ads-cost/kuala-lumpur' },
+        { label: 'Instagram Ads', href: '/instagram-ads-cost/kuala-lumpur' },
+        { label: 'Google Ads', href: '/google-ads-cost/kuala-lumpur' },
+        { label: 'TikTok Ads', href: '/tiktok-ads-cost/kuala-lumpur' },
+        { label: 'YouTube Ads', href: '/youtube-ads-cost/kuala-lumpur' },
+        { label: 'Live Viewers', href: '/tiktok-live-viewers' },
     ];
 
     const tools = [
-        { label: 'Kalkulator Budget', href: '/ad-budget-calculator' },
-        { label: 'Kalkulator ROAS', href: '/roas-calculator' },
-        { label: 'Kalkulator ROI', href: '/roi-calculator' },
-        { label: 'Riset Industri', href: '/research/laporan-industri-iklan-digital-indonesia-2026' },
+        { label: 'Budget Calculator', href: '/ad-budget-calculator' },
+        { label: 'ROAS Calculator', href: '/roas-calculator' },
+        { label: 'ROI Calculator', href: '/roi-calculator' },
+        { label: 'Industry Research', href: '/research/malaysia-digital-advertising-report-2026' },
     ];
 
     const company = [
-        { label: 'Tentang Kami', href: '/about-us' },
-        { label: 'Metodologi', href: '/methodology' },
+        { label: 'About Us', href: '/about-us' },
+        { label: 'Methodology', href: '/methodology' },
         { label: 'Press & Media', href: '/press' },
         { label: 'Blog', href: '/blog' },
-        { label: 'Kontak', href: '/contact' },
+        { label: 'Contact', href: '/contact' },
     ];
 </script>
 
@@ -54,14 +54,14 @@
         <div class="grid lg:grid-cols-2 gap-10 pb-12 border-b border-white/10">
             <div>
                 <h3 class="font-display font-bold text-2xl md:text-3xl leading-tight anim-fade-up" style="animation-delay: 60ms;">
-                    Siap merumuskan strategi<br/>yang selaras dengan bisnis Anda?
+                    Ready to build a strategy<br/>that fits your business?
                 </h3>
                 <p class="text-white/60 mt-3 text-sm md:text-base max-w-md anim-fade-up" style="animation-delay: 180ms;">
-                    Sesi konsultasi awal selama 15 menit melalui WhatsApp — tanpa biaya. Tim kami akan merespons dalam waktu 1 jam pada jam kerja.
+                    A free 15-minute initial consultation on WhatsApp. Our team responds within 1 hour during business hours.
                 </p>
             </div>
             <div class="flex flex-col sm:flex-row lg:justify-end gap-3 items-start lg:items-center">
-                <a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%20konsultasi%20gratis" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-ink font-bold px-6 py-3 rounded-full hover:bg-accent-2 transition shadow-lg">
+                <a href="https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20a%20free%20consultation" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-ink font-bold px-6 py-3 rounded-full hover:bg-accent-2 transition shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24z"/></svg>
                     Chat WhatsApp
                 </a>
@@ -73,9 +73,9 @@
 
         <div class="grid md:grid-cols-2 gap-8 py-10 border-b border-white/10">
             <div>
-                <h4 class="font-display font-bold text-xl md:text-2xl">Update Bulanan dari Tim Beriklan</h4>
+                <h4 class="font-display font-bold text-xl md:text-2xl">Monthly Updates from the Beriklan Team</h4>
                 <p class="text-white/60 mt-2 text-sm leading-relaxed max-w-md">
-                    Tips iklan Meta, Google, TikTok, YouTube + data industri. Dikirim 1× sebulan. Tanpa spam, berhenti kapan saja.
+                    Meta, Google, TikTok and YouTube ads tips + industry data. Sent once a month. No spam, unsubscribe anytime.
                 </p>
             </div>
             <div class="md:max-w-sm md:ml-auto md:w-full">
@@ -83,14 +83,14 @@
                     <input
                         type="text"
                         name="name"
-                        placeholder="Nama (opsional)"
+                        placeholder="Name (optional)"
                         class="w-full px-3.5 py-2.5 text-sm bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:outline-none focus:border-accent focus:bg-white/10 transition"
                     />
                     <div class="flex gap-2">
                         <input
                             type="email"
                             name="email"
-                            placeholder="email@bisnis.com"
+                            placeholder="email@business.com"
                             class="flex-1 min-w-0 px-3.5 py-2.5 text-sm bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:outline-none focus:border-accent focus:bg-white/10 transition"
                             required
                         />
@@ -98,7 +98,7 @@
                             type="submit"
                             class="shrink-0 px-5 py-2.5 text-sm font-bold bg-accent text-ink rounded-full hover:bg-accent-2 transition disabled:opacity-50"
                         >
-                            Daftar
+                            Subscribe
                         </button>
                     </div>
                     <input
@@ -110,7 +110,7 @@
                         aria-hidden="true"
                     />
                     <p class="nl-status text-[11px] text-white/40 leading-snug">
-                        Kami kirim 1 update/bulan. Berhenti kapan saja.
+                        One update per month. Unsubscribe anytime.
                     </p>
                 </form>
             </div>
@@ -119,10 +119,10 @@
         <div class="grid md:grid-cols-6 gap-8 py-12">
             <div class="md:col-span-1">
                 <a href="/" class="flex items-center gap-2">
-                    <img src="/logoweb.webp" alt="Beriklan.co.id" class="h-10 w-auto brightness-0 invert" />
+                    <img src="/logoweb.webp" alt="Beriklan.my" class="h-10 w-auto brightness-0 invert" />
                 </a>
                 <p class="text-white/60 text-sm mt-4 leading-relaxed">
-                    Agency performance marketing yang berbasis di Bandung. Mulai dari riset, eksekusi, hingga optimasi — kamielola secara end-to-end agar Anda fokus pada bisnis.
+                    A performance marketing agency serving Malaysia. From research to execution and optimisation — managed end-to-end so you can focus on your business.
                 </p>
                 <div class="flex gap-3 mt-5">
                     <a href="https://instagram.com/beriklan.my" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full bg-white/5 hover:bg-accent hover:text-ink flex items-center justify-center transition">
@@ -138,7 +138,7 @@
             </div>
 
             <div>
-                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Layanan</h4>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Services</h4>
                 <ul class="space-y-2">
                     {#each services as item}
                         <li>
@@ -154,9 +154,9 @@
             </div>
 
             <div>
-                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Harga</h4>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Pricing</h4>
                 <ul class="space-y-2">
-                    {#each harga as item}
+                    {#each pricing as item}
                         <li><a href={item.href} class="text-white/80 hover:text-accent text-sm transition">{item.label}</a></li>
                     {/each}
                 </ul>
@@ -181,7 +181,7 @@
             </div>
 
             <div>
-                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Perusahaan</h4>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-white/50 mb-3">Company</h4>
                 <ul class="space-y-2">
                     {#each company as item}
                         <li><a href={item.href} class="text-white/80 hover:text-accent text-sm transition">{item.label}</a></li>
@@ -191,7 +191,7 @@
         </div>
 
         <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
-            <p>&copy; {year} Beriklan.co.id. All rights reserved.</p>
+            <p>&copy; {year} Beriklan.my. All rights reserved.</p>
             <div class="flex gap-6">
                 <a href="/privacy-policy" class="hover:text-accent transition">Privacy Policy</a>
                 <a href="/terms-of-service" class="hover:text-accent transition">Terms of Service</a>

@@ -17,83 +17,36 @@ import Footer from '../components/Footer.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%20konsultasi%20strategi%20digital%20marketing%20untuk%20bisnis%20saya.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20your%20digital%20marketing%20services.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'Starter',
-        priceLabel: 'Konsultasi',
-        duration: '15 menit',
-        tagline: 'Sesi konsultasi awal gratis untuk Anda yang ingin berdiskusi strategi digital marketing untuk bisnis Anda.',
-        features: [
-            'Konsultasi 1-on-1 via WhatsApp',
-            'Analisis singkat kondisi digital marketing saat ini',
-            'Rekomendasi kanal yang relevan',
-            'Estimasi budget yang ideal',
-            'Tanpa biaya',
-        ],
-        priceNote: 'gratis tanpa syarat',
-        disclaimer: 'Tidak ada tekanan untuk lanjut setelah sesi konsultasi.',
-    },
-    {
-        name: 'Custom Package',
-        priceLabel: 'Custom',
-        duration: 'fleksibel',
-        tagline: 'Paket disesuaikan dengan objective dan budget Anda. Bisa kombinasi beberapa kanal.',
-        features: [
-            'Pilih kanal yang ingin dimanage',
-            'Kombinasi 2-5 layanan',
-            'Akses ke semua tim spesialis',
-            'Laporan terpadu lintas kanal',
-            'Optimasi berbasis data',
-            'Review bulanan via video call',
-        ],
-        priceNote: 'harga disesuaikan dengan scope',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-        highlight: true,
-    },
-    {
-        name: 'Enterprise',
-        priceLabel: 'Custom',
-        duration: 'long-term',
-        tagline: 'Untuk bisnis dengan budget iklan signifikan dan kebutuhan multi-channel jangka panjang.',
-        features: [
-            'Tim dedicated untuk akun Anda',
-            'Strategi omnichannel terpadu',
-            'Custom reporting & dashboard',
-            'SLA khusus (response time)',
-            'Workshop internal untuk tim Anda',
-            'Priority support',
-        ],
-        priceNote: 'penawaran khusus berdasarkan kebutuhan',
-        disclaimer: 'Hubungi kami untuk diskusi lebih lanjut.',
-    },
+    { name: 'Starter', priceLabel: 'Free', duration: '60-minute session', tagline: 'A strategy consultation — walk away with a channel plan even if we never work together.', features: ['Funnel & ad account review', 'Channel mix recommendation', 'Budget allocation guidance', 'Priority quick-wins list', 'No obligation'], priceNote: 'free consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Growth', priceLabel: 'Custom', duration: '30-day cycles', tagline: 'Multi-channel management scoped to your targets.', features: ['2–3 channels managed (Meta/Google/TikTok)', 'Creative direction included', 'Landing page optimisation', 'Weekly consolidated reporting', 'Monthly strategy call'], priceNote: 'custom quote after consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
+    { name: 'Scale', priceLabel: 'Custom', duration: '30-day cycles', tagline: 'Full-funnel programme for aggressive growth targets.', features: ['All channels + YouTube', 'Dedicated strategist & designer', 'CRO programme on pages', 'Weekly strategy rhythm', 'Quarterly executive review'], priceNote: 'custom quote after consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
 
 const features = [
-    { iconName: 'Target', title: 'Strategi Omnichannel', desc: 'Pendekatan terpadu lintas kanal: paid ads, organic, dan konversi. Setiap kanal saling menguatkan.' },
-    { iconName: 'Sparkles', title: 'Konsultasi Strategi', desc: 'Sesi awal untuk memahami bisnis Anda, audience, dan objective. Rekomendasi kanal yang paling sesuai.' },
-    { iconName: 'Users', title: 'Tim Spesialis', desc: 'Satu tim yang terdiri dari spesialis paid ads, organic, dan website. Anda tidak perlu koordinasikan banyak agency.' },
-    { iconName: 'BarChart3', title: 'Laporan Terpadu', desc: 'Laporan lintas kanal dalam satu dokumen: easy to read, dengan rekomendasi aksi untuk periode berikutnya.' },
-    { iconName: 'TrendingUp', title: 'Optimasi Berkelanjutan', desc: 'Setiap minggu kami optimasi: pause yang tidak perform, scale yang jalan. Data menjadi dasar setiap keputusan.' },
-    { iconName: 'MessageCircle', title: 'Komunikasi Rutin', desc: 'Update mingguan via WhatsApp atau email. Laporan bulanan via video call. Anda selalu tahu perkembangan campaign.' },
+    { iconName: 'Target', title: 'Omnichannel Strategy', desc: 'An integrated cross-channel approach: paid ads, organic and conversion. Every channel reinforces the others.' },
+    { iconName: 'Sparkles', title: 'Strategy Consultation', desc: 'An initial session to understand your business, audience and objectives — with a recommendation of the channels that fit best.' },
+    { iconName: 'Users', title: 'Specialist Team', desc: 'One team of paid ads, organic and website specialists. No need to coordinate multiple agencies.' },
+    { iconName: 'BarChart3', title: 'Unified Reporting', desc: 'Cross-channel reporting in one document: easy to read, with action recommendations for the next period.' },
+    { iconName: 'TrendingUp', title: 'Ongoing Optimisation', desc: 'Every week we optimise: pause what underperforms, scale what works. Data drives every decision.' },
+    { iconName: 'MessageCircle', title: 'Regular Communication', desc: 'Weekly updates via WhatsApp or email. Monthly reports via video call. You always know where the campaign stands.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI 1', title: 'Konsultasi Strategi', desc: 'Sesi 30-60 menit via video call atau WhatsApp untuk menggali kondisi bisnis, tujuan, dan tantangan yang Anda hadapi.' },
-    { num: '02', tag: 'HARI 2-3', title: 'Audit & Rekomendasi', desc: 'Kami audit kondisi digital marketing saat ini (jika ada), kemudian susun rekomendasi strategi dan paket yang sesuai.' },
-    { num: '03', tag: 'MINGGU 1+', title: 'Kick-off & Eksekusi', desc: 'Setelah deal, kami langsung mulai eksekusi: setup akun iklan, produksi materi, dan launch campaign pertama Anda.' },
-    { num: '04', tag: 'ONGOING', title: 'Optimasi & Scale', desc: 'Setiap minggu kami optimasi, setiap bulan kami review bersama Anda. Kanal yang perform di-scale, yang tidak di-iterasi.' },
+    { num: '01', tag: 'WEEK 1', title: 'Audit & Strategy', desc: 'We audit your current funnel and propose a channel mix with clear targets.' },
+    { num: '02', tag: 'WEEK 2', title: 'Setup Sprint', desc: 'Accounts, tracking, creative and landing pages prepared in one coordinated sprint.' },
+    { num: '03', tag: 'WEEK 3+', title: 'Launch & Learn', desc: 'Campaigns go live across the selected channels; early data guides quick corrections.' },
+    { num: '04', tag: 'MONTHLY', title: 'Optimise & Reallocate', desc: 'Monthly review moves budget to winners and cuts what underperforms.' },
 ];
 
 const faqs = [
-    { q: 'Berapa budget iklan (ad spend) yang perlu disiapkan di luar biaya jasa?', a: 'Tergantung target jangkauan dan industri. Pendekatan kami dimulai dari konsultasi: kami dengar dulu apa yang Anda butuhkan, kemudian susun rekomendasi strategi. Baru setelah deal, kami mulai eksekusi. Tidak ada paket fixed karena setiap bisnis berbeda. Pada sesi konsultasi, kami bantu estimasi ad spend yang ideal berdasarkan objective Anda.' },
-    { q: 'Bagaimana cara memulainya?', a: 'Sesi konsultasi awal 30 menit via WhatsApp atau video call. Setelah itu, kami susun rekomendasi strategi dan paket. Deal? Langsung kick-off dalam minggu yang sama. Tidak ada proses panjang yang membuang waktu Anda.' },
-    { q: 'Berapa lama sampai iklan mulai menghasilkan chat WhatsApp atau leads?', a: 'Tergantung kanal dan industri. Untuk Meta dan TikTok, data awal terbaca di minggu ke-2. Untuk Google Search Ads, bisa lebih cepat karena intent-nya sudah tinggi. Pola yang stabil biasanya terlihat di bulan ke-2 atau ke-3.' },
-    { q: 'Apakah layanan ini cocok untuk bisnis yang baru mulai?', a: 'Cocok. Banyak klien kami yang sebelumnya belum pernah beriklan. Kami bantu dari pemilihan kanal, setup akun, sampai materi iklan pertama. Anda tidak perlu pengalaman teknis.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Tidak ada. Sistem kerja bulanan. Anda bebas lanjut atau berhenti setiap periode. Ini bentuk komitmen kami untuk menjaga kualitas kerja — bukan jebakan kontrak.' },
-    { q: 'Apa perbedaan paket Starter, Custom, dan Enterprise?', a: 'Starter untuk Anda yang ingin konsultasi dan arah strategi awal. Custom untuk bisnis dengan objective spesifik yang butuh paket tailored. Enterprise untuk korporasi dengan multi-cabang atau multi-brand yang butuh dedicated team dan reporting lebih detail.' },
-    { q: 'Bagaimana laporan yang diberikan?', a: 'Laporan mingguan disusun dalam satu halaman dengan bahasa yang mudah dipahami — bukan sekadar deretan CPM-CTR-CPC. Anda mendapat kejelasan: mana yang berjalan optimal, mana yang perlu disesuaikan, dan rencana aksi untuk minggu depan.' },
+    { q: 'What does the full-service engagement include?', a: 'Strategy, channel selection, campaign management across Meta/Google/TikTok, creative direction, landing pages and consolidated reporting — scoped to your goals after a consultation.' },
+    { q: 'How is pricing determined?', a: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a free consultation and we will propose a scope with clear deliverables and pricing.' },
+    { q: 'Do you replace our internal team?', a: 'We usually complement it. Some clients hand us everything; others keep content in-house while we run paid media. The scope is built around what you already have.' },
+    { q: 'How soon can we see results?', a: 'Paid campaigns generate data within days and meaningful optimisation within 2–4 weeks. We set expectations per channel during the consultation — no inflated promises.' },
+    { q: 'Is there a minimum commitment?', a: 'Engagements run in 30-day cycles with a quarterly strategy rhythm. No long-term lock-in — the work has to justify itself.' },
 ];
 
 const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map(item => ({
@@ -104,28 +57,31 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
 }));
 ---
 
-<Layout title="Jasa Digital Marketing Multi-Channel Indonesia — Beriklan" description="Satu tim untuk Meta Ads + Google Ads + TikTok + YouTube + Landing Page. Hemat 30% vs kelola sendiri 5 channel. 9 tahun pengalaman, sertifikat Meta & Google Partner. Konsultasi strategi gratis 15 menit." canonical="https://beriklan.my/digital-marketing-agency/"
+<Layout
+    title="Digital Marketing Agency Malaysia | Multi-Channel Growth — Beriklan"
+    description="Multi-channel digital marketing: Facebook, Instagram, Google, TikTok, YouTube ads and landing pages, integrated for measurable growth. Free growth audit to start."
+    canonical="https://beriklan.my/digital-marketing-agency/"
     faq={[
-            { question: 'Berapa harga jasa digital marketing di Beriklan?', answer: 'Mulai dari Rp 2,5 juta per bulan. Paket sudah termasuk strategi, setup campaign multi-platform, dan laporan mingguan. Tidak ada kontrak minimum.' },
-            { question: 'Apa saja yang termasuk dalam layanan digital marketing?', answer: 'Setup campaign Facebook Ads, Instagram Ads, Google Ads, TikTok Ads. Optimasi mingguan, A/B testing creative, retargeting, dan laporan transparan.' },
-            { question: 'Berapa lama setup digital marketing?', answer: 'Setup awal 3-5 hari kerja. Campaign live dalam 1 minggu pertama. Optimasi rutin mingguan setelah launch.' },
-            { question: 'Apakah tim Beriklan bersertifikat?', answer: 'Ya, tim kami Meta Business Partner dan Google Partner bersertifikat. Akses langsung ke platform support.' },
-            { question: 'Bagaimana cara tracking hasil digital marketing?', answer: 'Kami setup GTM + GA4 + Meta Pixel di website. Anda bisa akses real-time dashboard + laporan mingguan via WhatsApp.' }
-        ]}
+        { question: 'What does the full-service engagement include?', answer: 'Strategy, channel selection, campaign management across Meta/Google/TikTok, creative direction, landing pages and consolidated reporting — scoped to your goals after a consultation.' },
+        { question: 'How is pricing determined?', answer: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a free consultation and we will propose a scope with clear deliverables and pricing.' },
+        { question: 'Do you replace our internal team?', answer: 'We usually complement it. Some clients hand us everything; others keep content in-house while we run paid media. The scope is built around what you already have.' },
+        { question: 'How soon can we see results?', answer: 'Paid campaigns generate data within days and meaningful optimisation within 2–4 weeks. We set expectations per channel during the consultation — no inflated promises.' },
+        { question: 'Is there a minimum commitment?', answer: 'Engagements run in 30-day cycles with a quarterly strategy rhythm. No long-term lock-in — the work has to justify itself.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Digital Marketing", url: "https://beriklan.my/digital-marketing-agency/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Digital Marketing Agency", url: "https://beriklan.my/digital-marketing-agency/" }
     ]}
     service={{
-        name: "Jasa Digital Marketing",
-        description: "Jasa Jasa Digital Marketing profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "Digital Marketing Agency",
+        description: "End-to-end digital marketing for Malaysian businesses — strategy, paid media, content and landing pages under one accountable team.",
         url: "https://beriklan.my/digital-marketing-agency/",
-        priceRange: "Rp 2.500.000 - Rp 10.000.000",
+        priceRange: "Custom",
         serviceType: "Digital Marketing",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -147,36 +103,36 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Jasa Digital Marketing · Multi-Channel · Bandung</span>
+                    <span class="opacity-0 anim-fade-in">Digital Marketing Agency · Multi-Channel · Malaysia</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Jasa Digital Marketing</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Meningkatkan Bisnis Anda</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">Lewat Saluran yang Tepat.</span>
+                    <span class="anim-fade-up">Digital Marketing</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">That Grows Your Business</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">Through the Right Channels.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    Kami mengelola iklan Facebook, Instagram, Google, TikTok, YouTube, dan Landing Page untuk mendatangkan pelanggan baru secara terukur. Setiap rupiah yang Anda investasikan dipantau ketat dengan laporan yang dapat Anda pahami.
+                    We manage Facebook, Instagram, Google, TikTok and YouTube ads plus landing pages to bring in new customers, measurably. Every ringgit you invest is monitored closely, with reports you can actually understand.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -190,15 +146,15 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -213,15 +169,15 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa Pendekatan Kami
+                    Why Our Approach
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar menayangkan iklan di banyak tempat,<br/>
-                    <span class="text-accent">tapi mengintegrasikan kanal untuk hasil yang optimal.</span>
+                    Not just running ads everywhere,<br/>
+                    <span class="text-accent">but integrating channels for optimal results.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Digital marketing bukan hanya soal pasang iklan di banyak platform. Yang lebih penting adalah mengintegrasikan setiap kanal agar saling menguatkan: Facebook Ads untuk awareness, Google Ads untuk intent tinggi, Landing Page untuk konversi, dan seterusnya. Tim kami mengelola integrasi ini secara menyeluruh.
+                    Digital marketing is not just about running ads on many platforms. What matters more is integrating every channel so they reinforce each other: Facebook Ads for awareness, Google Ads for high intent, landing pages for conversion, and so on. Our team manages that integration end-to-end.
                 </p>
             </div>
 
@@ -229,17 +185,17 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                 <div class="why-card group">
                     <div class="why-icon">🎯</div>
                     <h3 class="why-title">Pendekatan Omnichannel</h3>
-                    <p class="why-desc">Setiap kanal punya peran spesifik dalam funnel. Kami kelola integrasi agar audience journey dari awareness hingga konversi terasa mulus.</p>
+                    <p class="why-desc">Every channel has a specific role in the funnel. We manage the integration so the audience journey from awareness to conversion feels seamless.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">📊</div>
-                    <h3 class="why-title">Laporan Terpadu</h3>
-                    <p class="why-desc">Laporan lintas kanal dalam satu dokumen: mana kanal yang perform, mana yang perlu iterasi, dan bagaimana mereka saling berkontribusi.</p>
+                    <h3 class="why-title">Unified Reporting</h3>
+                    <p class="why-desc">Cross-channel reporting in a single document: which channels perform, which need iteration, and how they contribute to each other.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">💬</div>
                     <h3 class="why-title">Satu Tim, Banyak Spesialis</h3>
-                    <p class="why-desc">Tidak perlu koordinasikan banyak agency. Tim kami berisi spesialis untuk setiap kanal — semuanya terintegrasi dalam satu workflow.</p>
+                    <p class="why-desc">No juggling multiple agencies. Our team has a specialist for every channel — all integrated in a single workflow.</p>
                 </div>
             </div>
         </div>
@@ -255,8 +211,8 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -272,12 +228,12 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -292,15 +248,15 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
@@ -313,10 +269,10 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -339,33 +295,33 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -377,49 +333,49 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">🧴</div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">💆</div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">💼</div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -444,12 +400,12 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -464,7 +420,7 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="digital-marketing-agency" pageUrl="https://beriklan.my/digital-marketing-agency/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/digital-marketing-agency/pilar/" pillarLabel="Panduan Lengkap Digital Marketing" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/digital-marketing-agency/pilar/" pillarLabel="Complete Digital Marketing Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -478,27 +434,27 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar pasang iklan di banyak platform. Kami menyusun strategi yang mengintegrasikan setiap kanal untuk hasil optimal — agar investasi digital marketing Anda menghasilkan pertumbuhan bisnis yang terukur.
+                    More than running ads on many platforms. We build a strategy that integrates every channel for optimal results — so your digital marketing investment produces measurable business growth.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

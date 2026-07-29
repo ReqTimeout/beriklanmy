@@ -8,22 +8,22 @@
         {
             num: '01',
             Icon: TrendingDown,
-            title: 'Budget keluar, closing tidak bergerak',
-            body: 'Budget keluar tiap hari. Closing stagnan. Biasanya targeting melebar atau creative tidak selaras dengan audience — baru terasa dampaknya setelah sebulan berjalan.',
+            title: 'Budget going out, sales not moving',
+            body: 'Ad spend goes out every day, yet sales stay flat. Usually the targeting is too broad or the creative is misaligned with the audience — and you only feel it after a month has passed.',
             tag: 'Wasted Spend',
         },
         {
             num: '02',
             Icon: LineChart,
-            title: 'Laporan rutin, tanpa arahan strategis',
-            body: 'Agency mengirim laporan CPM-CTR-CPC setiap minggu. Anda bingung membaca angka-angka ini. Tidak ada konteks, tidak ada rekomendasi konkret — hanya pajangan metrik.',
+            title: 'Routine reports, no strategic direction',
+            body: 'Your agency sends CPM-CTR-CPC reports every week. The numbers are confusing. No context, no concrete recommendations — just a display of metrics.',
             tag: 'No Clarity',
         },
         {
             num: '03',
             Icon: CircleHelp,
-            title: 'Bimbang menentukan platform',
-            body: 'Meta dulu? Atau Google? TikTok? Tiap platform punya karakter audience yang berbeda. Salah pilih = buang waktu 3–6 bulan dan budget terkuras tanpa hasil terukur.',
+            title: 'Unsure which platform to choose',
+            body: 'Meta first? Or Google? TikTok? Each platform has a different audience character. The wrong pick means 3–6 months wasted and a drained budget with no measurable results.',
             tag: 'Wrong Channel',
         },
     ];
@@ -66,15 +66,15 @@
         <div class="text-center max-w-2xl mx-auto mb-14 reveal">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 <span class="w-8 h-px bg-accent"></span>
-                Tanda-Tanda Bisnis Anda Perlu Kami
+                Signs Your Business Needs Us
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-4">
-                Tiga pola yang membuat<br/>
-                <span class="text-accent">performa iklan Anda stagnan.</span>
+                Three patterns that keep<br/>
+                <span class="text-accent">your ad performance stagnant.</span>
             </h2>
             <p class="mt-5 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                Jika salah satu terasa dekat dengan kondisi bisnis Anda saat ini, Anda tidak sendirian. Situasi seperti ini umumnya terjadi pada bisnis yang belum pernah ditangani tim yang memahami funnel secara utuh.
+                If one of these feels close to home, you are not alone. These situations usually happen to businesses that have never been handled by a team that understands the full funnel.
             </p>
         </div>
 
@@ -111,7 +111,7 @@
                     <!-- Hover arrow -->
                     <div class="relative mt-5 pt-4 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-accent flex items-center gap-1">
-                            Solusinya?
+                            The solution?
                             <ArrowRight class="w-3 h-3" />
                         </span>
                     </div>
@@ -127,7 +127,7 @@
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-green"></span>
                 </span>
                 <p class="text-sm text-ink font-semibold">
-                    Ketiganya dapat ditangani dalam <span class="text-accent">30–90 hari</span> dengan sistem yang terukur.
+                    All three can be addressed within <span class="text-accent">30–90 days</span> with a measurable system.
                 </p>
             </div>
         </div>

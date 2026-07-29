@@ -6,47 +6,47 @@
     const tiers = [
         {
             name: 'Starter',
-            tag: 'Untuk UMKM baru mulai testing',
-            monthlyPrice: '2.500.000',
-            yearlyPrice: '2.000.000',
-            suffix: '/ bulan',
-            cta: 'Mulai Starter',
+            tag: 'For SMEs starting to test paid ads',
+            monthlyPrice: '990',
+            yearlyPrice: '790',
+            suffix: '/ month',
+            cta: 'Start with Starter',
             featured: false,
             features: [
-                '1 platform iklan (Meta atau Google)',
-                '2 campaign aktif',
-                'Laporan mingguan via WhatsApp',
-                '1x call review bulanan',
-                'Setup Meta Pixel gratis',
+                '1 ad platform (Meta or Google)',
+                '2 active campaigns',
+                'Weekly report via WhatsApp',
+                '1 monthly review call',
+                'Free Meta Pixel setup',
             ],
             accent: 'from-blue-500 to-cyan-500',
         },
         {
             name: 'Growth',
-            tag: 'Paling populer — sudah PMF, siap scale',
-            monthlyPrice: '5.000.000',
-            yearlyPrice: '4.000.000',
-            suffix: '/ bulan',
-            cta: 'Pilih Growth',
+            tag: 'Most popular — product-market fit, ready to scale',
+            monthlyPrice: '1,990',
+            yearlyPrice: '1,590',
+            suffix: '/ month',
+            cta: 'Choose Growth',
             featured: true,
             features: [
-                '2 platform iklan (Meta + Google, atau Meta + TikTok)',
-                '4 campaign aktif',
+                '2 ad platforms (Meta + Google, or Meta + TikTok)',
+                '4 active campaigns',
                 'Landing page support',
-                'Laporan mingguan + dashboard',
-                '2x call review bulanan',
-                'A/B testing rutin',
-                'Creative refresh tiap bulan',
+                'Weekly report + dashboard',
+                '2 monthly review calls',
+                'Routine A/B testing',
+                'Monthly creative refresh',
             ],
             accent: 'from-accent to-orange-600',
         },
         {
             name: 'Scale',
-            tag: 'Untuk bisnis 50jt+ budget iklan',
-            monthlyPrice: '10.000.000+',
-            yearlyPrice: '8.000.000+',
-            suffix: '/ bulan',
-            cta: 'Konsultasi Custom',
+            tag: 'For businesses with RM 15k+ monthly ad budget',
+            monthlyPrice: '2,990+',
+            yearlyPrice: '2,390+',
+            suffix: '/ month',
+            cta: 'Custom Consultation',
             featured: false,
             features: [
                 'Full funnel (awareness → conversion → retention)',
@@ -62,7 +62,7 @@
     ];
 </script>
 
-<section id="harga" class="py-20 md:py-28 bg-white relative overflow-hidden">
+<section id="pricing" class="py-20 md:py-28 bg-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-30 pointer-events-none">
         <div class="absolute top-32 left-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
     </div>
@@ -71,15 +71,15 @@
         <div class="text-center max-w-2xl mx-auto mb-10">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
                 <span class="w-8 h-px bg-accent"></span>
-                Harga
+                Pricing
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.15] tracking-tight">
-                Transparan. Tanpa hidden fee.
-                <span class="block mt-2 text-accent">Pilih paket yang pas.</span>
+                Transparent. No hidden fees.
+                <span class="block mt-2 text-accent">Pick the plan that fits.</span>
             </h2>
             <p class="mt-5 text-muted text-base md:text-lg leading-relaxed">
-                Minimum contract 1 bulan. Bisa cancel kapan saja. Custom sesuai kebutuhan.
+                Minimum contract of 1 month. Cancel anytime. Custom plans available on request.
             </p>
         </div>
 
@@ -90,15 +90,15 @@
                 on:click={() => billingCycle = 'monthly'}
                 class="px-5 py-2 rounded-full text-sm font-bold transition-all {billingCycle === 'monthly' ? 'bg-ink text-white shadow-md' : 'bg-soft text-muted hover:text-ink'}"
             >
-                Bulanan
+                Monthly
             </button>
             <button
                 type="button"
                 on:click={() => billingCycle = 'yearly'}
                 class="px-5 py-2 rounded-full text-sm font-bold transition-all flex items-center gap-2 {billingCycle === 'yearly' ? 'bg-ink text-white shadow-md' : 'bg-soft text-muted hover:text-ink'}"
             >
-                Tahunan
-                <span class="text-[10px] bg-green text-white px-2 py-0.5 rounded-full">Hemat 20%</span>
+                Yearly
+                <span class="text-[10px] bg-green text-white px-2 py-0.5 rounded-full">Save 20%</span>
             </button>
         </div>
 
@@ -111,7 +111,7 @@
                     {#if tier.featured}
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-ink text-[10px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
                             <Star size="12" strokeWidth="2.5" fill="currentColor" />
-                            Paling Populer
+                            Most Popular
                         </div>
                     {/if}
 
@@ -123,7 +123,7 @@
                     <!-- Price -->
                     <div class="mb-6 pb-6 border-b {tier.featured ? 'border-white/10' : 'border-gray-100'}">
                         <div class="flex items-baseline gap-1 flex-wrap">
-                            <span class="text-xs font-bold {tier.featured ? 'text-white/60' : 'text-muted'}">Rp</span>
+                            <span class="text-xs font-bold {tier.featured ? 'text-white/60' : 'text-muted'}">RM</span>
                             <span class="text-4xl md:text-5xl font-display font-extrabold tracking-tight {tier.featured ? 'text-accent' : 'text-ink'}">
                                 {billingCycle === 'monthly' ? tier.monthlyPrice : tier.yearlyPrice}
                             </span>
@@ -159,8 +159,8 @@
 
         <!-- Custom note -->
         <p class="text-center text-sm text-muted mt-10">
-            Mau lihat detail layanan lengkap atau paket custom? 
-            <a href="/digital-marketing-agency" class="text-accent font-bold hover:underline">Lihat detail layanan →</a>
+            Want the full service details or a custom plan?
+            <a href="/digital-marketing-agency" class="text-accent font-bold hover:underline">View service details →</a>
         </p>
     </div>
 </section>

@@ -1,6 +1,6 @@
 <script>
     export let title = 'Tech Stack';
-    export let subtitle = 'Teknologi yang kami pakai untuk membangun beriklan.my — dan yang kami rekomendasikan untuk klien.';
+    export let subtitle = 'The technology we use to build beriklan.my — and what we recommend to clients.';
     export let mode = 'light'; // 'light' | 'dark'
 </script>
 
@@ -13,7 +13,7 @@
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl {mode === 'dark' ? 'text-white' : 'text-ink'} leading-[1.1] tracking-tight mt-3">
-                Tools yang kami <span class="text-accent">percaya & gunakan</span>
+                Tools we <span class="text-accent">trust & use</span>
             </h2>
             <p class="mt-4 {mode === 'dark' ? 'text-white/70' : 'text-muted'} max-w-2xl mx-auto text-base leading-relaxed">
                 {subtitle}
@@ -112,7 +112,7 @@
         </div>
 
         <p class="mt-10 text-center {mode === 'dark' ? 'text-white/50' : 'text-muted'} text-sm">
-            Stack di atas dipilih berdasarkan kebutuhan, skalabilitas, dan biaya operasional klien. Tidak ada markup teknologi — hanya yang terbukti.
+            The stack above is chosen based on client needs, scalability and running costs. No technology markup — only what is proven.
         </p>
     </div>
 </section>

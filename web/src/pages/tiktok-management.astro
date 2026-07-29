@@ -17,83 +17,36 @@ import Footer from '../components/Footer.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20kelola%20TikTok.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20TikTok%20account%20management.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'TikTok Shop',
-        priceLabel: '1.500.000',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis yang ingin jualan di TikTok Shop: upload produk, optimasi foto, dan ads affiliate.',
-        features: [
-            'Upload 30 produk',
-            'Edit foto produk',
-            '1x ads TikTok 7 hari',
-            'Setup affiliate',
-            'Optimasi followers',
-            'Report',
-        ],
-        priceNote: 'termasuk ad spend 7 hari',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
-    {
-        name: 'Basic Content',
-        priceLabel: '3.000.000',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis yang ingin membangun audiens TikTok dengan konten video pendek yang konsisten.',
-        features: [
-            '15 video (5 edukasi + 5 entertainment + 5 review)',
-            'Riset musik yang sedang trending',
-            'Copywriting untuk setiap video',
-            'Konsep dan storyboard',
-            'Report bulanan',
-        ],
-        priceNote: 'belum termasuk ad spend (opsional)',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-        highlight: true,
-    },
-    {
-        name: 'Business Content',
-        priceLabel: '4.000.000',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis yang ingin konten TikTok dengan volume besar dan strategi lebih agresif.',
-        features: [
-            '30 video (10 edukasi + 10 entertainment + 10 review)',
-            'Riset musik + sound original',
-            'Copywriting + hashtag strategy',
-            'Konsep, storyboard, edit professional',
-            'Optimasi engagement + followers',
-            'Report mingguan + review bulanan',
-        ],
-        priceNote: 'belum termasuk ad spend (opsional)',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
+    { name: 'TikTok Shop', priceLabel: '990', duration: 'per month', tagline: 'Shop-focused plan: listings, content hooks and campaign support.', features: ['TikTok Shop setup & listing optimisation', '8 shop-focused videos per month', 'Campaign & voucher planning', 'Monthly performance report'], priceNote: 'per month', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Basic Content', priceLabel: '1,690', duration: 'per month', tagline: 'Consistent organic growth through routine video content.', features: ['12 videos per month (edited)', 'Hook & script writing', 'Trend monitoring & adaptation', 'Community management', 'Monthly performance report'], priceNote: 'per month', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
+    { name: 'Business Content', priceLabel: '2,490', duration: 'per month', tagline: 'High-volume content engine with strategy support.', features: ['20 videos per month (edited)', 'Content strategist assigned', 'TikTok Shop integration', 'Live session planning support', 'Weekly reporting'], priceNote: 'per month', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
 
 const features = [
-    { iconName: 'Video', title: '15-30 Video/Bulan', desc: 'Volume video yang konsisten: edukasi, entertainment, dan review. Mix ketiganya untuk menjaga variasi dan menarik algoritma.' },
-    { iconName: 'Music2', title: 'Riset Musik', desc: 'Riset musik dan sound yang sedang trending di industri Anda. Musik yang relevan dapat melipatgandakan peluang video masuk FYP.' },
-    { iconName: 'Sparkles', title: 'Copywriting Hook', desc: 'Copy 3 detik pertama yang menarik perhatian. Kami tulis hook untuk setiap video dengan formula yang sudah teruji.' },
-    { iconName: 'TrendingUp', title: 'Hashtag Strategy', desc: 'Mix hashtag yang relevan: branded, niche, dan trending. Strategi yang membuat video ditemukan oleh audiens yang tepat.' },
-    { iconName: 'BarChart3', title: 'Report Detail', desc: 'Laporan mingguan atau bulanan: views, watch time, engagement, dan rekomendasi iterasi untuk konten berikutnya.' },
-    { iconName: 'MessageCircle', title: 'Engagement Aktif', desc: 'Tim kami merespons komentar dan DM dengan tone brand. Engagement yang aktif menjadi sinyal positif untuk algoritma.' },
+    { iconName: 'Video', title: '15–30 Videos/Month', desc: 'A consistent video volume: education, entertainment and reviews. We mix all three to keep variety high and the algorithm interested.' },
+    { iconName: 'Music2', title: 'Music Research', desc: 'Research into the music and sounds trending in your industry. The right music can multiply a video’s odds of hitting the FYP.' },
+    { iconName: 'Sparkles', title: 'Hook Copywriting', desc: 'First-3-seconds copy that grabs attention. We write the hook for every video using proven formulas.' },
+    { iconName: 'TrendingUp', title: 'Hashtag Strategy', desc: 'A relevant hashtag mix: branded, niche and trending. A strategy that gets your videos found by the right audience.' },
+    { iconName: 'BarChart3', title: 'Detailed Reports', desc: 'Weekly or monthly reports: views, watch time, engagement, and iteration recommendations for the next batch of content.' },
+    { iconName: 'MessageCircle', title: 'Active Engagement', desc: 'Our team replies to comments and DMs in your brand tone. Active engagement sends positive signals to the algorithm.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'MINGGU 1', title: 'Brief & Riset', desc: 'Diskusi 30 menit untuk menggali produk, target market, dan tone brand Anda. Kami riset kompetitor dan tren konten TikTok di industri Anda.' },
-    { num: '02', tag: 'MINGGU 1-2', title: 'Konsep & Produksi Video', desc: 'Tim produksi membuat script, storyboard, dan video pendek. Anda approve konsep dan hasil akhir sebelum tayang di TikTok.' },
-    { num: '03', tag: 'MINGGU 2+', title: 'Posting & Engagement', desc: 'Video diposting sesuai jadwal. Kami monitor views, like, dan komentar untuk setiap video, dan merespons komentar dengan tone brand yang konsisten.' },
-    { num: '04', tag: 'BULANAN', title: 'Report & Iterasi', desc: 'Setiap bulan Anda menerima laporan: video mana yang masuk FYP, insight audiens, dan rekomendasi format atau topik untuk bulan depan.' },
+    { num: '01', tag: 'WEEK 1', title: 'Account & Niche Audit', desc: 'We review your account, category and competitors to define a content angle that can win.' },
+    { num: '02', tag: 'WEEK 1-2', title: 'Content Plan', desc: 'A monthly plan of video concepts and hooks for your approval.' },
+    { num: '03', tag: 'WEEK 2+', title: 'Produce & Publish', desc: 'Videos edited and published on schedule, optimised for watch time.' },
+    { num: '04', tag: 'MONTHLY', title: 'Review & Double Down', desc: 'Monthly review of what the algorithm rewarded — we double down on the winners.' },
 ];
 
 const faqs = [
-    { q: 'Apa bedanya paket TikTok Shop, Basic Content, dan Business Content?', a: 'TikTok Shop fokus pada upload produk dan aktivasi affiliate. Basic Content 15 video per bulan untuk membangun audiens. Business Content 30 video per bulan dengan strategi lebih agresif dan laporan mingguan.' },
-    { q: 'Apakah produksi video sudah termasuk?', a: 'Konsep, script, dan storyboard kami siapkan. Untuk syuting, pada paket TikTok Shop dan Basic Content talent atau produksi video disediakan oleh Anda. Pada paket Business Content, tim produksi kami bisa menangani sepenuhnya.' },
-    { q: 'Berapa lama sampai audiens terbentuk?', a: 'Pertumbuhan audiens yang konsisten biasanya terasa di bulan ke-2 atau ke-3. Untuk video spesifik yang masuk FYP, bisa lebih cepat — tapi pola stabil butuh waktu. Kami akan jujur soal ini di awal.' },
-    { q: 'Bisakah konsep konten diganti di tengah periode?', a: 'Bisa. Jika konsep awal kurang sesuai dengan respons audiens, kami revisi arah. Ini bagian dari layanan — kami adaptif, bukan kaku.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Tidak ada. Sistem kerja bulanan. Anda bebas lanjut atau berhenti setiap periode. Ini bentuk komitmen kami untuk menjaga kualitas kerja — bukan jebakan kontrak.' },
-    { q: 'Apakah saya perlu menyediakan talent atau model untuk video?', a: 'Untuk paket Business Content, talent bisa kami sediakan jika diperlukan. Untuk paket Basic Content dan TikTok Shop, umumnya Anda menyediakan talent sendiri atau menggunakan staff yang ada. Material seperti foto dan footage produk umumnya disediakan oleh Anda.' },
-    { q: 'Bagaimana laporan yang diberikan?', a: 'Laporan bulanan: performa setiap video (views, watch time, like, share, komentar), insight audiens (usia, lokasi, jam aktif), dan rekomendasi topik serta format untuk bulan depan. Dikirim via email dan didiskusikan via WhatsApp atau video call.' },
+    { q: 'How much does TikTok management cost at Beriklan?', a: 'Packages start from RM 990/month and go up to RM 2,490 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+    { q: 'How long does it take to set up a TikTok management campaign?', a: 'Initial setup takes 5–7 working days for the first content plan, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+    { q: 'Is the ad budget included in the package price?', a: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+    { q: 'Is there a minimum contract?', a: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+    { q: 'What reporting will I receive?', a: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' },
 ];
 
 const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item => ({
@@ -104,28 +57,31 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
 }));
 ---
 
-<Layout title="Jasa Kelola TikTok Toko & Brand — Beriklan" description="Upload rutin, video pendek, edit, dan optimasi FYP untuk akun TikTok Anda. Riset musik + hashtag otomatis. Mulai Rp 1,5 juta/bulan. Cocok untuk UMKM yang mau aktif di TikTok tanpa pusing konten." canonical="https://beriklan.my/tiktok-management/"
+<Layout
+    title="TikTok Management Malaysia | Consistent Video Content — Beriklan"
+    description="End-to-end TikTok management: trend research, video production, editing and engagement. Content built for the FYP algorithm. From RM 990/month."
+    canonical="https://beriklan.my/tiktok-management/"
     faq={[
-            { question: 'Berapa harga jasa kelola TikTok?', answer: 'Mulai dari Rp 1.500.000 per bulan. Sudah termasuk content creation, posting rutin, dan community management.' },
-            { question: 'Berapa video per minggu?', answer: '3-5 video pendek per minggu + 1-2 live streaming. Plus daily trend monitoring dan reply komentar.' },
-            { question: 'Bagaimana cara bikin konten yang viral?', answer: 'Tim kami monitor trending sounds, formats, dan topics. Kombinasikan dengan brand message untuk reach organik + paid boost.' },
-            { question: 'Apakah handle live streaming?', answer: 'Ya, bisa. Include dalam paket Business. Setup peralatan + script +主持人 untuk live session 1-2 jam.' },
-            { question: 'Berapa lama sampai viral?', answer: 'Tergantung niche. Beberapa video bisa viral dalam minggu pertama. Rata-rata akun baru FYP dalam 2-3 bulan.' }
-        ]}
+        { question: 'How much does TikTok management cost at Beriklan?', answer: 'Packages start from RM 990/month and go up to RM 2,490 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+        { question: 'How long does it take to set up a TikTok management campaign?', answer: 'Initial setup takes 5–7 working days for the first content plan, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+        { question: 'Is the ad budget included in the package price?', answer: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+        { question: 'Is there a minimum contract?', answer: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+        { question: 'What reporting will I receive?', answer: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Kelola TikTok", url: "https://beriklan.my/tiktok-management/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "TikTok Management", url: "https://beriklan.my/tiktok-management/" }
     ]}
     service={{
-        name: "Jasa Kelola TikTok",
-        description: "Jasa Jasa Kelola TikTok profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "TikTok Management",
+        description: "TikTok account management — routine video content and TikTok Shop operations for the Malaysian market.",
         url: "https://beriklan.my/tiktok-management/",
-        priceRange: "Rp 1.500.000 - Rp 3.000.000",
-        serviceType: "TikTok Management",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        priceRange: "RM 990 - RM 2,490",
+        serviceType: "Social Media Management",
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -147,36 +103,36 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Jasa Kelola TikTok · Konten Video Rutin</span>
+                    <span class="opacity-0 anim-fade-in">TikTok Management · Consistent Video Content</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Jasa Kelola TikTok</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Konten Berkualitas,</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">Followers Bertumbuh.</span>
+                    <span class="anim-fade-up">TikTok Management</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Quality Content,</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">Growing Followers.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    TikTok membutuhkan konten yang konsisten dan relevan dengan algoritma FYP. Tim kami mengelola akun TikTok Anda secara menyeluruh — mulai dari riset musik, konsep, produksi video, editing, hingga optimasi engagement. Anda fokus pada produk, kami menjaga brand tetap terdengar.
+                    TikTok demands consistent content that works with the FYP algorithm. Our team manages your TikTok account end-to-end — music research, concepts, video production, editing and engagement optimisation. You focus on the product; we keep the brand heard.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -190,15 +146,15 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -213,15 +169,15 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa Kelola TikTok
+                    Why TikTok Management
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar video banyak,<br/>
-                    <span class="text-accent">tapi konten yang relevan dan algoritmis.</span>
+                    Not just lots of videos,<br/>
+                    <span class="text-accent">but relevant, algorithm-friendly content.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    TikTok berbeda dari platform lain: algoritma FYP menentukan siapa yang melihat video Anda. Bukan hanya followers. Karena itu, konten harus menarik dalam 3 detik pertama dan relevan dengan pola trending. Tim kami riset musik, sound, dan format yang bekerja dengan algoritma, tanpa meninggalkan esensi brand Anda.
+                    TikTok is different: the FYP algorithm decides who sees your videos — not just your followers. Content has to hook within the first 3 seconds and match trending patterns. We research the music, sounds and formats that work with the algorithm, without losing your brand’s essence.
                 </p>
             </div>
 
@@ -229,17 +185,17 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
                 <div class="why-card group">
                     <div class="why-icon">🎵</div>
                     <h3 class="why-title">Riset Musik & Trend</h3>
-                    <p class="why-desc">Kami riset musik, sound, dan hashtag yang sedang trending untuk meningkatkan peluang video masuk FYP audiens yang tepat.</p>
+                    <p class="why-desc">We research trending music, sounds and hashtags to raise the odds of your videos hitting the right audience’s FYP.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">📊</div>
-                    <h3 class="why-title">Format yang Tepat</h3>
-                    <p class="why-desc">Edukasi, entertainment, atau review — setiap format punya peran berbeda. Kami mix ketiganya agar audiens Anda tidak bosan dan algoritma tetap tertarik.</p>
+                    <h3 class="why-title">The Right Format</h3>
+                    <p class="why-desc">Education, entertainment or reviews — each format plays a different role. We mix all three so your audience never gets bored and the algorithm stays interested.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">💬</div>
                     <h3 class="why-title">Engagement Aktif</h3>
-                    <p class="why-desc">Tim kami merespons komentar dengan tone brand yang konsisten. Kolom komentar yang hidup meningkatkan trust dan menambah sinyal positif ke algoritma.</p>
+                    <p class="why-desc">Our team replies to comments in a consistent brand tone. A lively comment section builds trust and sends positive signals to the algorithm.</p>
                 </div>
             </div>
         </div>
@@ -255,8 +211,8 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -272,12 +228,12 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -292,19 +248,19 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="Kelola TikTok" highlightIndex={1} columns={3} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="TikTok Management" highlightIndex={1} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -313,10 +269,10 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -339,33 +295,33 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -377,49 +333,49 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">🧴</div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">💆</div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">💼</div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -444,12 +400,12 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -464,7 +420,7 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="tiktok-management" pageUrl="https://beriklan.my/tiktok-management/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/tiktok-management/pilar/" pillarLabel="Panduan Lengkap Kelola Tiktok" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/tiktok-management/pilar/" pillarLabel="Complete TikTok Management Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -478,27 +434,27 @@ const relatedItems = (relatedMap.services['tiktok-management'] || []).map(item =
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar membuat video banyak. Kami menyusun strategi konten yang selaras dengan algoritma TikTok dan karakter brand Anda — agar setiap video berpotensi menjadi viral atau menjangkau audiens baru.
+                    More than churning out videos. We build a content strategy aligned with the TikTok algorithm and your brand — so every video has a shot at going viral or reaching new audiences.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

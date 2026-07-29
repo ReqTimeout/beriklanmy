@@ -6,14 +6,14 @@ import Footer from '../components/Footer.svelte';
 import { TrendingUp, TrendingDown, MousePointerClick, Eye, BarChart3, Globe2, Smartphone, Monitor, AlertTriangle, Calendar, ArrowUpRight, Search } from 'lucide-svelte';
 import gsc from '../../public/data/gsc-stats.json';
 
-const fmt = (n) => new Intl.NumberFormat('id-ID').format(n);
+const fmt = (n) => new Intl.NumberFormat('en-MY').format(n);
 const pct = (n) => (n * 100).toFixed(2) + '%';
 
 function stripDomain(u) {
     try { return new URL(u).pathname; } catch { return u; }
 }
 ---
-<Layout title="GSC Monitoring · Beriklan" description="Live Google Search Console monitoring untuk beriklan.my — clicks, impressions, top queries, freshness alerts. Data otomatis di-refresh harian." canonical="https://beriklan.my/gsc-dashboard/" noindex={true}>
+<Layout title="GSC Monitoring · Beriklan" description="Live Google Search Console monitoring for beriklan.my — clicks, impressions, top queries, freshness alerts. Data refreshed automatically every day." canonical="https://beriklan.my/gsc-dashboard/" noindex={true}>
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
 
@@ -31,9 +31,9 @@ function stripDomain(u) {
                 GSC Monitoring
             </h1>
             <p class="text-base md:text-lg text-muted leading-relaxed max-w-3xl">
-                Performa pencarian organik <strong class="text-ink">beriklan.my</strong> di Google Search Console — di-refresh harian via API. Window data: {gsc.window.start} s/d {gsc.window.end} ({28} hari).
+                Organic search performance for <strong class="text-ink">beriklan.my</strong> in Google Search Console — refreshed daily via API. Data window: {gsc.window.start} to {gsc.window.end} ({28} days).
             </p>
-            <p class="text-xs text-muted mt-3">Last pulled: {new Date(gsc.last_pulled).toLocaleString('id-ID', { timeZone: 'Asia/Kuala_Lumpur' })} MYT</p>
+            <p class="text-xs text-muted mt-3">Last pulled: {new Date(gsc.last_pulled).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })} MYT</p>
         </div>
     </header>
 
@@ -90,7 +90,7 @@ function stripDomain(u) {
                         );
                     })}
                 </div>
-                <div class="mt-8 text-xs text-muted">Impressions per hari. Hover bar untuk detail.</div>
+                <div class="mt-8 text-xs text-muted">Impressions per day. Hover a bar for details.</div>
             </div>
         </div>
     </section>
@@ -188,7 +188,7 @@ function stripDomain(u) {
                 <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-2 flex items-center gap-2">
                     <AlertTriangle class="w-6 h-6 text-accent" /> Freshness Alerts
                 </h2>
-                <p class="text-sm text-muted mb-6">Halaman dengan penurunan impressions &gt; 40% week-over-week (butuh review / update konten).</p>
+                <p class="text-sm text-muted mb-6">Pages with impressions dropping &gt; 40% week-over-week (needs review / content update).</p>
                 <div class="bg-soft rounded-2xl p-6 border border-gray-100">
                     <div class="space-y-2">
                         {gsc.freshness_alerts.map(a => (
@@ -215,7 +215,7 @@ function stripDomain(u) {
                 <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-2 flex items-center gap-2">
                     <MousePointerClick class="w-6 h-6 text-accent" /> Low CTR Candidates
                 </h2>
-                <p class="text-sm text-muted mb-6">Halaman dengan impressions tinggi tapi CTR &lt; 2% — biasanya butuh perbaikan title tag atau meta description.</p>
+                <p class="text-sm text-muted mb-6">Pages with high impressions but CTR &lt; 2% — usually a sign the title tag or meta description needs work.</p>
                 <div class="bg-white rounded-2xl p-6 border border-gray-100">
                     <div class="space-y-2">
                         {gsc.low_ctr.map((p, i) => (
@@ -239,7 +239,7 @@ function stripDomain(u) {
     <!-- =============== FOOTER NOTE =============== -->
     <section class="py-12 bg-soft">
         <div class="container mx-auto px-6 max-w-3xl text-center text-xs text-muted">
-            <p>Data ini diambil langsung dari Google Search Console API via service account (read-only). Auto-refresh harian via cron. Last update: <strong>{new Date(gsc.last_pulled).toLocaleString('id-ID', { timeZone: 'Asia/Kuala_Lumpur' })}</strong>.</p>
+            <p>This data is pulled directly from the Google Search Console API via a service account (read-only). Auto-refreshed daily via cron. Last update: <strong>{new Date(gsc.last_pulled).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })}</strong>.</p>
             <p class="mt-2">Refresh manual: <code class="font-mono bg-white px-2 py-0.5 rounded border border-gray-200">python3 scripts/gsc_pull.py</code></p>
         </div>
     </section>

@@ -36,7 +36,7 @@
             <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
             <div class="ml-3 flex-1 bg-white rounded-md px-3 py-1 text-[10px] text-muted flex items-center gap-1.5 border border-gray-200 max-w-xs">
                 <Lock class="w-2.5 h-2.5 text-green" />
-                <span class="font-mono">bisnisanda.com</span>
+                <span class="font-mono">yourbusiness.com.my</span>
             </div>
             <!-- Device toggle -->
             <div class="flex items-center gap-1 bg-white border border-gray-200 rounded-md p-0.5">
@@ -129,7 +129,7 @@
             </div>
             <div>
                 <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Halaman</p>
-                <p class="text-base font-display font-extrabold text-ink leading-tight">1–25<span class="text-[9px] text-muted font-bold ml-1">halaman</span></p>
+                <p class="text-base font-display font-extrabold text-ink leading-tight">1–25<span class="text-[9px] text-muted font-bold ml-1">pages</span></p>
             </div>
         </div>
     </div>

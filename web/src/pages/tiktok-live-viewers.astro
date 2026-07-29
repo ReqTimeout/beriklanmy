@@ -10,94 +10,75 @@ import StepGrid from '../components/StepGrid.svelte';
 import Footer from '../components/Footer.svelte';
 import { MessageCircle, ArrowRight, Radio, Sparkles, Users, Shield, Clock, TrendingUp, Check, Smartphone, Heart, Music, Disc, PlayCircle, Eye, Volume2 } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20view%20live%20Tiktok.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20TikTok%20Live%20viewers.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    { name: 'Pemanasan', priceLabel: '12.000', duration: '20 viewers / 1 jam live', tagline: 'Cocok untuk warming up sebelum live utama biar algoritma notice Anda sejak awal.', features: ['20 viewers riil aktif', 'Bergabung gradual 5-15 menit', 'Multi-platform (TikTok + lain)', 'Cocok untuk live pendek atau tes', 'Tanpa risiko untuk akun TikTok'], priceNote: 'harga per sesi live', disclaimer: 'Viewers real account, no bot.' },
-    { name: 'Starter', priceLabel: '25.000', duration: '50 viewers / 1 jam live', tagline: 'Untuk live rutin yang butuh boost awal agar FYP algorithm notice Anda.', features: ['50 viewers riil aktif', 'Bergabung gradual 5-15 menit', 'Multi-platform semua channel', 'Cocok untuk seller & streamer pemula', 'Real account, no flag dari TikTok'], priceNote: 'Rp 500/viewer/jam', disclaimer: 'Paling sering dipilih seller TikTok.', highlight: true },
-    { name: 'Basic', priceLabel: '45.000', duration: '100 viewers / 1 jam live', tagline: 'Sweet spot untuk seller TikTok Shop yang mau boost ranking & konversi.', features: ['100 viewers riil stay selama live', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk seller TikTok Shop', 'Boost distribusi FYP algorithm'], priceNote: 'Rp 450/viewer/jam', disclaimer: 'Cocok untuk live mingguan.' },
-    { name: 'Pro', priceLabel: '80.000', duration: '200 viewers / 1 jam live', tagline: 'Untuk launching produk baru & live event yang butuh distribusi FYP luas.', features: ['200 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk launching & event', 'Boost organik distribusi FYP'], priceNote: 'Rp 400/viewer/jam', disclaimer: 'Repeat order diskon khusus.' },
-    { name: 'Bisnis', priceLabel: '115.000', duration: '300 viewers / 1 jam live', tagline: 'Untuk brand dan toko yang live commerce TikTok rutin setiap hari.', features: ['300 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk live commerce harian', 'Support prioritas + account manager'], priceNote: 'Rp 383/viewer/jam', disclaimer: 'Cocok untuk paket mingguan.' },
-    { name: 'Premium', priceLabel: '175.000', duration: '500 viewers / 1 jam live', tagline: 'Untuk launching event TikTok besar atau push viral dengan target viewers tinggi.', features: ['500 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk launching viral', 'Support 24/7 + flexible reschedule'], priceNote: 'Rp 350/viewer/jam', disclaimer: 'Untuk >500 viewers atau paket bulanan, custom price.' },
+    { name: 'Warm-up', priceLabel: '5', duration: '20 viewers / 1 hour live', tagline: 'Perfect for warming up before your main live so the algorithm notices you from the start.', features: ['20 real active viewers', 'Gradual join over 5–15 minutes', 'Multi-platform (TikTok + others)', 'Great for short or test lives', 'Zero risk to your TikTok account'], priceNote: 'price per live session', disclaimer: 'Real accounts, no bots.' },
+    { name: 'Starter', priceLabel: '10', duration: '50 viewers / 1 hour live', tagline: 'For regular lives that need an early boost so the TikTok algorithm notices you.', features: ['50 real active viewers', 'Gradual join over 5–15 minutes', 'Multi-platform across all channels', 'Great for new sellers & streamers', 'Real accounts, no flags from TikTok'], priceNote: 'RM 0.20/viewer/hour', disclaimer: 'The most popular pick among TikTok sellers.', highlight: true },
+    { name: 'Basic', priceLabel: '19', duration: '100 viewers / 1 hour live', tagline: 'The sweet spot for TikTok sellers who want to boost ranking & conversion.', features: ['100 real viewers staying the whole live', 'Natural gradual join', 'Multi-platform across all channels', 'Great for TikTok sellers', 'Boosts algorithm distribution'], priceNote: 'RM 0.19/viewer/hour', disclaimer: 'Ideal for weekly lives.' },
+    { name: 'Pro', priceLabel: '35', duration: '200 viewers / 1 hour live', tagline: 'For new product launches & live events that need wide distribution.', features: ['200 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for launches & events', 'Boosts organic distribution'], priceNote: 'RM 0.18/viewer/hour', disclaimer: 'Special discount on repeat orders.' },
+    { name: 'Business', priceLabel: '49', duration: '300 viewers / 1 hour live', tagline: 'For brands and stores running live commerce on TikTok every day.', features: ['300 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for daily live commerce', 'Priority support + account manager'], priceNote: 'RM 0.16/viewer/hour', disclaimer: 'Ideal for weekly bundles.' },
+    { name: 'Premium', priceLabel: '75', duration: '500 viewers / 1 hour live', tagline: 'For major TikTok launch events or viral pushes with high viewer targets.', features: ['500 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for viral launches', '24/7 support + flexible rescheduling'], priceNote: 'RM 0.15/viewer/hour', disclaimer: 'For 500+ viewers or monthly packages, custom pricing.' },
 ];
 
 const features = [
-    { iconName: 'Sparkles', title: 'Boost FYP Algorithm', desc: 'TikTok For You Page memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi FYP sampai 5x lebih luas dari biasanya.' },
-    { iconName: 'Users', title: 'Real Account Aktif', desc: 'Viewers dari kami akun TikTok aktif — bukan bot. Mereka stay, watch, dan berinteraksi natural dengan konten live Anda.' },
-    { iconName: 'TrendingUp', title: 'Masuk Gradual 5-15 Menit', desc: 'Viewers tidak muncul tiba-tiba. Mereka join gradual sejak menit pertama live — bikin FYP notice Anda sebagai live yang sedang trending.' },
-    { iconName: 'Shield', title: 'Aman untuk Akun TikTok', desc: 'Viewers dari kami tidak like/comment spam yang trigger shadow ban TikTok. Tidak ada aktivitas dari akun Anda. Sudah dipakai 1.200+ live tanpa satu pun kena masalah.' },
-    { iconName: 'Smartphone', title: 'Masuk TikTok Live + Lainnya', desc: 'Order untuk TikTok Live, tapi viewers juga bisa stay di platform lain yang sedang live bersamaan. Multi-platform, satu order.' },
-    { iconName: 'Clock', title: 'Start dalam 5 Menit', desc: 'Setelah order dikonfirmasi, viewers mulai join. Live Anda yang sudah jalan? Kami ikut real-time — tidak perlu rekam ulang.' },
+    { iconName: 'Sparkles', title: 'Boost the FYP Algorithm', desc: 'TikTok’s For You Page prioritises lives with active viewers. Boost viewers = boost FYP distribution up to 5x wider than usual.' },
+    { iconName: 'Users', title: 'Real Active Accounts', desc: 'Our viewers are active TikTok accounts — not bots. They stay, watch and interact naturally with your live content.' },
+    { iconName: 'TrendingUp', title: 'Gradual Join Over 5–15 Minutes', desc: 'Viewers never appear all at once. They join gradually from the first minute — so the algorithm sees your live as genuinely trending.' },
+    { iconName: 'Shield', title: 'Safe for Your TikTok Account', desc: 'Our viewers never spam likes/comments that trigger flags. Nothing happens from your account. Used on 1,200+ lives without a single issue.' },
+    { iconName: 'Smartphone', title: 'Joins TikTok Live + Others', desc: 'Order for TikTok Live, and viewers can also stay on other platforms streaming at the same time. Multi-platform, one order.' },
+    { iconName: 'Clock', title: 'Starts Within 5 Minutes', desc: 'Once your order is confirmed, viewers start joining. Live already running? We join in real time — no need to restart.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI H', title: 'Kirim Detail Live TikTok', desc: 'Share username TikTok + tanggal/jam mulai live. Order dikonfirmasi max 30 menit setelah detail lengkap.' },
-    { num: '02', tag: 'HARI H', title: 'Pembayaran & Persiapan', desc: 'Transfer via QRIS/e-wallet. Invoice langsung dikirim. DP 50% untuk paket besar tersedia.' },
-    { num: '03', tag: 'LIVE', title: 'Viewers Join ke FYP', desc: 'Saat TikTok Live Anda mulai, viewers join gradual 5-15 menit. Algoritma FYP notice live Anda sebagai trending.' },
-    { num: '04', tag: 'POST-LIVE', title: 'Evaluasi & Recurring', desc: 'Setelah live selesai, kami evaluasi performa FYP. Mau jadwal rutin 2-3x seminggu? Diskon 10-15% untuk paket berulang.' },
+    { num: '01', tag: 'DAY OF', title: 'Send Your TikTok Live Details', desc: 'Share your TikTok username + live date/time. Orders are confirmed within 30 minutes of complete details.' },
+    { num: '02', tag: 'LIVE DAY', title: 'Payment & Preparation', desc: 'Transfer via bank or e-wallet (DuitNow/TNG). Invoice sent immediately. 50% deposit available for larger packages.' },
+    { num: '03', tag: 'LIVE', title: 'Viewers Join Your Stream', desc: 'When your TikTok Live starts, viewers join gradually over 5–15 minutes. The algorithm notices your live as trending.' },
+    { num: '04', tag: 'POST-LIVE', title: 'Review & Recurring', desc: 'After the live ends, we review performance. Want a regular 2–3x weekly schedule? 10–15% off recurring packages.' },
 ];
 
 const faqs = [
-    { q: 'Apakah viewers-nya bot atau akun asli TikTok?', a: 'Akun asli TikTok, no automation. Mereka user aktif yang stay sesuai durasi live. Interaksi natural, no flag dari TikTok algorithm.' },
-    { q: 'Apakah aman untuk akun TikTok saya?', a: 'Sangat aman. Viewers tidak like/comment spam yang bisa trigger shadow ban. Tidak ada aktivitas dari akun Anda. Sudah 1.200+ live TikTok tanpa satu pun kena masalah.' },
-    { q: 'Berapa lama viewers muncul setelah live TikTok mulai?', a: '5-15 menit setelah live Anda mulai. Tidak tiba-tiba — gradual seperti live TikTok normal pada umumnya.' },
-    { q: 'Apakah membantu FYP algorithm TikTok?', a: 'Ya. Algoritma TikTok memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi FYP sampai 5x lebih luas, terutama untuk live pertama atau launching produk.' },
-    { q: 'Bisa order untuk viewers lebih dari 500 atau paket harian?', a: 'Bisa. Untuk 500+ viewers atau paket harian/mingguan dengan jadwal tetap, chat dulu via WA untuk harga terbaik. Recurring 2-3x seminggu bisa diskon 10-15%.' },
-    { q: 'Apakah viewers stay selama durasi live TikTok?', a: 'Ya. Viewers dari kami stay sesuai durasi live yang Anda pesan. Kalau Anda live 1 jam, viewers stay 1 jam. Tidak ada yang tiba-tiba pergi di tengah live.' },
-    { q: 'Bagaimana jika TikTok memberi shadow ban setelah order?', a: 'Belum pernah terjadi. Viewers dari kami interaksi natural — like, comment, dan share sesuai pattern akun normal. Tidak ada pattern bot yang TikTok bisa detect.' },
+    { q: 'Are the viewers bots or real TikTok accounts?', a: 'Real TikTok accounts, no automation. They are active users who stay for the full live duration. Natural interaction, no flags from the TikTok algorithm.' },
+    { q: 'Is it safe for my TikTok account?', a: 'Completely safe. Viewers never spam likes/comments that could trigger a shadow ban. Nothing happens from your account. Over 1,200 lives without a single issue.' },
+    { q: 'How soon do viewers appear after my live starts?', a: '5–15 minutes after your live begins. Never all at once — gradual, just like a normal live.' },
+    { q: 'Does it help the TikTok algorithm?', a: 'Yes. The TikTok algorithm prioritises lives with active viewers. Boosting viewers can expand distribution up to 5x wider, especially for first lives or product launches.' },
+    { q: 'Can I order more than 500 viewers, or weekly/monthly packages?', a: 'Yes. For 500+ viewers or daily/weekly packages on a fixed schedule, chat with us on WhatsApp first for the best rate. Recurring 2–3x weekly streams get 10–15% off.' },
+    { q: 'Do viewers stay for the whole live?', a: 'Yes. Our viewers stay for the duration you order. A 1-hour live means viewers stay 1 hour. No one suddenly leaves mid-live.' },
+    { q: 'What if TikTok flags my account after ordering?', a: 'It has never happened. Our viewers interact naturally — likes, comments and shares follow normal account patterns. There is no bot pattern for TikTok to detect.' },
 ];
 
 const relatedItems = [
-    { icon: '🛍️', label: 'Jasa View Live Shopee', desc: 'Untuk seller Shopee Live yang fokus ke konversi produk.', href: '/shopee-live-viewers' },
-    { icon: '🎬', label: 'Jasa View Live YouTube', desc: 'Untuk channel YouTube yang boost watch time & rekomendasi.', href: '/youtube-live-viewers' },
-    { icon: '📡', label: 'Jasa View Live Multi-Platform', desc: 'Satu order, semua platform live.', href: '/live-stream-viewers' },
+    { icon: '🛍️', label: 'Shopee Live Viewers', desc: 'For Shopee Live sellers focused on product conversion.', href: '/shopee-live-viewers' },
+    { icon: '🎬', label: 'YouTube Live Viewers', desc: 'For YouTube channels boosting watch time & recommendations.', href: '/youtube-live-viewers' },
+    { icon: '📡', label: 'Multi-Platform Live Viewers', desc: 'One order, every live platform.', href: '/live-stream-viewers' },
 ];
 ---
 
-<Layout title="Jasa View Live TikTok | Boost Viewers FYP Algorithm — Beriklan" description="Boost viewers live streaming TikTok agar FYP algorithm notice live Anda. Real account, no bot, aman untuk akun TikTok. Mulai Rp 12.000 untuk 20 viewers." canonical="https://beriklan.my/tiktok-live-viewers/"
+<Layout title="TikTok Live Viewers Malaysia | Boost the FYP Algorithm — Beriklan" description="Boost your TikTok Live viewer count so the FYP algorithm notices your stream. Real accounts, no bots, safe for your TikTok account. From RM 5 for 20 viewers." canonical="https://beriklan.my/tiktok-live-viewers/"
     faq={[
-            { question: 'Apakah viewers-nya bot atau akun asli TikTok?', answer: 'Akun asli TikTok, no automation. Mereka user aktif yang stay sesuai durasi live. Interaksi natural, no flag dari TikTok algorithm.' },
-            { question: 'Apakah aman untuk akun TikTok saya?', answer: 'Sangat aman. Viewers tidak like/comment spam yang bisa trigger shadow ban. Tidak ada aktivitas dari akun Anda. Sudah 1.200+ live TikTok tanpa satu pun kena masalah.' },
-            { question: 'Berapa lama viewers muncul setelah live TikTok mulai?', answer: '5-15 menit setelah live Anda mulai. Tidak tiba-tiba — gradual seperti live TikTok normal pada umumnya.' },
-            { question: 'Apakah membantu FYP algorithm TikTok?', answer: 'Ya. Algoritma TikTok memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi FYP sampai 5x lebih luas, terutama untuk live pertama atau launching produk.' },
-            { question: 'Bisa order untuk viewers lebih dari 500 atau paket harian?', answer: 'Bisa. Untuk 500+ viewers atau paket harian/mingguan dengan jadwal tetap, chat dulu via WA untuk harga terbaik. Recurring 2-3x seminggu bisa diskon 10-15%.' },
-            { question: 'Apakah viewers stay selama durasi live TikTok?', answer: 'Ya. Viewers dari kami stay sesuai durasi live yang Anda pesan. Kalau Anda live 1 jam, viewers stay 1 jam. Tidak ada yang tiba-tiba pergi di tengah live.' },
-            { question: 'Bagaimana jika TikTok memberi shadow ban setelah order?', answer: 'Belum pernah terjadi. Viewers dari kami interaksi natural — like, comment, dan share sesuai pattern akun normal. Tidak ada pattern bot yang TikTok bisa detect.' }
-        ]}
-    service={{
-        name: "Jasa View Live TikTok",
-        description: "Jasa viewers live streaming untuk Jasa View Live TikTok. Real account, no bot, aman untuk platform. Mulai dari Rp 12.000 untuk 20 viewers.",
-        url: "https://beriklan.my/tiktok-live-viewers/",
-        priceRange: "Rp 12.000 - Rp 175.000",
-        serviceType: "Live Viewers Service",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
-    }}
-
-    faq={[
-            { question: 'Apakah viewers-nya bot atau akun asli TikTok?', answer: 'Akun asli TikTok, no automation. Mereka user aktif yang stay sesuai durasi live. Interaksi natural, no flag dari TikTok algorithm.' },
-            { question: 'Apakah aman untuk akun TikTok saya?', answer: 'Sangat aman. Viewers tidak like/comment spam yang bisa trigger shadow ban. Tidak ada aktivitas dari akun Anda. Sudah 1.200+ live TikTok tanpa satu pun kena masalah.' },
-            { question: 'Berapa lama viewers muncul setelah live TikTok mulai?', answer: '5-15 menit setelah live Anda mulai. Tidak tiba-tiba — gradual seperti live TikTok normal pada umumnya.' },
-            { question: 'Apakah membantu FYP algorithm TikTok?', answer: 'Ya. Algoritma TikTok memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi FYP sampai 5x lebih luas, terutama untuk live pertama atau launching produk.' },
-            { question: 'Bisa order untuk viewers lebih dari 500 atau paket harian?', answer: 'Bisa. Untuk 500+ viewers atau paket harian/mingguan dengan jadwal tetap, chat dulu via WA untuk harga terbaik. Recurring 2-3x seminggu bisa diskon 10-15%.' },
-            { question: 'Apakah viewers stay selama durasi live TikTok?', answer: 'Ya. Viewers dari kami stay sesuai durasi live yang Anda pesan. Kalau Anda live 1 jam, viewers stay 1 jam. Tidak ada yang tiba-tiba pergi di tengah live.' },
-            { question: 'Bagaimana jika TikTok memberi shadow ban setelah order?', answer: 'Belum pernah terjadi. Viewers dari kami interaksi natural — like, comment, dan share sesuai pattern akun normal. Tidak ada pattern bot yang TikTok bisa detect.' }
+            { question: 'Are the viewers bots or real TikTok accounts?', answer: 'Real TikTok accounts, no automation. They are active users who stay for the full live duration. Natural interaction, no flags from the TikTok algorithm.' },
+            { question: 'Is it safe for my TikTok account?', answer: 'Completely safe. Viewers never spam likes/comments that could trigger a shadow ban. Nothing happens from your account. Over 1,200 lives without a single issue.' },
+            { question: 'How soon do viewers appear after my live starts?', answer: '5–15 minutes after your live begins. Never all at once — gradual, just like a normal live.' },
+            { question: 'Does it help the TikTok algorithm?', answer: 'Yes. The TikTok algorithm prioritises lives with active viewers. Boosting viewers can expand distribution up to 5x wider, especially for first lives or product launches.' },
+            { question: 'Can I order more than 500 viewers, or weekly/monthly packages?', answer: 'Yes. For 500+ viewers or daily/weekly packages on a fixed schedule, chat with us on WhatsApp first for the best rate. Recurring 2–3x weekly streams get 10–15% off.' },
+            { question: 'Do viewers stay for the whole live?', answer: 'Yes. Our viewers stay for the duration you order. A 1-hour live means viewers stay 1 hour. No one suddenly leaves mid-live.' },
+            { question: 'What if TikTok flags my account after ordering?', answer: 'It has never happened. Our viewers interact naturally — likes, comments and shares follow normal account patterns. There is no bot pattern for TikTok to detect.' }
         ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa View Live", url: "https://beriklan.my/live-stream-viewers/" },
-        { name: "Jasa View Live TikTok", url: "https://beriklan.my/tiktok-live-viewers/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Live Stream Viewers", url: "https://beriklan.my/live-stream-viewers/" },
+        { name: "TikTok Live Viewers", url: "https://beriklan.my/tiktok-live-viewers/" }
     ]}
     service={{
-        name: "Jasa View Live TikTok",
-        description: "Jasa viewers live streaming untuk Jasa View Live TikTok. Real account, no bot, aman untuk platform. Mulai dari Rp 12.000 untuk 20 viewers.",
+        name: "TikTok Live Viewers",
+        description: "Live streaming viewer service for TikTok Live. Real accounts, no bots, safe for your account. From RM 5 for 20 viewers.",
         url: "https://beriklan.my/tiktok-live-viewers/",
-        priceRange: "Rp 12.000 - Rp 175.000",
+        priceRange: "RM 5 - RM 75",
         serviceType: "Live Viewers Service",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -122,34 +103,34 @@ const relatedItems = [
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-400"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in text-pink-50">Jasa View Live TikTok · Boost FYP Algorithm</span>
+                    <span class="opacity-0 anim-fade-in text-pink-50">TikTok Live Viewers · Boost the FYP Algorithm</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-white leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Live TikTok Sepi,</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400" style="animation-delay: 80ms;">FYP Tidak Mau Angkat.</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">— Algoritma Butuh Viewers.</span>
+                    <span class="anim-fade-up">Your TikTok Live Is Quiet,</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400" style="animation-delay: 80ms;">The FYP Won’t Pick It Up.</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">— The Algorithm Needs Viewers.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-white/80 leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    TikTok For You Page memprioritaskan live dengan viewers aktif. 100+ viewers = 5x lebih besar jangkauan FYP. Viewer riil dari kami join gradual sejak menit pertama — bikin algoritma TikTok notice live Anda, tanpa flag, tanpa bot, tanpa risiko shadow ban.
+                    TikTok’s For You Page prioritises lives with active viewers. 100+ viewers = up to 5x wider FYP reach. Our real viewers join gradually from the very first minute — getting the TikTok algorithm to notice your live, with no flags, no bots and no shadow-ban risk.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-white text-black px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Order Viewers TikTok
+                            Order TikTok Viewers
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white border border-white/30 bg-white/5 backdrop-blur-sm hover:bg-white/15 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-white/20 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80"><strong class="text-white">Mulai Rp 12.000</strong> untuk 20 viewers</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80"><strong class="text-white">From RM 5</strong> for 20 viewers</span></div>
                     <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80">Real account, <strong class="text-white">no bot</strong></span></div>
                     <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80">Boost FYP algorithm</span></div>
                 </div>
@@ -210,9 +191,9 @@ const relatedItems = [
                         </div>
                         <!-- Chat overlay -->
                         <div class="absolute bottom-12 left-3 right-3 space-y-1.5 z-10 max-h-32 overflow-hidden">
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-pink-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user1</span><span class="text-white text-[11px] drop-shadow">fyp masuk nih 🔥</span></div>
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-cyan-400/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user2</span><span class="text-white text-[11px] drop-shadow">produk ready ga kak?</span></div>
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-pink-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user3</span><span class="text-white text-[11px] drop-shadow">kak ini diskon berapa?</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-pink-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user1</span><span class="text-white text-[11px] drop-shadow">we made it to fyp 🔥</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-cyan-400/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user2</span><span class="text-white text-[11px] drop-shadow">is the product ready?</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-pink-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user3</span><span class="text-white text-[11px] drop-shadow">how much is the discount?</span></div>
                         </div>
                         <!-- Product overlay -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -220,7 +201,7 @@ const relatedItems = [
                                 <div class="text-center">
                                     <p class="text-white text-[10px] font-bold uppercase tracking-wider">Shopping</p>
                                     <p class="text-white text-base font-bold">TikTok Live</p>
-                                    <p class="text-pink-300 text-sm font-extrabold">Rp 99K</p>
+                                    <p class="text-pink-300 text-sm font-extrabold">RM 29</p>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +209,7 @@ const relatedItems = [
                         <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/95 to-transparent">
                             <div class="bg-gradient-to-r from-pink-500 to-cyan-400 text-white text-center py-2 rounded-full text-xs font-bold flex items-center justify-center gap-1 tiktok-cta-glow">
                                 <Heart class="w-3 h-3" fill="currentColor" />
-                                TAP UNTUK BELI
+                                TAP TO BUY
                             </div>
                         </div>
                     </div>
@@ -246,7 +227,7 @@ const relatedItems = [
     <section class="py-7 bg-black/40 border-y border-white/5 relative overflow-hidden" cv-auto>
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Optimal untuk TikTok</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Optimised for TikTok</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold">
                     <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>FYP Algorithm</span>
                     <span class="text-white/30">·</span>
@@ -268,15 +249,15 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-pink-400">
                     <span class="w-8 h-px bg-gradient-to-r from-transparent to-pink-400"></span>
-                    Kenapa View Live TikTok
+                    Why TikTok Live Viewers
                     <span class="w-8 h-px bg-gradient-to-l from-transparent to-cyan-400"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Algoritma FYP TikTok satu hal:<br/>
-                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">live yang ramai = distribusi luas.</span>
+                    TikTok’s FYP algorithm knows one thing:<br/>
+                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">busy lives get wide distribution.</span>
                 </h2>
                 <p class="mt-4 text-white/70 max-w-xl mx-auto text-base leading-relaxed">
-                    TikTok For You Page memprioritaskan live dengan viewers aktif. Live dengan 100+ viewers naik 5x lebih sering di FYP dibanding live dengan 20 viewers. Viewer riil dari kami membantu TikTok algorithm notice live Anda — tanpa flag, tanpa shadow ban.
+                    TikTok’s For You Page prioritises lives with active viewers. Lives with 100+ viewers surface 5x more often on the FYP than lives with 20. Our real viewers help the TikTok algorithm notice your live — no flags, no shadow bans.
                 </p>
             </div>
 
@@ -286,21 +267,21 @@ const relatedItems = [
                         <Sparkles class="w-6 h-6" strokeWidth="2.2" />
                     </div>
                     <h3 class="tiktok-why-title">Boost FYP Algorithm</h3>
-                    <p class="tiktok-why-desc">TikTok memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi FYP sampai 5x lebih luas dari biasanya.</p>
+                    <p class="tiktok-why-desc">TikTok prioritises lives with active viewers. Boost viewers = boost FYP distribution up to 5x wider than usual.</p>
                 </div>
                 <div class="tiktok-why-card group" style="animation-delay: 100ms;">
                     <div class="tiktok-why-icon">
                         <Shield class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="tiktok-why-title">Aman dari Shadow Ban</h3>
-                    <p class="tiktok-why-desc">Viewers dari kami interaksi natural — like, comment, share sesuai pattern akun normal. Tidak ada pattern bot yang TikTok bisa detect.</p>
+                    <h3 class="tiktok-why-title">Safe from Shadow Bans</h3>
+                    <p class="tiktok-why-desc">Our viewers interact naturally — likes, comments and shares follow normal account patterns. No bot pattern for TikTok to detect.</p>
                 </div>
                 <div class="tiktok-why-card group" style="animation-delay: 200ms;">
                     <div class="tiktok-why-icon">
                         <Heart class="w-6 h-6" strokeWidth="2.2" fill="currentColor" />
                     </div>
-                    <h3 class="tiktok-why-title">Cocok untuk Live Shopping</h3>
-                    <p class="tiktok-why-desc">TikTok Shop integration: viewers aktif lihat produk lebih lama, conversion naik 3-4x dibanding live sepi.</p>
+                    <h3 class="tiktok-why-title">Perfect for Live Shopping</h3>
+                    <p class="tiktok-why-desc">TikTok Shop integration: active viewers watch products longer, lifting conversion 3–4x versus a quiet live.</p>
                 </div>
             </div>
         </div>
@@ -311,12 +292,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    6 Keunggulan Layanan
+                    6 Service Advantages
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Kenapa layanan kami berbeda<br/>
-                    <span class="text-accent">dari viewer bot biasa.</span>
+                    Why our service is different<br/>
+                    <span class="text-accent">from ordinary bot viewers.</span>
                 </h2>
             </div>
 
@@ -329,12 +310,12 @@ const relatedItems = [
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-pink-400">
                     <span class="w-6 h-px bg-pink-400"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-cyan-400"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Dari order sampai FYP trending,<br/>
-                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">kurang dari 30 menit.</span>
+                    From order to trending,<br/>
+                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">in under 30 minutes.</span>
                 </h2>
             </div>
 
@@ -348,19 +329,19 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Enam paket, dari pemanasan<br/>
-                    <span class="text-accent">sampai launching akbar.</span>
+                    Six packages, from warm-up<br/>
+                    <span class="text-accent">to a full-scale launch.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Semua paket sudah termasuk viewers riil (bukan bot), gradual entry, dan support via WhatsApp. Untuk paket mingguan/bulanan atau viewer 500+, chat dulu untuk harga khusus.
+                    All packages include real viewers (not bots), gradual entry, and WhatsApp support. For weekly/monthly packages or 500+ viewers, chat with us first for custom pricing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="View Live TikTok" highlightIndex={1} columns={3} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="TikTok Live Viewers" highlightIndex={1} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -369,8 +350,8 @@ const relatedItems = [
                             <Check class="w-5 h-5 text-pink-500" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Butuh paket harian atau FYP campaign khusus?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan jadwal live dan target FYP Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Need a daily package or a custom FYP campaign?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your live schedule and FYP goals.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-pink-500 hover:text-ink transition-colors group">
                                 Chat via WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -389,12 +370,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-pink-400">
                     <span class="w-8 h-px bg-pink-400"></span>
-                    Bukti Nyata
+                    Real Proof
                     <span class="w-8 h-px bg-cyan-400"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Sudah 1.200+<br/>
-                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">live TikTok.</span>
+                    Over 1,200<br/>
+                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">TikTok lives boosted.</span>
                 </h2>
             </div>
 
@@ -403,13 +384,13 @@ const relatedItems = [
                     <div class="tiktok-stat-num">5x</div>
                     <div class="tiktok-stat-label">Boost FYP</div>
                     <div class="tiktok-stat-bar"><span style="width: 100%"></span></div>
-                    <p class="tiktok-stat-foot">rata-rata distribusi For You</p>
+                    <p class="tiktok-stat-foot">average For You distribution</p>
                 </div>
                 <div class="tiktok-stat-card" style="animation-delay: 80ms;">
                     <div class="tiktok-stat-num">0</div>
                     <div class="tiktok-stat-label">Shadow ban</div>
                     <div class="tiktok-stat-bar"><span style="width: 5%"></span></div>
-                    <p class="tiktok-stat-foot">sepanjang penggunaan</p>
+                    <p class="tiktok-stat-foot">across all usage</p>
                 </div>
                 <div class="tiktok-stat-card" style="animation-delay: 160ms;">
                     <div class="tiktok-stat-num">3-4x</div>
@@ -419,9 +400,9 @@ const relatedItems = [
                 </div>
                 <div class="tiktok-stat-card" style="animation-delay: 240ms;">
                     <div class="tiktok-stat-num">15%</div>
-                    <div class="tiktok-stat-label">Diskon rutin</div>
+                    <div class="tiktok-stat-label">Recurring discount</div>
                     <div class="tiktok-stat-bar"><span style="width: 100%"></span></div>
-                    <p class="tiktok-stat-foot">paket mingguan</p>
+                    <p class="tiktok-stat-foot">weekly packages</p>
                 </div>
             </div>
 
@@ -430,22 +411,22 @@ const relatedItems = [
                     <div class="tiktok-trust-icon">
                         <Shield class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="tiktok-trust-title">Aman untuk akun TikTok</h3>
-                    <p class="tiktok-trust-desc">Viewers dari kami akun riil aktif. Interaksi natural, no flag. 1.200+ live TikTok tanpa satu pun kena shadow ban.</p>
+                    <h3 class="tiktok-trust-title">Safe for your TikTok account</h3>
+                    <p class="tiktok-trust-desc">Our viewers are real, active accounts. Natural interaction, no flags. 1,200+ TikTok lives without a single shadow ban.</p>
                 </div>
                 <div class="tiktok-trust-card" style="animation-delay: 120ms;">
                     <div class="tiktok-trust-icon">
                         <Clock class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="tiktok-trust-title">Masuk gradual 5-15 menit</h3>
-                    <p class="tiktok-trust-desc">Viewers join gradual sejak menit pertama live. Tidak tiba-tiba, tidak mencurigakan — FYP notice natural trending.</p>
+                    <h3 class="tiktok-trust-title">Gradual join over 5–15 minutes</h3>
+                    <p class="tiktok-trust-desc">Viewers join gradually from the first minute of your live. Never sudden, never suspicious — the FYP sees natural trending.</p>
                 </div>
                 <div class="tiktok-trust-card" style="animation-delay: 240ms;">
                     <div class="tiktok-trust-icon">
                         <TrendingUp class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="tiktok-trust-title">Tanpa minimum order</h3>
-                    <p class="tiktok-trust-desc">Order per sesi, bayar per order. Bebas order sesuai jadwal live TikTok Anda. Diskon 10-15% untuk paket berulang.</p>
+                    <h3 class="tiktok-trust-title">No minimum order</h3>
+                    <p class="tiktok-trust-desc">Order per session, pay per order. Book whenever your TikTok live schedule needs it. 10–15% off recurring packages.</p>
                 </div>
             </div>
         </div>
@@ -456,12 +437,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum order
+                    Before you order
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan tentang<br/>
-                    <span class="text-accent">live TikTok.</span>
+                    Questions about<br/>
+                    <span class="text-accent">TikTok lives.</span>
                 </h2>
             </div>
 
@@ -482,14 +463,14 @@ const relatedItems = [
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-400"></span>
                     </span>
-                    Tim online · respon dalam 1 jam pada jam kerja
+                    Team online · replies within 1 hour during business hours
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight mb-6 mt-3">
-                    Live TikTok berikutnya<br/>
-                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">langsung trending di FYP.</span>
+                    Your next TikTok live,<br/>
+                    <span class="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">trending on the FYP right away.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Ceritakan tanggal live TikTok Anda via WhatsApp. Kami kirim rekomendasi paket & timeline. Tanpa komitmen — order hanya saat Anda siap live.
+                    Tell us your TikTok live date on WhatsApp. We’ll send a package recommendation & timeline. No commitment — order only when you’re ready to go live.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-cyan-400 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all tiktok-cta-glow">
@@ -500,10 +481,10 @@ const relatedItems = [
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Paket mingguan/bulanan · diskon 10-15%</p>
+                <p class="text-white/50 text-xs mt-6">Weekly/monthly packages · 10–15% discount</p>
             </div>
         </div>
     </section>

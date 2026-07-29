@@ -10,30 +10,30 @@
     let closeTimeout = null;
 
     const paidAds = [
-        { label: 'Facebook Ads', href: '/facebook-ads-management', desc: '120jt+ pengguna aktif ID' },
+        { label: 'Facebook Ads', href: '/facebook-ads-management', desc: '24M+ active users in MY' },
         { label: 'Instagram Ads', href: '/instagram-ads-management', desc: 'Visual storytelling' },
-        { label: 'TikTok Ads', href: '/tiktok-ads-management', desc: 'Jangkauan FYP organik' },
-        { label: 'Google Search Ads', href: '/google-ads-management', desc: 'Tangkap intent tinggi' },
+        { label: 'TikTok Ads', href: '/tiktok-ads-management', desc: 'Organic FYP reach' },
+        { label: 'Google Search Ads', href: '/google-ads-management', desc: 'Capture high intent' },
         { label: 'YouTube Ads', href: '/youtube-ads-management', desc: 'Brand awareness video' },
     ];
 
     const organic = [
-        { label: 'Kelola Instagram', href: '/instagram-management', desc: 'Feed rapi & story aktif' },
-        { label: 'Kelola TikTok', href: '/tiktok-management', desc: '30 video / bulan' },
+        { label: 'Instagram Management', href: '/instagram-management', desc: 'Polished feed & active Stories' },
+        { label: 'TikTok Management', href: '/tiktok-management', desc: 'Up to 20 videos / month' },
     ];
 
     const build = [
-        { label: 'Pembuatan Website', href: '/website-development', desc: 'Mulai Rp 999rb / tahun' },
-        { label: 'Landing Page + Ads', href: '/landing-page-design', desc: 'Bundle Rp 1.999.000' },
+        { label: 'Website Development', href: '/website-development', desc: 'From RM 1,499 one-time' },
+        { label: 'Landing Page + Ads', href: '/landing-page-design', desc: 'Bundle RM 1,299' },
     ];
 
     const buzzerLive = [
-        { label: 'Lihat Semua Platform', href: '/live-stream-viewers', desc: 'Perbandingan harga & fitur' },
+        { label: 'View All Platforms', href: '/live-stream-viewers', desc: 'Compare prices & features' },
         { label: 'TikTok Live', href: '/tiktok-live-viewers', desc: 'Boost FYP algorithm' },
         { label: 'Shopee Live', href: '/shopee-live-viewers', desc: 'Boost ranking produk' },
         { label: 'YouTube Live', href: '/youtube-live-viewers', desc: 'Boost watch time' },
         { label: 'Instagram Live', href: '/instagram-live-viewers', desc: 'Boost IG reach' },
-        { label: 'Twitch Live', href: '/twitch-live-viewers', desc: 'Boost direktori' },
+        { label: 'Twitch Live', href: '/twitch-live-viewers', desc: 'Boost directory ranking' },
     ];
 
     const navGroups = [
@@ -45,12 +45,12 @@
 
     const navSingles = [
         { label: 'Digital Marketing', href: '/digital-marketing-agency' },
-        { label: 'AI Customer Service', href: 'https://haloka.id', external: true, icon: Bot, desc: 'Balas chat 24/7 otomatis' },
+        { label: 'AI Customer Service', href: 'https://haloka.id', external: true, icon: Bot, desc: 'Automated 24/7 chat replies' },
         { label: 'Blog', href: '/blog' },
     ];
 
     const waNumber = '62811919328';
-    const waText = encodeURIComponent('Halo Beriklan, saya ingin berdiskusi mengenai kebutuhan iklan digital bisnis saya.');
+    const waText = encodeURIComponent('Hello Beriklan, I would like to discuss digital advertising for my business.');
     const waLink = `https://wa.me/${waNumber}?text=${waText}`;
 
     onMount(() => {
@@ -111,13 +111,6 @@
                 <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400"></span>
             </span>
             <div class="flex items-center gap-3 ml-1">
-                <a href="#" aria-label="Bahasa Indonesia" title="Bahasa Indonesia" class="hover:opacity-80 transition flex items-center gap-1">
-                    <svg viewBox="0 0 18 12" class="w-[18px] h-[12px] rounded-sm overflow-hidden" aria-hidden="true">
-                        <rect width="18" height="6" fill="#ce1126"/>
-                        <rect y="6" width="18" height="6" fill="#ffffff"/>
-                    </svg>
-                    <span class="text-white/90">ID</span>
-                </a>
                 <a href="#" aria-label="English" title="English" class="hover:opacity-80 transition flex items-center gap-1">
                     <svg viewBox="0 0 60 30" class="w-[18px] h-[12px] rounded-sm overflow-hidden" aria-hidden="true">
                         <clipPath id="uk-clip"><rect width="60" height="30"/></clipPath>
@@ -180,7 +173,7 @@
         <a href="/" class="flex items-center gap-2 shrink-0 group" on:click={closeAll}>
             <img
                 src="/logoweb.webp"
-                alt="Beriklan.co.id"
+                alt="Beriklan.my"
                 class="h-8 md:h-9 w-auto transition-transform duration-300 group-hover:scale-105
                 {isScrolled ? '' : 'brightness-0'}"
             />
@@ -254,7 +247,7 @@
             <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center gap-2 bg-ink text-white pl-4 pr-3 py-2.5 rounded-full font-bold text-sm overflow-hidden hover:shadow-lg transition-all">
                 <span class="shine absolute inset-0 bg-gradient-to-r from-accent via-accent-2 to-accent -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
                 <span class="relative flex items-center gap-2 group-hover:text-ink transition-colors">
-                    <span class="hidden sm:inline">Konsultasi</span>
+                    <span class="hidden sm:inline">Consultation</span>
                     <span class="w-7 h-7 rounded-full bg-white/10 group-hover:bg-ink/10 flex items-center justify-center transition-colors">
                         <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </span>
@@ -269,7 +262,7 @@
         </a>
 
         <!-- Mobile hamburger -->
-        <button class="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:border-ink hover:bg-ink hover:text-white transition-all group" on:click={toggleMobileMenu} aria-label="Buka menu navigasi">
+        <button class="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:border-ink hover:bg-ink hover:text-white transition-all group" on:click={toggleMobileMenu} aria-label="Open navigation menu">
             {#if isMenuOpen}
                 <X class="w-5 h-5" />
             {:else}
@@ -290,9 +283,9 @@
 
         <div class="relative z-10 flex items-center justify-between px-6 pt-5 pb-3">
             <a href="/" class="flex items-center gap-2.5" on:click={closeAll}>
-                <img src="/logoweb.webp" alt="Beriklan.co.id" class="h-8 w-auto brightness-0 invert" />
+                <img src="/logoweb.webp" alt="Beriklan.my" class="h-8 w-auto brightness-0 invert" />
             </a>
-            <button class="close-btn w-11 h-11 rounded-full bg-white text-ink hover:bg-accent flex items-center justify-center transition-all shadow-lg" on:click={closeAll} aria-label="Tutup menu">
+            <button class="close-btn w-11 h-11 rounded-full bg-white text-ink hover:bg-accent flex items-center justify-center transition-all shadow-lg" on:click={closeAll} aria-label="Close menu">
                 <X class="w-5 h-5" strokeWidth="2.5" />
             </button>
         </div>
@@ -304,29 +297,29 @@
                     <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
                 </span>
-                <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-green-300/90">Tim online &middot; siap merespon</span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-green-300/90">Team online &middot; ready to respond</span>
             </div>
             <h2 class="font-display font-extrabold text-white text-[28px] leading-[1.05] tracking-tight reveal-up" style="animation-delay: 120ms;">
-                Mau scale up<br/>
-                <span class="text-accent">penjualan via iklan?</span>
+                Ready to scale<br/>
+                <span class="text-accent">sales with paid ads?</span>
             </h2>
             <p class="text-white/60 text-[13px] mt-3 leading-relaxed max-w-xs reveal-up" style="animation-delay: 180ms;">
-                Pilih layanan di bawah, atau langsung terhubung lewat WhatsApp untuk diskusi singkat 15 menit.
+                Pick a service below, or connect on WhatsApp for a quick 15-minute chat.
             </p>
 
             <!-- Trust strip: 3 micro-pills -->
             <div class="mt-4 flex flex-wrap items-center gap-2 reveal-up" style="animation-delay: 240ms;">
                 <span class="trust-pill">
                     <span class="trust-dot"></span>
-                    <span>9 th pengalaman</span>
+                    <span>9 yrs experience</span>
                 </span>
                 <span class="trust-pill">
                     <svg class="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a 1 1 0 01-1.414 0l-4-4a 1 1 0 011.414-1.414L8 12.586l7.293-7.293a 1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    <span>Respon 1 jam</span>
+                    <span>1-hour response</span>
                 </span>
                 <span class="trust-pill">
                     <svg class="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a 1 1 0 01-1.414 0l-4-4a 1 1 0 011.414-1.414L8 12.586l7.293-7.293a 1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    <span>Sertifikasi Meta &amp; Google</span>
+                    <span>Meta &amp; Google certified</span>
                 </span>
             </div>
         </div>
@@ -347,10 +340,10 @@
                                 <span class="group-label">
                                     {group.label}
                                     {#if group.popular}
-                                        <span class="popular-pill">Paling dicari</span>
+                                        <span class="popular-pill">Most popular</span>
                                     {/if}
                                 </span>
-                                <span class="group-count">{group.items.length} layanan</span>
+                                <span class="group-count">{group.items.length} services</span>
                             </span>
                             <span class="group-chevron">
                                 <ChevronDown class="w-4 h-4" />
@@ -392,7 +385,7 @@
                                         <span class="popular-pill">External</span>
                                     {/if}
                                 </span>
-                                <span class="group-count">{single.desc || 'Halaman lengkap'}</span>
+                                <span class="group-count">{single.desc || 'Full page'}</span>
                             </span>
                             {#if single.icon}
                                 <svelte:component this={single.icon} class="w-4 h-4 text-white/60" />
@@ -406,12 +399,12 @@
         </nav>
 
         <div class="quick-contact relative px-4 pt-3 pb-3 space-y-2 shrink-0">
-            <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 px-2 mb-1">Hubungi langsung</p>
+            <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 px-2 mb-1">Contact us directly</p>
             <a href="tel:+62811919328" class="quick-card" on:click={closeAll}>
                 <span class="quick-icon"><Phone class="w-4 h-4 text-white" /></span>
                 <span class="flex-1 min-w-0">
                     <span class="block text-white font-bold text-sm leading-tight">+62 81.1919.328</span>
-                    <span class="block text-white/50 text-[11px]">Telepon langsung</span>
+                    <span class="block text-white/50 text-[11px]">Call us directly</span>
                 </span>
             </a>
         </div>
@@ -424,8 +417,8 @@
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24z"/></svg>
                     </span>
                     <span class="flex flex-col items-start">
-                        <span class="font-display font-extrabold text-[15px] leading-tight">Diskusi via WhatsApp</span>
-                        <span class="text-[10px] opacity-90 leading-tight">Respon dalam 1 jam · jam kerja</span>
+                        <span class="font-display font-extrabold text-[15px] leading-tight">Chat on WhatsApp</span>
+                        <span class="text-[10px] opacity-90 leading-tight">Replies within 1 hour · business hours</span>
                     </span>
                     <ArrowRight class="w-4 h-4 ml-auto group-hover:translate-x-0.5 transition-transform" />
                 </span>
@@ -433,10 +426,10 @@
             <div class="flex items-center justify-center gap-3 mt-3 text-[10px] text-white/50">
                 <span class="flex items-center gap-1">
                     <svg class="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a 1 1 0 01-1.414 0l-4-4a 1 1 0 011.414-1.414L8 12.586l7.293-7.293a 1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    Respon 1 jam
+                    1-hour response
                 </span>
                 <span class="w-px h-3 bg-white/20"></span>
-                <span>© 2026 Bandung</span>
+                <span>© 2026 Beriklan.my</span>
             </div>
         </div>
     </div>

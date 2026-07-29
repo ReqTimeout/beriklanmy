@@ -110,14 +110,14 @@
             </div>
             <div>
                 <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Total Leads</p>
-                <p class="text-base font-display font-extrabold text-ink leading-tight">{leadCount}<span class="text-[9px] text-muted font-bold ml-0.5">/bulan</span></p>
+                <p class="text-base font-display font-extrabold text-ink leading-tight">{leadCount}<span class="text-[9px] text-muted font-bold ml-0.5">/month</span></p>
             </div>
         </div>
     </div>
 
     <!-- FLOATING: ROAS -->
     <div class="hv-float-2 absolute -right-2 md:-right-12 top-4 bg-white rounded-xl shadow-pop border border-gray-100 p-3 w-44 hidden md:block">
-        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Rata-rata ROAS</p>
+        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Average ROAS</p>
         <p class="text-2xl font-display font-extrabold text-ink mt-1">4.6<span class="text-sm text-muted">x</span></p>
         <div class="mt-2 h-1.5 bg-soft rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-accent via-accent-2 to-orange-500 rounded-full" style="width: 92%;"></div>
@@ -130,8 +130,8 @@
             <CheckCircle2 class="w-4 h-4 text-white" />
         </div>
         <div class="min-w-0">
-            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Sinergi</p>
-            <p class="text-base font-display font-extrabold text-ink leading-tight">Semua kanal</p>
+            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Synergy</p>
+            <p class="text-base font-display font-extrabold text-ink leading-tight">All channels</p>
         </div>
         <span class="live-dot relative w-1.5 h-1.5 rounded-full bg-green ml-auto anim-pulse"></span>
     </div>

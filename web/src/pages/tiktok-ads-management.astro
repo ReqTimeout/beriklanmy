@@ -17,86 +17,36 @@ import Footer from '../components/Footer.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20iklan%20TikTok.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20TikTok%20Ads%20management.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'Basic',
-        priceLabel: '1.000.000',
-        duration: '7 hari tayang',
-        tagline: 'Untuk testing awal: lihat bagaimana audiens merespons konten Anda di TikTok.',
-        features: [
-            'Goal: brand awareness',
-            'Estimasi 15.000-30.000 views',
-            '1 post TikTok (1 video)',
-            'Iklan dapat diganti',
-            'Laporan akhir periode',
-            'Akses penuh ke akun iklan TikTok Anda',
-        ],
-        priceNote: 'belum termasuk ad spend TikTok',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
-    {
-        name: 'Standart',
-        priceLabel: '1.600.000',
-        duration: '14 hari tayang',
-        tagline: 'Untuk bisnis yang ingin traffic dan visibilitas lebih konsisten di TikTok.',
-        features: [
-            'Goal: traffic',
-            'Estimasi 20.000-50.000 views',
-            '1 post TikTok (1 video)',
-            'Iklan dapat diganti',
-            'Laporan akhir periode',
-            'Akses penuh ke akun iklan TikTok Anda',
-        ],
-        priceNote: 'belum termasuk ad spend TikTok',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
-    {
-        name: 'Business',
-        priceLabel: '3.750.000',
-        duration: '30 hari tayang',
-        tagline: 'Untuk bisnis yang ingin mengarahkan tayangan ke lead dan konversi yang terukur.',
-        features: [
-            'Goal: traffic & lead',
-            'Estimasi 50.000-75.000 views',
-            '3 post TikTok (3 video)',
-            'Iklan dapat diganti',
-            'Optimasi untuk klik, konversi, atau lead',
-            'Setup remarketing audience',
-            'Laporan akhir periode + review strategi',
-            'Akses penuh ke akun iklan TikTok Anda',
-        ],
-        priceNote: 'belum termasuk ad spend TikTok',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-        highlight: true,
-    },
+    { name: 'Basic', priceLabel: '790', duration: '30-day campaign', tagline: 'Entry plan to validate TikTok as a channel for your business.', features: ['Estimated reach 4,000–12,000 people per day', 'Delivery across all TikTok placements', 'Ad creatives prepared and rotated for you', 'Ads can be replaced mid-cycle', 'Weekly report in plain language'], priceNote: 'per month, excludes ad spend', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Standard', priceLabel: '1,290', duration: '30-day campaign', tagline: 'Consistent TikTok presence with Spark Ads and weekly creative rotation.', features: ['Estimated reach 10,000–25,000 people per day', 'Delivery across all TikTok placements', 'Ad creatives prepared and rotated for you', 'Ads can be replaced mid-cycle', 'Weekly report in plain language', 'Spark Ads from your organic content'], priceNote: 'per month, excludes ad spend', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
+    { name: 'Business', priceLabel: '1,990', duration: '30-day campaign', tagline: 'Aggressive growth with TikTok Shop integration and retargeting.', features: ['Estimated reach 20,000–50,000 people per day', 'Delivery across all TikTok placements', 'Ad creatives prepared and rotated for you', 'Ads can be replaced mid-cycle', 'Weekly report in plain language', 'Real-time dashboard access', 'TikTok Shop campaign integration'], priceNote: 'per month, excludes ad spend', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
 
 const features = [
-    { iconName: 'Target', title: 'Targeting Interest', desc: 'Lebih dari 100 kategori minat yang dapat dikombinasikan: perilaku, demografi, hingga hobby spesifik audiens Anda.' },
-    { iconName: 'Repeat', title: 'Remarketing List', desc: 'Menjangkau kembali orang yang pernah mengunjungi website atau berinteraksi dengan iklan sebelumnya — biasanya menghasilkan konversi 3-5x lebih tinggi.' },
-    { iconName: 'MapPin', title: 'Target Wilayah', desc: 'Batasi penayangan berdasarkan kota, provinsi, atau radius tertentu. Cocok untuk bisnis lokal di Bandung, Jabodetabek, atau kota tertentu.' },
-    { iconName: 'Database', title: 'Lead Database', desc: 'Unggah daftar kontak customer lama atau prospek untuk penayangan iklan khusus — atau buat lookalike audience dari data tersebut.' },
-    { iconName: 'Users', title: 'Interaksi Audience', desc: 'Sasar orang yang aktif berinteraksi dengan halaman serupa di industri Anda. Lebih efisien daripada targeting minat umum.' },
-    { iconName: 'MessageCircle', title: 'Chat WhatsApp', desc: 'Tombol Call-to-Action langsung mengarah ke WhatsApp — mempersingkat jarak dari tertarik menjadi konsultasi.' },
+    { iconName: 'Target', title: 'Interest Targeting', desc: 'More than 100 interest categories that can be combined: behaviour, demographics, right down to your audience\u2019s specific hobbies.' },
+    { iconName: 'Repeat', title: 'Remarketing List', desc: 'Re-engage people who visited your website or interacted with previous ads \u2014 typically converting 3\u20135x higher.' },
+    { iconName: 'MapPin', title: 'Location Targeting', desc: 'Limit delivery by city, state or a specific radius. Ideal for local businesses in KL, the Klang Valley, Penang or any specific city.' },
+    { iconName: 'Database', title: 'Lead Database', desc: 'Upload your existing customer or prospect lists for dedicated ad delivery \u2014 or build lookalike audiences from that data.' },
+    { iconName: 'Users', title: 'Audience Engagement', desc: 'Target people who actively engage with similar pages in your industry. More efficient than broad interest targeting.' },
+    { iconName: 'MessageCircle', title: 'WhatsApp Chat', desc: 'Call-to-action buttons that lead straight to WhatsApp \u2014 shortening the distance from interested to in-conversation.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI 1-2', title: 'Brief & Konsep Konten', desc: 'Diskusi 30 menit untuk menggali produk, target market, dan tone konten yang sesuai dengan brand Anda. Kami susun konsep video yang siap produksi.' },
-    { num: '02', tag: 'HARI 3-5', title: 'Produksi Video', desc: 'Tim memproduksi video pendek sesuai konsep: 15-30 detik, hook kuat di 3 detik pertama, caption yang tertarget. Anda approve hasil akhir.' },
-    { num: '03', tag: 'HARI 6+', title: 'Launch Campaign', desc: 'Iklan tayang sesuai durasi paket yang dipilih (7/14/30 hari). Penayangan di TikTok For You Page dengan targeting yang sudah disesuaikan.' },
-    { num: '04', tag: 'ONGOING', title: 'Optimasi & Ganti Iklan', desc: 'Kami monitor performa harian. Iklan yang tidak perform diganti. Yang jalan, di-scale-up.' },
+    { num: '01', tag: 'WEEK 1', title: 'Brief & Research', desc: 'A 30-minute discussion to understand your product, target market and goals. We map the TikTok targeting strategy that fits.' },
+    { num: '02', tag: 'WEEK 1-2', title: 'Setup & Creative', desc: 'We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute.' },
+    { num: '03', tag: 'WEEK 2+', title: '30-Day Launch', desc: 'Your ads run for a full 30 days across TikTok placements. You receive a report every Monday morning.' },
+    { num: '04', tag: 'ONGOING', title: 'Optimise & Rotate', desc: 'We monitor performance daily. Underperforming ads are replaced; winners are scaled up.' },
 ];
 
 const faqs = [
-    { q: 'Berapa budget iklan (ad spend) yang perlu disiapkan di luar biaya jasa?', a: 'Tergantung target jangkauan dan industri. Untuk TikTok Ads di Indonesia, umumnya mulai dari Rp 300.000 per hari untuk kampanye yang stabil. Pada sesi konsultasi, kami bantu estimasi ad spend yang ideal berdasarkan objective Anda.' },
-    { q: 'Apakah harga paket sudah termasuk ad spend TikTok?', a: 'Belum. Angka tersebut adalah biaya jasa pengelolaan campaign. Ad spend Meta dibayar langsung ke Meta oleh Anda — Anda memegang penuh kendali akun, tidak ada biaya tersembunyi lewat kami.' },
-    { q: 'Berapa lama sampai iklan mulai menghasilkan chat WhatsApp atau leads?', a: 'Untuk paket Basic (7 hari), data sudah terbaca di akhir periode. Untuk Standart (14 hari) dan Business (30 hari), pola yang lebih stabil biasanya terlihat di minggu ke-2 atau ke-3. Bisa lebih cepat atau lambat tergantung industri dan kualitas konten.' },
-    { q: 'Bisakah iklan diganti di tengah periode berjalan?', a: 'Bisa, dan ini salah satu keuntungan paket kami. Jika Creative A tidak perform, kami ganti dengan Creative B di tengah jalan. Hal yang sama pada copy, audience, atau placement yang perlu disesuaikan.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Tidak ada. Sistem kami bekerja secara bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap periode. Ini bentuk komitmen kami untuk menjaga kualitas kerja — bukan jebakan kontrak.' },
-    { q: 'Apa bedanya paket Basic, Standart, dan Business?', a: 'Basic untuk testing awal 7 hari dengan 1 video dan estimasi 15.000-30.000 views. Standart untuk traffic 14 hari dengan 1 video dan estimasi 20.000-50.000 views. Business untuk lead generation 30 hari dengan 3 video, estimasi 50.000-75.000 views, setup remarketing, dan review strategi.' },
-    { q: 'Bagaimana laporan yang diberikan?', a: 'Untuk paket Basic dan Standart, laporan dikirim di akhir periode. Untuk paket Business, laporan akhir periode ditambah review strategi via video call. Format laporan satu halaman: views, engagement, dan rekomendasi iterasi untuk periode berikutnya.' },
+    { q: 'How much does TikTok Ads management cost at Beriklan?', a: 'Packages start from RM 790/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+    { q: 'How long does it take to set up a TikTok Ads management campaign?', a: 'Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+    { q: 'Is the ad budget included in the package price?', a: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+    { q: 'Is there a minimum contract?', a: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+    { q: 'What reporting will I receive?', a: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' },
 ];
 
 const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(item => ({
@@ -107,28 +57,31 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
 }));
 ---
 
-<Layout title="Jasa Iklan TikTok Ads Indonesia — Beriklan" description="TikTok Ads menghasilkan 70.000+ views & leads nyata. Spark Ads, In-Feed, TopView — kami handle dari setup sampai laporan mingguan. Mulai Rp 1 juta untuk 7 hari. Tim bersertifikat TikTok Marketing Partner." canonical="https://beriklan.my/tiktok-ads-management/"
+<Layout
+    title="TikTok Ads Management Malaysia | Spark Ads & FYP — Beriklan"
+    description="TikTok ads built for the FYP algorithm — short videos that turn views into leads. Managed end-to-end with weekly reports. From RM 790/month. Free 15-minute consultation."
+    canonical="https://beriklan.my/tiktok-ads-management/"
     faq={[
-            { question: 'Berapa biaya TikTok Ads?', answer: 'Mulai dari Rp 1.750.000 per 30 hari. Sudah termasuk setup Spark Ads, In-Feed Ads, dan optimasi.' },
-            { question: 'Format TikTok Ads apa saja?', answer: 'In-Feed Ads (muncul di FYP), Spark Ads (boost organic content), TopView Ads (premium).' },
-            { question: 'Siapa target audience TikTok Ads?', answer: 'Gen Z (18-25) dan Milenial (26-35). 70% pengguna TikTok Indonesia di rentang usia ini. Cocok untuk F&B, fashion, beauty, entertainment.' },
-            { question: 'Apakah TikTok Ads untuk B2B?', answer: 'Bisa, tapi kurang efektif. Untuk B2B lebih cocok LinkedIn Ads atau Google Ads. TikTok optimal untuk B2C.' },
-            { question: 'Berapa lama setup TikTok Ads?', answer: 'Setup 1-3 hari. Video ads mulai tayang 24-48 jam setelah approval. Spark Ads bisa langsung boost dari organic.' }
-        ]}
+        { question: 'How much does TikTok Ads management cost at Beriklan?', answer: 'Packages start from RM 790/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+        { question: 'How long does it take to set up a TikTok Ads management campaign?', answer: 'Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+        { question: 'Is the ad budget included in the package price?', answer: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+        { question: 'Is there a minimum contract?', answer: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+        { question: 'What reporting will I receive?', answer: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Iklan TikTok", url: "https://beriklan.my/tiktok-ads-management/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "TikTok Ads Management", url: "https://beriklan.my/tiktok-ads-management/" }
     ]}
     service={{
-        name: "Jasa Iklan TikTok",
-        description: "Jasa Jasa Iklan TikTok profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "TikTok Ads Management",
+        description: "TikTok Ads management — Spark Ads, In-Feed and TikTok Shop campaigns for the Malaysian market.",
         url: "https://beriklan.my/tiktok-ads-management/",
-        priceRange: "Rp 1.750.000 - Rp 3.750.000",
+        priceRange: "RM 790 - RM 1,990",
         serviceType: "TikTok Ads",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -150,36 +103,36 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Jasa Iklan TikTok Ads · Spark & FYP</span>
+                    <span class="opacity-0 anim-fade-in">TikTok Ads Management · Spark & FYP</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Jasa Iklan TikTok</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">untuk Menjangkau Audiens</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">dengan Konten yang Menghibur.</span>
+                    <span class="anim-fade-up">TikTok Ads Management</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">to Reach Your Audience</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">With Entertaining Content.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    TikTok menjadi kanal penemuan produk yang paling cepat bertumbuh di Indonesia. Kami membantu bisnis Anda membuat iklan video pendek yang tertarget — agar tayangan berubah menjadi pengikut, kunjungan profil, atau chat WhatsApp yang siap berkonsultasi.
+                    TikTok is Malaysia’s fastest-growing product discovery channel. We help your business create targeted short-video ads — turning views into followers, profile visits, or WhatsApp chats ready to talk.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -193,15 +146,15 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -216,33 +169,33 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa TikTok Ads
+                    Why TikTok Ads
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar video viral,<br/>
-                    <span class="text-accent">tapi penargetan yang menghasilkan leads.</span>
+                    Not just viral videos,<br/>
+                    <span class="text-accent">but targeting that generates leads.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Banyak bisnis sudah mencoba TikTok Ads, namun hasilnya kurang memuaskan. Umumnya penyebabnya: video tidak dioptimasi untuk algoritma FYP, atau targeting yang melebar sehingga views tidak tertarget pada audiens potensial.
+                    Many businesses have tried TikTok Ads with underwhelming results. The usual causes: videos not optimised for the FYP algorithm, or targeting so broad the views never hit potential buyers.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="why-card group">
                     <div class="why-icon">🎯</div>
-                    <h3 class="why-title">Penargetan FYP yang Tepat</h3>
-                    <p class="why-desc">Algoritma TikTok For You Page membaca minat, perilaku, dan pola interaksi pengguna. Kami mengatur parameter agar iklan Anda muncul ke audiens yang benar-benar berpotensi tertarik, bukan hanya viewers random.</p>
+                    <h3 class="why-title">Precise FYP Targeting</h3>
+                    <p class="why-desc">TikTok’s For You Page algorithm reads user interests, behaviour and interaction patterns. We tune the parameters so your ads reach people genuinely likely to be interested — not random viewers.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">📊</div>
                     <h3 class="why-title">Data Views Real-Time</h3>
-                    <p class="why-desc">Dashboard iklan TikTok menampilkan views, watch time, dan interaksi secara real-time. Anda dapat melihat performa video kapan saja dan kami menyesuaikan strategi berdasarkan data.</p>
+                    <p class="why-desc">TikTok’s ads dashboard shows views, watch time and engagement in real time. Check video performance any time — we adjust strategy based on the data.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">💬</div>
                     <h3 class="why-title">Lead via WhatsApp</h3>
-                    <p class="why-desc">Tombol Call-to-Action bawaan TikTok dapat langsung mengarah ke WhatsApp. Dari viewers menjadi chat — semuanya dalam satu flow yang halus.</p>
+                    <p class="why-desc">TikTok’s built-in call-to-action button can link straight to WhatsApp. From viewer to chat — all in one smooth flow.</p>
                 </div>
             </div>
         </div>
@@ -258,8 +211,8 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -275,12 +228,12 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -295,15 +248,15 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
@@ -316,10 +269,10 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -330,7 +283,7 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
     </section>
 
     <!-- ====================== COMPARISON TABLE ====================== -->
-    <ComparisonTable serviceName="Iklan TikTok" />
+    <ComparisonTable serviceName="TikTok Ads" />
 
     <!-- ====================== STATS / TRUST ====================== -->
     <section class="py-20 md:py-28 bg-ink text-white relative overflow-hidden">
@@ -342,33 +295,33 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -380,49 +333,49 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">🧴</div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">💆</div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">💼</div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -447,12 +400,12 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -467,7 +420,7 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="tiktok-ads-management" pageUrl="https://beriklan.my/tiktok-ads-management/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/tiktok-ads-management/pilar/" pillarLabel="Panduan Lengkap Iklan Tiktok" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/tiktok-ads-management/pilar/" pillarLabel="Complete TikTok Ads Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -481,27 +434,27 @@ const relatedItems = (relatedMap.services['tiktok-ads-management'] || []).map(it
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar membuat video viral. Kami menyusun strategi yang selaras dengan karakter brand dan algoritma TikTok — agar setiap views yang Anda dapatkan berpotensi menjadi leads atau konversi.
+                    More than just chasing viral videos. We build a strategy aligned with your brand and the TikTok algorithm — so every view you earn can become a lead or a conversion.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

@@ -4,67 +4,67 @@
 
     const baseTestimonials = [
         {
-            quote: 'Kami sempat mengelola iklan sendiri hampir setahun. Hasilnya naik turun dan menyita waktu tim internal. Setelah bekerja sama dengan Beriklan, ROAS meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.',
-            name: 'Andini Pratiwi',
+            quote: 'We managed our own ads for almost a year. Results were up and down and it drained our internal team. After working with Beriklan, ROAS improved from 1.8x to 4.5x in four months. What we appreciate most: reports are written in plain language and we understand every change made.',
+            name: 'Nurul Aisyah',
             role: 'Owner',
-            biz: 'Brand Skincare, Bandung',
+            biz: 'Skincare Brand, Kuala Lumpur',
             metric: 'ROAS 1.8x → 4.5x',
-            metricLabel: 'dalam 4 bulan',
+            metricLabel: 'in 4 months',
             avatar: '🧴',
             accent: 'from-amber-500 to-orange-500',
             industry: 'Skincare',
         },
         {
-            quote: 'Awalnya kami skeptis menggandeng agensi, namun setelah dua bulan pertama, akhirnya kami memahami perbedaannya. Yang paling terasa: setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan angka CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.',
-            name: 'Rizky Maulana',
+            quote: 'We were sceptical about hiring an agency at first, but after the first two months we finally understood the difference. What stands out: every Monday morning there is a report in plain language — not just rows of CPM and CTR numbers, but what needs to change and why.',
+            name: 'Amirul Hakim',
             role: 'Marketing Manager',
-            biz: 'Klinik Kecantikan, Jakarta',
-            metric: 'Lead konsisten 3x lipat',
-            metricLabel: 'dari bulan ke-2',
+            biz: 'Aesthetic Clinic, Petaling Jaya',
+            metric: 'Leads consistently 3x',
+            metricLabel: 'from month 2',
             avatar: '💆',
             accent: 'from-pink-500 to-rose-500',
-            industry: 'Klinik',
+            industry: 'Clinic',
         },
         {
-            quote: 'Kampanye TikTok Ads dari Beriklan berhasil menembus FYP secara organik. Dari nol pengikut menjadi 12.000 dalam dua bulan, dengan rasio closing 8% per video. Proses kreatif dilakukan secara kolaboratif, bukan sekadar posting rutin.',
-            name: 'Bayu Adhi',
+            quote: 'Beriklan\'s TikTok Ads campaigns broke into the FYP organically. From zero followers to 12,000 in two months, with an 8% closing rate per video. The creative process is collaborative, not just routine posting.',
+            name: 'Tan Wei Jian',
             role: 'Founder',
-            biz: 'Edutech, Jakarta',
-            metric: '0 → 12K pengikut',
-            metricLabel: 'closing 8% / video',
+            biz: 'Edutech, Kuala Lumpur',
+            metric: '0 → 12K followers',
+            metricLabel: '8% closing / video',
             avatar: '🎓',
             accent: 'from-cyan-500 to-teal-500',
             industry: 'Edutech',
         },
         {
-            quote: 'Sebagai pemilik brand F&B, saya biasanya tidak terlalu memperhatikan aspek marketing. Setelah Tim Beriklan menyampaikan laporan dengan bahasa yang mudah dipahami, baru saya sadari bahwa biaya yang sebelumnya kami keluarkan untuk agensi lain ternyata hanya menaikkan CPM tanpa hasil yang terukur. Saat ini ROI setiap bulan positif.',
-            name: 'Hendro Wibowo',
+            quote: 'As an F&B brand owner, I never paid much attention to marketing. Once the Beriklan team delivered reports in plain language, I realised our previous agency spend was only inflating CPM with no measurable results. Now our ROI is positive every month.',
+            name: 'Faizal Rahman',
             role: 'Owner',
-            biz: 'Restoran Lokal, Jabodetabek',
-            metric: 'ROI positif',
-            metricLabel: 'tiap bulan sejak Q2',
+            biz: 'Local Restaurant, Klang Valley',
+            metric: 'Positive ROI',
+            metricLabel: 'every month since Q2',
             avatar: '🍜',
             accent: 'from-purple-500 to-pink-500',
             industry: 'F&B',
         },
         {
-            quote: 'Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan, tanpa pendekatan copy-paste dari kampanye ritel. qualified leads kami naik 180% di Q3. Investasi yang sebanding dengan hasilnya.',
-            name: 'Sarah Nathania',
+            quote: 'B2B funnels behave very differently from FMCG. Beriklan understands this and built a relevant strategy, without copy-pasting retail campaign playbooks. Our qualified leads grew 180% in Q3. An investment that matched its returns.',
+            name: 'Michelle Lim',
             role: 'Head of Growth',
-            biz: 'SaaS B2B, Jakarta',
+            biz: 'B2B SaaS, Kuala Lumpur',
             metric: 'Qualified leads +180%',
-            metricLabel: 'di Q3 2025',
+            metricLabel: 'in Q3 2025',
             avatar: '💼',
             accent: 'from-blue-500 to-indigo-500',
             industry: 'SaaS B2B',
         },
         {
-            quote: 'Tim Beriklan mengelola akun Instagram secara menyeluruh — mulai dari penulisan skrip, penyuntingan, penjadwalan posting, hingga balasan DM. Kami hanya menerima laporan hasil. Dalam tiga bulan pertama, penjualan dari Instagram naik tiga kali lipat. Sangat membantu untuk bisnis yang sedang dalam tahap ekspansi.',
-            name: 'Aulia Rahma',
+            quote: 'The Beriklan team manages our Instagram end-to-end — scriptwriting, editing, post scheduling, right through to DM replies. We just receive the results report. In the first three months, Instagram sales tripled. A huge help for a business in expansion mode.',
+            name: 'Siti Zulaikha',
             role: 'Owner',
-            biz: 'Brand Fashion, Surabaya',
-            metric: 'Penjualan IG naik 3x',
-            metricLabel: 'dalam 3 bulan',
+            biz: 'Fashion Brand, Johor Bahru',
+            metric: 'IG sales up 3x',
+            metricLabel: 'in 3 months',
             avatar: '👗',
             accent: 'from-rose-500 to-red-500',
             industry: 'Fashion',
@@ -98,7 +98,7 @@
         isPaused = !isPaused;
     }
 
-    const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20ingin%20konsultasi%20mengenai%20campaign%20iklan%20saya";
+    const waLink = "https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20to%20discuss%20my%20ad%20campaigns";
 </script>
 
 <section id="testimonials" class="py-20 md:py-28 bg-soft relative overflow-hidden">
@@ -111,15 +111,15 @@
         <div class="text-center max-w-2xl mx-auto mb-12 reveal">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 <span class="w-8 h-px bg-accent"></span>
-                Studi Kasus & Testimoni
+                Case Studies & Testimonials
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                Pengalaman mereka yang telah<br/>
-                <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                Stories from businesses that<br/>
+                <span class="text-accent">have worked with the Beriklan team.</span>
             </h2>
             <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                Setiap testimoni disertai nama, industri, serta data yang terukur. Anda dapat melakukan verifikasi langsung kepada klien kami bila diperlukan.
+                Every testimonial includes a name, industry and measurable data. You can verify directly with our clients if needed.
             </p>
         </div>
 
@@ -170,7 +170,7 @@
                             <button
                                 type="button"
                                 on:click={togglePause}
-                                aria-label={isPaused ? 'Lanjutkan rotasi' : 'Jeda rotasi'}
+                                aria-label={isPaused ? 'Resume rotation' : 'Pause rotation'}
                                 class="hidden md:flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-muted hover:text-accent transition px-2 py-1 rounded-full border border-gray-200 hover:border-accent"
                             >
                                 {#if isPaused}
@@ -178,7 +178,7 @@
                                 {:else}
                                     <Pause class="w-3 h-3" fill="currentColor" />
                                 {/if}
-                                {isPaused ? 'Lanjut' : 'Jeda'}
+                                {isPaused ? 'Resume' : 'Pause'}
                             </button>
                         </div>
                         <p class="text-ink text-base md:text-lg leading-relaxed mb-7 relative">
@@ -211,7 +211,7 @@
                 <button
                     type="button"
                     on:click={() => setIdx(i)}
-                    aria-label="Lihat testimoni {i + 1}"
+                    aria-label="View testimonial {i + 1}"
                     class="pager-dot transition-all duration-300 rounded-full {visibleIdx === i ? 'w-10 bg-accent' : 'w-2 bg-gray-300 hover:bg-gray-400'}"
                     style="height: 8px;"
                 ></button>
@@ -224,7 +224,7 @@
                 <button
                     type="button"
                     on:click={() => setIdx(i)}
-                    aria-label="Lihat testimoni dari {t.name}"
+                    aria-label="View testimonial from {t.name}"
                     class="tst-mini group bg-white border rounded-xl p-3 text-left transition-all duration-300 hover:shadow-pop hover:-translate-y-1 {visibleIdx === i ? 'border-accent shadow-pop ring-2 ring-accent/20' : 'border-gray-100'}"
                 >
                     <div class="flex items-center gap-2 mb-2">
@@ -241,10 +241,10 @@
 
         <div class="mt-12 text-center">
             <p class="text-muted italic mb-4 reveal">
-                Saatnya giliran Anda. <span class="text-ink font-semibold not-italic">Mari kita telaah campaign Anda secara mendalam.</span>
+                Your turn next. <span class="text-ink font-semibold not-italic">Let's take a deep look at your campaigns.</span>
             </p>
             <a href={waLink} target="_blank" rel="noopener" class="reveal inline-flex items-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full font-bold text-sm hover:bg-accent hover:text-ink transition shadow-md group">
-                Jadwalkan Konsultasi
+                Book a Consultation
                 <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
         </div>

@@ -28,9 +28,9 @@
 
     const targeting = [
         { Icon: Users, label: 'Usia 25-44', color: 'bg-accent/15 text-accent' },
-        { Icon: MapPin, label: 'Bandung, Jakarta, Surabaya', color: 'bg-teal/15 text-teal' },
-        { Icon: Sparkles, label: 'Minat: Skincare & Beauty', color: 'bg-pink-100 text-pink-600' },
-        { Icon: ThumbsUp, label: 'Remarketing: 30 hari', color: 'bg-green/15 text-green' },
+        { Icon: MapPin, label: 'Kuala Lumpur, Penang, Johor Bahru', color: 'bg-teal/15 text-teal' },
+        { Icon: Sparkles, label: 'Interests: Skincare & Beauty', color: 'bg-pink-100 text-pink-600' },
+        { Icon: ThumbsUp, label: 'Remarketing: 30 days', color: 'bg-green/15 text-green' },
         { Icon: Eye, label: 'Interest: 100+', color: 'bg-purple-100 text-purple-600' },
     ];
 </script>
@@ -60,16 +60,16 @@
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-orange-500 flex items-center justify-center text-white font-bold text-sm shrink-0">BS</div>
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5 flex-wrap">
-                        <p class="text-sm font-bold text-ink">Beauty Studio Bandung</p>
+                        <p class="text-sm font-bold text-ink">Beauty Studio KL</p>
                         <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     </div>
                     <p class="text-[11px] text-muted mt-0.5">Sponsored &middot; Global</p>
                 </div>
-                <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded uppercase tracking-wider">Iklan</span>
+                <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded uppercase tracking-wider">Ad</span>
             </div>
 
             <p class="text-sm text-ink leading-relaxed">
-                Kulit kusam dan bruntusan? Treatment <strong class="text-ink">Glow Facial</strong> hanya <strong class="text-accent">Rp 249rb</strong> untuk konsultasi pertama. Booking via WhatsApp &mdash; slot terbatas tiap minggunya.
+                Dull, bumpy skin? <strong class="text-ink">Glow Facial</strong> treatment for only <strong class="text-accent">RM 149</strong> on your first visit. Book via WhatsApp &mdash; limited slots each week.
             </p>
 
             <div class="relative rounded-xl overflow-hidden aspect-[1.91/1] bg-gradient-to-br from-pink-200 via-amber-100 to-orange-200">
@@ -87,10 +87,10 @@
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                     <div class="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-md">
                         <p class="text-[9px] font-bold text-ink uppercase tracking-wider">Beauty Studio</p>
-                        <p class="text-[10px] text-muted">Klinik Kecantikan &middot; Bandung</p>
+                        <p class="text-[10px] text-muted">Beauty Clinic &middot; Kuala Lumpur</p>
                     </div>
                     <div class="cta-shine relative bg-white rounded-lg px-4 py-2 font-bold text-ink text-xs shadow-md">
-                        <span class="relative z-10">Konsultasi via WhatsApp</span>
+                        <span class="relative z-10">Book via WhatsApp</span>
                     </div>
                 </div>
             </div>
@@ -99,20 +99,20 @@
                 <div class="flex items-center -space-x-1">
                     <span class="w-4 h-4 rounded-full bg-blue-500 flex items-center justify-center ring-2 ring-white"><svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg></span>
                     <span class="w-4 h-4 rounded-full bg-red-500 flex items-center justify-center ring-2 ring-white"><Heart class="w-2.5 h-2.5 text-white" fill="currentColor" /></span>
-                    <span class="ml-2">2,4 rb</span>
+                    <span class="ml-2">2.4K</span>
                 </div>
-                <span>187 komentar &middot; 43 kali dibagikan</span>
+                <span>187 comments &middot; 43 shares</span>
             </div>
 
             <div class="flex items-center justify-around pt-3 border-t border-gray-100 text-[11px] font-bold text-muted">
                 <button class="flex items-center gap-1.5 hover:text-blue-600 transition group">
-                    <ThumbsUp class="w-4 h-4 group-hover:scale-110 transition" /> Suka
+                    <ThumbsUp class="w-4 h-4 group-hover:scale-110 transition" /> Like
                 </button>
                 <button class="flex items-center gap-1.5 hover:text-blue-600 transition group">
-                    <MessageCircle class="w-4 h-4 group-hover:scale-110 transition" /> Komentar
+                    <MessageCircle class="w-4 h-4 group-hover:scale-110 transition" /> Comment
                 </button>
                 <button class="flex items-center gap-1.5 hover:text-blue-600 transition group">
-                    <Share2 class="w-4 h-4 group-hover:scale-110 transition" /> Bagikan
+                    <Share2 class="w-4 h-4 group-hover:scale-110 transition" /> Share
                 </button>
             </div>
         </div>
@@ -124,8 +124,8 @@
                 <Users class="w-3.5 h-3.5 text-blue-600" />
             </div>
             <div>
-                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Target Audiens</p>
-                <p class="text-xs font-bold text-ink">Live &middot; 5 set aktif</p>
+                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Target Audience</p>
+                <p class="text-xs font-bold text-ink">Live &middot; 5 active sets</p>
             </div>
         </div>
         <div class="space-y-1.5">
@@ -139,9 +139,9 @@
     </div>
 
     <div class="hv-float hv-float-2 absolute -right-3 md:-right-8 top-4 bg-white rounded-xl shadow-pop border border-gray-100 p-3 w-52 hidden md:block">
-        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimasi Jangkauan</p>
+        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimated Reach</p>
         <p class="text-2xl font-display font-extrabold text-ink mt-1">{reach}<span class="text-sm font-bold text-muted">K</span><span class="text-base text-muted">&ndash;15K</span></p>
-        <p class="text-[10px] text-muted mt-0.5">orang / hari</p>
+        <p class="text-[10px] text-muted mt-0.5">people / day</p>
         <div class="mt-2 h-1.5 bg-soft rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-accent to-orange-500 rounded-full" style="width: 72%;"></div>
         </div>
@@ -152,8 +152,8 @@
             <MessageCircle class="w-4 h-4 text-green" fill="currentColor" />
         </div>
         <div class="min-w-0">
-            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Pesan Masuk</p>
-            <p class="text-base font-display font-extrabold text-ink leading-tight">{messages}<span class="text-xs text-muted font-bold ml-0.5">chat</span> hari ini</p>
+            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Incoming Messages</p>
+            <p class="text-base font-display font-extrabold text-ink leading-tight">{messages}<span class="text-xs text-muted font-bold ml-0.5">chats</span> today</p>
         </div>
         <span class="live-dot relative w-1.5 h-1.5 rounded-full bg-green ml-auto anim-pulse"></span>
     </div>

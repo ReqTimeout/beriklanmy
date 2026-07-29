@@ -10,7 +10,7 @@
 
     function buildWaLink(tier) {
         const msg = encodeURIComponent(
-            `Halo Beriklan, saya tertarik dengan paket ${tier.name} (${pageSlug}) — Rp ${tier.priceLabel}. Mohon info lebih lanjut.`
+            `Hello Beriklan, I'm interested in the ${tier.name} package (${pageSlug}) — RM ${tier.priceLabel}. Please share more details.`
         );
         return `${baseWa}?text=${msg}`;
     }
@@ -36,7 +36,7 @@
             {#if isHighlight}
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-accent to-accent-2 text-ink text-[10px] font-bold uppercase tracking-widest rounded-full shadow-md flex items-center gap-1">
                     <Sparkles class="w-3 h-3" />
-                    Rekomendasi Tim
+                    Team's Pick
                 </div>
             {/if}
 
@@ -51,10 +51,10 @@
 
             <div class="mt-5 mb-6 pb-6 border-b border-gray-100">
                 <div class="flex items-baseline gap-1.5">
-                    <span class="text-xs font-bold text-muted">Rp</span>
+                    <span class="text-xs font-bold text-muted">RM</span>
                     <span class="font-display font-extrabold text-[34px] md:text-[40px] text-ink leading-none tabular-nums">{tier.priceLabel}</span>
                 </div>
-                <p class="text-[11px] md:text-xs text-muted mt-2">{tier.priceNote || 'belum termasuk ad spend Meta'}</p>
+                <p class="text-[11px] md:text-xs text-muted mt-2">{tier.priceNote || 'excludes ad spend'}</p>
             </div>
 
             <ul class="space-y-2.5 mb-7">
@@ -82,7 +82,7 @@
                 <span class="cta-shine absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 <span class="relative flex items-center gap-2">
                     <MessageCircle class="w-4 h-4" />
-                    Diskusi via WhatsApp
+                    Chat on WhatsApp
                 </span>
             </a>
 

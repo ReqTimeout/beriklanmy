@@ -30,10 +30,10 @@
     });
 
     const tickerItems = [
-        { Icon: Check, color: 'green', text: 'Order #387 • Rp 487.000', sub: 'dari Meta Ads' },
-        { Icon: TrendingUp, color: 'amber', text: 'ROAS naik ke 5.1x', sub: 'TikTok Ads' },
-        { Icon: MessageCircle, color: 'sky', text: 'Lead baru masuk', sub: 'Google Search Ads' },
-        { Icon: Target, color: 'green', text: 'CPA turun 23%', sub: 'IG Ads minggu ini' },
+        { Icon: Check, color: 'green', text: 'Order #387 • RM 487', sub: 'from Meta Ads' },
+        { Icon: TrendingUp, color: 'amber', text: 'ROAS up to 5.1x', sub: 'TikTok Ads' },
+        { Icon: MessageCircle, color: 'sky', text: 'New lead received', sub: 'Google Search Ads' },
+        { Icon: Target, color: 'green', text: 'CPA down 23%', sub: 'IG Ads this week' },
     ];
 </script>
 
@@ -91,7 +91,7 @@
                     </div>
 
                     <p class="text-[10px] text-white/60 mt-2">
-                        Naik dari <span class="text-accent font-bold">3.1x</span> bulan lalu
+                        Up from <span class="text-accent font-bold">3.1x</span> last month
                     </p>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div class="bg-soft rounded-lg p-2.5 metric-card">
                     <div class="w-5 h-5 rounded bg-blue-100 text-blue-600 flex items-center justify-center mb-1.5"><Wallet size="12" strokeWidth="2.5" /></div>
                     <p class="text-[8px] text-muted uppercase font-bold leading-tight">Spend</p>
-                    <p class="text-sm font-extrabold text-ink mt-0.5">Rp{spend}jt</p>
+                    <p class="text-sm font-extrabold text-ink mt-0.5">RM{spend}k</p>
                 </div>
                 <div class="bg-soft rounded-lg p-2.5 metric-card">
                     <div class="w-5 h-5 rounded bg-purple-100 text-purple-600 flex items-center justify-center mb-1.5"><Target size="12" strokeWidth="2.5" /></div>
@@ -111,12 +111,12 @@
                 <div class="bg-soft rounded-lg p-2.5 metric-card">
                     <div class="w-5 h-5 rounded bg-green-100 text-green-600 flex items-center justify-center mb-1.5"><TrendingUp size="12" strokeWidth="2.5" /></div>
                     <p class="text-[8px] text-muted uppercase font-bold leading-tight">Revenue</p>
-                    <p class="text-sm font-extrabold text-green mt-0.5">{revenue}jt</p>
+                    <p class="text-sm font-extrabold text-green mt-0.5">RM{revenue}k</p>
                 </div>
                 <div class="bg-soft rounded-lg p-2.5 metric-card">
                     <div class="w-5 h-5 rounded bg-amber-100 text-amber-600 flex items-center justify-center mb-1.5"><Zap size="12" strokeWidth="2.5" /></div>
                     <p class="text-[8px] text-muted uppercase font-bold leading-tight">CPA</p>
-                    <p class="text-sm font-extrabold text-ink mt-0.5">Rp{cpa}k</p>
+                    <p class="text-sm font-extrabold text-ink mt-0.5">RM{cpa}</p>
                 </div>
             </div>
 
@@ -159,10 +159,10 @@
                 <svg class="w-4 h-4 text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-[10px] font-bold text-ink">Conversion baru</p>
-                <p class="text-[10px] text-muted truncate">Order #387 • Rp 487.000</p>
+                <p class="text-[10px] font-bold text-ink">New conversion</p>
+                <p class="text-[10px] text-muted truncate">Order #387 • RM 487</p>
                 <p class="text-[9px] text-green font-bold mt-0.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-green"></span> dari Meta Ads
+                    <span class="w-1.5 h-1.5 rounded-full bg-green"></span> from Meta Ads
                 </p>
             </div>
         </div>
@@ -175,8 +175,8 @@
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-[10px] font-bold text-ink">ROAS update</p>
-                <p class="text-[10px] text-muted truncate">TikTok naik ke 5.1x</p>
-                <p class="text-[9px] text-accent font-bold mt-0.5">+18% minggu ini</p>
+                <p class="text-[10px] text-muted truncate">TikTok up to 5.1x</p>
+                <p class="text-[9px] text-accent font-bold mt-0.5">+18% this week</p>
             </div>
         </div>
     {/if}
@@ -187,7 +187,7 @@
                 <Target size="14" strokeWidth="2.5" />
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-[10px] font-bold text-ink">CPA turun 23%</p>
+                <p class="text-[10px] font-bold text-ink">CPA down 23%</p>
                 <p class="text-[9px] text-muted">IG Ads optimization</p>
             </div>
         </div>

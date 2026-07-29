@@ -6,7 +6,7 @@
     let direction = 1;
     let platforms = [];
     let goal = null;
-    let monthlyTarget = 50000000;
+    let monthlyTarget = 50000;
     let targetIdx = 3;
 
     function setTarget(e) {
@@ -15,7 +15,7 @@
     }
 
     const allPlatforms = [
-        { id: 'facebook', label: 'Facebook Ads', emoji: '📘', desc: 'Target audiens presisi' },
+        { id: 'facebook', label: 'Facebook Ads', emoji: '📘', desc: 'Precise audience targeting' },
         { id: 'instagram', label: 'Instagram Ads', emoji: '📸', desc: 'Visual + Reels discovery' },
         { id: 'tiktok', label: 'TikTok Ads', emoji: '🎵', desc: 'FYP + Spark Ads viral' },
         { id: 'google', label: 'Google Ads', emoji: '🔍', desc: 'Search high-intent traffic' },
@@ -23,20 +23,20 @@
     ];
 
     const goals = [
-        { id: 'leads', label: 'Leads / Inquiry', desc: 'Target: leads via WhatsApp, form, telepon', multiplier: 0.25 },
-        { id: 'sales', label: 'Penjualan Online', desc: 'Target: transaksi e-commerce langsung', multiplier: 0.30 },
-        { id: 'awareness', label: 'Brand Awareness', desc: 'Target: reach dan impressions luas', multiplier: 0.20 },
-        { id: 'traffic', label: 'Traffic Website', desc: 'Target: kunjungan ke landing page', multiplier: 0.15 },
+        { id: 'leads', label: 'Leads / Enquiries', desc: 'Target: leads via WhatsApp, form, phone', multiplier: 0.25 },
+        { id: 'sales', label: 'Online Sales', desc: 'Target: direct e-commerce transactions', multiplier: 0.30 },
+        { id: 'awareness', label: 'Brand Awareness', desc: 'Target: broad reach and impressions', multiplier: 0.20 },
+        { id: 'traffic', label: 'Website Traffic', desc: 'Target: visits to your landing page', multiplier: 0.15 },
     ];
 
     const targetOptions = [
-        { value: 10000000, label: 'Rp 10 juta' },
-        { value: 25000000, label: 'Rp 25 juta' },
-        { value: 50000000, label: 'Rp 50 juta' },
-        { value: 100000000, label: 'Rp 100 juta' },
-        { value: 250000000, label: 'Rp 250 juta' },
-        { value: 500000000, label: 'Rp 500 juta' },
-        { value: 1000000000, label: 'Rp 1 miliar' },
+        { value: 10000, label: 'RM 10k' },
+        { value: 25000, label: 'RM 25k' },
+        { value: 50000, label: 'RM 50k' },
+        { value: 100000, label: 'RM 100k' },
+        { value: 250000, label: 'RM 250k' },
+        { value: 500000, label: 'RM 500k' },
+        { value: 1000000, label: 'RM 1 million' },
     ];
 
     function togglePlatform(id) {
@@ -48,9 +48,9 @@
     }
 
     function formatCurrency(val) {
-        if (val >= 1000000000) return 'Rp ' + (val / 1000000000).toFixed(1) + ' miliar';
-        if (val >= 1000000) return 'Rp ' + (val / 1000000).toFixed(val >= 100000000 ? 0 : 1) + ' juta';
-        return 'Rp ' + val.toLocaleString('id-ID');
+        if (val >= 1000000) return 'RM ' + (val / 1000000).toFixed(1) + ' million';
+        if (val >= 1000) return 'RM ' + (val / 1000).toFixed(val >= 100000 ? 0 : 1) + 'k';
+        return 'RM ' + val.toLocaleString('en-MY');
     }
 
     function getResult() {
@@ -59,19 +59,19 @@
         const platformFactor = 1 + (platformCount - 1) * 0.15;
         const raw = monthlyTarget * baseMultiplier * platformFactor;
 
-        const min = Math.round(raw * 0.8 / 100000) * 100000;
-        const max = Math.round(raw * 1.2 / 100000) * 100000;
+        const min = Math.round(raw * 0.8 / 100) * 100;
+        const max = Math.round(raw * 1.2 / 100) * 100;
 
         let managementFee;
-        if (max <= 3000000) managementFee = 'Rp 1.000.000 - 1.750.000';
-        else if (max <= 10000000) managementFee = 'Rp 1.750.000 - 3.750.000';
-        else managementFee = 'Rp 3.750.000 - 6.000.000';
+        if (max <= 3000) managementFee = 'RM 990 - 1,490';
+        else if (max <= 10000) managementFee = 'RM 1,490 - 2,490';
+        else managementFee = 'RM 2,490 - 3,990';
 
         let tips = [];
-        if (platformCount > 2) tips.push('Fokus ke 1-2 platform dengan performa terbaik dulu sebelum ekspansi ke platform lain.');
-        if (goal === 'leads' && !platforms.includes('facebook')) tips.push('Facebook Ads umumnya platform terbaik untuk leads/WhatsApp di Indonesia.');
-        if (goal === 'sales' && !platforms.includes('google')) tips.push('Google Ads sangat efektif untuk direct sales karena menangkap high-intent traffic.');
-        if (goal === 'awareness' && !platforms.includes('tiktok')) tips.push('TikTok punya CPM termurah untuk awareness campaign.');
+        if (platformCount > 2) tips.push('Focus on the 1-2 best-performing platforms first before expanding to others.');
+        if (goal === 'leads' && !platforms.includes('facebook')) tips.push('Facebook Ads is generally the best platform for leads/WhatsApp in Malaysia.');
+        if (goal === 'sales' && !platforms.includes('google')) tips.push('Google Ads is highly effective for direct sales because it captures high-intent traffic.');
+        if (goal === 'awareness' && !platforms.includes('tiktok')) tips.push('TikTok has the cheapest CPM for awareness campaigns.');
 
         return { budgetRange: `${formatCurrency(min)} - ${formatCurrency(max)}`, managementFee, tips, min, max };
     }
@@ -90,13 +90,13 @@
     }
 
     function reset() {
-        platforms = []; goal = null; monthlyTarget = 50000000; step = 0;
+        platforms = []; goal = null; monthlyTarget = 50000; step = 0;
     }
 
     const baseWa = 'https://wa.me/62811919328';
     function waResult() {
         const msg = encodeURIComponent(
-            `Halo Beriklan, saya baru selesai kalkulasi budget iklan. Saya butuh budget iklan sekitar ${result.budgetRange} untuk ${platforms.length} platform. Mohon info lebih lanjut.`
+            `Hello Beriklan, I just calculated my ad budget. I need an ad budget of around ${result.budgetRange} for ${platforms.length} platform(s). Please share more details.`
         );
         return `${baseWa}?text=${msg}`;
     }
@@ -110,14 +110,14 @@
             <div class="text-center mb-10">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kalkulator Budget Iklan
+                    Ad Budget Calculator
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl leading-[1.15] tracking-tight">
-                    Berapa budget iklan yang<br/>
-                    <span class="text-accent">tepat untuk bisnis Anda?</span>
+                    What is the right ad budget<br/>
+                    <span class="text-accent">for your business?</span>
                 </h2>
-                <p class="mt-4 text-white/60 text-sm md:text-base">Jawab 3 pertanyaan sederhana, dapatkan estimasi budget iklan + biaya management yang sesuai.</p>
+                <p class="mt-4 text-white/60 text-sm md:text-base">Answer 3 simple questions to get an estimated ad budget + a matching management fee.</p>
             </div>
 
             <div class="mb-8">
@@ -134,8 +134,8 @@
                 {#if step === 0}
                     {#key step}
                         <div class="flex-1 flex flex-col" in:fly={{ y: 20, duration: 400 }}>
-                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">Pilih platform iklan</h3>
-                            <p class="text-white/50 text-sm mb-6">Pilih satu atau lebih platform yang ingin Anda gunakan.</p>
+                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">Choose your ad platforms</h3>
+                            <p class="text-white/50 text-sm mb-6">Select one or more platforms you want to use.</p>
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-3 flex-1">
                                 {#each allPlatforms as p}
                                     <button type="button" on:click={() => togglePlatform(p.id)}
@@ -152,10 +152,10 @@
                                 {/each}
                             </div>
                             <div class="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
-                                <span class="text-xs text-white/40">Pilih minimal 1 platform</span>
+                                <span class="text-xs text-white/40">Select at least 1 platform</span>
                                 <button type="button" on:click={next} disabled={!canNext}
                                     class="px-6 py-3 bg-accent text-ink rounded-full font-bold text-sm hover:bg-accent-2 transition disabled:opacity-40 disabled:cursor-not-allowed">
-                                    Lanjut
+                                    Next
                                 </button>
                             </div>
                         </div>
@@ -163,8 +163,8 @@
                 {:else if step === 1}
                     {#key step}
                         <div class="flex-1 flex flex-col" in:fly={{ y: 20, duration: 400 }}>
-                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">Apa tujuan utama campaign Anda?</h3>
-                            <p class="text-white/50 text-sm mb-6">Pilih satu tujuan yang paling prioritas.</p>
+                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">What is your main campaign goal?</h3>
+                            <p class="text-white/50 text-sm mb-6">Pick the single highest-priority goal.</p>
                             <div class="grid grid-cols-2 gap-3 flex-1">
                                 {#each goals as g}
                                     <button type="button" on:click={() => { goal = g.id; setTimeout(next, 400); }}
@@ -182,37 +182,37 @@
                             <div class="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
                                 <button type="button" on:click={prev} class="text-sm text-white/60 hover:text-white transition flex items-center gap-1">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                                    Kembali
+                                    Back
                                 </button>
-                                <span class="text-xs text-white/40">Klik salah satu opsi</span>
+                                <span class="text-xs text-white/40">Click one of the options</span>
                             </div>
                         </div>
                     {/key}
                 {:else if step === 2}
                     {#key step}
                         <div class="flex-1 flex flex-col" in:fly={{ y: 20, duration: 400 }}>
-                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">Target omzet bulanan?</h3>
-                            <p class="text-white/50 text-sm mb-6">Perkirakan pendapatan yang ingin Anda capai per bulan dari iklan.</p>
+                            <h3 class="font-display font-bold text-xl md:text-2xl mb-2">Monthly revenue target?</h3>
+                            <p class="text-white/50 text-sm mb-6">Estimate the monthly revenue you want to reach from ads.</p>
                             <div class="flex-1 flex flex-col justify-center">
                                 <div class="text-center mb-8">
                                     <p class="text-4xl md:text-5xl font-display font-extrabold text-accent">{selectedTarget?.label || formatCurrency(monthlyTarget)}</p>
-                                    <p class="text-white/40 text-sm mt-2">Target omzet bulanan</p>
+                                    <p class="text-white/40 text-sm mt-2">Monthly revenue target</p>
                                 </div>
                                 <input type="range" min="0" max="6" step="1" bind:value={targetIdx}
                                     on:input={setTarget}
                                     class="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-accent" />
                                 <div class="flex justify-between text-[10px] text-white/40 mt-2">
-                                    <span>Rp 10 jt</span>
-                                    <span>Rp 1 M</span>
+                                    <span>RM 10k</span>
+                                    <span>RM 1M</span>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
                                 <button type="button" on:click={prev} class="text-sm text-white/60 hover:text-white transition flex items-center gap-1">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                                    Kembali
+                                    Back
                                 </button>
                                 <button type="button" on:click={next} class="px-6 py-3 bg-accent text-ink rounded-full font-bold text-sm hover:bg-accent-2 transition">
-                                    Hitung Budget
+                                    Calculate Budget
                                 </button>
                             </div>
                         </div>
@@ -222,15 +222,15 @@
                         <div class="text-center mb-6">
                             <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-xs font-bold mb-4">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                Kalkulasi selesai
+                                Calculation complete
                             </div>
-                            <p class="text-white/60 text-sm mb-2">Estimasi budget iklan (ad spend) per bulan:</p>
+                            <p class="text-white/60 text-sm mb-2">Estimated ad budget (ad spend) per month:</p>
                             <h3 class="font-display font-extrabold text-3xl md:text-4xl text-accent mb-2">{result.budgetRange}</h3>
-                            <p class="text-white/50 text-xs">+ biaya management: {result.managementFee}/bln</p>
+                            <p class="text-white/50 text-xs">+ management fee: {result.managementFee}/month</p>
                         </div>
 
                         <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6">
-                            <p class="text-xs font-bold uppercase tracking-wider text-accent mb-3">💡 Tips untuk Anda:</p>
+                            <p class="text-xs font-bold uppercase tracking-wider text-accent mb-3">💡 Tips for you:</p>
                             <ul class="space-y-2">
                                 {#each result.tips as tip}
                                     <li class="flex items-start gap-2 text-sm text-white/80">
@@ -244,9 +244,9 @@
                         <div class="flex flex-col sm:flex-row gap-3">
                             <a href={waResult()} target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-2 bg-accent text-ink px-6 py-3 rounded-full font-bold hover:bg-accent-2 hover:shadow-pop transition-all">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24z"/></svg>
-                                Diskusi via WhatsApp
+                                Discuss via WhatsApp
                             </a>
-                            <button type="button" on:click={reset} class="px-6 py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/5 transition">Hitung Ulang</button>
+                            <button type="button" on:click={reset} class="px-6 py-3 rounded-full font-bold border border-white/20 text-white hover:bg-white/5 transition">Recalculate</button>
                         </div>
                     </div>
                 {/if}

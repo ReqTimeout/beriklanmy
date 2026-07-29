@@ -10,8 +10,8 @@ import cities from '../../data/cities.json';
 import services from '../../data/services.json';
 
 export function getStaticPaths() {
-    const indonesianCities = cities.filter(c => !c.is_international);
-    return indonesianCities.map(city => ({
+    const malaysianCities = cities.filter(c => !c.is_international);
+    return malaysianCities.map(city => ({
         params: { city: city.slug },
         props: { city },
     }));
@@ -25,10 +25,10 @@ const faqs = service?.faqs?.slice(0, 4) || [];
 
 const cityName = city.name;
 const slug = city.slug;
-const title = `Harga Iklan TikTok di ${cityName} — Biaya & Paket 2026 | Beriklan`;
-const description = `Lihat harga paket jasa iklan TikTok Ads di ${cityName}. Mulai Rp 1.000.000/30 hari. Spark Ads, FYP, In-Feed. Tim berpengalaman sejak 2016. Konsultasi gratis.`;
+const title = `TikTok Ads Cost in ${cityName} — Pricing & Packages 2026 | Beriklan`;
+const description = `See TikTok Ads management pricing in ${cityName}, Malaysia. From RM 790 per 30 days. Certified team, weekly reports. Free consultation via WhatsApp.`;
 const canonical = `https://beriklan.my/tiktok-ads-cost/${slug}/`;
-const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20paket%20iklan%20TikTok%20di%20${encodeURIComponent(cityName)}.%20Mohon%20info%20lebih%20lanjut.`;
+const waLink = `https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20your%20TikTok%20Ads%20packages%20in%20${encodeURIComponent(cityName)}.%20Please%20share%20more%20details.`;
 ---
 
 <Layout
@@ -36,18 +36,18 @@ const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20terta
     description={description}
     canonical={canonical}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Harga Iklan TikTok", url: "https://beriklan.my/tiktok-ads-cost/" },
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "TikTok Ads Cost", url: "https://beriklan.my/tiktok-ads-cost/" },
         { name: cityName, url: canonical }
     ]}
     service={{
-        name: `Jasa Iklan TikTok di ${cityName}`,
-        description: `Jasa iklan TikTok Ads profesional di ${cityName}. Spark Ads, FYP, In-Feed. Tim berpengalaman sejak 2016.`,
+        name: `TikTok Ads Services in ${cityName}`,
+        description: `Professional TikTok Ads management in ${cityName}, Malaysia. Certified team. Weekly reports, full account access.`,
         url: canonical,
-        priceRange: "Rp 1.000.000 - Rp 3.750.000",
+        priceRange: "RM 790 - RM 1,990",
         serviceType: "TikTok Ads",
         areaServed: cityName,
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
 >
     <Navbar client:only="svelte" />
@@ -60,33 +60,33 @@ const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20terta
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                 </span>
-                Harga Iklan TikTok · {cityName}
+                TikTok Ads Cost · {cityName}
             </div>
             <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                Harga Iklan TikTok di {cityName}
+                TikTok Ads Cost in {cityName}
             </h1>
             <p class="mt-5 text-base md:text-lg text-muted leading-relaxed max-w-2xl mx-auto">
-                Cek biaya dan paket jasa iklan TikTok Ads di {cityName}. Mulai dari <strong class="text-ink">Rp 1.000.000</strong> per 30 hari untuk paket Basic, dengan jangkauan hingga 15.000 orang per hari di FYP.
+                Check TikTok Ads management pricing and packages in {cityName}. Starting from <strong class="text-ink">RM 790</strong> per 30 days for the Basic package — including campaign setup, optimisation and weekly reports.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
                 <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all">
-                    Konsultasi via WhatsApp
+                    Consult via WhatsApp
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
-                <a href="#harga" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold border border-gray-200 bg-white hover:border-ink transition-all">
-                    Lihat Paket
+                <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold border border-gray-200 bg-white hover:border-ink transition-all">
+                    View Packages
                 </a>
             </div>
         </div>
     </header>
 
-    <section id="harga" class="py-20 md:py-28 bg-gradient-to-br from-soft via-white to-beige">
+    <section id="pricing" class="py-20 md:py-28 bg-gradient-to-br from-soft via-white to-beige">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight">
-                    Paket Iklan TikTok di {cityName}
+                    TikTok Ads Packages in {cityName}
                 </h2>
-                <p class="mt-4 text-muted max-w-xl mx-auto">Biaya management campaign. Ad spend TikTok dibayar langsung oleh Anda — tanpa markup.</p>
+                <p class="mt-4 text-muted max-w-xl mx-auto">Campaign management fees. Your ad spend is paid directly to the platform — no markup.</p>
             </div>
             <PricingCards tiers={tiers} pageSlug="TikTok Ads" highlightIndex={tiers.findIndex(t => t.highlight)} client:only="svelte" />
         </div>
@@ -94,16 +94,16 @@ const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20terta
 
     <section class="py-20 md:py-28 bg-white">
         <div class="container mx-auto px-6 max-w-3xl">
-            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-6">Biaya Iklan TikTok di {cityName}</h2>
+            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-6">TikTok Ads Cost in {cityName}</h2>
             <div class="space-y-4 text-muted text-base leading-relaxed">
-                <p>Biaya jasa pengelolaan iklan TikTok di {cityName} dari Beriklan mulai dari <strong class="text-ink">Rp 1.000.000 per 30 hari</strong> untuk paket Basic, Rp 1.600.000 untuk Standart, dan Rp 3.750.000 untuk Business. Angka tersebut adalah fee management — ad spend TikTok dibayar terpisah langsung ke platform oleh klien.</p>
-                <p>TikTok Ads memiliki <strong class="text-ink">CPM 40-60% lebih murah</strong> dibanding platform lain, cocok untuk bisnis di {cityName} yang ingin jangkauan luas dengan budget efisien.</p>
+                <p>TikTok Ads management fees in {cityName} from Beriklan start at <strong class="text-ink">RM 790 per 30 days</strong> for the Basic package, up to RM 1,990 for the top-tier package. These figures are the management fee — ad spend is paid separately, straight to the platform, by the client.</p>
+                <p>For businesses in {cityName}, we offer a measurable approach with <strong class="text-ink">precise targeting</strong>, creative tailored to your local audience, and weekly reports written in plain language.</p>
             </div>
             <div class="mt-8 p-6 bg-beige rounded-2xl">
-                <h3 class="font-display font-bold text-lg text-ink mb-2">Konsultasi Gratis 15 Menit</h3>
-                <p class="text-sm text-muted mb-4">Diskusikan kebutuhan iklan TikTok bisnis Anda di {cityName} dengan tim kami.</p>
+                <h3 class="font-display font-bold text-lg text-ink mb-2">Free 15-Minute Consultation</h3>
+                <p class="text-sm text-muted mb-4">Discuss your business's TikTok Ads needs in {cityName} with our team.</p>
                 <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-ink text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-primary-2 transition">
-                    Mulai Konsultasi via WhatsApp →
+                    Start a WhatsApp Consultation →
                 </a>
             </div>
         </div>
@@ -111,7 +111,7 @@ const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20terta
 
     <section class="py-20 md:py-28 bg-soft">
         <div class="container mx-auto px-6 max-w-2xl">
-            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-8 text-center">Pertanyaan Seputar Harga Iklan TikTok</h2>
+            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-8 text-center">TikTok Ads Pricing FAQs</h2>
             <FaqAccordion items={faqs} client:visible />
         </div>
     </section>
@@ -119,42 +119,41 @@ const waLink = `https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20terta
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white text-center">
         <div class="container mx-auto px-6 max-w-2xl">
             <h2 class="font-display font-extrabold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-4">
-                Siap mulai iklan TikTok<br/>
-                <span class="text-accent">di {cityName}?</span>
+                Ready to launch TikTok Ads<br/>
+                <span class="text-accent">in {cityName}?</span>
             </h2>
-            <p class="text-white/60 text-base mb-8">Tim kami siap membantu dari riset, setup, hingga optimasi campaign Anda.</p>
+            <p class="text-white/60 text-base mb-8">Our team supports you from research and setup through to campaign optimisation.</p>
             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all">
-                Konsultasi Sekarang
+                Get a Consultation Now
             </a>
         </div>
     </section>
 
     <section class="py-16 md:py-20 bg-soft">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-6">Pelajari Lebih Lanjut</h2>
+            <h2 class="font-display font-extrabold text-2xl md:text-3xl text-ink mb-6">Learn More</h2>
             <div class="grid md:grid-cols-3 gap-5">
-                <a href={`/blog/tiktok-ads-management-{slug}/`} class="block bg-white rounded-xl p-5 border border-gray-200 hover:border-accent hover:shadow-soft transition">
-                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Artikel</span>
-                    <h3 class="font-bold text-ink mt-2">Tips Iklan TikTok di {cityName}</h3>
-                    <p class="text-sm text-muted mt-1">Pelajari strategi + studi kasus TikTok Ads untuk pasar {cityName}.</p>
-                </a>
                 <a href="/tiktok-ads-management/" class="block bg-white rounded-xl p-5 border border-gray-200 hover:border-accent hover:shadow-soft transition">
-                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Layanan</span>
-                    <h3 class="font-bold text-ink mt-2">Jasa Iklan TikTok</h3>
-                    <p class="text-sm text-muted mt-1">Detail lengkap layanan TikTok Ads: targeting, creative, optimasi.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Service</span>
+                    <h3 class="font-bold text-ink mt-2">TikTok Ads Services</h3>
+                    <p class="text-sm text-muted mt-1">Full service details: targeting, creative and optimisation.</p>
                 </a>
-                <a href="/tiktok-ads-management/pilar/" class="block bg-white rounded-xl p-5 border border-gray-200 hover:border-accent hover:shadow-soft transition">
-                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Pillar</span>
-                    <h3 class="font-bold text-ink mt-2">Panduan Lengkap TikTok Ads</h3>
-                    <p class="text-sm text-muted mt-1">Artikel pillar 6000+ kata, jawaban lengkap semua pertanyaan TikTok Ads.</p>
+                <a href="/blog/" class="block bg-white rounded-xl p-5 border border-gray-200 hover:border-accent hover:shadow-soft transition">
+                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Blog</span>
+                    <h3 class="font-bold text-ink mt-2">Digital Marketing Guides</h3>
+                    <p class="text-sm text-muted mt-1">Strategy articles, tips and case studies from the Beriklan team.</p>
+                </a>
+                <a href="/research/malaysia-digital-advertising-report-2026/" class="block bg-white rounded-xl p-5 border border-gray-200 hover:border-accent hover:shadow-soft transition">
+                    <span class="text-xs font-bold uppercase tracking-wider text-accent">Research</span>
+                    <h3 class="font-bold text-ink mt-2">Malaysia Digital Advertising Report 2026</h3>
+                    <p class="text-sm text-muted mt-1">Market data, platform landscape and the trends shaping 2026.</p>
                 </a>
             </div>
             <div class="mt-8 p-5 bg-white rounded-xl border border-gray-200">
-                <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">Referensi Eksternal</p>
+                <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">External References</p>
                 <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                    <a href="https://ads.tiktok.com/help" target="_blank" rel="noopener nofollow" class="text-accent hover:underline">TikTok for Business</a>
-                    <a href="https://business.tiktok.com/" target="_blank" rel="noopener nofollow" class="text-accent hover:underline">TikTok Business Center</a>
-                    <a href="/research/laporan-industri-iklan-digital-indonesia-2026/" class="text-accent hover:underline">Riset Industri Iklan Digital ID 2026</a>
+                    <a href="https://ads.tiktok.com/" target="_blank" rel="noopener nofollow" class="text-accent hover:underline">TikTok Ads Manager</a>
+                    <a href="https://ads.tiktok.com/help/" target="_blank" rel="noopener nofollow" class="text-accent hover:underline">TikTok Business Help Center</a>
                 </div>
             </div>
         </div>

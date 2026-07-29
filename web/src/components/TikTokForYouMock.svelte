@@ -11,10 +11,10 @@
     let captionProgress = 0;
 
     const captions = [
-        'POV: kulit kamu cerah dalam 7 hari ✨',
-        'Tips skincare yang BENER-BENER works',
-        'Review jujur treatment facial viral',
-        'Rahasia glowing tanpa ribet',
+        'POV: your skin gets brighter in 7 days ✨',
+        'Skincare tips that ACTUALLY work',
+        'Honest review of the viral facial treatment',
+        'The no-fuss secret to glowing skin',
     ];
 
     onMount(() => {
@@ -118,7 +118,7 @@
                         </div>
                         <div class="flex items-center gap-1 bg-black/40 backdrop-blur-sm rounded-full px-2 py-0.5">
                             <Music2 class="w-2.5 h-2.5 text-white" />
-                            <span class="text-[8px] font-bold text-white">Suara Original - beautyloka</span>
+                            <span class="text-[8px] font-bold text-white">Original Sound - beautyloka</span>
                         </div>
                     </div>
                 </div>
@@ -166,8 +166,8 @@
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 text-lg">🔥</div>
             <div>
-                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimasi Views</p>
-                <p class="text-base font-display font-extrabold text-ink leading-tight">{viewCount}K–75K<span class="text-[9px] text-muted font-bold ml-1">/kampanye</span></p>
+                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimated Views</p>
+                <p class="text-base font-display font-extrabold text-ink leading-tight">{viewCount}K–75K<span class="text-[9px] text-muted font-bold ml-1">/campaign</span></p>
             </div>
         </div>
     </div>

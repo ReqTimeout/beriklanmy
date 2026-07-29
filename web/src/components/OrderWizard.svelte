@@ -7,23 +7,23 @@
     let business = { name: '', contact: '', notes: '' };
 
     const services = [
-        { id: 'fb', label: 'Facebook Ads', desc: 'Iklan tertarget', emoji: '📘' },
+        { id: 'fb', label: 'Facebook Ads', desc: 'Targeted advertising', emoji: '📘' },
         { id: 'ig', label: 'Instagram Ads', desc: 'Visual storytelling', emoji: '📷' },
         { id: 'tt', label: 'TikTok Ads', desc: 'Reach FYP & convert', emoji: '🎵' },
-        { id: 'gads', label: 'Google Search Ads', desc: 'Tangkap intent tinggi', emoji: '🔍' },
+        { id: 'gads', label: 'Google Search Ads', desc: 'Capture high intent', emoji: '🔍' },
         { id: 'yt', label: 'YouTube Ads', desc: 'Brand awareness video', emoji: '🎬' },
-        { id: 'kelola-ig', label: 'Kelola Instagram', desc: 'Manajemen konten', emoji: '📲' },
-        { id: 'kelola-tt', label: 'Kelola TikTok', desc: 'Manajemen video pendek', emoji: '🎤' },
-        { id: 'web', label: 'Pembuatan Website', desc: 'Profesional, multi-halaman', emoji: '🌐' },
-        { id: 'lp', label: 'Landing Page + Ads', desc: 'Paket promo 1.999rb', emoji: '🚀' },
+        { id: 'kelola-ig', label: 'Instagram Management', desc: 'Content management', emoji: '📲' },
+        { id: 'kelola-tt', label: 'TikTok Management', desc: 'Short-video management', emoji: '🎤' },
+        { id: 'web', label: 'Website Development', desc: 'Professional, multi-page', emoji: '🌐' },
+        { id: 'lp', label: 'Landing Page + Ads', desc: 'Promo bundle RM 1,299', emoji: '🚀' },
     ];
 
     const budgets = [
-        { id: 'starter', label: 'Di bawah Rp 3 juta', desc: 'Untuk testing awal' },
-        { id: 'mid', label: 'Rp 3-10 juta', desc: 'Untuk campaign aktif' },
-        { id: 'pro', label: 'Rp 10-25 juta', desc: 'Untuk scale up' },
-        { id: 'enterprise', label: 'Di atas Rp 25 juta', desc: 'Untuk multi-channel' },
-        { id: 'unsure', label: 'Belum yakin', desc: 'Mari berdiskusi dulu' },
+        { id: 'starter', label: 'Under RM 1,500', desc: 'For early testing' },
+        { id: 'mid', label: 'RM 1,500 - 5,000', desc: 'For active campaigns' },
+        { id: 'pro', label: 'RM 5,000 - 12,000', desc: 'For scaling up' },
+        { id: 'enterprise', label: 'Above RM 12,000', desc: 'For multi-channel' },
+        { id: 'unsure', label: 'Not sure yet', desc: 'Let us discuss first' },
     ];
 
     function toggleService(id) {
@@ -56,15 +56,15 @@
             business_name: business.name,
             page_location: window.location.pathname,
             value: 1,
-            currency: 'IDR'
+            currency: 'MYR'
         });
         const msg = encodeURIComponent(
-            `Halo Beriklan, saya tertarik untuk diskusi:\n\n` +
-            `Layanan: ${serviceNames}\n` +
+            `Hello Beriklan, I would like to discuss:\n\n` +
+            `Services: ${serviceNames}\n` +
             `Budget: ${budgetLabel}\n` +
-            `Bisnis: ${business.name}\n` +
-            `Kontak: ${business.contact}\n` +
-            (business.notes ? `Catatan: ${business.notes}` : '')
+            `Business: ${business.name}\n` +
+            `Contact: ${business.contact}\n` +
+            (business.notes ? `Notes: ${business.notes}` : '')
         );
         window.open(`https://wa.me/62811919328?text=${msg}`, '_blank');
     }
@@ -85,8 +85,8 @@
     <div class="p-5 md:p-7">
         {#if step === 1}
             <!-- Step 1: Service selection -->
-            <h3 class="font-display font-extrabold text-xl text-ink mb-1">Layanan apa yang Anda butuhkan?</h3>
-            <p class="text-sm text-muted mb-5">Pilih satu atau lebih. Anda dapat diskusi detail di sesi konsultasi.</p>
+            <h3 class="font-display font-extrabold text-xl text-ink mb-1">Which services do you need?</h3>
+            <p class="text-sm text-muted mb-5">Select one or more. You can discuss the details in your consultation session.</p>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 reveal-stagger">
                 {#each services as svc}
                     <button
@@ -107,8 +107,8 @@
             </div>
         {:else if step === 2}
             <!-- Step 2: Budget -->
-            <h3 class="font-display font-extrabold text-xl text-ink mb-1">Berapa budget yang Anda persiapkan?</h3>
-            <p class="text-sm text-muted mb-5">Termasuk ad spend (budget iklan) + biaya jasa. Belum yakin? Pilih "Belum yakin".</p>
+            <h3 class="font-display font-extrabold text-xl text-ink mb-1">What budget have you prepared?</h3>
+            <p class="text-sm text-muted mb-5">Including ad spend + service fees. Not sure? Choose "Not sure yet".</p>
             <div class="space-y-2.5 reveal-stagger">
                 {#each budgets as b}
                     <button
@@ -133,20 +133,20 @@
             </div>
         {:else}
             <!-- Step 3: Business info -->
-            <h3 class="font-display font-extrabold text-xl text-ink mb-1">Ceritakan sedikit tentang bisnis Anda</h3>
-            <p class="text-sm text-muted mb-5">Data ini membantu kami menyiapkan rekomendasi yang relevan untuk Anda.</p>
+            <h3 class="font-display font-extrabold text-xl text-ink mb-1">Tell us a little about your business</h3>
+            <p class="text-sm text-muted mb-5">This helps us prepare recommendations that are relevant to you.</p>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-name">Nama bisnis / brand</label>
-                    <input id="biz-name" type="text" bind:value={business.name} placeholder="contoh: Beauty Studio Bandung" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition" />
+                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-name">Business / brand name</label>
+                    <input id="biz-name" type="text" bind:value={business.name} placeholder="e.g. Beauty Studio KL" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition" />
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-contact">Nomor WhatsApp / email</label>
-                    <input id="biz-contact" type="text" bind:value={business.contact} placeholder="contoh: 0812-3456-7890 atau info@bisnis.com" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition" />
+                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-contact">WhatsApp number / email</label>
+                    <input id="biz-contact" type="text" bind:value={business.contact} placeholder="e.g. 012-345 6789 or info@business.com" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition" />
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-notes">Catatan tambahan <span class="text-muted font-normal">(opsional)</span></label>
-                    <textarea id="biz-notes" bind:value={business.notes} placeholder="Misalnya: target market, tantangan saat ini, atau pertanyaan spesifik..." rows="3" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition resize-none"></textarea>
+                    <label class="block text-xs font-bold text-ink mb-1.5" for="biz-notes">Additional notes <span class="text-muted font-normal">(optional)</span></label>
+                    <textarea id="biz-notes" bind:value={business.notes} placeholder="e.g. target market, current challenges, or specific questions..." rows="3" class="w-full px-4 py-3 bg-soft border border-gray-200 rounded-xl text-sm focus:border-accent focus:bg-white outline-none transition resize-none"></textarea>
                 </div>
             </div>
         {/if}
@@ -155,7 +155,7 @@
         <div class="mt-7 pt-5 border-t border-gray-100 flex items-center justify-between">
             {#if step > 1}
                 <button type="button" on:click={prevStep} class="inline-flex items-center gap-1.5 text-sm font-bold text-muted hover:text-ink transition-colors">
-                    <ArrowLeft class="w-4 h-4" /> Kembali
+                    <ArrowLeft class="w-4 h-4" /> Back
                 </button>
             {:else}
                 <span></span>
@@ -163,11 +163,11 @@
 
             {#if step < 3}
                 <button type="button" on:click={nextStep} disabled={step === 1 ? selectedServices.length === 0 : !budget} class="inline-flex items-center gap-1.5 bg-ink text-white px-5 py-3 rounded-full font-bold text-sm hover:bg-accent hover:text-ink transition-all disabled:opacity-40 disabled:cursor-not-allowed">
-                    Lanjut <ArrowRight class="w-4 h-4" />
+                    Next <ArrowRight class="w-4 h-4" />
                 </button>
             {:else}
                 <button type="button" on:click={submit} disabled={!business.name || !business.contact} data-cta="order_submit" data-cta-location="order_wizard" data-track="order_wizard_submit" data-service={selectedServices.join(',')} data-price={budget} class="inline-flex items-center gap-1.5 bg-gradient-to-r from-accent to-accent-2 text-ink px-5 py-3 rounded-full font-bold text-sm hover:shadow-pop transition-all disabled:opacity-40 disabled:cursor-not-allowed btn-shine">
-                    <MessageCircle class="w-4 h-4" /> Kirim via WhatsApp
+                    <MessageCircle class="w-4 h-4" /> Send via WhatsApp
                     <span class="cta-shine absolute inset-0 opacity-0 group-hover:opacity-100"></span>
                 </button>
             {/if}

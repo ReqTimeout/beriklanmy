@@ -2,10 +2,10 @@
     import { ArrowRight, BookOpen } from 'lucide-svelte';
 
     export let items = [];
-    export let title = 'Layanan yang sering dipilih bersamaan';
-    export let subtitle = 'Bisnis yang efektif biasanya menjalankan iklan di 2-3 kanal sekaligus agar saling menguatkan.';
+    export let title = 'Services often chosen together';
+    export let subtitle = 'Effective businesses usually run ads on 2-3 channels at once so they reinforce each other.';
     export let pillarHref = '';
-    export let pillarLabel = 'Panduan Lengkap';
+    export let pillarLabel = 'Complete Guide';
 </script>
 
 <section class="py-20 md:py-24 bg-white relative overflow-hidden">
@@ -15,7 +15,7 @@
         <div class="text-center max-w-2xl mx-auto mb-12 reveal">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 <span class="w-8 h-px bg-accent"></span>
-                Saling Melengkapi
+                Better Together
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-4xl text-ink leading-[1.1] tracking-tight mt-3">
@@ -41,7 +41,7 @@
                         <h3 class="font-display font-bold text-lg text-ink mb-1.5">{item.label}</h3>
                         <p class="text-sm text-muted leading-relaxed">{item.desc}</p>
                         <div class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-ink group-hover:text-accent transition-colors">
-                            Lihat detail
+                            View details
                             <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
@@ -59,9 +59,9 @@
                                 <BookOpen class="w-6 h-6 text-white" />
                             </div>
                             <h3 class="font-display font-bold text-lg text-white mb-1.5">{pillarLabel}</h3>
-                            <p class="text-sm text-white/70 leading-relaxed">Strategi, format iklan, optimasi budget, dan cara ukur ROI — dibahas tuntas.</p>
+                            <p class="text-sm text-white/70 leading-relaxed">Strategy, ad formats, budget optimisation and how to measure ROI — covered in depth.</p>
                             <div class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-accent group-hover:text-white transition-colors">
-                                Baca panduan
+                                Read the guide
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                             </div>
                         </div>

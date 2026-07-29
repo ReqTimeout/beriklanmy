@@ -7,12 +7,12 @@ import OrderWizard from '../components/OrderWizard.svelte';
 import Footer from '../components/Footer.svelte';
 import { MessageCircle, Mail, MapPin, Phone, Clock, Sparkles, ArrowRight } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20ingin%20berdiskusi%20mengenai%20kebutuhan%20digital%20marketing%20untuk%20bisnis%20saya.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27d%20like%20to%20discuss%20the%20digital%20marketing%20needs%20of%20my%20business.";
 const phoneLink = "tel:+62811919328";
-const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketing";
+const mailLink = "mailto:info@beriklan.my?subject=Digital%20Marketing%20Consultation";
 ---
 
-<Layout title="Inquiry & Order Jasa Digital Marketing — Beriklan" description="Kirim kebutuhan campaign Anda. Hubungi tim Beriklan: WhatsApp 0811-919-328, email info@beriklan.my, atau gunakan form wizard di halaman ini." canonical="https://beriklan.my/order/">
+<Layout title="Inquiry & Order — Digital Marketing Services | Beriklan" description="Send us your campaign requirements. Contact the Beriklan team: WhatsApp 0811-919-328, email info@beriklan.my, or use the form wizard on this page." canonical="https://beriklan.my/order/">
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -29,16 +29,16 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                 </span>
-                Inquiry & Order · WhatsApp atau Email
+                Inquiry & Order · WhatsApp or Email
             </div>
 
             <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] tracking-tight mb-6 anim-fade-up">
-                Pasang Iklan atau Mulai Proyek<br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent">Digital — Kirim Inquiry Anda.</span>
+                Launch Ads or Start a Digital<br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent">Project — Send Your Inquiry.</span>
             </h1>
 
             <p class="text-base md:text-lg text-muted leading-relaxed mb-8 anim-fade-up" style="animation-delay: 120ms;">
-                Isi form wizard singkat di bawah ini, atau langsung hubungi tim kami melalui WhatsApp, telepon, atau email. Sesi konsultasi awal 15–30 menit — tanpa biaya.
+                Fill in the short form wizard below, or contact our team directly via WhatsApp, phone or email. Initial consultation session of 15–30 minutes — free of charge.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-3 justify-center anim-fade-up" style="animation-delay: 240ms;">
@@ -49,7 +49,7 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     </span>
                 </a>
                 <a href="#wizard" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink transition-all">
-                    Isi Form Wizard
+                    Fill In the Form Wizard
                     <ArrowRight class="w-4 h-4" />
                 </a>
             </div>
@@ -66,7 +66,7 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     </div>
                     <p class="contact-label">WhatsApp</p>
                     <p class="contact-value">+62 81-1919-328</p>
-                    <p class="contact-sub">Respon dalam 1 jam (jam kerja)</p>
+                    <p class="contact-sub">Replies within 1 hour (business hours)</p>
                     <span class="contact-arrow">
                         <ArrowRight class="w-4 h-4" />
                     </span>
@@ -77,7 +77,7 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     </div>
                     <p class="contact-label">Email</p>
                     <p class="contact-value">info@beriklan.my</p>
-                    <p class="contact-sub">Untuk inquiry detail atau proposal</p>
+                    <p class="contact-sub">For detailed inquiries or proposals</p>
                     <span class="contact-arrow">
                         <ArrowRight class="w-4 h-4" />
                     </span>
@@ -86,8 +86,8 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     <div class="contact-icon bg-accent/15 text-accent">
                         <MapPin class="w-6 h-6" />
                     </div>
-                    <p class="contact-label">Kantor</p>
-                    <p class="contact-value">Bandung, Jawa Barat</p>
+                    <p class="contact-label">Office</p>
+                    <p class="contact-value">Bandung, Indonesia (HQ)</p>
                     <p class="contact-sub">Jl. Arcamanik Endah No.76 — by appointment</p>
                     <span class="contact-arrow">
                         <ArrowRight class="w-4 h-4" />
@@ -108,11 +108,11 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Ceritakan Kebutuhan Anda<br/>
+                    Tell Us What You Need<br/>
                     <span class="text-accent">dalam 3 Langkah.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Form singkat yang akan kami teruskan ke WhatsApp tim kami — sehingga Anda tidak perlu mengetik ulang.
+                    A short form we forward straight to our team's WhatsApp — so you never have to type things twice.
                 </p>
             </div>
 
@@ -131,30 +131,30 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan janji yang berlebihan.<br/>
-                    <span class="text-accent">Komitmen yang dapat Anda verifikasi.</span>
+                    No inflated promises.<br/>
+                    <span class="text-accent">Commitments you can verify.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta, Google, dan TikTok tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">All Meta, Google and TikTok accounts stay under your control. If you ever need to move on, all data transfers without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan bahasa yang mudah dipahami</h3>
-                    <p class="trust-desc-dark">Bukan deretan CPM-CTR-CPC tanpa konteks. Anda mendapat kejelasan: mana yang berjalan optimal, mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">Reports in plain language</h3>
+                    <p class="trust-desc-dark">Not rows of CPM-CTR-CPC without context. You get clarity: what is performing well, and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">A monthly working system. You are free to continue or stop at any time — no 6-12 month contracts like most agencies require.</p>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Pertanyaan yang Sering Muncul
+                    Frequently Asked Questions
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
@@ -176,20 +176,20 @@ const mailLink = "mailto:info@beriklan.my?subject=Konsultasi%20Digital%20Marketi
 
             <div class="max-w-3xl mx-auto space-y-3 reveal-stagger">
                 <div class="faq-item bg-white border border-gray-100 rounded-xl p-5 md:p-6 shadow-soft">
-                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Apakah sesi konsultasi benar-benar gratis?</h3>
-                    <p class="text-sm md:text-base text-muted leading-relaxed">Ya, sesi konsultasi awal 15-30 menit via WhatsApp atau video call sepenuhnya gratis. Kami ingin memahami kebutuhan Anda terlebih dahulu sebelum membahas paket dan harga.</p>
+                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Is the consultation session really free?</h3>
+                    <p class="text-sm md:text-base text-muted leading-relaxed">Yes, the initial 15-30 minute consultation via WhatsApp or video call is completely free. We want to understand your needs first before discussing packages and pricing.</p>
                 </div>
                 <div class="faq-item bg-white border border-gray-100 rounded-xl p-5 md:p-6 shadow-soft" style="animation-delay: 80ms;">
-                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Apakah saya harus commit setelah konsultasi?</h3>
-                    <p class="text-sm md:text-base text-muted leading-relaxed">Tidak ada kewajiban. Setelah konsultasi, kami kirimkan rekomendasi tertulis via email. Anda bebas memutuskan untuk lanjut atau tidak — tanpa tekanan.</p>
+                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Do I have to commit after the consultation?</h3>
+                    <p class="text-sm md:text-base text-muted leading-relaxed">No obligation. After the consultation we send written recommendations via email. You are free to decide whether to proceed — no pressure.</p>
                 </div>
                 <div class="faq-item bg-white border border-gray-100 rounded-xl p-5 md:p-6 shadow-soft" style="animation-delay: 160ms;">
-                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Berapa lama respon WhatsApp?</h3>
-                    <p class="text-sm md:text-base text-muted leading-relaxed">Pada jam kerja (Senin-Sabtu, 09.00-18.00 MYT), kami merespons dalam 1 jam. Di luar jam kerja, kami balas di pagi hari berikutnya.</p>
+                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">How fast do you reply on WhatsApp?</h3>
+                    <p class="text-sm md:text-base text-muted leading-relaxed">During business hours (Monday-Saturday, 09.00-18.00 MYT), we reply within 1 hour. Outside business hours, we reply the next morning.</p>
                 </div>
                 <div class="faq-item bg-white border border-gray-100 rounded-xl p-5 md:p-6 shadow-soft" style="animation-delay: 240ms;">
-                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Bisa meeting langsung di kantor Bandung?</h3>
-                    <p class="text-sm md:text-base text-muted leading-relaxed">Bisa, dengan janji terlebih dahulu. Meeting online via video call adalah opsi yang lebih fleksibel dan efisien bagi banyak klien kami yang berada di luar kota.</p>
+                    <h3 class="font-display font-bold text-base md:text-lg text-ink mb-2">Can we meet in person?</h3>
+                    <p class="text-sm md:text-base text-muted leading-relaxed">Our consultations run online via video call or WhatsApp — the most practical option for our Malaysian clients. In-person meetings at our Bandung (Indonesia) HQ are possible by appointment.</p>
                 </div>
             </div>
         </div>

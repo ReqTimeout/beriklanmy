@@ -8,32 +8,32 @@
         {
             num: '01',
             Icon: MessagesSquare,
-            title: 'Diagnosa',
-            headline: 'Kami dengar dulu. Baru action.',
-            desc: 'Kick-off 30 menit — kami gali goal, budget, audience, hambatan, plus apa yang sudah Anda coba. Output: brief eksekusi yang jadi pegangan tim.',
-            tag: 'MINGGU 1',
-            deliverable: 'Brief Strategi',
-            deliverables: ['Audit akun lama', 'Persona & mapping', 'Channel decision'],
+            title: 'Diagnose',
+            headline: 'We listen first. Then act.',
+            desc: 'A 30-minute kick-off — we dig into goals, budget, audience, blockers, plus what you have already tried. Output: an execution brief the team works from.',
+            tag: 'WEEK 1',
+            deliverable: 'Strategy Brief',
+            deliverables: ['Existing account audit', 'Persona & mapping', 'Channel decision'],
         },
         {
             num: '02',
             Icon: Hammer,
-            title: 'Eksekusi',
-            headline: 'Bangun, launch, monitor.',
-            desc: 'Copy, visual, video, setup tracking — semuanya paralel. Campaign live di minggu ke-2. Anda tetap approve tiap milestone, kami eksekusi.',
-            tag: 'MINGGU 2',
+            title: 'Execute',
+            headline: 'Build, launch, monitor.',
+            desc: 'Copy, visuals, video, tracking setup — all in parallel. Campaigns go live in week 2. You approve every milestone, we execute.',
+            tag: 'WEEK 2',
             deliverable: 'Campaign Live',
-            deliverables: ['Creative siap tayang', 'Pixel & tracking oke', 'A/B test aktif'],
+            deliverables: ['Creatives ready to run', 'Pixel & tracking verified', 'A/B tests active'],
         },
         {
             num: '03',
             Icon: TrendingUp,
-            title: 'Optimasi',
-            headline: 'Pantau ketat. Iterasi cepat.',
-            desc: 'Review mingguan dari data — bukan asumsi. Yang performanya di bawah standar, kami ganti. Yang jalan, kami scale. Anda cukup approve summary.',
-            tag: 'MINGGU 3+',
+            title: 'Optimise',
+            headline: 'Monitor closely. Iterate fast.',
+            desc: 'Weekly reviews driven by data — not assumptions. Underperformers get replaced. Winners get scaled. You just approve the summary.',
+            tag: 'WEEK 3+',
             deliverable: 'Scale-up',
-            deliverables: ['Report bahasa yang mudah dipahami', 'Pivot cepat', 'Scaling winner'],
+            deliverables: ['Plain-language reports', 'Fast pivots', 'Scaling the winners'],
         },
     ];
 
@@ -66,15 +66,15 @@
         <div class="max-w-2xl mx-auto text-center mb-14 reveal">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 <span class="w-6 h-px bg-accent"></span>
-                Cara Kerja · Tiga Tahap Terstruktur
+                How We Work · Three Structured Phases
                 <span class="w-6 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                Dari keraguan awal,<br/>
-                <span class="text-accent">menuju sistem iklan yang terukur.</span>
+                From early doubts<br/>
+                <span class="text-accent">to a measurable advertising system.</span>
             </h2>
             <p class="mt-4 text-muted text-base">
-                Tidak ada janji berlebihan. Tidak ada proses yang tidak transparan. Setiap minggu, Anda mengetahui secara persis apa yang sedang kami kerjakan dan alasan di baliknya.
+                No inflated promises. No opaque processes. Every week, you know exactly what we are working on and why.
             </p>
         </div>
 
@@ -116,7 +116,7 @@
 
                     <!-- Deliverable pill -->
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <span class="text-[10px] uppercase tracking-wider font-bold text-muted">Output minggu ini</span>
+                        <span class="text-[10px] uppercase tracking-wider font-bold text-muted">This week's output</span>
                         <span class="text-xs font-bold text-ink inline-flex items-center gap-1 method-pill">
                             {step.deliverable}
                             <ArrowRight class="w-3 h-3 text-accent method-arrow" />
@@ -128,9 +128,9 @@
 
         <!-- Bottom CTA -->
         <div class="mt-14 text-center">
-            <a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%20konsultasi%20gratis" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full font-bold text-sm hover:bg-accent hover:text-ink transition-all shadow-md group anim-fade-up btn-shine" style="animation-delay: 600ms;">
+            <a href="https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20a%20free%20consultation" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full font-bold text-sm hover:bg-accent hover:text-ink transition-all shadow-md group anim-fade-up btn-shine" style="animation-delay: 600ms;">
                 <span class="relative z-10 flex items-center gap-2">
-                    Tanya Detail di WhatsApp
+                    Ask Us on WhatsApp
                     <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
             </a>

@@ -2,15 +2,15 @@
     import { onMount } from 'svelte';
     import { Megaphone, Camera, Music2, Search, Play, FileText, Globe, Film, Smartphone, ArrowUpRight, Check } from 'lucide-svelte';
 
-    const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20mau%20konsultasi%20gratis";
+    const waLink = "https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20a%20free%20consultation";
 
     let visible = false;
     let activeTab = 'all';
 
     const categories = [
-        { id: 'all', label: 'Semua', count: 9 },
-        { id: 'ads', label: 'Iklan', count: 5 },
-        { id: 'social', label: 'Sosmed', count: 2 },
+        { id: 'all', label: 'All', count: 9 },
+        { id: 'ads', label: 'Ads', count: 5 },
+        { id: 'social', label: 'Social', count: 2 },
         { id: 'web', label: 'Web', count: 2 },
     ];
 
@@ -21,10 +21,10 @@
             href: '/facebook-ads-management',
             Icon: Megaphone,
             title: 'Facebook Ads',
-            promise: 'Jangkau 120jt+ user Indonesia — disaring by interest, behavior, sampai ke customer Anda yang paling mirip.',
+            promise: 'Reach 24M+ users in Malaysia — filtered by interest, behaviour, right down to lookalikes of your best customers.',
             features: ['Lookalike audience', 'Retargeting pixel', 'Lead gen form', 'Catalog sale'],
             metric: '4.2x',
-            metricLabel: 'ROAS median',
+            metricLabel: 'Median ROAS',
         },
         {
             id: 'ig',
@@ -32,10 +32,10 @@
             href: '/instagram-ads-management',
             Icon: Camera,
             title: 'Instagram Ads',
-            promise: 'Reels & story yang dirancang untuk menarik perhatian di tiga detik pertama. Cocok untuk brand visual dan F&B — di mana keputusan beli terjadi dalam hitungan menit.',
-            features: ['Reels ads', 'Story interaktif', 'Shopping tag', 'Branded content'],
+            promise: 'Reels & Stories designed to grab attention in the first three seconds. Ideal for visual brands and F&B — where buying decisions happen in minutes.',
+            features: ['Reels ads', 'Interactive Stories', 'Shopping tags', 'Branded content'],
             metric: '2.3%',
-            metricLabel: 'CTR rerata',
+            metricLabel: 'Avg CTR',
         },
         {
             id: 'tt',
@@ -43,10 +43,10 @@
             href: '/tiktok-ads-management',
             Icon: Music2,
             title: 'TikTok Ads',
-            promise: 'Konten native yang dirancang untuk masuk FYP secara organik. Bukan sekadar viral kosong — format yang kami produksi ditujukan untuk menggerakkan audiens hingga ke tahap closing.',
+            promise: 'Native content built to land on the FYP organically. Not empty virality — the formats we produce are designed to move audiences all the way to a sale.',
             features: ['Spark ads', 'In-feed', 'TopView', 'Branded effect'],
-            metric: 'ratusan',
-            metricLabel: 'Closing/bulan',
+            metric: '100s',
+            metricLabel: 'Sales/month',
         },
         {
             id: 'ga',
@@ -54,10 +54,10 @@
             href: '/google-ads-management',
             Icon: Search,
             title: 'Google Search Ads',
-            promise: 'Tangkap buyer yang lagi googling produk/jasa Anda. Intent tinggi = closing lebih cepat, value per lead lebih tinggi.',
+            promise: 'Capture buyers already googling your product or service. High intent = faster closes and higher value per lead.',
             features: ['Search intent', 'Performance Max', 'Shopping ads', 'Display network'],
-            metric: 'Rp 1.2rb',
-            metricLabel: 'CPC rerata',
+            metric: 'RM 0.8',
+            metricLabel: 'Avg CPC',
         },
         {
             id: 'yt',
@@ -65,10 +65,10 @@
             href: '/youtube-ads-management',
             Icon: Play,
             title: 'YouTube Ads',
-            promise: 'Video 6 detik atau in-stream yang memorable. Brand recall yang awet — bukan cuma awareness sebulan.',
-            features: ['In-stream skippable', 'Bumper 6 detik', 'Discovery', 'YouTube Shorts'],
+            promise: 'Memorable 6-second bumpers or in-stream video. Brand recall that lasts — not just a month of awareness.',
+            features: ['In-stream skippable', '6-second bumpers', 'Discovery', 'YouTube Shorts'],
             metric: '65%',
-            metricLabel: 'View rate rerata',
+            metricLabel: 'Avg view rate',
         },
         {
             id: 'lp',
@@ -76,10 +76,10 @@
             href: '/landing-page-design',
             Icon: FileText,
             title: 'Landing Page',
-            promise: 'Halaman satu-layar yang dirancang untuk mengarahkan kunjungan menjadi chat atau order. Copywriting persuasif dengan A/B test yang sudah disiapkan sejak hari pertama.',
-            features: ['Copywriting persuasif', 'A/B test ready', 'Mobile-first', 'Pixel integrated'],
+            promise: 'A single-screen page built to turn visits into chats or orders. Persuasive copywriting with A/B tests prepared from day one.',
+            features: ['Persuasive copywriting', 'A/B test ready', 'Mobile-first', 'Pixel integrated'],
             metric: '< 2s',
-            metricLabel: 'Waktu muat',
+            metricLabel: 'Load time',
         },
         {
             id: 'web',
@@ -87,32 +87,32 @@
             href: '/website-development',
             Icon: Globe,
             title: 'Custom Website',
-            promise: 'Bukan template pasaran. Custom design, fast load, SEO-ready dari hari pertama — layak jadi "rumah digital" bisnis Anda.',
-            features: ['Custom design', 'CMS integrasi', 'SEO on-page', 'Mobile-perfect'],
+            promise: 'Not an off-the-shelf template. Custom design, fast load, SEO-ready from day one — a proper digital home for your business.',
+            features: ['Custom design', 'CMS integration', 'On-page SEO', 'Mobile-perfect'],
             metric: '< 3s',
-            metricLabel: 'Waktu muat',
+            metricLabel: 'Load time',
         },
         {
             id: 'kt',
             cat: 'social',
             href: '/tiktok-management',
             Icon: Film,
-            title: 'Kelola TikTok',
-            promise: '30 konten/bulan, dari script sampai report. Anda approve konsep, kami eksekusi. Cocok untuk tim yang tidak sempat.',
-            features: ['Scriptwriting', 'Edit profesional', 'Posting schedule', 'Monthly report'],
-            metric: '30',
-            metricLabel: 'Konten/bln',
+            title: 'TikTok Management',
+            promise: 'Up to 20 videos/month, from script to report. You approve the concepts, we execute. Perfect for teams with no time to spare.',
+            features: ['Scriptwriting', 'Professional editing', 'Posting schedule', 'Monthly report'],
+            metric: '20',
+            metricLabel: 'Videos/mo',
         },
         {
             id: 'ki',
             cat: 'social',
             href: '/instagram-management',
             Icon: Smartphone,
-            title: 'Kelola Instagram',
-            promise: 'Feed aesthetic, story aktif, DM dibalas. Sales ngalir tanpa Anda supervise harian — Anda fokus bisnis.',
-            features: ['Feed aesthetic', 'Story aktif', 'Reels rutin', 'DM response'],
-            metric: 'ratusan',
-            metricLabel: 'Engagement/bulan',
+            title: 'Instagram Management',
+            promise: 'A polished feed, active Stories, DMs answered. Sales keep flowing without daily supervision — you focus on the business.',
+            features: ['Polished feed', 'Active Stories', 'Regular Reels', 'DM responses'],
+            metric: '100s',
+            metricLabel: 'Engagements/mo',
         },
     ];
 
@@ -125,13 +125,13 @@
                 observer.disconnect();
             }
         }, { threshold: 0.05 });
-        const el = document.getElementById('layanan');
+        const el = document.getElementById('services');
         if (el) observer.observe(el);
         setTimeout(() => { visible = true; }, 1000);
     });
 </script>
 
-<section id="layanan" class="py-20 md:py-28 bg-gradient-to-b from-white to-soft relative overflow-hidden">
+<section id="services" class="py-20 md:py-28 bg-gradient-to-b from-white to-soft relative overflow-hidden">
     <!-- Floating SVG illustrations -->
     <div class="absolute top-12 left-4 w-36 h-36 opacity-60 pointer-events-none hidden md:block" aria-hidden="true">
         <svg viewBox="0 0 100 100" class="w-full h-full">
@@ -140,7 +140,7 @@
                 <animate attributeName="r" values="22;26;22" dur="3s" repeatCount="indefinite"/>
             </circle>
             <text x="50" y="58" text-anchor="middle" font-size="26" fill="#f59e0b" fill-opacity="0.7" font-weight="900">9</text>
-            <text x="50" y="84" text-anchor="middle" font-size="7" fill="#0f1e3d" fill-opacity="0.5" font-weight="700" letter-spacing="1.5">LAYANAN</text>
+            <text x="50" y="84" text-anchor="middle" font-size="7" fill="#0f1e3d" fill-opacity="0.5" font-weight="700" letter-spacing="1.5">SERVICES</text>
         </svg>
     </div>
     <div class="absolute bottom-24 right-4 w-28 h-28 opacity-40 pointer-events-none hidden md:block" aria-hidden="true">
@@ -157,15 +157,15 @@
         <div class="text-center max-w-2xl mx-auto mb-10 reveal">
             <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 <span class="w-8 h-px bg-accent"></span>
-                9 Layanan, Satu Mind
+                9 Services, One Mind
                 <span class="w-8 h-px bg-accent"></span>
             </p>
             <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                Semua kebutuhan performance<br/>
-                <span class="text-accent">marketing, di satu tempat.</span>
+                Everything performance<br/>
+                <span class="text-accent">marketing, in one place.</span>
             </h2>
             <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                Tidak perlu koordinasi 3 vendor berbeda. Iklan, landing page, social media — semua disusun sebagai satu sistem yang saling menguatkan.
+                No need to coordinate 3 different vendors. Ads, landing pages, social media — all built as one system that reinforces itself.
             </p>
         </div>
 
@@ -240,9 +240,9 @@
 
         <div class="mt-10 text-center anim-fade-up">
             <p class="text-sm text-muted">
-                Butuh rekomendasi atau ingin mendiskusikan anggaran?
+                Need a recommendation or want to discuss budget?
                 <a href={waLink} class="text-accent font-bold hover:underline ml-1 group inline-flex items-center gap-1">
-                    Konsultasi gratis via WhatsApp
+                    Free consultation on WhatsApp
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
             </p>

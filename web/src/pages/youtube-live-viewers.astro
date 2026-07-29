@@ -10,94 +10,75 @@ import StepGrid from '../components/StepGrid.svelte';
 import Footer from '../components/Footer.svelte';
 import { MessageCircle, ArrowRight, Radio, Sparkles, Users, Shield, Clock, TrendingUp, Check, Smartphone, Heart, Music, Disc, PlayCircle, Eye, Volume2 } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20view%20live%20YouTube.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20YouTube%20Live%20viewers.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    { name: 'Pemanasan', priceLabel: '12.000', duration: '20 viewers / 1 jam live', tagline: 'Cocok untuk warming up sebelum live utama biar algoritma notice Anda sejak awal.', features: ['20 viewers riil aktif', 'Bergabung gradual 5-15 menit', 'Multi-platform (semua channel)', 'Cocok untuk live pendek atau tes', 'Tanpa risiko untuk channel YouTube'], priceNote: 'harga per sesi live', disclaimer: 'Viewers real account, no bot.' },
-    { name: 'Starter', priceLabel: '25.000', duration: '50 viewers / 1 jam live', tagline: 'Untuk live rutin yang butuh boost awal agar YouTube algorithm notice Anda.', features: ['50 viewers riil aktif', 'Bergabung gradual 5-15 menit', 'Multi-platform semua channel', 'Cocok untuk YouTube creator & streamer', 'Real account, no flag dari YouTube'], priceNote: 'Rp 500/viewer/jam', disclaimer: 'Paling sering dipilih YouTube user.', highlight: true },
-    { name: 'Basic', priceLabel: '45.000', duration: '100 viewers / 1 jam live', tagline: 'Sweet spot untuk seller YouTube yang mau boost ranking & konversi.', features: ['100 viewers riil stay selama live', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk seller YouTube', 'distribusi live'], priceNote: 'Rp 450/viewer/jam', disclaimer: 'Cocok untuk live mingguan.' },
-    { name: 'Pro', priceLabel: '80.000', duration: '200 viewers / 1 jam live', tagline: 'Untuk launching produk baru & live event yang butuh distribusi FYP luas.', features: ['200 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk launching & event', 'Boost organik distribusi live'], priceNote: 'Rp 400/viewer/jam', disclaimer: 'Repeat order diskon khusus.' },
-    { name: 'Bisnis', priceLabel: '115.000', duration: '300 viewers / 1 jam live', tagline: 'Untuk brand dan toko yang live commerce YouTube rutin setiap hari.', features: ['300 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk live harian', 'Support prioritas + account manager'], priceNote: 'Rp 383/viewer/jam', disclaimer: 'Cocok untuk paket mingguan.' },
-    { name: 'Premium', priceLabel: '175.000', duration: '500 viewers / 1 jam live', tagline: 'Untuk launching event YouTube besar atau push viral dengan target viewers tinggi.', features: ['500 viewers riil aktif', 'Bergabung gradual natural', 'Multi-platform semua channel', 'Cocok untuk launching viral', 'Support 24/7 + flexible reschedule'], priceNote: 'Rp 350/viewer/jam', disclaimer: 'Untuk >500 viewers atau paket bulanan, custom price.' },
+    { name: 'Warm-up', priceLabel: '5', duration: '20 viewers / 1 hour live', tagline: 'Perfect for warming up before your main live so the algorithm notices you from the start.', features: ['20 real active viewers', 'Gradual join over 5–15 minutes', 'Multi-platform (YouTube + others)', 'Great for short or test lives', 'Zero risk to your YouTube account'], priceNote: 'price per live session', disclaimer: 'Real accounts, no bots.' },
+    { name: 'Starter', priceLabel: '10', duration: '50 viewers / 1 hour live', tagline: 'For regular lives that need an early boost so the YouTube algorithm notices you.', features: ['50 real active viewers', 'Gradual join over 5–15 minutes', 'Multi-platform across all channels', 'Great for new sellers & streamers', 'Real accounts, no flags from YouTube'], priceNote: 'RM 0.20/viewer/hour', disclaimer: 'The most popular pick among YouTube sellers.', highlight: true },
+    { name: 'Basic', priceLabel: '19', duration: '100 viewers / 1 hour live', tagline: 'The sweet spot for YouTube sellers who want to boost ranking & conversion.', features: ['100 real viewers staying the whole live', 'Natural gradual join', 'Multi-platform across all channels', 'Great for YouTube sellers', 'Boosts algorithm distribution'], priceNote: 'RM 0.19/viewer/hour', disclaimer: 'Ideal for weekly lives.' },
+    { name: 'Pro', priceLabel: '35', duration: '200 viewers / 1 hour live', tagline: 'For new product launches & live events that need wide distribution.', features: ['200 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for launches & events', 'Boosts organic distribution'], priceNote: 'RM 0.18/viewer/hour', disclaimer: 'Special discount on repeat orders.' },
+    { name: 'Business', priceLabel: '49', duration: '300 viewers / 1 hour live', tagline: 'For brands and stores running live commerce on YouTube every day.', features: ['300 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for daily live commerce', 'Priority support + account manager'], priceNote: 'RM 0.16/viewer/hour', disclaimer: 'Ideal for weekly bundles.' },
+    { name: 'Premium', priceLabel: '75', duration: '500 viewers / 1 hour live', tagline: 'For major YouTube launch events or viral pushes with high viewer targets.', features: ['500 real active viewers', 'Natural gradual join', 'Multi-platform across all channels', 'Great for viral launches', '24/7 support + flexible rescheduling'], priceNote: 'RM 0.15/viewer/hour', disclaimer: 'For 500+ viewers or monthly packages, custom pricing.' },
 ];
 
 const features = [
-    { iconName: 'Sparkles', title: 'Boost Rekomendasi', desc: 'YouTube merekomendasikan live berdasarkan watch time. Lebih banyak viewers aktif = lebih sering muncul di rekomendasi & suggested videos.' },
-    { iconName: 'Users', title: 'Real Account YT', desc: 'Viewers dari kami akun YouTube aktif — bukan bot. Stay, watch, dan berinteraksi natural.' },
-    { iconName: 'TrendingUp', title: 'Masuk Gradual 5-15 Menit', desc: 'Viewers join gradual sejak menit pertama. YouTube algorithm notice live Anda sebagai trending.' },
-    { iconName: 'Shield', title: 'Aman untuk Channel', desc: 'Viewers tidak like spam yang bisa trigger flag YouTube. Tidak ada aktivitas dari akun channel. 1.200+ live tanpa masalah.' },
-    { iconName: 'Smartphone', title: 'Masuk YouTube Live + Lainnya', desc: 'Order untuk YouTube Live, tapi viewers juga bisa stay di platform lain yang sedang live bersamaan. Multi-platform, satu order.' },
-    { iconName: 'Clock', title: 'Start dalam 5 Menit', desc: 'Live YouTube Anda yang sudah jalan? Kami ikut real-time. Tidak perlu rekam ulang.' },
+    { iconName: 'Sparkles', title: 'Boost YT Recommendations', desc: 'YouTube recommends lives with active viewers. Boost viewers = boost distribution in YT recommendations.' },
+    { iconName: 'Users', title: 'Real Active Accounts', desc: 'Our viewers are active YouTube accounts — not bots. They stay, watch and interact naturally with your live content.' },
+    { iconName: 'TrendingUp', title: 'Gradual Join Over 5–15 Minutes', desc: 'Viewers never appear all at once. They join gradually from the first minute — so the algorithm sees your live as genuinely trending.' },
+    { iconName: 'Shield', title: 'Safe for Your YouTube Account', desc: 'Our viewers never spam likes/comments that trigger flags. Nothing happens from your account. Used on 1,200+ lives without a single issue.' },
+    { iconName: 'Smartphone', title: 'Joins YouTube Live + Others', desc: 'Order for YouTube Live, and viewers can also stay on other platforms streaming at the same time. Multi-platform, one order.' },
+    { iconName: 'Clock', title: 'Starts Within 5 Minutes', desc: 'Once your order is confirmed, viewers start joining. Live already running? We join in real time — no need to restart.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'HARI H', title: 'Kirim Detail Live YouTube', desc: 'Share username YouTube + tanggal/jam mulai live. Order dikonfirmasi max 30 menit setelah detail lengkap.' },
-    { num: '02', tag: 'HARI H', title: 'Pembayaran & Persiapan', desc: 'Transfer via QRIS/e-wallet. Invoice langsung dikirim. DP 50% untuk paket besar tersedia.' },
-    { num: '03', tag: 'LIVE', title: 'Viewers Join ke FYP', desc: 'Saat YouTube Live Anda mulai, viewers join gradual 5-15 menit. Algoritma YouTube notice live Anda sebagai trending.' },
-    { num: '04', tag: 'POST-LIVE', title: 'Evaluasi & Recurring', desc: 'Setelah live selesai, kami evaluasi performa FYP. Mau jadwal rutin 2-3x seminggu? Diskon 10-15% untuk paket berulang.' },
+    { num: '01', tag: 'DAY OF', title: 'Send Your YouTube Live Details', desc: 'Share your YouTube username + live date/time. Orders are confirmed within 30 minutes of complete details.' },
+    { num: '02', tag: 'LIVE DAY', title: 'Payment & Preparation', desc: 'Transfer via bank or e-wallet (DuitNow/TNG). Invoice sent immediately. 50% deposit available for larger packages.' },
+    { num: '03', tag: 'LIVE', title: 'Viewers Join Your Stream', desc: 'When your YouTube Live starts, viewers join gradually over 5–15 minutes. The algorithm notices your live as trending.' },
+    { num: '04', tag: 'POST-LIVE', title: 'Review & Recurring', desc: 'After the live ends, we review performance. Want a regular 2–3x weekly schedule? 10–15% off recurring packages.' },
 ];
 
 const faqs = [
-    { q: 'Apakah viewers-nya bot atau akun asli YouTube?', a: 'Akun asli YouTube, no automation. Mereka user aktif yang stay sesuai durasi live. Interaksi natural, no flag dari YouTube algorithm.' },
-    { q: 'Apakah aman untuk akun YouTube saya?', a: 'Sangat aman. Viewers tidak like/comment spam yang bisa trigger shadow ban. Tidak ada aktivitas dari akun Anda. Sudah 1.200+ live YouTube tanpa satu pun kena masalah.' },
-    { q: 'Berapa lama viewers muncul setelah live YouTube mulai?', a: '5-15 menit setelah live Anda mulai. Tidak tiba-tiba — gradual seperti live YouTube normal pada umumnya.' },
-    { q: 'Apakah membantu algorithm YouTube?', a: 'Ya. Algorithm YouTube memprioritaskan live dengan viewers aktif. Boost viewers = boost distribusi sampai 5x lebih luas.' },
-    { q: 'Bisa order untuk viewers lebih dari 500 atau paket mingguan/bulanan?', a: 'Bisa. Untuk 500+ viewers atau paket harian/mingguan dengan jadwal tetap, chat dulu via WA untuk harga terbaik. Recurring 2-3x seminggu bisa diskon 10-15%.' },
-    { q: 'Apakah viewers stay selama durasi live YouTube?', a: 'Ya. Viewers dari kami stay sesuai durasi live yang Anda pesan. Kalau Anda live 1 jam, viewers stay 1 jam. Tidak ada yang tiba-tiba pergi di tengah live.' },
-    { q: 'Bagaimana jika YouTube memberi flag setelah order?', a: 'Belum pernah terjadi. Viewers interaksi natural — like, comment, dan share sesuai pattern akun normal. Tidak ada pattern bot.' },
+    { q: 'Are the viewers bots or real YouTube accounts?', a: 'Real YouTube accounts, no automation. They are active users who stay for the full live duration. Natural interaction, no flags from the YouTube algorithm.' },
+    { q: 'Is it safe for my YouTube account?', a: 'Completely safe. Viewers never spam likes/comments that could trigger a shadow ban. Nothing happens from your account. Over 1,200 lives without a single issue.' },
+    { q: 'How soon do viewers appear after my live starts?', a: '5–15 minutes after your live begins. Never all at once — gradual, just like a normal live.' },
+    { q: 'Does it help the YouTube algorithm?', a: 'Yes. The YouTube algorithm prioritises lives with active viewers. Boosting viewers can expand distribution up to 5x wider, especially for first lives or product launches.' },
+    { q: 'Can I order more than 500 viewers, or weekly/monthly packages?', a: 'Yes. For 500+ viewers or daily/weekly packages on a fixed schedule, chat with us on WhatsApp first for the best rate. Recurring 2–3x weekly streams get 10–15% off.' },
+    { q: 'Do viewers stay for the whole live?', a: 'Yes. Our viewers stay for the duration you order. A 1-hour live means viewers stay 1 hour. No one suddenly leaves mid-live.' },
+    { q: 'What if YouTube flags my account after ordering?', a: 'It has never happened. Our viewers interact naturally — likes, comments and shares follow normal account patterns. There is no bot pattern for YouTube to detect.' },
 ];
 
 const relatedItems = [
-    { icon: '🛍️', label: 'Jasa View Live Shopee', desc: 'Untuk seller Shopee Live yang fokus ke konversi produk.', href: '/shopee-live-viewers' },
-    { icon: '🎬', label: 'Jasa View Live YouTube', desc: 'Untuk channel YouTube yang boost watch time & rekomendasi.', href: '/youtube-live-viewers' },
-    { icon: '📡', label: 'Jasa View Live Multi-Platform', desc: 'Satu order, semua platform live.', href: '/live-stream-viewers' },
+    { icon: '🛍️', label: 'Shopee Live Viewers', desc: 'For Shopee Live sellers focused on product conversion.', href: '/shopee-live-viewers' },
+    { icon: '🎬', label: 'YouTube Live Viewers', desc: 'For YouTube channels boosting watch time & recommendations.', href: '/youtube-live-viewers' },
+    { icon: '📡', label: 'Multi-Platform Live Viewers', desc: 'One order, every live platform.', href: '/live-stream-viewers' },
 ];
 ---
 
-<Layout title="Jasa View Live YouTube | Boost Viewers Rekomendasi YT — Beriklan" description="Boost viewers live streaming YouTube agar YouTube algorithm notice live Anda. Real account, no bot, aman untuk akun YouTube. Mulai Rp 12.000 untuk 20 viewers." canonical="https://beriklan.my/youtube-live-viewers/"
+<Layout title="YouTube Live Viewers Malaysia | Boost Recommendations — Beriklan" description="Boost your YouTube Live viewer count so the YouTube algorithm notices your stream. Real accounts, no bots, safe for your channel. From RM 5 for 20 viewers." canonical="https://beriklan.my/youtube-live-viewers/"
     faq={[
-            { question: 'Apakah viewers-nya akun asli YouTube?', answer: 'Akun real YouTube, no automation. User aktif yang watch dan bisa like/comment.' },
-            { question: 'Apakah aman untuk channel YouTube saya?', answer: 'Sangat aman. Viewers watch normal, no spike yang trigger YouTube analytics flag.' },
-            { question: 'Berapa lama viewers muncul setelah live streaming mulai?', answer: '5-15 menit setelah live. Gradual, seperti live YouTube normal pada umumnya.' },
-            { question: 'Apakah membantu YouTube algorithm?', answer: 'Ya. YouTube algorithm boost live dengan watch time lebih tinggi. Live Anda muncul di suggested + notification subscribers.' },
-            { question: 'Bisa order untuk viewers lebih dari 200 atau paket harian?', answer: 'Bisa. Chat dulu via WA untuk harga terbaik. Recurring stream diskon khusus.' },
-            { question: 'Apakah viewers stay selama live?', answer: 'Ya. 1 jam live = 1 jam viewers stay. Mereka watch normal seperti viewers organik.' },
-            { question: 'Bagaimana jika YouTube memberi strike?', answer: 'Belum pernah terjadi. Viewers watch natural, no spike yang trigger YouTube fraud detection.' }
-        ]}
-    service={{
-        name: "Jasa View Live YouTube",
-        description: "Jasa viewers live streaming untuk Jasa View Live YouTube. Real account, no bot, aman untuk platform. Mulai dari Rp 12.000 untuk 20 viewers.",
-        url: "https://beriklan.my/youtube-live-viewers/",
-        priceRange: "Rp 12.000 - Rp 175.000",
-        serviceType: "Live Viewers Service",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
-    }}
-
-    faq={[
-            { question: 'Apakah viewers-nya akun asli YouTube?', answer: 'Akun real YouTube, no automation. User aktif yang watch dan bisa like/comment.' },
-            { question: 'Apakah aman untuk channel YouTube saya?', answer: 'Sangat aman. Viewers watch normal, no spike yang trigger YouTube analytics flag.' },
-            { question: 'Berapa lama viewers muncul setelah live streaming mulai?', answer: '5-15 menit setelah live. Gradual, seperti live YouTube normal pada umumnya.' },
-            { question: 'Apakah membantu YouTube algorithm?', answer: 'Ya. YouTube algorithm boost live dengan watch time lebih tinggi. Live Anda muncul di suggested + notification subscribers.' },
-            { question: 'Bisa order untuk viewers lebih dari 200 atau paket harian?', answer: 'Bisa. Chat dulu via WA untuk harga terbaik. Recurring stream diskon khusus.' },
-            { question: 'Apakah viewers stay selama live?', answer: 'Ya. 1 jam live = 1 jam viewers stay. Mereka watch normal seperti viewers organik.' },
-            { question: 'Bagaimana jika YouTube memberi strike?', answer: 'Belum pernah terjadi. Viewers watch natural, no spike yang trigger YouTube fraud detection.' }
+            { question: 'Are the viewers bots or real YouTube accounts?', answer: 'Real YouTube accounts, no automation. They are active users who stay for the full live duration. Natural interaction, no flags from the YouTube algorithm.' },
+            { question: 'Is it safe for my YouTube account?', answer: 'Completely safe. Viewers never spam likes/comments that could trigger a shadow ban. Nothing happens from your account. Over 1,200 lives without a single issue.' },
+            { question: 'How soon do viewers appear after my live starts?', answer: '5–15 minutes after your live begins. Never all at once — gradual, just like a normal live.' },
+            { question: 'Does it help the YouTube algorithm?', answer: 'Yes. The YouTube algorithm prioritises lives with active viewers. Boosting viewers can expand distribution up to 5x wider, especially for first lives or product launches.' },
+            { question: 'Can I order more than 500 viewers, or weekly/monthly packages?', answer: 'Yes. For 500+ viewers or daily/weekly packages on a fixed schedule, chat with us on WhatsApp first for the best rate. Recurring 2–3x weekly streams get 10–15% off.' },
+            { question: 'Do viewers stay for the whole live?', answer: 'Yes. Our viewers stay for the duration you order. A 1-hour live means viewers stay 1 hour. No one suddenly leaves mid-live.' },
+            { question: 'What if YouTube flags my account after ordering?', answer: 'It has never happened. Our viewers interact naturally — likes, comments and shares follow normal account patterns. There is no bot pattern for YouTube to detect.' }
         ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa View Live", url: "https://beriklan.my/live-stream-viewers/" },
-        { name: "Jasa View Live YouTube", url: "https://beriklan.my/youtube-live-viewers/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Live Stream Viewers", url: "https://beriklan.my/live-stream-viewers/" },
+        { name: "YouTube Live Viewers", url: "https://beriklan.my/youtube-live-viewers/" }
     ]}
     service={{
-        name: "Jasa View Live YouTube",
-        description: "Jasa viewers live streaming untuk Jasa View Live YouTube. Real account, no bot, aman untuk platform. Mulai dari Rp 12.000 untuk 20 viewers.",
+        name: "YouTube Live Viewers",
+        description: "Live streaming viewer service for YouTube Live. Real accounts, no bots, safe for your account. From RM 5 for 20 viewers.",
         url: "https://beriklan.my/youtube-live-viewers/",
-        priceRange: "Rp 12.000 - Rp 175.000",
+        priceRange: "RM 5 - RM 75",
         serviceType: "Live Viewers Service",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -122,34 +103,34 @@ const relatedItems = [
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-400"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in text-red-50">Jasa View Live YouTube · Boost Rekomendasi</span>
+                    <span class="opacity-0 anim-fade-in text-red-50">YouTube Live Viewers · Boost Recommendations</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-white leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Live YouTube Sepi,</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-500" style="animation-delay: 80ms;">Rekomendasi Tidak Datang.</span><br/>
+                    <span class="anim-fade-up">Your YouTube Live Is Quiet,</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-500" style="animation-delay: 80ms;">Recommendations Aren’t Coming.</span><br/>
                     <span class="anim-fade-up" style="animation-delay: 160ms;">— Watch Time Algorithm.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-white/80 leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    YouTube memprioritaskan live dengan viewers aktif. 100+ viewers = 5x lebih besar jangkauan. Viewer riil dari kami join gradual sejak menit pertama — bikin algorithm YouTube notice live Anda, tanpa flag, tanpa bot, tanpa risiko shadow ban.
+                    YouTube prioritises lives with active viewers. 100+ viewers = up to 5x wider reach. Our real viewers join gradually from the very first minute — getting the YouTube algorithm to notice your live, with no flags, no bots and no shadow-ban risk.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-white text-black px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Order Viewers YouTube
+                            Order YouTube Viewers
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white border border-white/30 bg-white/5 backdrop-blur-sm hover:bg-white/15 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-white/20 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80"><strong class="text-white">Mulai Rp 12.000</strong> untuk 20 viewers</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80"><strong class="text-white">From RM 5</strong> for 20 viewers</span></div>
                     <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80">Real account, <strong class="text-white">no bot</strong></span></div>
                     <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-white/80">Boost watch time & rekomendasi</span></div>
                 </div>
@@ -210,9 +191,9 @@ const relatedItems = [
                         </div>
                         <!-- Chat overlay -->
                         <div class="absolute bottom-12 left-3 right-3 space-y-1.5 z-10 max-h-32 overflow-hidden">
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user1</span><span class="text-white text-[11px] drop-shadow">stream mantap! 🔥</span></div>
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-600/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user2</span><span class="text-white text-[11px] drop-shadow">mantap kak</span></div>
-                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user3</span><span class="text-white text-[11px] drop-shadow">sub dong</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user1</span><span class="text-white text-[11px] drop-shadow">great stream! 🔥</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-600/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user2</span><span class="text-white text-[11px] drop-shadow">nice one</span></div>
+                            <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 bg-red-500/80 backdrop-blur-sm text-white text-[10px] font-bold rounded">user3</span><span class="text-white text-[11px] drop-shadow">subbed!</span></div>
                         </div>
                         <!-- Product overlay -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -220,7 +201,7 @@ const relatedItems = [
                                 <div class="text-center">
                                     <p class="text-white text-[10px] font-bold uppercase tracking-wider">Shopping</p>
                                     <p class="text-white text-base font-bold">YouTube Live</p>
-                                    <p class="text-red-300 text-sm font-extrabold">Rp 99K</p>
+                                    <p class="text-red-300 text-sm font-extrabold">RM 29</p>
                                 </div>
                             </div>
                         </div>
@@ -246,9 +227,9 @@ const relatedItems = [
     <section class="py-7 bg-black/40 border-y border-white/5 relative overflow-hidden" cv-auto>
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Optimal untuk YouTube</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Optimised for YouTube</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold">
-                    <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>Rekomendasi YT</span>
+                    <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>YT Recommendations</span>
                     <span class="text-white/30">·</span>
                     <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>Live Streaming</span>
                     <span class="text-white/30">·</span>
@@ -268,15 +249,15 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-red-400">
                     <span class="w-8 h-px bg-gradient-to-r from-transparent to-pink-400"></span>
-                    Kenapa View Live YouTube
+                    Why YouTube Live Viewers
                     <span class="w-8 h-px bg-gradient-to-l from-transparent to-cyan-400"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Apa algoritma YouTube satu hal:<br/>
-                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">banyak viewers = watch time tinggi.</span>
+                    The YouTube algorithm knows one thing:<br/>
+                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">more viewers = higher watch time.</span>
                 </h2>
                 <p class="mt-4 text-white/70 max-w-xl mx-auto text-base leading-relaxed">
-                    YouTube merekomendasikan live berdasarkan watch time & concurrent viewers. Live dengan 100+ viewers aktif muncul 3x lebih sering di rekomendasi & suggested videos.
+                    YouTube recommends lives based on watch time & concurrent viewers. Lives with 100+ active viewers appear 3x more often in recommendations & suggested videos.
                 </p>
             </div>
 
@@ -286,20 +267,20 @@ const relatedItems = [
                         <Sparkles class="w-6 h-6" strokeWidth="2.2" />
                     </div>
                     <h3 class="youtube-why-title">Boost Rekomendasi</h3>
-                    <p class="youtube-why-desc">YouTube merekomendasikan live dengan viewers aktif. Boost viewers = boost distribusi di rekomendasi YT.</p>
+                    <p class="youtube-why-desc">YouTube recommends lives with active viewers. Boost viewers = boost distribution in YT recommendations.</p>
                 </div>
                 <div class="youtube-why-card group" style="animation-delay: 100ms;">
                     <div class="youtube-why-icon">
                         <Shield class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="youtube-why-title">Aman untuk Channel</h3>
-                    <p class="youtube-why-desc">Viewers dari kami akun YT aktif. Tidak like spam. Tidak ada aktivitas dari akun channel. 1.200+ live tanpa masalah.</p>
+                    <h3 class="youtube-why-title">Safe for Your Channel</h3>
+                    <p class="youtube-why-desc">Our viewers are active YT accounts. No like spam. No activity from your channel account. 1,200+ lives without issues.</p>
                 </div>
                 <div class="youtube-why-card group" style="animation-delay: 200ms;">
                     <div class="youtube-why-icon">
                         <Heart class="w-6 h-6" strokeWidth="2.2" fill="currentColor" />
                     </div>
-                    <h3 class="youtube-why-title">Cocok untuk Live Commerce</h3>
+                    <h3 class="youtube-why-title">Perfect for Live Commerce</h3>
                     <p class="youtube-why-desc">Viewers aktif watch lebih lama, super chat naik, conversion live commerce YT meningkat signifikan.</p>
                 </div>
             </div>
@@ -311,12 +292,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    6 Keunggulan Layanan
+                    6 Service Advantages
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Kenapa layanan kami berbeda<br/>
-                    <span class="text-accent">dari viewer bot biasa.</span>
+                    Why our service is different<br/>
+                    <span class="text-accent">from ordinary bot viewers.</span>
                 </h2>
             </div>
 
@@ -329,12 +310,12 @@ const relatedItems = [
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-red-400">
                     <span class="w-6 h-px bg-pink-400"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-red-600"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Dari order sampai FYP trending,<br/>
-                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">kurang dari 30 menit.</span>
+                    From order to trending,<br/>
+                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">in under 30 minutes.</span>
                 </h2>
             </div>
 
@@ -348,19 +329,19 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Enam paket, dari pemanasan<br/>
-                    <span class="text-accent">sampai launching akbar.</span>
+                    Six packages, from warm-up<br/>
+                    <span class="text-accent">to a full-scale launch.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Semua paket sudah termasuk viewers riil (bukan bot), gradual entry, dan support via WhatsApp. Untuk paket mingguan/bulanan atau viewer 500+, chat dulu untuk harga khusus.
+                    All packages include real viewers (not bots), gradual entry, and WhatsApp support. For weekly/monthly packages or 500+ viewers, chat with us first for custom pricing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="View Live YouTube" highlightIndex={1} columns={3} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="YouTube Live Viewers" highlightIndex={1} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -369,8 +350,8 @@ const relatedItems = [
                             <Check class="w-5 h-5 text-red-500" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Butuh paket harian atau FYP campaign khusus?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan jadwal live dan target FYP Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Need a daily package or a custom FYP campaign?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your live schedule and FYP goals.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-red-500 hover:text-ink transition-colors group">
                                 Chat via WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -389,12 +370,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-red-400">
                     <span class="w-8 h-px bg-pink-400"></span>
-                    Bukti Nyata
+                    Real Proof
                     <span class="w-8 h-px bg-red-600"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Sudah 1.200+<br/>
-                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">live YouTube.</span>
+                    Over 1,200<br/>
+                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">YouTube lives boosted.</span>
                 </h2>
             </div>
 
@@ -403,25 +384,25 @@ const relatedItems = [
                     <div class="youtube-stat-num">5x</div>
                     <div class="youtube-stat-label">Boost rekomendasi</div>
                     <div class="youtube-stat-bar"><span style="width: 100%"></span></div>
-                    <p class="youtube-stat-foot">rata-rata YT recommended</p>
+                    <p class="youtube-stat-foot">average YT recommended</p>
                 </div>
                 <div class="youtube-stat-card" style="animation-delay: 80ms;">
                     <div class="youtube-stat-num">0</div>
                     <div class="youtube-stat-label">Channel kena flag</div>
                     <div class="youtube-stat-bar"><span style="width: 5%"></span></div>
-                    <p class="youtube-stat-foot">sepanjang penggunaan</p>
+                    <p class="youtube-stat-foot">across all usage</p>
                 </div>
                 <div class="youtube-stat-card" style="animation-delay: 160ms;">
                     <div class="youtube-stat-num">3-4x</div>
                     <div class="youtube-stat-label">Watch time boost</div>
                     <div class="youtube-stat-bar"><span style="width: 70%"></span></div>
-                    <p class="youtube-stat-foot">rata-rata YT live</p>
+                    <p class="youtube-stat-foot">average YT live</p>
                 </div>
                 <div class="youtube-stat-card" style="animation-delay: 240ms;">
                     <div class="youtube-stat-num">15%</div>
-                    <div class="youtube-stat-label">Diskon rutin</div>
+                    <div class="youtube-stat-label">Recurring discount</div>
                     <div class="youtube-stat-bar"><span style="width: 100%"></span></div>
-                    <p class="youtube-stat-foot">paket mingguan</p>
+                    <p class="youtube-stat-foot">weekly packages</p>
                 </div>
             </div>
 
@@ -430,22 +411,22 @@ const relatedItems = [
                     <div class="youtube-trust-icon">
                         <Shield class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="youtube-trust-title">Aman untuk channel YouTube</h3>
-                    <p class="youtube-trust-desc">Viewers dari kami akun riil aktif. Interaksi natural, no flag. 1.200+ live YouTube tanpa satu pun kena shadow ban.</p>
+                    <h3 class="youtube-trust-title">Safe for your YouTube channel</h3>
+                    <p class="youtube-trust-desc">Our viewers are real, active accounts. Natural interaction, no flags. 1,200+ YouTube lives without a single shadow ban.</p>
                 </div>
                 <div class="youtube-trust-card" style="animation-delay: 120ms;">
                     <div class="youtube-trust-icon">
                         <Clock class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="youtube-trust-title">Masuk gradual 5-15 menit</h3>
-                    <p class="youtube-trust-desc">Viewers join gradual sejak menit pertama live. Tidak tiba-tiba, tidak mencurigakan — rekomendasi YT notice natural trending.</p>
+                    <h3 class="youtube-trust-title">Gradual join over 5–15 minutes</h3>
+                    <p class="youtube-trust-desc">Viewers join gradually from the first minute of your live. Never sudden, never suspicious — YT recommendations see natural trending.</p>
                 </div>
                 <div class="youtube-trust-card" style="animation-delay: 240ms;">
                     <div class="youtube-trust-icon">
                         <TrendingUp class="w-6 h-6" strokeWidth="2.2" />
                     </div>
-                    <h3 class="youtube-trust-title">Tanpa minimum order</h3>
-                    <p class="youtube-trust-desc">Order per sesi, bayar per order. Bebas order sesuai jadwal live YouTube Anda. Diskon 10-15% untuk paket berulang.</p>
+                    <h3 class="youtube-trust-title">No minimum order</h3>
+                    <p class="youtube-trust-desc">Order per session, pay per order. Book whenever your YouTube live schedule needs it. 10–15% off recurring packages.</p>
                 </div>
             </div>
         </div>
@@ -456,12 +437,12 @@ const relatedItems = [
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum order
+                    Before you order
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan tentang<br/>
-                    <span class="text-accent">live YouTube.</span>
+                    Questions about<br/>
+                    <span class="text-accent">YouTube lives.</span>
                 </h2>
             </div>
 
@@ -482,14 +463,14 @@ const relatedItems = [
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-400"></span>
                     </span>
-                    Tim online · respon dalam 1 jam pada jam kerja
+                    Team online · replies within 1 hour during business hours
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight mb-6 mt-3">
-                    Live YouTube berikutnya<br/>
-                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">naik watch time & rekomendasi.</span>
+                    Your next YouTube live,<br/>
+                    <span class="bg-gradient-to-r from-red-400 to-red-500 bg-clip-text text-transparent">lifting watch time &amp; recommendations.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Ceritakan tanggal live YouTube Anda via WhatsApp. Kami kirim rekomendasi paket & timeline. Tanpa komitmen — order hanya saat Anda siap live.
+                    Tell us your YouTube live date on WhatsApp. We’ll send a package recommendation & timeline. No commitment — order only when you’re ready to go live.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all youtube-cta-glow">
@@ -500,10 +481,10 @@ const relatedItems = [
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Paket mingguan/bulanan · diskon 10-15%</p>
+                <p class="text-white/50 text-xs mt-6">Weekly/monthly packages · 10–15% discount</p>
             </div>
         </div>
     </section>

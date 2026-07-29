@@ -4,36 +4,36 @@
 
     const faqs = [
         {
-            q: 'Berapa minimum anggaran untuk memulai?',
-            a: 'Minimum Rp 500.000 per bulan untuk ad spend, ditambah biaya jasa sesuai paket yang dipilih. Angka ini memadai untuk membaca data awal dalam 2–4 minggu. Untuk hasil yang lebih stabil dan berkelanjutan, kami umumnya merekomendasikan mulai dari Rp 3–5 juta per bulan.'
+            q: 'What is the minimum budget to get started?',
+            a: 'A minimum of RM 500 per month for ad spend, plus the management fee of the package you choose. That amount is enough to read early data within 2–4 weeks. For more stable, sustainable results, we generally recommend starting from RM 1,500–3,000 per month.'
         },
         {
-            q: 'Berapa lama hingga hasil mulai terlihat?',
-            a: 'Secara realistis: 2–4 minggu untuk membaca data awal, 1–3 bulan untuk menemukan pola yang stabil. Durasi bervariasi tergantung industri, platform, dan besaran anggaran. Kami tidak menjanjikan hasil instan — yang menjadi komitmen kami: optimasi konsisten berbasis data nyata, bukan asumsi.'
+            q: 'How long until results start showing?',
+            a: 'Realistically: 2–4 weeks to read early data, 1–3 months to find a stable pattern. The timeline varies by industry, platform and budget size. We do not promise instant results — what we do commit to: consistent optimisation based on real data, not assumptions.'
         },
         {
-            q: 'Apa bedanya dengan agency lain?',
-            a: 'Tiga hal: (1) Anda pegang akun Meta/Google/TikTok — kami hanya yang manage; (2) laporan bahasa yang mudah dipahami, bukan jargon CPM-CTR-CPC tanpa konteks; (3) tidak ada lock 6-12 bulan — bulanan saja, Anda bebas pindah kapan saja.'
+            q: 'How are you different from other agencies?',
+            a: 'Three things: (1) you own the Meta/Google/TikTok accounts — we only manage them; (2) reports in plain language you can actually read, not CPM-CTR-CPC jargon without context; (3) no 6–12 month lock-in — month to month, you are free to leave anytime.'
         },
         {
-            q: 'Perlu siapkan apa saja?',
-            a: 'Cukup business profile singkat Anda + akses ke akun iklan (kalau sudah ada). Kalau belum ada, kami setup dari nol — Meta Pixel, Google Tag, TikTok Pixel, semuanya diurus.'
+            q: 'What do I need to prepare?',
+            a: 'Just a short business profile and access to your ad accounts (if you already have them). If you don\'t, we set everything up from scratch — Meta Pixel, Google Tag, TikTok Pixel, all handled.'
         },
         {
-            q: 'Apakah paket dapat disesuaikan?',
-            a: 'Ya, dapat disesuaikan. Rekomendasi kami umumnya disusun berdasarkan besaran anggaran iklan dan objective utama — apakah untuk membangun branding atau mengarahkan pada konversi. Untuk kebutuhan yang tidak lazim, kami akan berdiskusi secara personal terlebih dahulu, tanpa biaya.'
+            q: 'Can packages be customised?',
+            a: 'Yes. Our recommendations are usually built around your ad budget and primary objective — whether that is building brand awareness or driving conversions. For unusual requirements, we will discuss it with you personally first, free of charge.'
         },
         {
-            q: 'Berapa lama dari konsultasi pertama sampai iklan tayang?',
-            a: 'Rata-rata 7–14 hari setelah brief Anda kami terima. Termasuk persiapan akun iklan, materi iklan (foto, video, copy), dan pixel tracking. Untuk paket yang materinya sudah siap, biasanya lebih cepat.'
+            q: 'How long from first consultation until ads go live?',
+            a: 'On average 7–14 days after we receive your brief. That includes ad account preparation, ad materials (photos, video, copy) and pixel tracking. If your materials are already ready, it is usually faster.'
         },
         {
-            q: 'Bagaimana jika hasil tidak sesuai target?',
-            a: 'Kami melakukan evaluasi terbuka pada bulan kedua dan ketiga. Apabila pendekatan kami terbukti tidak sesuai dengan karakter bisnis Anda, kami akan merekomendasikan pergantian strategi atau pengembalian sebagian biaya. Kasus ini jarang terjadi — namun kami transparan mengenai kemungkinan tersebut sejak awal.'
+            q: 'What if results miss the target?',
+            a: 'We run an open evaluation in the second and third month. If our approach clearly does not fit the character of your business, we will recommend a change of strategy or a partial refund. This rarely happens — but we are transparent about the possibility from day one.'
         },
         {
-            q: 'Kenapa tidak kasih guaranteed ROAS?',
-            a: 'Karena ROAS tergantung banyak faktor di luar kuasa kami (produk, harga, funnel, landing page). Yang kami jamin: effort maksimal + optimasi berdasarkan data + laporan yang jujur. Bukan sulap.'
+            q: 'Why don\'t you guarantee ROAS?',
+            a: 'Because ROAS depends on many factors outside our control (product, pricing, funnel, landing page). What we do guarantee: maximum effort + data-driven optimisation + honest reporting. No magic tricks.'
         },
     ];
 

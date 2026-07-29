@@ -45,7 +45,7 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 const featuredImage = getFeaturedImage(post);
 
-const waLink = `https://wa.me/62811919328?text=${encodeURIComponent(`Halo Beriklan, saya tertarik dengan topik "${post.title}" — mohon info lebih lanjut.`)}`;
+const waLink = `https://wa.me/62811919328?text=${encodeURIComponent(`Hi Beriklan, I'm interested in the topic "${post.title}" — please share more details.`)}`;
 
 const related = posts
     .filter((p) => p.category === post.category && p.slug !== post.slug)
@@ -75,7 +75,7 @@ const categoryLabel = categoryLabels[post.category] || 'Strategi';
 const fullUrl = `https://beriklan.my/blog/${post.slug}`;
 
 const sidebarCategories = [
-    { id: 'all', label: 'Semua Topik' },
+    { id: 'all', label: 'All Topics' },
     { id: 'meta', label: 'Facebook & Instagram', count: categoryCounts.meta || 0 },
     { id: 'tiktok', label: 'TikTok', count: categoryCounts.tiktok || 0 },
     { id: 'google', label: 'Google Ads', count: categoryCounts.google || 0 },
@@ -85,16 +85,16 @@ const sidebarCategories = [
 ];
 
 const AUTHOR = {
-    name: 'Tim Beriklan',
+    name: 'Beriklan Team',
     role: 'Performance Marketing Strategist',
-    credentials: 'Tim bersertifikasi Meta & Google sejak 2016 · mengelola campaign untuk ratusan UMKM & bisnis menengah Indonesia',
+    credentials: 'Meta & Google certified team since 2016 · managing campaigns for hundreds of SMEs and mid-sized businesses',
     url: 'https://beriklan.my/about-us/',
 };
 
 // Freshness layer (truthful). last_reviewed is set by scripts/freshness_engine.py:
 // it equals the publish date unless the post was genuinely re-edited (REFRESHED_SLUGS).
 const REFRESHED_SLUGS = {
-    // "slug-yang-direfresh": "2026-07-15T10:00:00",
+    // "refreshed-slug": "2026-07-15T10:00:00",
 };
 const lastReviewed = post.last_reviewed || post.iso_date;
 const isRefreshed = post.slug in REFRESHED_SLUGS;
@@ -169,7 +169,7 @@ const articleSchema = {
 
         <div class="container mx-auto px-6 max-w-3xl relative z-10">
             <nav class="text-xs text-muted mb-6 flex items-center gap-1.5 anim-fade-in">
-                <a href="/" class="hover:text-accent transition">Beranda</a>
+                <a href="/" class="hover:text-accent transition">Home</a>
                 <span class="text-muted/40">›</span>
                 <a href="/blog" class="hover:text-accent transition">Blog</a>
                 <span class="text-muted/40">›</span>
@@ -285,11 +285,11 @@ const articleSchema = {
 
                     {post.service && (
                         <div class="mt-8 p-5 bg-gradient-to-br from-soft to-white rounded-2xl border border-accent/20">
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1.5">Mau belajar lebih dalam?</p>
-                            <h4 class="font-display font-bold text-lg text-ink leading-snug mb-2">Panduan Lengkap {SERVICE_NAMES[post.service] || post.service}</h4>
-                            <p class="text-xs text-muted leading-relaxed mb-3">Strategi, format iklan, optimasi budget, dan cara ukur ROI dari tim Beriklan.</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1.5">Want to go deeper?</p>
+                            <h4 class="font-display font-bold text-lg text-ink leading-snug mb-2">Complete Guide: {SERVICE_NAMES[post.service] || post.service}</h4>
+                            <p class="text-xs text-muted leading-relaxed mb-3">Strategy, ad formats, budget optimisation and how to measure ROI — from the Beriklan team.</p>
                             <a href={`/${post.service}/pilar/`} class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Baca panduan pilar
+                                Read the pillar guide
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -300,10 +300,10 @@ const articleSchema = {
                         <div class="relative flex flex-col md:flex-row items-start md:items-center gap-5">
                             <div class="flex-1">
                                 <h3 class="font-display font-extrabold text-xl md:text-2xl leading-tight mb-2">
-                                    Butuh strategi iklan untuk bisnis Anda?
+                                    Need an ad strategy for your business?
                                 </h3>
                                 <p class="text-white/70 text-sm leading-relaxed">
-                                    Diskusi gratis 15-30 menit via WhatsApp. Tim kami akan tinjau kondisi campaign Anda saat ini.
+                                    A free 15-30 minute discussion via WhatsApp. Our team will review your current campaign performance.
                                 </p>
                             </div>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-full font-bold text-sm shadow-lg hover:shadow-pop transition-all btn-shine-accent shrink-0">
@@ -329,7 +329,7 @@ const articleSchema = {
                     <div class="mt-10">
                         <a href="/blog" class="inline-flex items-center gap-2 text-sm font-bold text-ink hover:text-accent transition">
                             <ArrowLeft class="w-4 h-4" />
-                            Kembali ke semua artikel
+                            Back to all articles
                         </a>
                     </div>
                 </div>
@@ -350,7 +350,7 @@ const articleSchema = {
                     </div>
 
                     <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-soft">
-                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-muted mb-4">Artikel Terbaru</h3>
+                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-muted mb-4">Latest Articles</h3>
                         <ul class="space-y-4">
                             {recentPosts.map((rp) => (
                                 <li>
@@ -398,9 +398,9 @@ const articleSchema = {
                     <div class="bg-gradient-to-br from-ink via-primary-2 to-ink rounded-2xl p-6 text-white relative overflow-hidden">
                         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.18) 0%, transparent 60%);"></div>
                         <div class="relative">
-                            <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Diskusi Gratis 15 Menit</h3>
-                            <p class="text-white/70 text-xs leading-relaxed mb-4">Tim kami tinjau campaign Anda, kasih rekomendasi konkret.</p>
-                            <a href={`https://wa.me/62811919328?text=${encodeURIComponent(`Halo Beriklan, saya baca artikel "${post.title}" dan ingin diskusi.`)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-accent text-ink px-4 py-2 rounded-full font-bold text-xs shadow-md hover:shadow-pop transition-all">
+                            <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Free 15-Minute Discussion</h3>
+                            <p class="text-white/70 text-xs leading-relaxed mb-4">Our team reviews your campaign and gives concrete recommendations.</p>
+                            <a href={`https://wa.me/62811919328?text=${encodeURIComponent(`Hi Beriklan, I read the article "${post.title}" and would like to discuss.`)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-accent text-ink px-4 py-2 rounded-full font-bold text-xs shadow-md hover:shadow-pop transition-all">
                                 <MessageCircle class="w-3.5 h-3.5" />
                                 Chat WhatsApp
                             </a>
@@ -416,7 +416,7 @@ const articleSchema = {
             <div class="container mx-auto px-6 max-w-5xl">
                 <div class="flex items-center gap-3 mb-8">
                     <span class="w-8 h-px bg-accent"></span>
-                    <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-accent">Artikel Serupa</h2>
+                    <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-accent">Related Articles</h2>
                 </div>
                 <div class="grid md:grid-cols-3 gap-5 reveal-stagger">
                     {related.map((rel) => (

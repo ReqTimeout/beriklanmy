@@ -112,9 +112,9 @@
                         <div class="w-full h-full bg-gradient-to-br from-purple-300 via-pink-200 to-rose-300 relative overflow-hidden">
                             <div class="absolute inset-0 bg-grid opacity-30"></div>
                             <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-white drop-shadow-lg mb-1">Promo Hari Ini</p>
-                                <p class="text-xl font-display font-extrabold text-white leading-tight drop-shadow-2xl">Glow Up<br/>Skin Anda</p>
-                                <p class="text-xs text-white/90 mt-2 drop-shadow-lg">Klik untuk booking</p>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-white drop-shadow-lg mb-1">Today's Promo</p>
+                                <p class="text-xl font-display font-extrabold text-white leading-tight drop-shadow-2xl">Glow Up<br/>Your Skin</p>
+                                <p class="text-xs text-white/90 mt-2 drop-shadow-lg">Tap to book</p>
                                 <button class="mt-4 bg-white text-ink text-xs font-bold px-5 py-2 rounded-full shadow-lg btn-shine-accent">BOOKING →</button>
                             </div>
                             <!-- Progress bars (story-style) -->
@@ -166,7 +166,7 @@
                             <!-- Caption overlay bottom -->
                             <div class="absolute bottom-3 left-3 right-16 z-10">
                                 <p class="text-[11px] font-bold text-white drop-shadow-lg">@skincareloka</p>
-                                <p class="text-[10px] text-white/90 drop-shadow mt-0.5">Rutin 7 hari, kulit cerah nyata ✨</p>
+                                <p class="text-[10px] text-white/90 drop-shadow mt-0.5">7-day routine, visibly brighter skin ✨</p>
                                 <div class="flex items-center gap-1 mt-1">
                                     <Sparkles class="w-3 h-3 text-yellow-300" />
                                     <span class="text-[9px] font-bold text-white drop-shadow">Original audio</span>
@@ -203,15 +203,15 @@
             </div>
             <div>
                 <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Discover</p>
-                <p class="text-xs font-bold text-ink">60% pengguna temukan produk baru</p>
+                <p class="text-xs font-bold text-ink">60% of users discover new products</p>
             </div>
         </div>
     </div>
 
     <!-- FLOATING: Reach counter -->
     <div class="hv-float-2 absolute -right-2 md:-right-10 top-8 bg-white rounded-xl shadow-pop border border-gray-100 p-3 w-44 hidden md:block">
-        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimasi Views</p>
-        <p class="text-2xl font-display font-extrabold text-ink mt-1">{views.toLocaleString('id-ID')}</p>
+        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Estimated Views</p>
+        <p class="text-2xl font-display font-extrabold text-ink mt-1">{views.toLocaleString('en-MY')}</p>
         <div class="mt-2 h-1.5 bg-soft rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 rounded-full" style="width: 78%;"></div>
         </div>
@@ -223,8 +223,8 @@
             <MessageCircle class="w-4 h-4 text-white" fill="currentColor" />
         </div>
         <div class="min-w-0">
-            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">DM Masuk</p>
-            <p class="text-base font-display font-extrabold text-ink leading-tight">+{Math.floor(likes / 25)}<span class="text-xs text-muted font-bold ml-0.5">hari ini</span></p>
+            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Incoming DMs</p>
+            <p class="text-base font-display font-extrabold text-ink leading-tight">+{Math.floor(likes / 25)}<span class="text-xs text-muted font-bold ml-0.5">today</span></p>
         </div>
         <span class="live-dot relative w-1.5 h-1.5 rounded-full bg-pink-500 ml-auto anim-pulse"></span>
     </div>

@@ -17,83 +17,36 @@ import Footer from '../components/Footer.svelte';
 import relatedMap from '../data/related-services.json';
 import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, Users, Check, TrendingUp } from 'lucide-svelte';
 
-const waLink = "https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20jasa%20kelola%20Instagram.%20Mohon%20info%20paket%20dan%20harga.";
+const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20Instagram%20account%20management.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    {
-        name: 'Basic',
-        priceLabel: '2.500.000',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis yang ingin aktif rutin di Instagram dengan desain feed dan story yang konsisten.',
-        features: [
-            '15 desain feed (tanpa video)',
-            '5 story',
-            'Konsep, timeline, copy, posting',
-            'Report bulanan',
-            'Akses penuh ke akun Instagram Anda',
-        ],
-        priceNote: 'belum termasuk ad spend (opsional)',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
-    {
-        name: 'Standart',
-        priceLabel: '3.500.000',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis yang ingin lebih aktif dengan tambahan konten video pendek dan foto produk.',
-        features: [
-            '20 desain feed',
-            '2 short video (Reels)',
-            '10 story',
-            'Konsep, timeline, copy, posting, report',
-            '15 foto produk*',
-            'Akses penuh ke akun Instagram Anda',
-        ],
-        priceNote: 'belum termasuk ad spend (opsional)',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-        highlight: true,
-    },
-    {
-        name: 'Business',
-        priceLabel: 'Custom',
-        duration: '30 hari',
-        tagline: 'Untuk bisnis dengan kebutuhan khusus: produksi konten, UGC, campaign, atau kolaborasi influencer.',
-        features: [
-            'Custom jumlah konten',
-            'Custom jumlah story',
-            'Custom jumlah video pendek',
-            'Strategi dan konsep tailor-made',
-            'Kolaborasi dengan tim internal Anda',
-            'Review bulanan via video call',
-        ],
-        priceNote: 'harga disesuaikan dengan scope',
-        disclaimer: 'Tanpa kontrak panjang. Berhenti kapan saja.',
-    },
+    { name: 'Basic', priceLabel: '1,290', duration: 'per month', tagline: 'Steady, professional presence for growing brands.', features: ['12 feed posts per month', '8 Stories per month', 'Content calendar with approval flow', 'Caption copywriting in English/BM', 'Monthly performance report'], priceNote: 'per month', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Standard', priceLabel: '1,990', duration: 'per month', tagline: 'Full content engine with Reels and community management.', features: ['16 feed posts per month', '12 Stories + 4 Reels per month', 'Community management (comments & DMs)', 'Hashtag & trend research', 'Monthly strategy call', 'Monthly performance report'], priceNote: 'per month', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
+    { name: 'Business', priceLabel: 'Custom', duration: 'per month', tagline: 'Tailored scope for multi-brand or high-volume accounts.', features: ['Custom content volume', 'Dedicated content strategist', 'Photo/video production coordination', 'Influencer collaboration support', 'Weekly reporting'], priceNote: 'tailored quote', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
 
 const features = [
-    { iconName: 'Camera', title: 'Desain Feed', desc: 'Setiap post melalui proses desain visual yang menjaga konsistensi estetika brand. Cocok untuk brand yang ingin feed terlihat profesional.' },
-    { iconName: 'Sparkles', title: 'Story Harian', desc: 'Story diposting secara rutin untuk menjaga visibilitas di antara followers Anda. Format interaktif: polling, quiz, Q&A, countdown.' },
-    { iconName: 'Video', title: 'Reels Pendek', desc: 'Video pendek 15-30 detik yang mengikuti tren, namun tetap relevan dengan brand. Cocok untuk menjangkau audiens baru lewat Explore.' },
-    { iconName: 'MessageCircle', title: 'Manajemen DM', desc: 'Tim kami merespons DM dan komentar dengan tone brand yang konsisten. Respon cepat meningkatkan trust dan konversi.' },
-    { iconName: 'BarChart3', title: 'Report Bulanan', desc: 'Laporan disusun dengan bahasa yang mudah dipahami: post mana yang perform, insight followers, reach, dan rekomendasi strategi.' },
-    { iconName: 'Eye', title: 'Insight Audiens', desc: 'Kami analisis audiens Instagram Anda: siapa mereka, kapan aktif, konten apa yang paling engaging. Data ini menjadi dasar strategi bulan depan.' },
+    { iconName: 'Camera', title: 'Feed Design', desc: 'Every post goes through a visual design process that keeps your brand aesthetic consistent. Ideal for brands that want a professional-looking feed.' },
+    { iconName: 'Sparkles', title: 'Daily Stories', desc: 'Stories posted routinely to stay visible among your followers. Interactive formats: polls, quizzes, Q&As, countdowns.' },
+    { iconName: 'Video', title: 'Short Reels', desc: '15–30 second videos that follow trends while staying on-brand. Ideal for reaching new audiences via Explore.' },
+    { iconName: 'MessageCircle', title: 'DM Management', desc: 'Our team replies to DMs and comments in a consistent brand tone. Fast responses build trust and conversion.' },
+    { iconName: 'BarChart3', title: 'Monthly Reports', desc: 'Reports written in plain language: which posts performed, follower insights, reach, and strategy recommendations.' },
+    { iconName: 'Eye', title: 'Audience Insights', desc: 'We analyse your Instagram audience: who they are, when they’re active, and which content engages them most. This data drives the strategy.' },
 ];
 
 const steps = [
-    { num: '01', tag: 'MINGGU 1', title: 'Brief & Brand Guidelines', desc: 'Diskusi 30 menit untuk menggali produk, target market, tone visual, dan referensi brand Anda. Kami susun brand guidelines dan content pillars.' },
-    { num: '02', tag: 'MINGGU 1-2', title: 'Konsep & Produksi Konten', desc: 'Tim kami produksi desain, copy, dan konten visual sesuai brand guidelines. Anda approve konsep dan hasil akhir sebelum posting.' },
-    { num: '03', tag: 'MINGGU 2+', title: 'Posting & Monitoring', desc: 'Konten diposting sesuai jadwal yang disusun. Kami monitor performa harian dan merespons DM/komentar untuk menjaga engagement.' },
-    { num: '04', tag: 'BULANAN', title: 'Report & Iterasi', desc: 'Setiap bulan Anda menerima laporan lengkap: post mana yang perform, insight followers, dan rekomendasi strategi untuk bulan depan.' },
+    { num: '01', tag: 'WEEK 1', title: 'Brand & Audience Audit', desc: 'We review your profile, competitors and audience to define content pillars that fit your goals.' },
+    { num: '02', tag: 'WEEK 1-2', title: 'Content Calendar', desc: 'A monthly calendar of posts, Stories and Reels for your approval before anything goes live.' },
+    { num: '03', tag: 'WEEK 2+', title: 'Publish & Engage', desc: 'We publish on schedule and manage comments and DMs during business hours.' },
+    { num: '04', tag: 'MONTHLY', title: 'Review & Refine', desc: 'Monthly performance review — what grew, what didn\'t, and what changes next month.' },
 ];
 
 const faqs = [
-    { q: 'Apa bedanya paket Basic, Standart, dan Business?', a: 'Basic untuk Anda yang butuh konten rutin (15 feed + 5 story per bulan, tanpa video). Standart menambahkan 2 Reels dan 10 foto produk untuk variasi lebih kaya. Business adalah paket custom dengan produksi konten menyeluruh dan strategi aktivasi khusus.' },
-    { q: 'Apakah foto produk sudah termasuk dalam harga?', a: 'Untuk paket Standart, sudah termasuk 15 foto produk. Untuk paket Basic, foto produk disediakan oleh Anda. Untuk paket Business, kami produksi foto dan video sesuai kebutuhan.' },
-    { q: 'Berapa lama sampai saya melihat hasil dari konten ini?', a: 'Engagement rate biasanya sudah terbaca di minggu ke-2 atau ke-3. Pertumbuhan followers yang konsisten baru terasa di bulan ke-2 atau ke-3. Untuk hasil bisnis (chat WhatsApp atau penjualan), biasanya kombinasi dengan paid ads memberikan hasil lebih cepat.' },
-    { q: 'Bisakah konten diganti di tengah periode berjalan?', a: 'Bisa. Jika konsep awal kurang sesuai dengan respons audiens, kami revisi arah di tengah bulan. Ini bagian dari layanan — kami adaptif, bukan kaku.' },
-    { q: 'Apakah ada kontrak minimum?', a: 'Tidak ada. Sistem kerja bulanan. Anda bebas lanjut atau berhenti setiap periode. Ini bentuk komitmen kami untuk menjaga kualitas kerja — bukan jebakan kontrak.' },
-    { q: 'Apakah saya perlu tetap login ke akun Instagram saya?', a: 'Perlu — akses penuh ke akun Anda tetap dipegang. Kami yang mengeksekusi posting, menjawab komentar direct message opsional, dan memonitor insight. Semua perubahan terdokumentasi di laporan.' },
-    { q: 'Bagaimana laporan yang diberikan?', a: 'Laporan bulanan mencakup performa setiap post, insight audiens (demografi, jam aktif, lokasi), reach dan engagement, serta rekomendasi topik dan format untuk bulan depan. Dikirim via email dan didiskusikan via WhatsApp atau video call.' },
+    { q: 'How much does Instagram management cost at Beriklan?', a: 'Packages start from RM 1,290/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+    { q: 'How long does it take to set up a Instagram management campaign?', a: 'Initial setup takes 5–7 working days for the first content calendar, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+    { q: 'Is the ad budget included in the package price?', a: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+    { q: 'Is there a minimum contract?', a: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+    { q: 'What reporting will I receive?', a: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' },
 ];
 
 const relatedItems = (relatedMap.services['instagram-management'] || []).map(item => ({
@@ -104,28 +57,31 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
 }));
 ---
 
-<Layout title="Jasa Kelola Instagram Profesional — Beriklan" description="Akun Instagram Anda dijaga aktif — desain feed, story harian, copywriting Bahasa Indonesia, dan community management. Hemat waktu 5-10 jam per minggu. Mulai Rp 2,5 juta/bulan. Laporan bulanan via WhatsApp." canonical="https://beriklan.my/instagram-management/"
+<Layout
+    title="Instagram Management Malaysia | Content & Community — Beriklan"
+    description="End-to-end Instagram management: concept, design, copy, scheduling and monthly reports. Keep your brand alive while you run the business. From RM 1,290/month."
+    canonical="https://beriklan.my/instagram-management/"
     faq={[
-            { question: 'Berapa harga jasa kelola Instagram?', answer: 'Mulai dari Rp 1.500.000 per bulan. Sudah termasuk 12-15 post, story harian, reels mingguan, dan laporan.' },
-            { question: 'Berapa post per minggu?', answer: '3-5 post feed, 5-7 story per hari, 1-2 reels per minggu. Sesuai paket dan target audiens.' },
-            { question: 'Apakah tim Beriklan handle caption + hashtag?', answer: 'Ya, kami handle content calendar, copywriting caption, hashtag strategy, dan visual design.' },
-            { question: 'Berapa lama sampai results terlihat?', answer: 'Engagement rate naik dalam 1-2 bulan. Follower growth konsisten di bulan ke-2. Optimal di bulan ke-3.' },
-            { question: 'Apakah ada laporan bulanan?', answer: 'Ya, IG Insight report bulanan: reach, impressions, engagement rate, follower growth, dan rekomendasi bulan depan.' }
-        ]}
+        { question: 'How much does Instagram management cost at Beriklan?', answer: 'Packages start from RM 1,290/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation.' },
+        { question: 'How long does it take to set up a Instagram management campaign?', answer: 'Initial setup takes 5–7 working days for the first content calendar, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy.' },
+        { question: 'Is the ad budget included in the package price?', answer: 'No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency.' },
+        { question: 'Is there a minimum contract?', answer: 'No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract.' },
+        { question: 'What reporting will I receive?', answer: 'A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself.' }
+    ]}
     breadcrumb={[
-        { name: "Beranda", url: "https://beriklan.my/" },
-        { name: "Jasa Kelola Instagram", url: "https://beriklan.my/instagram-management/" }
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: "Instagram Management", url: "https://beriklan.my/instagram-management/" }
     ]}
     service={{
-        name: "Jasa Kelola Instagram",
-        description: "Jasa Jasa Kelola Instagram profesional dari Beriklan.co.id. Tim bersertifikat, strategi terukur, laporan mingguan, dan optimasi rutin untuk UMKM & bisnis menengah di Indonesia.",
+        name: "Instagram Management",
+        description: "Organic Instagram management — content, community and consistency for brands in Malaysia.",
         url: "https://beriklan.my/instagram-management/",
-        priceRange: "Rp 1.500.000 - Rp 3.000.000",
-        serviceType: "Instagram Management",
-        areaServed: "Indonesia",
-        provider: { name: "Beriklan.co.id", url: "https://beriklan.my" }
+        priceRange: "RM 1,290 - RM 1,990",
+        serviceType: "Social Media Management",
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
     }}
->>
+>
 
     <Navbar client:only="svelte" />
     <StickyCTA client:only="svelte" />
@@ -147,36 +103,36 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    <span class="opacity-0 anim-fade-in">Jasa Kelola Instagram · Konten & Community</span>
+                    <span class="opacity-0 anim-fade-in">Instagram Management · Content & Community</span>
                 </div>
 
                 <h1 class="hero-h1 font-display font-extrabold text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[2.9rem] text-ink leading-[1.05] tracking-tight">
-                    <span class="anim-fade-up">Jasa Kelola Instagram</span><br/>
-                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Konsistensi Konten,</span><br/>
-                    <span class="anim-fade-up" style="animation-delay: 160ms;">Pertumbuhan yang Terukur.</span>
+                    <span class="anim-fade-up">Instagram Management</span><br/>
+                    <span class="anim-fade-up text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent" style="animation-delay: 80ms;">Consistent Content,</span><br/>
+                    <span class="anim-fade-up" style="animation-delay: 160ms;">Measurable Growth.</span>
                 </h1>
 
                 <p class="hero-sub text-base md:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 anim-fade-up" style="animation-delay: 240ms;">
-                    Instagram yang aktif dan tertata membutuhkan waktu dan konsistensi. Tim kami mengelola akun Instagram Anda secara menyeluruh — mulai dari konsep, copy, desain, penjadwalan, hingga laporan mingguan. Anda fokus pada bisnis, kami yang menjaga brand tetap hidup.
+                    An active, well-curated Instagram takes time and consistency. Our team manages your Instagram account end-to-end — concept, copy, design, scheduling and weekly reports. You focus on the business; we keep the brand alive.
                 </p>
 
                 <div class="hero-ctas flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2 anim-fade-up" style="animation-delay: 320ms;">
                     <a href={waLink} target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-4 rounded-full font-bold shadow-lg hover:shadow-pop overflow-hidden btn-shine">
                         <span class="relative z-10 flex items-center gap-2">
-                            Diskusi via WhatsApp
+                            Chat on WhatsApp
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 group-hover:rotate-12 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-gray-200 bg-white hover:border-ink hover:-translate-y-0.5 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                 </div>
 
                 <div class="hero-trust pt-6 border-t border-gray-200/60 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm reveal" style="transition-delay: 200ms;">
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 tahun</strong> mengelola campaign iklan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Optimasi berbasis data, bukan tebakan</span></div>
-                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Laporan <strong class="text-ink">setiap Senin</strong>, bahasa yang mudah dipahami</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted"><strong class="text-ink">9 years</strong> managing ad campaigns</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Data-driven optimisation, not guesswork</span></div>
+                    <div class="flex items-center gap-2 trust-item"><span class="check-icon"></span><span class="text-muted">Reports <strong class="text-ink">every Monday</strong>, in plain language</span></div>
                 </div>
             </div>
 
@@ -190,15 +146,15 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
     <section class="py-7 bg-ink border-y border-white/5 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Dipercaya bisnis dari berbagai industri</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-white/40">Trusted by businesses across industries</p>
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/70 text-sm font-semibold trust-word">
                     <span>F&amp;B</span><span class="text-white/30">·</span>
                     <span>Skincare</span><span class="text-white/30">·</span>
                     <span>Fashion</span><span class="text-white/30">·</span>
                     <span>Edutech</span><span class="text-white/30">·</span>
                     <span>SaaS B2B</span><span class="text-white/30">·</span>
-                    <span>Klinik</span><span class="text-white/30">·</span>
-                    <span>Properti</span>
+                    <span>Clinics</span><span class="text-white/30">·</span>
+                    <span>Property</span>
                 </div>
             </div>
         </div>
@@ -213,33 +169,33 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Kenapa Kelola Instagram
+                    Why Instagram Management
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Bukan sekadar posting rutin,<br/>
-                    <span class="text-accent">tapi konten yang terukur dan selaras brand.</span>
+                    Not just routine posting,<br/>
+                    <span class="text-accent">but measurable, on-brand content.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Instagram adalah platform di mana keputusan pembelian banyak terjadi — terutama untuk produk consumer. Namun menjalankan akun secara konsisten membutuhkan waktu: desain, copy, penjadwalan, interaksi dengan followers, hingga monitoring performa. Tim kami mengambil alih semua itu, dengan output yang terukur dan dapat Anda verifikasi kapan saja.
+                    Instagram is where many purchase decisions happen — especially for consumer products. But running an account consistently takes time: design, copy, scheduling, follower engagement and performance monitoring. Our team takes all of that over, with output you can verify any time.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="why-card group">
                     <div class="why-icon">🎨</div>
-                    <h3 class="why-title">Desain Feed yang Konsisten</h3>
-                    <p class="why-desc">Kami menjaga feed Instagram Anda tertata dengan estetika brand yang konsisten. Setiap post melalui proses kurasi visual sebelum tayang.</p>
+                    <h3 class="why-title">A Consistent Feed Design</h3>
+                    <p class="why-desc">We keep your Instagram feed curated with a consistent brand aesthetic. Every post goes through visual curation before publishing.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 100ms;">
                     <div class="why-icon">📊</div>
-                    <h3 class="why-title">Report yang Detail</h3>
-                    <p class="why-desc">Laporan bulanan disusun dengan bahasa yang mudah dipahami: post mana yang perform, mana yang perlu iterasi, dan rekomendasi untuk bulan depan.</p>
+                    <h3 class="why-title">Detailed Reporting</h3>
+                    <p class="why-desc">Monthly reports written in plain language: which posts performed, which need iteration, and recommendations for next month.</p>
                 </div>
                 <div class="why-card group" style="animation-delay: 200ms;">
                     <div class="why-icon">💬</div>
                     <h3 class="why-title">Interaksi Followers</h3>
-                    <p class="why-desc">Tim kami mengelola balasan DM dan komentar untuk menjaga engagement tetap aktif. Respon cepat pada kolom komentar meningkatkan reach organik.</p>
+                    <p class="why-desc">Our team manages DM replies and comments to keep engagement active. Fast responses in the comments boost organic reach.</p>
                 </div>
             </div>
         </div>
@@ -255,8 +211,8 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Fitur yang kami optimalkan<br/>
-                    <span class="text-accent">di setiap campaign.</span>
+                    The features we optimise<br/>
+                    <span class="text-accent">in every campaign.</span>
                 </h2>
             </div>
 
@@ -272,12 +228,12 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="max-w-2xl mx-auto text-center mb-14 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-6 h-px bg-accent"></span>
-                    Cara Kerja
+                    How It Works
                     <span class="w-6 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Empat langkah dari brief<br/>
-                    <span class="text-accent">menuju iklan yang tayang optimal.</span>
+                    Four steps from brief<br/>
+                    <span class="text-accent">to ads running at their best.</span>
                 </h2>
             </div>
 
@@ -292,19 +248,19 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Paket & Harga
+                    Packages & Pricing
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Dua paket, disesuaikan dengan<br/>
-                    <span class="text-accent">tujuan bisnis Anda.</span>
+                    Two packages, matched to<br/>
+                    <span class="text-accent">your business goals.</span>
                 </h2>
                 <p class="mt-4 text-muted max-w-xl mx-auto text-base leading-relaxed">
-                    Pilih paket sesuai objective campaign: Standart untuk jangkauan rutin, Business untuk skala lebih besar dengan remarketing aktif.
+                    Choose a package to match your campaign objective: Standard for consistent reach, Business for bigger scale with active remarketing.
                 </p>
             </div>
 
-            <PricingCards tiers={tiers} pageSlug="Kelola Instagram" highlightIndex={1} columns={3} client:only="svelte" />
+            <PricingCards tiers={tiers} pageSlug="Instagram Management" highlightIndex={1} columns={3} client:only="svelte" />
 
             <div class="mt-10 max-w-2xl mx-auto reveal">
                 <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-soft">
@@ -313,10 +269,10 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
                             <Check class="w-5 h-5 text-accent" strokeWidth="2.5" />
                         </div>
                         <div>
-                            <p class="font-display font-bold text-base text-ink mb-1">Tidak yakin paket mana yang sesuai?</p>
-                            <p class="text-sm text-muted leading-relaxed">Sesi konsultasi 15 menit gratis. Kami bantu pilih paket yang paling cocok dengan budget iklan dan objective campaign Anda.</p>
+                            <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
+                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
-                                Konsultasi via WhatsApp
+                                Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </a>
                         </div>
@@ -339,33 +295,33 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Mengapa Tim Ini
+                    Why This Team
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white leading-[1.1] tracking-tight mt-3">
-                    Bukan agensi yang berjanji<br/>
-                    <span class="text-accent">angka fantastis tanpa dasar.</span>
+                    Not an agency that promises<br/>
+                    <span class="text-accent">fantastic numbers with nothing behind them.</span>
                 </h2>
                 <p class="text-white/60 mt-4 text-base max-w-xl mx-auto">
-                    Seluruh hasil berdasarkan data riil yang dapat Anda verifikasi sendiri. Bukan janji — hanya proses yang terukur.
+                    Every result is based on real data you can verify yourself. No promises — just a measurable process.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto reveal-stagger">
                 <div class="trust-item-dark">
                     <div class="trust-icon-dark">🔒</div>
-                    <h3 class="trust-title-dark">Akses penuh ke akun Anda</h3>
-                    <p class="trust-desc-dark">Seluruh akun Meta Ads tetap di bawah kendali Anda. Bila sewaktu-waktu dibutuhkan, seluruh data historis dan konfigurasi berpindah tanpa hambatan.</p>
+                    <h3 class="trust-title-dark">Full access to your account</h3>
+                    <p class="trust-desc-dark">Your ad account stays fully under your control. If you ever need to move on, all historical data and configurations transfer without friction.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 120ms;">
                     <div class="trust-icon-dark">📊</div>
-                    <h3 class="trust-title-dark">Laporan setiap Senin pagi</h3>
-                    <p class="trust-desc-dark">Disusun dalam satu halaman dengan bahasa yang mudah dipahami. Bukan sekadar deretan CPM-CTR-CPC — Anda mendapat kejelasan: mana yang berjalan optimal, dan mana yang perlu disesuaikan.</p>
+                    <h3 class="trust-title-dark">A report every Monday morning</h3>
+                    <p class="trust-desc-dark">One page, written in plain language. Not just rows of CPM-CTR-CPC — you get clarity on what is performing well and what needs adjusting.</p>
                 </div>
                 <div class="trust-item-dark" style="animation-delay: 240ms;">
                     <div class="trust-icon-dark">🔄</div>
-                    <h3 class="trust-title-dark">Tanpa minimum contract</h3>
-                    <p class="trust-desc-dark">Sistem kerja bulanan. Anda bebas memutuskan untuk lanjut atau berhenti setiap saat — tidak ada kontrak 6-12 bulan yang lazim diterapkan oleh kebanyakan agency lain.</p>
+                    <h3 class="trust-title-dark">No minimum contract</h3>
+                    <p class="trust-desc-dark">We work in monthly cycles. You are free to continue or stop at any time — none of the 6–12 month contracts most other agencies impose.</p>
                 </div>
             </div>
         </div>
@@ -377,49 +333,49 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Studi Kasus & Testimoni
+                    Case Studies & Testimonials
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pengalaman mereka yang telah<br/>
-                    <span class="text-accent">bekerja sama dengan Tim Beriklan.</span>
+                    The experience of those who have<br/>
+                    <span class="text-accent">worked with the Beriklan team.</span>
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto reveal-stagger">
                 <article class="tst-card">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.</p>
+                    <p class="tst-body">Our ROAS grew from 1.8x to 4.5x in four months. What we appreciated most: reports written in clear language, with every change explained so we could understand it.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-amber-500 to-orange-500">🧴</div>
                         <div>
-                            <p class="tst-name">Andini Pratiwi</p>
-                            <p class="tst-role">Owner · Brand Skincare, Bandung</p>
-                            <p class="tst-metric">ROAS 1.8x → 4.5x dalam 4 bulan</p>
+                            <p class="tst-name">Nurul Aisyah</p>
+                            <p class="tst-role">Owner · Skincare Brand, Kuala Lumpur</p>
+                            <p class="tst-metric">ROAS 1.8x → 4.5x in 4 months</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 100ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.</p>
+                    <p class="tst-body">Every Monday morning there is a report in language we actually understand — not just rows of CPM and CTR, but what needs to change and why.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-pink-500 to-rose-500">💆</div>
                         <div>
-                            <p class="tst-name">Rizky Maulana</p>
-                            <p class="tst-role">Marketing Manager · Klinik Kecantikan, Jakarta</p>
-                            <p class="tst-metric">Lead konsisten 3x lipat dari bulan ke-2</p>
+                            <p class="tst-name">Amirul Hakim</p>
+                            <p class="tst-role">Marketing Manager · Beauty Clinic, Petaling Jaya</p>
+                            <p class="tst-metric">Consistent 3x more leads from month 2</p>
                         </div>
                     </div>
                 </article>
                 <article class="tst-card" style="animation-delay: 200ms;">
                     <div class="tst-quote-mark">"</div>
-                    <p class="tst-body">Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.</p>
+                    <p class="tst-body">A B2B funnel behaves very differently from FMCG. Beriklan understood this and built a strategy that fit. Qualified leads grew 180% in Q3.</p>
                     <div class="tst-author">
                         <div class="tst-avatar bg-gradient-to-br from-blue-500 to-indigo-500">💼</div>
                         <div>
-                            <p class="tst-name">Sarah Nathania</p>
-                            <p class="tst-role">Head of Growth · SaaS B2B, Jakarta</p>
-                            <p class="tst-metric">Qualified leads +180% di Q3 2025</p>
+                            <p class="tst-name">Rachel Ng</p>
+                            <p class="tst-role">Head of Growth · B2B SaaS, Kuala Lumpur</p>
+                            <p class="tst-metric">Qualified leads +180% in Q3 2025</p>
                         </div>
                     </div>
                 </article>
@@ -444,12 +400,12 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
             <div class="text-center max-w-2xl mx-auto mb-12 reveal">
                 <p class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                     <span class="w-8 h-px bg-accent"></span>
-                    Sebelum mulai, ini biasanya yang ditanya
+                    Before starting, these usually get asked
                     <span class="w-8 h-px bg-accent"></span>
                 </p>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl text-ink leading-[1.1] tracking-tight mt-3">
-                    Pertanyaan yang sering muncul<br/>
-                    <span class="text-accent">sebelum deal pertama.</span>
+                    The questions that come up most<br/>
+                    <span class="text-accent">before the first deal.</span>
                 </h2>
             </div>
             <FaqAccordion items={faqs} client:visible />
@@ -464,7 +420,7 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
     <!-- ====================== PAA (People Also Ask) ====================== -->
     <PAASection service="instagram-management" pageUrl="https://beriklan.my/instagram-management/" />
 
-    <RelatedServices items={relatedItems} pillarHref="/instagram-management/pilar/" pillarLabel="Panduan Lengkap Kelola Instagram" client:visible />
+    <RelatedServices items={relatedItems} pillarHref="/instagram-management/pilar/" pillarLabel="Complete Instagram Management Guide" client:visible />
 
     <!-- ====================== FINAL CTA ====================== -->
     <section class="py-20 md:py-28 bg-gradient-to-br from-ink via-primary-2 to-ink text-white relative overflow-hidden">
@@ -478,27 +434,27 @@ const relatedItems = (relatedMap.services['instagram-management'] || []).map(ite
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
-                    Tim sedang online · respons dalam 1 jam (jam kerja)
+                    Team online · replies within 1 hour (business hours)
                 </div>
                 <h2 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 mt-3">
-                    Satu keputusan kecil hari ini,<br/>
-                    <span class="text-accent">dampaknya terasa di kuartal depan.</span>
+                    One small decision today,<br/>
+                    <span class="text-accent">the impact shows next quarter.</span>
                 </h2>
                 <p class="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-                    Bukan sekadar menjaga akun tetap aktif. Kami menyusun strategi konten yang selaras dengan karakter brand dan perilaku audiens Anda — agar setiap post berpotensi menjadi titik interaksi yang bermakna.
+                    More than keeping the account alive. We build a content strategy aligned with your brand and audience behaviour — so every post can become a meaningful point of engagement.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={waLink} target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-2 bg-accent text-ink px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-pop transition-all btn-shine-accent">
                         <span class="relative z-10 flex items-center gap-2">
-                            Mulai Konsultasi via WhatsApp
+                            Start a WhatsApp Consultation
                             <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </a>
                     <a href="#pricing" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
-                        Lihat Paket & Harga
+                        View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">Sesi konsultasi 15 menit · tanpa biaya</p>
+                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
             </div>
         </div>
     </section>

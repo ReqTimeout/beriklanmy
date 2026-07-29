@@ -6,7 +6,7 @@
     let postsCount = 0;
     let engagement = 0;
 
-    const days = ['S', 'S', 'R', 'K', 'J', 'S', 'M'];
+    const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     // Mock: some days have posts (orange), others empty
     const postsMap = {
         0: [{ type: 'image' }, { type: 'story' }],
@@ -108,17 +108,17 @@
                 <div class="text-center">
                     <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Total</p>
                     <p class="text-lg font-display font-extrabold text-ink leading-none mt-1">{postsCount}</p>
-                    <p class="text-[9px] text-muted">konten</p>
+                    <p class="text-[9px] text-muted">posts</p>
                 </div>
                 <div class="text-center">
                     <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Engagement</p>
                     <p class="text-lg font-display font-extrabold text-ink leading-none mt-1">{formatNumber(engagement)}</p>
-                    <p class="text-[9px] text-muted">/bulan</p>
+                    <p class="text-[9px] text-muted">/month</p>
                 </div>
                 <div class="text-center">
                     <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Reach</p>
                     <p class="text-lg font-display font-extrabold text-green leading-none mt-1">+24%</p>
-                    <p class="text-[9px] text-muted">vs bln lalu</p>
+                    <p class="text-[9px] text-muted">vs last month</p>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
         </div>
         <div class="min-w-0">
             <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Top Post</p>
-            <p class="text-[11px] font-bold text-ink leading-tight">Tutorial Skincare</p>
+            <p class="text-[11px] font-bold text-ink leading-tight">Skincare Tutorial</p>
             <p class="text-[9px] text-muted">2,3K likes · 187 saves</p>
         </div>
     </div>

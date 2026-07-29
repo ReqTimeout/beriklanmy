@@ -5,7 +5,7 @@
     let mounted = false;
     let displayedQuery = '';
     let typingIdx = 0;
-    const fullQuery = 'klinik gigi terbaik bandung';
+    const fullQuery = 'best dental clinic kuala lumpur';
     let visibleResults = 0;
     let positionTicker = 0;
 
@@ -74,24 +74,24 @@
             <div class="flex items-center gap-2 bg-soft rounded-full px-4 py-2.5 border border-gray-200 focus-within:border-blue-400 transition-colors">
                 <Search class="w-4 h-4 text-muted shrink-0" />
                 <span class="text-sm text-ink flex-1 truncate">{displayedQuery}<span class="cursor-blink">|</span></span>
-                <button class="text-[9px] font-bold text-blue-600 hover:text-blue-700">CARI</button>
+                <button class="text-[9px] font-bold text-blue-600 hover:text-blue-700">Search</button>
             </div>
         </div>
 
         <!-- Results area -->
         <div class="p-4 md:p-5 space-y-3 min-h-[280px]">
-            <p class="text-[10px] text-muted">Sekitar 1.230.000 hasil (0,42 detik)</p>
+            <p class="text-[10px] text-muted">About 1,230,000 results (0.42 seconds)</p>
 
             <!-- Ads block -->
             {#if visibleResults >= 1}
                 <div class="ad-result">
                     <div class="flex items-start gap-1.5 mb-1">
-                        <span class="ad-badge">Iklan</span>
+                        <span class="ad-badge">Ad</span>
                         <span class="text-[9px] text-muted">ads.google.com</span>
                     </div>
-                    <h3 class="ad-title">Klinik Gigi Bandung · Rating 4.8 · Booking Online 24 Jam</h3>
-                    <p class="ad-url">klinikgigibandung.id/booking</p>
-                    <p class="ad-desc">Dokter gigi berpengalaman 12 tahun. Perawatan saluran akar, behel, veneer, dan scaling. Konsultasi pertama GRATIS. Lokasi strategis di Bandung.</p>
+                    <h3 class="ad-title">KL Dental Clinic · Rating 4.8 · 24-Hour Online Booking</h3>
+                    <p class="ad-url">kldentalclinic.com.my/booking</p>
+                    <p class="ad-desc">Dentists with 12 years of experience. Root canal treatment, braces, veneers and scaling. First consultation FREE. Strategic location in Kuala Lumpur.</p>
                     <div class="flex items-center gap-3 mt-1.5 text-[10px]">
                         <span class="flex items-center gap-1 text-accent">
                             <Star class="w-3 h-3 fill-current" />
@@ -101,7 +101,7 @@
                             <Star class="w-3 h-3 fill-current" />
                             <span class="text-ink font-bold ml-0.5">4.8</span>
                         </span>
-                        <span class="flex items-center gap-1 text-muted"><Phone class="w-2.5 h-2.5" /> +62 22-...</span>
+                        <span class="flex items-center gap-1 text-muted"><Phone class="w-2.5 h-2.5" /> +60 3-...</span>
                         <span class="flex items-center gap-1 text-muted"><MapPin class="w-2.5 h-2.5" /> 0,8 km</span>
                     </div>
                 </div>
@@ -110,24 +110,24 @@
             {#if visibleResults >= 2}
                 <div class="ad-result" style="animation-delay: 100ms;">
                     <div class="flex items-start gap-1.5 mb-1">
-                        <span class="ad-badge">Iklan</span>
-                        <span class="text-[9px] text-muted">klinikgigi-bdg.com</span>
+                        <span class="ad-badge">Ad</span>
+                        <span class="text-[9px] text-muted">dentalcare-kl.com</span>
                     </div>
-                    <h3 class="ad-title">Promo Scaling Gigi Hanya Rp 199rb · Klinik Gigi Berstandar</h3>
-                    <p class="ad-url">klinikgigi-bdg.com/promo</p>
-                    <p class="ad-desc">Diskon 60% untuk scaling + konsultasi gratis. Dokter profesional dengan alat modern. Booking via WhatsApp hari ini.</p>
+                    <h3 class="ad-title">Teeth Scaling Promo Only RM 99 · Certified Dental Clinic</h3>
+                    <p class="ad-url">dentalcare-kl.com/promo</p>
+                    <p class="ad-desc">60% off scaling + a free consultation. Professional dentists with modern equipment. Book via WhatsApp today.</p>
                 </div>
             {/if}
 
             {#if visibleResults >= 3}
                 <div class="ad-result" style="animation-delay: 200ms;">
                     <div class="flex items-start gap-1.5 mb-1">
-                        <span class="ad-badge">Iklan</span>
-                        <span class="text-[9px] text-muted">dokterspesialis-gigi.id</span>
+                        <span class="ad-badge">Ad</span>
+                        <span class="text-[9px] text-muted">braces-specialist.com.my</span>
                     </div>
-                    <h3 class="ad-title">Behel Gigi Premium · Cicilan 0% · 24 Cabang di Indonesia</h3>
-                    <p class="ad-url">dokterspesialis-gigi.id/behel</p>
-                    <p class="ad-desc">Konsultasi gratis untuk pasang behel. Hasil terukur dengan teknologi 3D scan. Lokasi strategis di pusat kota Bandung.</p>
+                    <h3 class="ad-title">Premium Braces · 0% Instalment · 24 Branches in Malaysia</h3>
+                    <p class="ad-url">braces-specialist.com.my/braces</p>
+                    <p class="ad-desc">Free braces consultation. Measurable results with 3D scan technology. Strategic location in central Kuala Lumpur.</p>
                 </div>
             {/if}
         </div>
@@ -135,9 +135,9 @@
 
     <!-- FLOATING: Position rank -->
     <div class="hv-float-1 absolute -left-2 md:-left-12 top-20 bg-white rounded-xl shadow-pop border border-gray-100 p-3 w-52 hidden md:block">
-        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Posisi Rata-rata</p>
+        <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Average Position</p>
         <p class="text-2xl font-display font-extrabold text-ink mt-1">#{positionTicker}<span class="text-sm text-muted">–#2</span></p>
-        <p class="text-[10px] text-muted mt-0.5">di halaman pertama Google</p>
+        <p class="text-[10px] text-muted mt-0.5">on page one of Google</p>
         <div class="mt-2 h-1.5 bg-soft rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-blue-500 via-teal to-green rounded-full" style="width: {Math.min((positionTicker / 3) * 100, 95)}%; transition: width 0.4s ease;"></div>
         </div>
@@ -150,8 +150,8 @@
                 <Sparkles class="w-4 h-4 text-blue-600" />
             </div>
             <div>
-                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Kata Kunci</p>
-                <p class="text-base font-display font-extrabold text-ink leading-tight">15–20<span class="text-[9px] text-muted font-bold ml-1">aktif</span></p>
+                <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Keywords</p>
+                <p class="text-base font-display font-extrabold text-ink leading-tight">15–20<span class="text-[9px] text-muted font-bold ml-1">active</span></p>
             </div>
         </div>
     </div>
@@ -162,7 +162,7 @@
             <Search class="w-4 h-4 text-teal" />
         </div>
         <div class="min-w-0">
-            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Pencarian/Bulan</p>
+            <p class="text-[9px] uppercase tracking-wider text-muted font-bold">Searches/Month</p>
             <p class="text-base font-display font-extrabold text-ink leading-tight">1.2K<span class="text-xs text-muted font-bold ml-0.5">search</span></p>
         </div>
         <span class="live-dot relative w-1.5 h-1.5 rounded-full bg-teal ml-auto anim-pulse"></span>

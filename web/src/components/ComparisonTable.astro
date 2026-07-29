@@ -1,56 +1,56 @@
 ---
-// ComparisonTable.astro — Beriklan vs Kelola Sendiri comparison.
+// ComparisonTable.astro — Beriklan vs DIY comparison.
 // Generic component; service-specific overrides via props.
 import { Check, X } from 'lucide-svelte';
 
-const { serviceName = 'Iklan' } = Astro.props;
+const { serviceName = 'Ads' } = Astro.props;
 
 const rows = [
     {
-        feature: 'Setup akun iklan + pixel tracking',
-        diy: 'Risiko salah konversi event, pixel tidak merekam data',
-        agency: 'Setup sesuai best practice Meta/Google/TikTok, pixel terverifikasi sebelum launch'
+        feature: 'Ad account setup + pixel tracking',
+        diy: 'Risk of wrong conversion events, pixel not recording data',
+        agency: 'Setup follows Meta/Google/TikTok best practice, pixel verified before launch'
     },
     {
-        feature: 'Riset audiens & targeting',
-        diy: 'Targeting melebar, budget habis tanpa hasil',
-        agency: 'Interest + lookalike + retargeting berlapis, berdasarkan riset audiens spesifik industri'
+        feature: 'Audience research & targeting',
+        diy: 'Targeting too broad, budget spent with no results',
+        agency: 'Layered interest + lookalike + retargeting, based on industry-specific audience research'
     },
     {
-        feature: 'Pembuatan iklan (copy + creative)',
-        diy: 'Iklan terasa generic, tidak stand-out di feed',
-        agency: '10+ variasi creative per periode, copy disesuaikan dengan pain point audiens'
+        feature: 'Ad production (copy + creative)',
+        diy: 'Ads feel generic and fail to stand out in the feed',
+        agency: '10+ creative variations per period, copy tailored to audience pain points'
     },
     {
-        feature: 'Optimasi harian',
-        diy: 'Cek mingguan, tidak tahu kapan harus pause atau scale',
-        agency: 'Monitoring harian, bid adjustment, creative refresh sesuai data real-time'
+        feature: 'Daily optimisation',
+        diy: 'Weekly check-ins, unsure when to pause or scale',
+        agency: 'Daily monitoring, bid adjustments, creative refresh based on real-time data'
     },
     {
-        feature: 'Pelaporan & transparansi',
-        diy: 'Lihat di Ads Manager tanpa interpretasi',
-        agency: 'Laporan mingguan bahasa manusia + review bulanan via video call'
+        feature: 'Reporting & transparency',
+        diy: 'Raw Ads Manager numbers without interpretation',
+        agency: 'Weekly plain-language reports + monthly review via video call'
     },
     {
-        feature: 'Akses akun iklan',
-        diy: 'Penuh (tapi Anda sendiri yang pegang)',
-        agency: 'Penuh — Anda tetap owner, kami yang kelola'
+        feature: 'Ad account access',
+        diy: 'Full (but you run everything yourself)',
+        agency: 'Full — you remain the owner, we manage it'
     },
     {
-        feature: 'Waktu Anda',
-        diy: '5-10 jam/minggu belajar + eksekusi',
-        agency: 'Fokus bisnis, kami yang handle iklan'
+        feature: 'Your time',
+        diy: '5-10 hrs/week learning + executing',
+        agency: 'Focus on your business, we manage the campaigns'
     },
 ];
 ---
-<section class="py-16 md:py-20 bg-white" aria-label="Perbandingan Beriklan vs Kelola Sendiri">
+<section class="py-16 md:py-20 bg-white" aria-label="Beriklan vs DIY Comparison">
     <div class="container mx-auto px-6 max-w-6xl">
         <div class="text-center mb-10">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Perbandingan Jujur</p>
-            <h2 class="text-3xl md:text-4xl font-display font-extrabold text-ink mb-3">Kelola {serviceName} Sendiri vs Beriklan</h2>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">An Honest Comparison</p>
+            <h2 class="text-3xl md:text-4xl font-display font-extrabold text-ink mb-3">DIY {serviceName} vs Beriklan</h2>
             <p class="text-base md:text-lg text-muted max-w-2xl mx-auto">
-                Tidak ada jawaban benar atau salah — hanya berbeda prioritas waktu, budget, dan target hasil.
-                Berikut perbandingan apa yang Anda dapatkan di masing-masing opsi.
+                There is no right or wrong answer — only different priorities in time, budget and target outcomes.
+                Here is what you get with each option.
             </p>
         </div>
 
@@ -58,9 +58,9 @@ const rows = [
             <table class="w-full">
                 <thead>
                     <tr class="bg-ink text-white">
-                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold">Aspek</th>
-                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold">Kelola Sendiri</th>
-                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold bg-accent text-ink">Dengan Beriklan</th>
+                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold">Aspect</th>
+                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold">Do It Yourself</th>
+                        <th class="text-left p-4 md:p-5 text-sm md:text-base font-bold bg-accent text-ink">With Beriklan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,9 +82,9 @@ const rows = [
         </div>
 
         <p class="text-sm text-muted text-center mt-6 max-w-3xl mx-auto">
-            Bukan untuk meyakinkan Anda — ini keputusan bisnis yang harus Anda buat sendiri.
-            Jika Anda punya waktu 5-10 jam/minggu untuk belajar Meta/Google Ads dan nyaman eksperimen, kelola sendiri sah-sah saja.
-            Jika ingin hasil terukur tanpa harus belajar platform, kami siap diskusi.
+            This is not about convincing you — it is a business decision only you can make.
+            If you have 5-10 hours a week to learn Meta/Google Ads and enjoy experimenting, DIY is perfectly fine.
+            If you want measurable results without learning the platforms, we are happy to talk.
         </p>
     </div>
 </section>

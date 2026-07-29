@@ -1,957 +1,1188 @@
 [
   {
     "slug": "facebook-ads-management",
-    "name": "Jasa Iklan Facebook",
+    "name": "Facebook Ads Management",
     "category": "paid-ads",
-    "description": "Jasa Iklan Facebook profesional dari Beriklan. Bergaransi tim online respon 1 jam, laporan mingguan, dashboard real-time.",
+    "order": 1,
+    "active": true,
+    "description": "Professional Facebook Ads management by Beriklan. Meta-certified team, reply within 1 hour during business hours, weekly reports and a real-time dashboard.",
     "faqs": [
       {
-        "q": "Berapa biaya Jasa Iklan Facebook di Beriklan?",
-        "a": "Biaya bervariasi tergantung paket dan objectif campaign. Paket mulai Rp 12K untuk paket pemanasan, hingga paket premium Rp 175K untuk campaign terukur dengan pendampingan penuh. Hubungi kami untuk konsultasi awal 15 menit gratis."
+        "q": "How much does Facebook Ads management cost at Beriklan?",
+        "a": "Packages start from RM 990/month and go up to RM 2,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
       },
       {
-        "q": "Berapa lama setup campaign Jasa Iklan Facebook?",
-        "a": "Setup awal 1-3 hari kerja termasuk riset audience, pembuatan creative, dan konfigurasi tracking pixel. Campaign live dalam minggu pertama setelah persetujuan strategi."
+        "q": "How long does it take to set up a Facebook Ads management campaign?",
+        "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
       },
       {
-        "q": "Apakah saya dapat akses penuh ke akun iklan?",
-        "a": "Ya. Berbeda dengan agency yang menyembunyikan akun, kami memberikan akses penuh. Anda bisa monitor dashboard real-time dan kami kirim laporan mingguan."
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
       },
       {
-        "q": "Bagaimana sistem pelaporan hasilnya?",
-        "a": "Dashboard real-time + laporan mingguan via WhatsApp dengan breakdown spend, reach, CPA, ROAS, dan rekomendasi iterasi."
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
       },
       {
-        "q": "Berapa minimum budget iklan?",
-        "a": "Minimum budget harian Rp 50K-Rp 100K tergantung niche. Untuk hasil terukur dalam 30 hari, kami rekomendasikan budget Rp 5-10jt/bulan dengan fee manajemen terpisah."
-      }
-    ],
-    "active": true,
-    "order": 1,
-    "tiers": [
-      {
-        "name": "Standart",
-        "priceLabel": "1.750.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk bisnis yang ingin mulai rutin tampil di Facebook dengan iklan yang tertarget.",
-        "features": [
-          "Estimasi jangkauan 3.000-9.000 orang per hari",
-          "Penayangan di seluruh placement Facebook",
-          "2 iklan aktif: 10 foto atau 1 video",
-          "Iklan dapat diganti di tengah periode",
-          "Laporan mingguan bahasa yang mudah dipahami",
-          "Akses penuh ke akun iklan Facebook Anda"
-        ],
-        "priceNote": "belum termasuk ad spend Meta",
-        "disclaimer": "Tanpa kontrak panjang. Berhenti kapan saja."
-      },
-      {
-        "name": "Business",
-        "priceLabel": "3.750.000",
-        "duration": "30 hari tayang",
-        "highlight": true,
-        "tagline": "Untuk bisnis yang ingin jangkauan lebih luas dan optimasi lebih agresif.",
-        "features": [
-          "Estimasi jangkauan 4.000-15.000 orang per hari",
-          "Penayangan di seluruh placement Facebook",
-          "3 iklan aktif: 10 foto atau 1 video per iklan",
-          "Iklan dapat diganti kapan saja di tengah periode",
-          "Setup remarketing + lookalike audience",
-          "Laporan mingguan + review bulanan via video call",
-          "Akses penuh ke akun iklan Facebook Anda"
-        ],
-        "priceNote": "belum termasuk ad spend Meta",
-        "disclaimer": "Tanpa kontrak panjang. Berhenti kapan saja."
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
         "icon": "🎯",
-        "title": "Targeting Akurat",
-        "desc": "Lebih dari 100 kategori minat, perilaku, dan demografi yang dapat dikombinasikan. Kami memilih kombinasi yang paling sesuai dengan karakter audiens Anda."
+        "title": "Precise Targeting",
+        "desc": "Over 100 interest, behaviour and demographic categories that can be combined. We select the mix that best matches your audience in Malaysia."
       },
       {
         "icon": "📊",
-        "title": "Data yang Terbaca",
-        "desc": "Dashboard Meta menampilkan data detail tentang siapa yang melihat, mengklik, dan berkonsultasi — semuanya bisa Anda cek sendiri."
+        "title": "Numbers You Can Read",
+        "desc": "The Meta dashboard shows exactly who saw, clicked and enquired — and you can verify everything yourself at any time."
       },
       {
         "icon": "💬",
-        "title": "Chat WhatsApp Langsung",
-        "desc": "Tombol Call-to-Action bawaan Meta mengirim klik langsung ke WhatsApp — mempersempit jarak dari 'tertarik' menjadi 'percakapan'."
+        "title": "Direct WhatsApp Chats",
+        "desc": "Meta's built-in call-to-action sends clicks straight to WhatsApp — closing the gap between 'interested' and 'talking to you'."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "MINGGU 1",
-        "title": "Brief & Riset",
-        "desc": "Diskusi 30 menit untuk menggali produk, target market, dan tujuan Anda. Kami susun strategi targeting yang sesuai."
+        "tag": "WEEK 1",
+        "title": "Brief & Research",
+        "desc": "A 30-minute discussion to understand your product, target market and goals. We map the Facebook targeting strategy that fits."
       },
       {
         "num": "02",
-        "tag": "MINGGU 1-2",
-        "title": "Setup & Kreatif",
-        "desc": "Kami siapkan akun iklan & Meta Pixel, dan materi iklan (foto, video, copy). Anda approve, kami eksekusi."
+        "tag": "WEEK 1-2",
+        "title": "Setup & Creative",
+        "desc": "We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute."
       },
       {
         "num": "03",
-        "tag": "MINGGU 2+",
-        "title": "Launch 30 Hari",
-        "desc": "Iklan tayang selama 30 hari penuh di seluruh placement Facebook. Anda menerima laporan setiap Senin pagi."
+        "tag": "WEEK 2+",
+        "title": "30-Day Launch",
+        "desc": "Your ads run for a full 30 days across Facebook placements. You receive a report every Monday morning."
       },
       {
         "num": "04",
         "tag": "ONGOING",
-        "title": "Optimasi & Ganti Iklan",
-        "desc": "Kami monitor performa harian. Iklan yang tidak perform diganti. Yang jalan, di-scale-up."
+        "title": "Optimise & Rotate",
+        "desc": "We monitor performance daily. Underperforming ads are replaced; winners are scaled up."
       }
     ],
     "city_intro_template": "",
-    "testimonials": [
+    "tiers": [
       {
-        "quote": "ROAS kami meningkat dari 1.8x menjadi 4.5x dalam empat bulan. Yang paling kami apresiasi: laporan disusun dengan bahasa yang jelas dan setiap perubahan dapat kami pahami.",
-        "author": "Andini Pratiwi",
-        "role": "Owner · Brand Skincare, Bandung",
-        "metric": "ROAS 1.8x → 4.5x dalam 4 bulan",
-        "avatar": "🧴",
-        "color": "from-amber-500 to-orange-500"
+        "name": "Starter",
+        "priceLabel": "990",
+        "duration": "30-day campaign",
+        "tagline": "For businesses starting consistent, targeted Facebook advertising.",
+        "features": [
+          "Estimated reach 3,000–9,000 people per day",
+          "Delivery across all Facebook placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "quote": "Setiap Senin pagi selalu ada laporan dalam bahasa yang mudah dipahami — bukan hanya deretan CPM dan CTR, tetapi apa yang perlu diubah dan mengapa.",
-        "author": "Rizky Maulana",
-        "role": "Marketing Manager · Klinik Kecantikan, Jakarta",
-        "metric": "Lead konsisten 3x lipat dari bulan ke-2",
-        "avatar": "💆",
-        "color": "from-pink-500 to-rose-500"
+        "name": "Business",
+        "priceLabel": "1,990",
+        "duration": "30-day campaign",
+        "tagline": "For businesses ready to scale with more creatives and deeper optimisation.",
+        "features": [
+          "Estimated reach 8,000–20,000 people per day",
+          "Delivery across all Facebook placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access",
+          "A/B testing across audiences and creatives"
+        ],
+        "highlight": true,
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "quote": "Karakteristik funnel B2B berbeda signifikan dari FMCG. Beriklan memahami hal ini dan menyusun strategi yang relevan. Qualified leads naik 180% di Q3.",
-        "author": "Sarah Nathania",
-        "role": "Head of Growth · SaaS B2B, Jakarta",
-        "metric": "Qualified leads +180% di Q3 2025",
-        "avatar": "💼",
-        "color": "from-blue-500 to-indigo-500"
+        "name": "Premium",
+        "priceLabel": "2,990",
+        "duration": "30-day campaign",
+        "tagline": "Full-funnel management with retargeting and conversion optimisation.",
+        "features": [
+          "Estimated reach 15,000–40,000 people per day",
+          "Delivery across all Facebook placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access",
+          "Retargeting & lookalike audiences",
+          "Dedicated account strategist"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       }
     ]
   },
   {
     "slug": "instagram-ads-management",
-    "name": "Jasa Iklan Instagram",
+    "name": "Instagram Ads Management",
     "category": "paid-ads",
-    "description": "Jasa Iklan Instagram Dapatkan Targeting Yang Tepat Pengelolaan Iklan Yang Efisien Dan Analisis Kinerja Untuk Hasil Yang Optimal Hubungi 0811-919-328",
+    "order": 2,
+    "active": true,
+    "description": "Instagram Ads management focused on reach, engagement and enquiries. Meta-certified team managing campaigns since 2016.",
     "faqs": [
       {
-        "q": "Berapa biaya Jasa Iklan Instagram di Beriklan?",
-        "a": "Biaya bervariasi tergantung paket dan objectif campaign. Paket mulai Rp 12K untuk paket pemanasan, hingga paket premium Rp 175K untuk campaign terukur dengan pendampingan penuh. Hubungi kami untuk konsultasi awal 15 menit gratis."
+        "q": "How much does Instagram Ads management cost at Beriklan?",
+        "a": "Packages start from RM 990/month and go up to RM 2,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
       },
       {
-        "q": "Berapa lama setup campaign Jasa Iklan Instagram?",
-        "a": "Setup awal 1-3 hari kerja termasuk riset audience, pembuatan creative, dan konfigurasi tracking pixel. Campaign live dalam minggu pertama setelah persetujuan strategi."
+        "q": "How long does it take to set up a Instagram Ads management campaign?",
+        "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
       },
       {
-        "q": "Apakah saya dapat akses penuh ke akun iklan?",
-        "a": "Ya. Berbeda dengan agency yang menyembunyikan akun, kami memberikan akses penuh. Anda bisa monitor dashboard real-time dan kami kirim laporan mingguan."
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
       },
       {
-        "q": "Bagaimana sistem pelaporan hasilnya?",
-        "a": "Dashboard real-time + laporan mingguan via WhatsApp dengan breakdown spend, reach, CPA, ROAS, dan rekomendasi iterasi."
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
       },
       {
-        "q": "Berapa minimum budget iklan?",
-        "a": "Minimum budget harian Rp 50K-Rp 100K tergantung niche. Untuk hasil terukur dalam 30 hari, kami rekomendasikan budget Rp 5-10jt/bulan dengan fee manajemen terpisah."
-      }
-    ],
-    "active": true,
-    "order": 2,
-    "tiers": [
-      {
-        "name": "Standart",
-        "priceLabel": "1.750.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk bisnis dengan produk visual yang ingin tampil rutin di Instagram.",
-        "features": [
-          "Estimasi jangkauan 4.000-12.000 orang per hari",
-          "Tayang di Feed, Stories, dan Reels",
-          "2 iklan aktif: 10 foto atau 3 video",
-          "Iklan dapat diganti di tengah periode",
-          "Laporan mingguan dengan bahasa yang mudah dipahami",
-          "Akses penuh ke akun iklan Instagram Anda"
-        ],
-        "priceNote": "belum termasuk ad spend Meta",
-        "disclaimer": "Tanpa kontrak panjang. Berhenti kapan saja."
-      },
-      {
-        "name": "Business",
-        "priceLabel": "3.750.000",
-        "duration": "30 hari tayang",
-        "highlight": true,
-        "tagline": "Untuk brand yang ingin agresif tampil di discovery dan explore.",
-        "features": [
-          "Estimasi jangkauan 6.000-20.000 orang per hari",
-          "Tayang di Feed, Stories, Reels, dan Explore",
-          "3 iklan aktif: 15 foto atau 5 video per iklan",
-          "Setup influencer-style content collaboration",
-          "Setup lookalike audience dari customer existing",
-          "Laporan mingguan + review bulanan via video call",
-          "Akses penuh ke akun Instagram Business Anda"
-        ],
-        "priceNote": "belum termasuk ad spend Meta",
-        "disclaimer": "Tanpa kontrak panjang."
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
-        "icon": "📱",
-        "title": "Visual First",
-        "desc": "Instagram adalah platform visual. Foto dan video berkualitas tinggi mengubah scroll menjadi percakapan."
+        "icon": "📸",
+        "title": "Visual-First Creative",
+        "desc": "Feed, Stories and Reels formats prepared to match how Malaysians actually scroll — thumb-stopping in the first second."
       },
       {
-        "icon": "🎨",
-        "title": "Reels Discovery",
-        "desc": "Reels Instagram punya reach organik tertinggi — bahkan tanpa paid ads, video Anda bisa viral."
+        "icon": "🎯",
+        "title": "Interest & Behaviour Targeting",
+        "desc": "We combine Meta's targeting signals to reach the people most likely to buy, not just to like."
       },
       {
         "icon": "💬",
-        "title": "DM & WhatsApp",
-        "desc": "Tombol CTA Instagram mengirim chat langsung ke WhatsApp — lebih cepat dari form."
+        "title": "DM & WhatsApp Funnels",
+        "desc": "Click-to-message campaigns that turn views into conversations you can close."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "MINGGU 1",
-        "title": "Content Audit",
-        "desc": "Evaluasi content existing, identifikasi visual yang paling resonan, dan tentukan content plan iklan."
+        "tag": "WEEK 1",
+        "title": "Brief & Research",
+        "desc": "A 30-minute discussion to understand your product, target market and goals. We map the Instagram targeting strategy that fits."
       },
       {
         "num": "02",
-        "tag": "MINGGU 1-2",
-        "title": "Creative Production",
-        "desc": "Briefing untuk materi iklan + integrasi Meta Pixel untuk tracking konversi."
+        "tag": "WEEK 1-2",
+        "title": "Setup & Creative",
+        "desc": "We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute."
       },
       {
         "num": "03",
-        "tag": "MINGGU 2+",
-        "title": "Launch 30 Hari",
-        "desc": "Tayang di Feed, Stories, Reels + lookalike audience aktif dari minggu pertama."
+        "tag": "WEEK 2+",
+        "title": "30-Day Launch",
+        "desc": "Your ads run for a full 30 days across Instagram placements. You receive a report every Monday morning."
       },
       {
         "num": "04",
         "tag": "ONGOING",
-        "title": "Optimasi Mingguan",
-        "desc": "A/B test visual + copy. Yang resonan di-scale, yang tidak diganti."
+        "title": "Optimise & Rotate",
+        "desc": "We monitor performance daily. Underperforming ads are replaced; winners are scaled up."
       }
     ],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "tiktok-ads-management",
-    "name": "Jasa Iklan TikTok",
-    "category": "paid-ads",
-    "description": "Iklankan Perusahaan Anda di TikTok Dapatkan Lebih Banyak Views Followers dan Like di Admin TikTok Anda | Beriklan Sponsor Tertarget Hubungi : 0811-919-328",
-    "faqs": [
-      {
-        "q": "Berapa biaya Jasa Iklan TikTok di Beriklan?",
-        "a": "Biaya bervariasi tergantung paket dan objectif campaign. Paket mulai Rp 12K untuk paket pemanasan, hingga paket premium Rp 175K untuk campaign terukur dengan pendampingan penuh. Hubungi kami untuk konsultasi awal 15 menit gratis."
-      },
-      {
-        "q": "Berapa lama setup campaign Jasa Iklan TikTok?",
-        "a": "Setup awal 1-3 hari kerja termasuk riset audience, pembuatan creative, dan konfigurasi tracking pixel. Campaign live dalam minggu pertama setelah persetujuan strategi."
-      },
-      {
-        "q": "Apakah saya dapat akses penuh ke akun iklan?",
-        "a": "Ya. Berbeda dengan agency yang menyembunyikan akun, kami memberikan akses penuh. Anda bisa monitor dashboard real-time dan kami kirim laporan mingguan."
-      },
-      {
-        "q": "Bagaimana sistem pelaporan hasilnya?",
-        "a": "Dashboard real-time + laporan mingguan via WhatsApp dengan breakdown spend, reach, CPA, ROAS, dan rekomendasi iterasi."
-      },
-      {
-        "q": "Berapa minimum budget iklan?",
-        "a": "Minimum budget harian Rp 50K-Rp 100K tergantung niche. Untuk hasil terukur dalam 30 hari, kami rekomendasikan budget Rp 5-10jt/bulan dengan fee manajemen terpisah."
-      }
-    ],
-    "active": true,
-    "order": 3,
+    "city_intro_template": "",
     "tiers": [
       {
-        "name": "Basic",
-        "priceLabel": "1.000.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk bisnis yang ingin mulai mencoba TikTok Ads dengan budget terbatas.",
+        "name": "Starter",
+        "priceLabel": "990",
+        "duration": "30-day campaign",
+        "tagline": "Consistent, targeted Instagram presence for growing brands.",
         "features": [
-          "Estimasi jangkauan 5.000-15.000 orang per hari",
-          "Tayang di For You Page (FYP)",
-          "1 video Spark Ads aktif",
-          "Spark Ads menggunakan organic post yang sudah perform",
-          "Laporan mingguan dengan KPI utama"
+          "Estimated reach 3,000–9,000 people per day",
+          "Delivery across all Instagram placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access"
         ],
-        "priceNote": "belum termasuk ad spend TikTok",
-        "disclaimer": "Tanpa kontrak panjang."
-      },
-      {
-        "name": "Standart",
-        "priceLabel": "1.600.000",
-        "duration": "30 hari tayang",
-        "highlight": true,
-        "tagline": "Untuk brand yang ingin scaling dengan multiple Spark Ads sekaligus.",
-        "features": [
-          "Estimasi jangkauan 8.000-25.000 orang per hari",
-          "Tayang di FYP + kategori relevan",
-          "3 video Spark Ads aktif simultan",
-          "Setup In-Feed Ads format native",
-          "Optimasi manual setiap minggu"
-        ],
-        "priceNote": "belum termasuk ad spend TikTok",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
         "name": "Business",
-        "priceLabel": "3.750.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk brand yang serius di TikTok dengan pendekatan multi-format.",
+        "priceLabel": "1,990",
+        "duration": "30-day campaign",
+        "tagline": "Scale reach and engagement with more formats and testing.",
         "features": [
-          "Estimasi jangkauan 15.000-50.000 orang per hari",
-          "Spark Ads + In-Feed + TopView (sesuai brief)",
-          "5-7 video Spark Ads aktif",
-          "Setup KOL/creator collaboration",
-          "Setup retargeting untuk viewer engaged",
-          "Laporan mingguan + review bulanan"
+          "Estimated reach 8,000–20,000 people per day",
+          "Delivery across all Instagram placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access",
+          "Stories & Reels ad formats included"
         ],
-        "priceNote": "belum termasuk ad spend TikTok",
-        "disclaimer": "Tanpa kontrak panjang."
+        "highlight": true,
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Premium",
+        "priceLabel": "2,990",
+        "duration": "30-day campaign",
+        "tagline": "Full-funnel Instagram: awareness, retargeting, conversion.",
+        "features": [
+          "Estimated reach 15,000–40,000 people per day",
+          "Delivery across all Instagram placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access",
+          "Retargeting & lookalike audiences",
+          "Dedicated account strategist"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "tiktok-ads-management",
+    "name": "TikTok Ads Management",
+    "category": "paid-ads",
+    "order": 3,
+    "active": true,
+    "description": "TikTok Ads management — Spark Ads, In-Feed and TikTok Shop campaigns for the Malaysian market.",
+    "faqs": [
+      {
+        "q": "How much does TikTok Ads management cost at Beriklan?",
+        "a": "Packages start from RM 790/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
+      },
+      {
+        "q": "How long does it take to set up a TikTok Ads management campaign?",
+        "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
+      },
+      {
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
+      },
+      {
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
+      },
+      {
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
-        "icon": "🎬",
-        "title": "Video-First Discovery",
-        "desc": "TikTok FYP memberi organic reach lebih besar dari platform lain. Spark Ads amplifies organic post yang sudah viral."
+        "icon": "🔥",
+        "title": "Native, Not 'Ad-Looking'",
+        "desc": "TikTok rewards content that feels organic. We build Spark Ads from content that already earns watch time."
       },
       {
-        "icon": "👥",
-        "title": "Audiens Muda Indonesia",
-        "desc": "127jt+ pengguna aktif di Indonesia, dominan Gen-Z dan Milenial urban yang jadi target utama brand masa kini."
+        "icon": "🛍",
+        "title": "TikTok Shop Ready",
+        "desc": "Campaigns wired to TikTok Shop Malaysia — from FYP view to checkout without leaving the app."
       },
       {
-        "icon": "💰",
-        "title": "CPM Lebih Murah",
-        "desc": "CPM TikTok umumnya 40-60% lebih murah dari Meta. Cocok untuk bisnis dengan budget efisien."
+        "icon": "📈",
+        "title": "Fast Iteration",
+        "desc": "Creative fatigue hits fast on TikTok. We rotate and test hooks weekly to keep costs down."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "MINGGU 1",
-        "title": "Trend Research",
-        "desc": "Riset 30-50 video trending di niche Anda, identifikasi format yang bekerja, dan brief content plan."
+        "tag": "WEEK 1",
+        "title": "Brief & Research",
+        "desc": "A 30-minute discussion to understand your product, target market and goals. We map the TikTok targeting strategy that fits."
       },
       {
         "num": "02",
-        "tag": "MINGGU 1-2",
-        "title": "Spark Ads Setup",
-        "desc": "Pilih video organic yang perform, set sebagai Spark Ads, configure targeting untuk audiens yang bergerak di niche Anda."
+        "tag": "WEEK 1-2",
+        "title": "Setup & Creative",
+        "desc": "We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute."
       },
       {
         "num": "03",
-        "tag": "MINGGU 2+",
-        "title": "Launch 30 Hari",
-        "desc": "Multiple Spark Ads tayang simultan. FYP算法 TikTok distribute ke ratusan ribu orang."
+        "tag": "WEEK 2+",
+        "title": "30-Day Launch",
+        "desc": "Your ads run for a full 30 days across TikTok placements. You receive a report every Monday morning."
       },
       {
         "num": "04",
         "tag": "ONGOING",
-        "title": "Refresh Creative",
-        "desc": "Tiap 1-2 minggu ganti creative. Yang resonan scale, yang mati ganti dengan hook baru."
+        "title": "Optimise & Rotate",
+        "desc": "We monitor performance daily. Underperforming ads are replaced; winners are scaled up."
       }
     ],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "google-ads-management",
-    "name": "Jasa Iklan Google",
-    "category": "paid-ads",
-    "description": "Ingin meningkatkan traffic website dan penjualan bisnis Anda? Kami siap membantu dengan jasa iklan Google Tumbuhkan bisnis Anda dengan iklan Google 0811-919-328",
-    "faqs": [
-      {
-        "q": "Berapa biaya Jasa Iklan Google di Beriklan?",
-        "a": "Biaya bervariasi tergantung paket dan objectif campaign. Paket mulai Rp 12K untuk paket pemanasan, hingga paket premium Rp 175K untuk campaign terukur dengan pendampingan penuh. Hubungi kami untuk konsultasi awal 15 menit gratis."
-      },
-      {
-        "q": "Berapa lama setup campaign Jasa Iklan Google?",
-        "a": "Setup awal 1-3 hari kerja termasuk riset audience, pembuatan creative, dan konfigurasi tracking pixel. Campaign live dalam minggu pertama setelah persetujuan strategi."
-      },
-      {
-        "q": "Apakah saya dapat akses penuh ke akun iklan?",
-        "a": "Ya. Berbeda dengan agency yang menyembunyikan akun, kami memberikan akses penuh. Anda bisa monitor dashboard real-time dan kami kirim laporan mingguan."
-      },
-      {
-        "q": "Bagaimana sistem pelaporan hasilnya?",
-        "a": "Dashboard real-time + laporan mingguan via WhatsApp dengan breakdown spend, reach, CPA, ROAS, dan rekomendasi iterasi."
-      },
-      {
-        "q": "Berapa minimum budget iklan?",
-        "a": "Minimum budget harian Rp 50K-Rp 100K tergantung niche. Untuk hasil terukur dalam 30 hari, kami rekomendasikan budget Rp 5-10jt/bulan dengan fee manajemen terpisah."
-      }
-    ],
-    "active": true,
-    "order": 4,
+    "city_intro_template": "",
     "tiers": [
       {
         "name": "Basic",
-        "priceLabel": "1.750.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk bisnis baru yang ingin mulai tertangkap di pencarian Google.",
+        "priceLabel": "790",
+        "duration": "30-day campaign",
+        "tagline": "Entry plan to validate TikTok as a channel for your business.",
         "features": [
-          "10 kata kunci aktif (long-tail)",
-          "10 iklan aktif per keyword",
-          "Tayang di Google Search (halaman 1)",
-          "Targeting lokasi Indonesia atau tertentu",
-          "Iklan dapat diganti di tengah periode",
-          "Laporan mingguan bahasa yang mudah dipahami",
-          "Akses penuh ke akun Google Ads Anda"
+          "Estimated reach 4,000–12,000 people per day",
+          "Delivery across all TikTok placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language"
         ],
-        "priceNote": "belum termasuk ad spend Google",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "name": "Standart",
-        "priceLabel": "3.750.000",
-        "duration": "30 hari tayang",
-        "highlight": true,
-        "tagline": "Untuk bisnis dengan search volume sedang dan perlu variasi iklan.",
+        "name": "Standard",
+        "priceLabel": "1,290",
+        "duration": "30-day campaign",
+        "tagline": "Consistent TikTok presence with Spark Ads and weekly creative rotation.",
         "features": [
-          "15-20 kata kunci aktif",
-          "15 iklan aktif per keyword",
-          "Tayang di Search + Display Network",
-          "A/B testing iklan dan landing page",
-          "Conversion tracking setup",
-          "Laporan mingguan dengan rekomendasi iterasi"
+          "Estimated reach 10,000–25,000 people per day",
+          "Delivery across all TikTok placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Spark Ads from your organic content"
         ],
-        "priceNote": "belum termasuk ad spend Google",
-        "disclaimer": "Tanpa kontrak panjang."
+        "highlight": true,
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
         "name": "Business",
-        "priceLabel": "6.000.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk bisnis dengan search volume tinggi dan target agresif.",
+        "priceLabel": "1,990",
+        "duration": "30-day campaign",
+        "tagline": "Aggressive growth with TikTok Shop integration and retargeting.",
         "features": [
-          "25-30 kata kunci aktif",
-          "20 iklan aktif per keyword",
-          "Tayang di Search + Display + YouTube Ads",
-          "Setup Smart Bidding + Conversion AI",
-          "Analisa kompetitor keyword",
-          "Optimasi bidding strategy",
-          "Laporan mingguan + review bulanan video call"
+          "Estimated reach 20,000–50,000 people per day",
+          "Delivery across all TikTok placements",
+          "Ad creatives prepared and rotated for you",
+          "Ads can be replaced mid-cycle",
+          "Weekly report in plain language",
+          "Real-time dashboard access",
+          "TikTok Shop campaign integration"
         ],
-        "priceNote": "belum termasuk ad spend Google",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "google-ads-management",
+    "name": "Google Ads Management",
+    "category": "paid-ads",
+    "order": 4,
+    "active": true,
+    "description": "Google Ads management — Search, Display and YouTube. Capture Malaysians who are already searching for what you sell.",
+    "faqs": [
+      {
+        "q": "How much does Google Ads management cost at Beriklan?",
+        "a": "Packages start from RM 990/month and go up to RM 2,790 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
+      },
+      {
+        "q": "How long does it take to set up a Google Ads management campaign?",
+        "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
+      },
+      {
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
+      },
+      {
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
+      },
+      {
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
         "icon": "🔍",
-        "title": "High Intent Traffic",
-        "desc": "Orang yang search di Google punya intensi tinggi — mereka aktif mencari solusi. Bukan被动 melihat."
+        "title": "High-Intent Traffic",
+        "desc": "Search ads reach people at the exact moment they are looking for your product or service — the warmest traffic money can buy."
       },
       {
-        "icon": "📍",
-        "title": "Page 1 in Minutes",
-        "desc": "Google Ads muncul di halaman 1 SEARCH result dalam hitungan menit — vs SEO organik yang butuh bulan."
+        "icon": "🧮",
+        "title": "Keyword Economics",
+        "desc": "We build keyword lists around buying intent and negative-match the waste, so budget goes to clicks that can convert."
       },
       {
-        "icon": "💰",
-        "title": "Pay Per Click",
-        "desc": "Anda hanya bayar saat ada orang mengklik. Tidak ada click = tidak ada biaya."
+        "icon": "📊",
+        "title": "Conversion Tracking Done Right",
+        "desc": "Calls, WhatsApp clicks and form fills tracked properly, so decisions are based on results — not guesses."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "MINGGU 1",
-        "title": "Keyword Research",
-        "desc": "Riset 50-100 kata kunci, pilih yang high-intent + cost-effective sesuai niche Anda."
+        "tag": "WEEK 1",
+        "title": "Brief & Research",
+        "desc": "A 30-minute discussion to understand your product, target market and goals. We map the Google targeting strategy that fits."
       },
       {
         "num": "02",
-        "tag": "MINGGU 1-2",
-        "title": "Setup & Tracking",
-        "desc": "Setup akun, conversion tracking, integrasi landing page. Iklan dengan copy yang strong."
+        "tag": "WEEK 1-2",
+        "title": "Setup & Creative",
+        "desc": "We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute."
       },
       {
         "num": "03",
-        "tag": "MINGGU 2+",
-        "title": "Launch 30 Hari",
-        "desc": "Tayang 24/7 di Google Search + Display. Data mulai terkumpul dari hari pertama."
+        "tag": "WEEK 2+",
+        "title": "30-Day Launch",
+        "desc": "Your ads run for a full 30 days across Google placements. You receive a report every Monday morning."
       },
       {
         "num": "04",
         "tag": "ONGOING",
-        "title": "Optimasi Mingguan",
-        "desc": "Negative keywords, bid adjustments, ad copy refresh. Yang tidak convert di-pause."
+        "title": "Optimise & Rotate",
+        "desc": "We monitor performance daily. Underperforming ads are replaced; winners are scaled up."
       }
     ],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "youtube-ads-management",
-    "name": "Jasa Iklan YouTube",
-    "category": "paid-ads",
-    "description": "Maksimalkan keuntungan bisnis Anda dengan jasa iklan YouTube kami. Kami menawarkan targeting yang tepat dan analisis kinerja untuk hasil optimal 081-1919-328",
-    "faqs": [
-      {
-        "q": "Berapa biaya Jasa Iklan YouTube di Beriklan?",
-        "a": "Biaya bervariasi tergantung paket dan objectif campaign. Paket mulai Rp 12K untuk paket pemanasan, hingga paket premium Rp 175K untuk campaign terukur dengan pendampingan penuh. Hubungi kami untuk konsultasi awal 15 menit gratis."
-      },
-      {
-        "q": "Berapa lama setup campaign Jasa Iklan YouTube?",
-        "a": "Setup awal 1-3 hari kerja termasuk riset audience, pembuatan creative, dan konfigurasi tracking pixel. Campaign live dalam minggu pertama setelah persetujuan strategi."
-      },
-      {
-        "q": "Apakah saya dapat akses penuh ke akun iklan?",
-        "a": "Ya. Berbeda dengan agency yang menyembunyikan akun, kami memberikan akses penuh. Anda bisa monitor dashboard real-time dan kami kirim laporan mingguan."
-      },
-      {
-        "q": "Bagaimana sistem pelaporan hasilnya?",
-        "a": "Dashboard real-time + laporan mingguan via WhatsApp dengan breakdown spend, reach, CPA, ROAS, dan rekomendasi iterasi."
-      },
-      {
-        "q": "Berapa minimum budget iklan?",
-        "a": "Minimum budget harian Rp 50K-Rp 100K tergantung niche. Untuk hasil terukur dalam 30 hari, kami rekomendasikan budget Rp 5-10jt/bulan dengan fee manajemen terpisah."
-      }
-    ],
-    "active": true,
-    "order": 5,
+    "city_intro_template": "",
     "tiers": [
       {
         "name": "Basic",
-        "priceLabel": "1.250.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk content creator / UMKM yang ingin lift awareness lewat video pendek.",
+        "priceLabel": "990",
+        "duration": "30-day campaign",
+        "tagline": "Search campaign for one core service or product line.",
         "features": [
-          "Estimasi 3.000-8.000 views per hari",
-          "Video in-stream 15-30 detik (skip-able)",
-          "Tayang di YouTube + Video Partner Network",
-          "Targeting channel + topic relevan",
-          "Targeting lokasi Indonesia atau tertentu"
+          "Keyword & competitor research",
+          "Search campaign setup and management",
+          "Ad copywriting (multiple variants)",
+          "Negative keyword management",
+          "Conversion tracking setup",
+          "Weekly plain-language report",
+          "Real-time dashboard access"
         ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "name": "Starter",
-        "priceLabel": "2.500.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk brand dengan video content library yang ingin scale distribusi.",
+        "name": "Standard",
+        "priceLabel": "1,790",
+        "duration": "30-day campaign",
+        "tagline": "Search + Display for stronger coverage across the funnel.",
         "features": [
-          "Estimasi 8.000-20.000 views per hari",
-          "In-stream + In-feed (Discovery)",
-          "3 video aktif sekaligus",
-          "Targeting affinity + in-market audiences",
-          "A/B test thumbnail dan hook 5 detik"
+          "Everything in Basic",
+          "Display remarketing campaigns",
+          "Landing page recommendations",
+          "A/B ad testing",
+          "Bi-weekly optimisation sprints",
+          "Weekly plain-language report"
         ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
-      },
-      {
-        "name": "Standart",
-        "priceLabel": "3.750.000",
-        "duration": "30 hari tayang",
         "highlight": true,
-        "tagline": "Untuk advertiser serius dengan strategi multi-format.",
-        "features": [
-          "Estimasi 15.000-50.000 views per hari",
-          "In-stream + Bumper + Shorts",
-          "5-7 video aktif simultan",
-          "Targeting by topic + interest + life event",
-          "Setup retargeting untuk viewer 50%+ completion"
-        ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
         "name": "Business",
-        "priceLabel": "4.750.000",
-        "duration": "30 hari tayang",
-        "tagline": "Untuk brand besar dengan video content dan target high-intent.",
+        "priceLabel": "2,790",
+        "duration": "30-day campaign",
+        "tagline": "Full Google stack: Search, Display and YouTube with dedicated strategy.",
         "features": [
-          "Estimasi 50.000-150.000 views per hari",
-          "Multi-format full (in-stream + bumper + shorts + masthead)",
-          "10+ video aktif simultan",
-          "Custom audience builder + similar audiences",
-          "Brand lift survey + view-through conversion tracking",
-          "Laporan mingguan + review bulanan"
+          "Everything in Standard",
+          "YouTube video campaigns",
+          "Advanced audience layering",
+          "Quarterly strategy review",
+          "Dedicated account strategist",
+          "Priority support (reply within 1 hour)",
+          "Weekly plain-language report"
         ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "youtube-ads-management",
+    "name": "YouTube Ads Management",
+    "category": "paid-ads",
+    "order": 5,
+    "active": true,
+    "description": "YouTube Ads management — video campaigns for awareness and conversion across Malaysia.",
+    "faqs": [
+      {
+        "q": "How much does YouTube Ads management cost at Beriklan?",
+        "a": "Packages start from RM 890/month and go up to RM 2,490 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
+      },
+      {
+        "q": "How long does it take to set up a YouTube Ads management campaign?",
+        "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
+      },
+      {
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
+      },
+      {
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
+      },
+      {
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
         "icon": "🎬",
-        "title": "Visual Storytelling",
-        "desc": "YouTube adalah platform video #1 di Indonesia. 95jt+ pengguna aktif setiap bulan dengan rata-rata 40+ menit/hari."
+        "title": "Video That Earns Attention",
+        "desc": "Skippable in-stream, bumper and Shorts formats matched to your objective — awareness, consideration or action."
       },
       {
         "icon": "🎯",
-        "title": "Affinity Targeting",
-        "desc": "Target by interest seperti 'punya mobil baru', 'travel enthusiast', atau 'foodie' — beyond basic demographics."
+        "title": "Audience Precision",
+        "desc": "Target by search history, interests, life events and custom intent — YouTube inherits Google's targeting depth."
       },
       {
-        "icon": "📊",
-        "title": "Brand Lift Measurement",
-        "desc": "YouTube adalah satu-satunya platform yang memberi brand lift survey untuk ukur efektivitas awareness campaign."
+        "icon": "💰",
+        "title": "Pay for Attention Only",
+        "desc": "With skippable ads, you only pay when viewers actually watch — cost-efficient awareness at scale."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "MINGGU 1",
-        "title": "Video Audit",
-        "desc": "Evaluasi video existing, identifikasi video dengan hook terbaik, dan tentukan creative direction."
+        "tag": "WEEK 1",
+        "title": "Brief & Research",
+        "desc": "A 30-minute discussion to understand your product, target market and goals. We map the YouTube targeting strategy that fits."
       },
       {
         "num": "02",
-        "tag": "MINGGU 1-2",
-        "title": "Setup Targeting",
-        "desc": "Konfigurasi affinity audiences, in-market, life event, custom intent. Set frequency cap untuk avoid ad fatigue."
+        "tag": "WEEK 1-2",
+        "title": "Setup & Creative",
+        "desc": "We prepare the ad account, tracking pixels and ad materials (images, video, copy). You approve, we execute."
       },
       {
         "num": "03",
-        "tag": "MINGGU 2+",
-        "title": "Launch 30 Hari",
-        "desc": "Multi-format tayang simultan. Shorts untuk Discovery, in-stream untuk reach, bumper untuk frequency."
+        "tag": "WEEK 2+",
+        "title": "30-Day Launch",
+        "desc": "Your ads run for a full 30 days across YouTube placements. You receive a report every Monday morning."
       },
       {
         "num": "04",
         "tag": "ONGOING",
-        "title": "Refresh & Optimize",
-        "desc": "Setiap 2-3 minggu ganti creative. Yang resonan (CTR tinggi, completion rate >30%) scale, yang mati ganti."
+        "title": "Optimise & Rotate",
+        "desc": "We monitor performance daily. Underperforming ads are replaced; winners are scaled up."
       }
     ],
-    "city_intro_template": ""
+    "city_intro_template": "",
+    "tiers": [
+      {
+        "name": "Basic",
+        "priceLabel": "890",
+        "duration": "30-day campaign",
+        "tagline": "Entry video campaign to test YouTube for your brand.",
+        "features": [
+          "Campaign setup & audience research",
+          "1 video format (in-stream or Shorts)",
+          "Basic conversion tracking",
+          "Weekly plain-language report",
+          "Real-time dashboard access"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Starter",
+        "priceLabel": "1,490",
+        "duration": "30-day campaign",
+        "tagline": "Broader reach with multiple formats and audience testing.",
+        "features": [
+          "Everything in Basic",
+          "2 video formats running in parallel",
+          "Audience A/B testing",
+          "Remarketing audience building",
+          "Weekly plain-language report"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Standard",
+        "priceLabel": "1,990",
+        "duration": "30-day campaign",
+        "tagline": "Structured awareness-to-action funnel on YouTube.",
+        "features": [
+          "Everything in Starter",
+          "Full-funnel campaign structure",
+          "Custom intent audiences",
+          "Landing page recommendations",
+          "Weekly plain-language report"
+        ],
+        "highlight": true,
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Business",
+        "priceLabel": "2,490",
+        "duration": "30-day campaign",
+        "tagline": "Complete YouTube programme with dedicated strategy.",
+        "features": [
+          "Everything in Standard",
+          "Creative direction & script input",
+          "Advanced measurement setup",
+          "Quarterly strategy review",
+          "Dedicated account strategist",
+          "Priority support"
+        ],
+        "priceNote": "per month, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
   },
   {
     "slug": "instagram-management",
-    "name": "Jasa Kelola Instagram",
+    "name": "Instagram Management",
     "category": "organic",
-    "description": "Jasa Kelola Instagram Kami Membantu Bisnis Anda Meningkatkan Brand Awareness Dengan Mengelola Akun Instagram Anda Hubungi Kami Sekarang 0811-919-328",
-    "faqs": [
-      {
-        "q": "Berapa biaya Jasa Kelola Instagram bulanan?",
-        "a": "Paket mulai Rp 3jt/bulan untuk 12 posting + 60 story. Include content calendar, copywriting, design graphic, dan community management."
-      },
-      {
-        "q": "Berapa posting per hari/minggu?",
-        "a": "Tergantung paket: 3-5 posting/minggu untuk akun reguler, 1 posting/hari untuk akun aktif. Kami sesuaikan dengan ritme niche Anda."
-      },
-      {
-        "q": "Apakah konten original?",
-        "a": "Ya. Copywriting original Bahasa Indonesia, design kustom, foto/video dari stock library gratis atau shooting opsional berbayar."
-      },
-      {
-        "q": "Bagaimana laporan bulanan?",
-        "a": "Laporan via WhatsApp/email setiap awal bulan dengan metric reach, engagement, follower growth, dan rekomendasi content bulan depan."
-      },
-      {
-        "q": "Berapa lama kontrak minimum?",
-        "a": "Minimum 3 bulan untuk hasil optimal. Setelah 3 bulan, evaluasi bulanan dengan opsi break dengan notice 30 hari."
-      }
-    ],
-    "active": true,
     "order": 6,
-    "tiers": [],
-    "why_features": [],
-    "how_steps": [],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "tiktok-management",
-    "name": "Jasa Kelola TikTok",
-    "category": "organic",
-    "description": "Ingin Memanfaatkan Potensi Bisnis Di Tiktok? Kami Siap Membantu Dengan Jasa Kelola Tiktok Terbaik. Dapatkan Strategi Admin Yang Kreatif Hubungi : 0811-919-328",
+    "active": true,
+    "description": "Organic Instagram management — content, community and consistency for brands in Malaysia.",
     "faqs": [
       {
-        "q": "Berapa biaya Jasa Kelola TikTok bulanan?",
-        "a": "Paket mulai Rp 3jt/bulan untuk 12 posting + 60 story. Include content calendar, copywriting, design graphic, dan community management."
+        "q": "How much does Instagram management cost at Beriklan?",
+        "a": "Packages start from RM 1,290/month and go up to RM 1,990 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
       },
       {
-        "q": "Berapa posting per hari/minggu?",
-        "a": "Tergantung paket: 3-5 posting/minggu untuk akun reguler, 1 posting/hari untuk akun aktif. Kami sesuaikan dengan ritme niche Anda."
+        "q": "How long does it take to set up a Instagram management campaign?",
+        "a": "Initial setup takes 5–7 working days for the first content calendar, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
       },
       {
-        "q": "Apakah konten original?",
-        "a": "Ya. Copywriting original Bahasa Indonesia, design kustom, foto/video dari stock library gratis atau shooting opsional berbayar."
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
       },
       {
-        "q": "Bagaimana laporan bulanan?",
-        "a": "Laporan via WhatsApp/email setiap awal bulan dengan metric reach, engagement, follower growth, dan rekomendasi content bulan depan."
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
       },
       {
-        "q": "Berapa lama kontrak minimum?",
-        "a": "Minimum 3 bulan untuk hasil optimal. Setelah 3 bulan, evaluasi bulanan dengan opsi break dengan notice 30 hari."
-      }
-    ],
-    "active": true,
-    "order": 7,
-    "tiers": [],
-    "why_features": [],
-    "how_steps": [],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "website-development",
-    "name": "Jasa Pembuatan Website",
-    "category": "build",
-    "description": "Ingin Memanfaatkan Potensi Bisnis Online Anda ? Buat Website Dengan Jasa Pembuatan Website Harga Murah dan Design Terbaru Hubungi Kami 0811-919-328",
-    "faqs": [
-      {
-        "q": "Berapa biaya Jasa Pembuatan Website?",
-        "a": "Mulai Rp 3jt untuk landing page, Rp 8jt untuk company profile, Rp 25jt untuk toko online + payment gateway. Custom sesuai requirement."
-      },
-      {
-        "q": "Berapa lama pengerjaan?",
-        "a": "Landing page 5-7 hari, company profile 14-21 hari, toko online 21-30 hari. Revisi 2-3× included sebelum launch."
-      },
-      {
-        "q": "Apakah include domain dan hosting?",
-        "a": "Untuk paket tertentu include. Atau kami setup domain .co.id/.id/.com dan hosting managed (Rp 250rb/tahun)."
-      },
-      {
-        "q": "Maintenance setelah launch?",
-        "a": "Maintenance bulanan Rp 500rb-1.5jt tergantung kompleksitas. Include update konten, security patch, backup."
-      },
-      {
-        "q": "CMS atau static?",
-        "a": "Tergantung: untuk update rutin pakai WordPress/Headless CMS. Untuk performance optimal pakai static + auto rebuild."
-      }
-    ],
-    "active": true,
-    "order": 8,
-    "tiers": [],
-    "why_features": [],
-    "how_steps": [],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "landing-page-design",
-    "name": "Jasa Landing Page",
-    "category": "build",
-    "description": "Jasa Landing Page profesional dari Beriklan. Bergaransi tim online respon 1 jam, laporan mingguan, dashboard real-time.",
-    "faqs": [
-      {
-        "q": "Apa bedanya landing page dengan website biasa?",
-        "a": "Landing page fokus 1 objectif (lead/sale) tanpa distraksi menu/navigasi. Konversi rate biasanya 3-5× lebih tinggi dari website umum."
-      },
-      {
-        "q": "Berapa biaya?",
-        "a": "Single page Rp 3jt, multi-page funnel (3-5 halaman) Rp 8-15jt. Include copywriting, design, integrasi tracking pixel + form WA."
-      },
-      {
-        "q": "Berapa lama pengerjaan?",
-        "a": "Single page 5-7 hari, multi-page 14-21 hari. Pengerjaan paralel dengan setup iklan."
-      },
-      {
-        "q": "Apakah include copywriting?",
-        "a": "Ya. Kami riset pain point, benefit, dan objection handling. Copywriting persuasif mengikuti best practice direct response."
-      },
-      {
-        "q": "Tracking dan analytics?",
-        "a": "Include Meta Pixel, Google Tag Manager, Google Analytics 4, dan event tracking button/CTA. Dilengkap heatmap monitoring."
-      }
-    ],
-    "active": true,
-    "order": 9,
-    "tiers": [
-      {
-        "name": "Landing Page + Google Ads",
-        "priceLabel": "1.999.000",
-        "duration": "7-10 hari kerja",
-        "tagline": "Single landing page + setup Google Ads siap tayang.",
-        "features": [
-          "1 halaman landing page conversion-ready",
-          "Copywriting persuasif (proven frameworks)",
-          "Design responsive mobile + desktop",
-          "Integrasi Meta Pixel + GA4 + GTM",
-          "1x putar revisi included",
-          "Setup Google Ads siap launch"
-        ],
-        "priceNote": "",
-        "disclaimer": "Sekali bayar."
-      },
-      {
-        "name": "Funnel Multi-Page",
-        "priceLabel": "4.500.000",
-        "duration": "14-21 hari kerja",
-        "highlight": true,
-        "tagline": "Multi-page funnel untuk nurture prospek hingga konversi.",
-        "features": [
-          "3-5 halaman funnel (landing + thank you + upsell)",
-          "Wireframe + design semua halaman",
-          "Copywriting per halaman dengan logic",
-          "A/B testing infrastructure",
-          "Heatmap + analytics setup",
-          "2x revisi included"
-        ],
-        "priceNote": "",
-        "disclaimer": "Sekali bayar."
-      },
-      {
-        "name": "Custom Web App",
-        "priceLabel": "Konsultasi",
-        "duration": "21-60 hari kerja",
-        "tagline": "Custom web app / e-commerce untuk requirement spesifik.",
-        "features": [
-          "Architecture planning",
-          "Custom UI/UX design",
-          "Backend development",
-          "Payment gateway integration (jika e-commerce)",
-          "Full testing + QA",
-          "3x revisi included"
-        ],
-        "priceNote": "Quotation per project",
-        "disclaimer": "Term-based."
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
+        "icon": "📅",
+        "title": "Consistent Publishing",
+        "desc": "A planned content calendar executed on schedule — feed, Stories and Reels — so your brand stays visible without you chasing it."
+      },
+      {
         "icon": "🎨",
-        "title": "Design-First",
-        "desc": "BUKAN template. Setiap landing page didesain khusus sesuai brand dan pesan Anda."
+        "title": "On-Brand Design",
+        "desc": "Templates and visual direction that keep your grid professional and recognisable."
       },
       {
-        "icon": "📱",
-        "title": "Mobile-Optimized",
-        "desc": "75%+ traffic Indonesia dari mobile. Landing page di-optimized untuk mobile experience."
-      },
-      {
-        "icon": "⚡",
-        "title": "Fast Loading",
-        "desc": "Loading time < 3 detik. Setiap detik keterlambatan = 7% konversi hilang."
+        "icon": "🤝",
+        "title": "Community Care",
+        "desc": "Comments and DMs handled with your tone of voice, business hours coverage."
       }
     ],
     "how_steps": [
       {
         "num": "01",
-        "tag": "HARI 1-2",
-        "title": "Brief & Research",
-        "desc": "Diskusi objective, target audience, dan unique selling proposition Anda."
+        "tag": "WEEK 1",
+        "title": "Brand & Audience Audit",
+        "desc": "We review your profile, competitors and audience to define content pillars that fit your goals."
       },
       {
         "num": "02",
-        "tag": "HARI 3-5",
-        "title": "Wireframe & Copy",
-        "desc": "Layout dirancang, copy disusun. Anda melihat mockup sebelum design final."
+        "tag": "WEEK 1-2",
+        "title": "Content Calendar",
+        "desc": "A monthly calendar of posts, Stories and Reels for your approval before anything goes live."
       },
       {
         "num": "03",
-        "tag": "HARI 6-9",
-        "title": "Design & Build",
-        "desc": "Visual high-fidelity + integrasi tracking pixel + payment form."
+        "tag": "WEEK 2+",
+        "title": "Publish & Engage",
+        "desc": "We publish on schedule and manage comments and DMs during business hours."
       },
       {
         "num": "04",
-        "tag": "HARI 10+",
-        "title": "Launch & Optimize",
-        "desc": "Go-live, monitoring, training tim Anda untuk manage sendiri."
+        "tag": "MONTHLY",
+        "title": "Review & Refine",
+        "desc": "Monthly performance review — what grew, what didn't, and what changes next month."
       }
     ],
-    "city_intro_template": ""
-  },
-  {
-    "slug": "digital-marketing-agency",
-    "name": "Jasa Digital Marketing",
-    "category": "full-service",
-    "description": "Jasa Digital Marketing Iklankan Perusahaan Anda di Google Ads Facebook Instagram dan TikTok Dapatkan Lebih Banyak Konsumen | Hubungi : 0811-919-328",
-    "faqs": [
-      {
-        "q": "Apa yang termasuk Jasa Digital Marketing?",
-        "a": "Strategi marketing online end-to-end: ads (Meta, Google, TikTok, YouTube) + organic content (Instagram, TikTok) + landing page + analytics. Bisa pilih paket atau full."
-      },
-      {
-        "q": "Berapa biaya keseluruhan?",
-        "a": "Tergantung scope dan channel. Konsultasi awal gratis untuk audit bisnis + rekomendasi strategi + estimasi budget + ROI projection."
-      },
-      {
-        "q": "Berapa lama komitmen kontrak?",
-        "a": "Minimum 3 bulan untuk setup awal + learning phase. Setelah 3 bulan evaluasi, bisa lanjut bulanan."
-      },
-      {
-        "q": "Bagaimana jika belum pernah pakai iklan?",
-        "a": "Sempurna. Kami handle dari setup akun ad platform, verification, pixel installation, hingga campaign launch. Anda tinggal setujui strategi."
-      },
-      {
-        "q": "Apakah ada garansi hasil?",
-        "a": "Tidak ada garansi nominal karena hasil tergantung banyak faktor (niche, produk, harga, landing page). Tapi kami terukur, transparan, dan iteratif dengan laporan mingguan."
-      }
-    ],
-    "active": true,
-    "order": 10,
+    "city_intro_template": "",
     "tiers": [
       {
-        "name": "Starter",
-        "priceLabel": "Konsultasi",
-        "duration": "1 sesi 60 menit",
-        "tagline": "Untuk bisnis baru di digital marketing yang butuh clarity strategi.",
+        "name": "Basic",
+        "priceLabel": "1,290",
+        "duration": "per month",
+        "tagline": "Steady, professional presence for growing brands.",
         "features": [
-          "1 sesi konsultasi via Zoom 60 menit",
-          "Audit channel existing (ads + organic)",
-          "Rekomendasi 3 channel prioritas",
-          "Estimasi budget dan ROI projection",
-          "Ringkasan strategi tertulis 5-7 halaman"
+          "12 feed posts per month",
+          "8 Stories per month",
+          "Content calendar with approval flow",
+          "Caption copywriting in English/BM",
+          "Monthly performance report"
         ],
-        "priceNote": "",
-        "disclaimer": "Sekali bayar, tidak ada kontrak."
+        "priceNote": "per month",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "name": "Growth",
-        "priceLabel": "5.500.000",
-        "duration": "30 hari",
+        "name": "Standard",
+        "priceLabel": "1,990",
+        "duration": "per month",
+        "tagline": "Full content engine with Reels and community management.",
+        "features": [
+          "16 feed posts per month",
+          "12 Stories + 4 Reels per month",
+          "Community management (comments & DMs)",
+          "Hashtag & trend research",
+          "Monthly strategy call",
+          "Monthly performance report"
+        ],
         "highlight": true,
-        "tagline": "Untuk bisnis dengan budget iklan Rp 5-15jt/bulan dan butuh multi-channel.",
-        "features": [
-          "Manajemen 2 platform iklan",
-          "Setup organic content 12 post + 30 story/bulan",
-          "Weekly performance report",
-          "A/B testing mingguan",
-          "Monthly strategy review"
-        ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "per month",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
       },
       {
-        "name": "Scale",
-        "priceLabel": "9.500.000",
-        "duration": "30 hari",
-        "tagline": "Untuk bisnis serius yang butuh full-service agency + brand exposure.",
+        "name": "Business",
+        "priceLabel": "Custom",
+        "duration": "per month",
+        "tagline": "Tailored scope for multi-brand or high-volume accounts.",
         "features": [
-          "Manajemen 4+ platform iklan (Meta + Google + TikTok + YouTube)",
-          "Full content production 20 post + 60 story + 8 video/bulan",
-          "Dedicated account manager",
-          "Custom landing page bulanan",
-          "Bi-weekly strategy review"
+          "Custom content volume",
+          "Dedicated content strategist",
+          "Photo/video production coordination",
+          "Influencer collaboration support",
+          "Weekly reporting"
         ],
-        "priceNote": "belum termasuk ad spend",
-        "disclaimer": "Tanpa kontrak panjang."
+        "priceNote": "tailored quote",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "tiktok-management",
+    "name": "TikTok Management",
+    "category": "organic",
+    "order": 7,
+    "active": true,
+    "description": "TikTok account management — routine video content and TikTok Shop operations for the Malaysian market.",
+    "faqs": [
+      {
+        "q": "How much does TikTok management cost at Beriklan?",
+        "a": "Packages start from RM 990/month and go up to RM 2,490 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."
+      },
+      {
+        "q": "How long does it take to set up a TikTok management campaign?",
+        "a": "Initial setup takes 5–7 working days for the first content plan, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."
+      },
+      {
+        "q": "Is the ad budget included in the package price?",
+        "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."
+      },
+      {
+        "q": "Is there a minimum contract?",
+        "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."
+      },
+      {
+        "q": "What reporting will I receive?",
+        "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."
       }
     ],
     "why_features": [
       {
-        "icon": "🎯",
-        "title": "Multi-Channel",
-        "desc": "Anda tidak perlu hire 4 agency berbeda. Satu tim mengorkestrasi Meta, Google, TikTok, organic jadi coherent strategy."
+        "icon": "🎬",
+        "title": "Routine Video Output",
+        "desc": "Consistent short-video publishing built around hooks that earn watch time on the FYP."
       },
       {
-        "icon": "📊",
-        "title": "Data Integration",
-        "desc": "Semua channel dashboard dalam satu tempat. Lihat holistik performance, bukan sil per channel."
+        "icon": "🛍",
+        "title": "TikTok Shop Operations",
+        "desc": "Product listing hygiene, campaign hooks and content that drives in-app checkout."
+      },
+      {
+        "icon": "📈",
+        "title": "Trend Responsiveness",
+        "desc": "We monitor Malaysian TikTok trends weekly and slot relevant formats into your calendar fast."
+      }
+    ],
+    "how_steps": [
+      {
+        "num": "01",
+        "tag": "WEEK 1",
+        "title": "Account & Niche Audit",
+        "desc": "We review your account, category and competitors to define a content angle that can win."
+      },
+      {
+        "num": "02",
+        "tag": "WEEK 1-2",
+        "title": "Content Plan",
+        "desc": "A monthly plan of video concepts and hooks for your approval."
+      },
+      {
+        "num": "03",
+        "tag": "WEEK 2+",
+        "title": "Produce & Publish",
+        "desc": "Videos edited and published on schedule, optimised for watch time."
+      },
+      {
+        "num": "04",
+        "tag": "MONTHLY",
+        "title": "Review & Double Down",
+        "desc": "Monthly review of what the algorithm rewarded — we double down on the winners."
+      }
+    ],
+    "city_intro_template": "",
+    "tiers": [
+      {
+        "name": "TikTok Shop",
+        "priceLabel": "990",
+        "duration": "per month",
+        "tagline": "Shop-focused plan: listings, content hooks and campaign support.",
+        "features": [
+          "TikTok Shop setup & listing optimisation",
+          "8 shop-focused videos per month",
+          "Campaign & voucher planning",
+          "Monthly performance report"
+        ],
+        "priceNote": "per month",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Basic Content",
+        "priceLabel": "1,690",
+        "duration": "per month",
+        "tagline": "Consistent organic growth through routine video content.",
+        "features": [
+          "12 videos per month (edited)",
+          "Hook & script writing",
+          "Trend monitoring & adaptation",
+          "Community management",
+          "Monthly performance report"
+        ],
+        "highlight": true,
+        "priceNote": "per month",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Business Content",
+        "priceLabel": "2,490",
+        "duration": "per month",
+        "tagline": "High-volume content engine with strategy support.",
+        "features": [
+          "20 videos per month (edited)",
+          "Content strategist assigned",
+          "TikTok Shop integration",
+          "Live session planning support",
+          "Weekly reporting"
+        ],
+        "priceNote": "per month",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "website-development",
+    "name": "Website Development",
+    "category": "build",
+    "order": 8,
+    "active": true,
+    "description": "Professional website development — fast, SEO-ready and built to convert visitors into enquiries.",
+    "faqs": [
+      {
+        "q": "How much does a website cost at Beriklan?",
+        "a": "Our Starter business website is RM 1,499 one-time. Corporate websites are RM 3,999 and e-commerce builds start from RM 6,999 depending on scope. All prices include design, development and launch."
+      },
+      {
+        "q": "How long does it take to build?",
+        "a": "A Starter website launches in 7–14 working days after content is ready. Corporate and e-commerce builds typically take 3–6 weeks."
+      },
+      {
+        "q": "Is hosting and domain included?",
+        "a": "First-year domain and fast cloud hosting are included in every package. Renewals are billed at cost — no hidden markup."
+      },
+      {
+        "q": "Will my website work on mobile?",
+        "a": "Yes — every build is mobile-first, tested on real devices, and optimised for Core Web Vitals so it loads fast on Malaysian mobile networks."
+      },
+      {
+        "q": "Can you also bring traffic to the website?",
+        "a": "Yes. Most clients pair a build with Google Ads or Facebook Ads management. We design the site and the campaign as one funnel, which is why our builds convert."
+      }
+    ],
+    "why_features": [
+      {
+        "icon": "⚡",
+        "title": "Fast by Default",
+        "desc": "Static-first builds that score 90+ on PageSpeed — because slow sites lose Malaysian mobile visitors."
+      },
+      {
+        "icon": "🔍",
+        "title": "SEO-Ready Structure",
+        "desc": "Clean headings, schema markup and sitemaps from day one, so Google understands your site immediately."
+      },
+      {
+        "icon": "📞",
+        "title": "Built to Convert",
+        "desc": "WhatsApp CTAs, click-to-call and enquiry forms positioned where visitors actually decide."
+      }
+    ],
+    "how_steps": [
+      {
+        "num": "01",
+        "tag": "WEEK 1",
+        "title": "Scope & Sitemap",
+        "desc": "We define pages, structure and the action you want visitors to take."
+      },
+      {
+        "num": "02",
+        "tag": "WEEK 1-2",
+        "title": "Design & Content",
+        "desc": "Design direction and copywriting support — you approve before we build."
+      },
+      {
+        "num": "03",
+        "tag": "WEEK 2-3",
+        "title": "Build & Test",
+        "desc": "Development, mobile testing and speed optimisation."
+      },
+      {
+        "num": "04",
+        "tag": "LAUNCH",
+        "title": "Launch & Handover",
+        "desc": "Domain, hosting, analytics and a walkthrough so you own everything."
+      }
+    ],
+    "city_intro_template": "",
+    "tiers": [
+      {
+        "name": "Starter",
+        "priceLabel": "1,499",
+        "duration": "7–14 working days",
+        "tagline": "A professional business website that loads fast and converts.",
+        "features": [
+          "Up to 5 pages",
+          "Mobile-first responsive design",
+          "WhatsApp & enquiry form integration",
+          "Basic on-page SEO",
+          "Domain + 1 year hosting included",
+          "Google Analytics & Search Console setup"
+        ],
+        "priceNote": "one-time",
+        "disclaimer": "Includes first-year domain and hosting."
+      },
+      {
+        "name": "Corporate",
+        "priceLabel": "3,999",
+        "duration": "3–4 weeks",
+        "tagline": "For established companies that need depth and polish.",
+        "features": [
+          "Up to 15 pages",
+          "Custom design system",
+          "Blog / news module",
+          "Advanced on-page SEO + schema markup",
+          "Multi-language ready (EN/BM)",
+          "Priority support after launch"
+        ],
+        "highlight": true,
+        "priceNote": "one-time",
+        "disclaimer": "Includes first-year domain and hosting."
+      },
+      {
+        "name": "E-commerce",
+        "priceLabel": "from 6,999",
+        "duration": "4–6 weeks",
+        "tagline": "Online store with payments, inventory and marketing hooks.",
+        "features": [
+          "Product catalogue & inventory",
+          "Local payment gateway integration",
+          "Shipping configuration for Malaysia",
+          "Marketing & analytics integration",
+          "Staff training session",
+          "Get a tailored quote"
+        ],
+        "priceNote": "from, one-time",
+        "disclaimer": "Final quote depends on catalogue size and integrations."
+      }
+    ]
+  },
+  {
+    "slug": "landing-page-design",
+    "name": "Landing Page + Google Ads",
+    "category": "build",
+    "order": 9,
+    "active": true,
+    "description": "High-converting landing page bundled with Google Ads setup and first-month management — one funnel, one team.",
+    "faqs": [
+      {
+        "q": "What exactly is included in the bundle?",
+        "a": "A custom one-page landing page (design + copy + build), Google Ads account setup, conversion tracking, and the first month of campaign management — RM 1,299 all-in, excluding ad spend."
+      },
+      {
+        "q": "How long until my campaign is live?",
+        "a": "Typically 7–10 working days from brief to live campaign, including your approval rounds."
+      },
+      {
+        "q": "Why bundle the page with the ads?",
+        "a": "Because the page and the ad must tell one story. When the same team builds both, message match improves and cost per enquiry drops."
+      },
+      {
+        "q": "Is ad spend included?",
+        "a": "No — ad budget is paid directly to Google through your own account. We recommend starting from RM 1,500/month in ad spend for meaningful data."
+      },
+      {
+        "q": "What happens after the first month?",
+        "a": "You can continue with a Google Ads management plan (from RM 990/month), or keep the landing page and run it yourself — you own everything we build."
+      }
+    ],
+    "why_features": [
+      {
+        "icon": "🧲",
+        "title": "Message Match",
+        "desc": "Ad copy and landing page written together, so visitors see exactly what they clicked for."
       },
       {
         "icon": "⚡",
-        "title": "Fast Iteration",
-        "desc": "Strategy pivot dalam 1 minggu, bukan 1 bulan. Cocok untuk dynamic market dan growth-stage startup."
+        "title": "Speed = Conversions",
+        "desc": "Sub-2-second load times — every extra second of loading costs you enquiries."
+      },
+      {
+        "icon": "📊",
+        "title": "Tracked End-to-End",
+        "desc": "WhatsApp clicks, calls and form fills tracked from the first day, so you know your real cost per lead."
+      }
+    ],
+    "how_steps": [
+      {
+        "num": "01",
+        "tag": "DAY 1-2",
+        "title": "Offer & Angle",
+        "desc": "We define the offer, audience and the one action the page must drive."
+      },
+      {
+        "num": "02",
+        "tag": "DAY 3-6",
+        "title": "Page Build",
+        "desc": "Design, copy and build — reviewed and approved by you."
+      },
+      {
+        "num": "03",
+        "tag": "DAY 7-10",
+        "title": "Ads Live",
+        "desc": "Google Ads campaign configured, tracking verified, campaign launched."
+      },
+      {
+        "num": "04",
+        "tag": "DAY 10-30",
+        "title": "Optimise",
+        "desc": "First month of management included — bids, keywords and page tweaks."
+      }
+    ],
+    "city_intro_template": "",
+    "tiers": [
+      {
+        "name": "Landing Page + Google Ads",
+        "priceLabel": "1,299",
+        "duration": "7–10 working days",
+        "tagline": "One high-converting page plus your first month of Google Ads — all-in.",
+        "features": [
+          "Custom 1-page design & copywriting",
+          "Mobile-first, sub-2s load time",
+          "Google Ads setup + 1 month management",
+          "Conversion tracking (WhatsApp, calls, forms)",
+          "A/B headline variants",
+          "You own the page and the ad account"
+        ],
+        "highlight": true,
+        "priceNote": "one-time bundle, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Multi-Page Funnel",
+        "priceLabel": "2,999",
+        "duration": "14–21 working days",
+        "tagline": "Multi-step funnel for higher-ticket offers.",
+        "features": [
+          "Up to 4 funnel pages",
+          "Lead magnet / opt-in integration",
+          "Email automation hooks",
+          "Google Ads setup + 1 month management",
+          "Full analytics wiring",
+          "Conversion-focused copywriting"
+        ],
+        "priceNote": "one-time bundle, excludes ad spend",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Custom Web App",
+        "priceLabel": "Custom",
+        "duration": "21–60 working days",
+        "tagline": "Calculators, portals, booking systems — scoped to your needs.",
+        "features": [
+          "Custom functionality scoping",
+          "UI/UX design",
+          "Integration with your tools",
+          "Staging & testing environment",
+          "Training & documentation",
+          "Get a tailored quote"
+        ],
+        "priceNote": "tailored quote",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
+  },
+  {
+    "slug": "digital-marketing-agency",
+    "name": "Digital Marketing Agency",
+    "category": "full-service",
+    "order": 10,
+    "active": true,
+    "description": "End-to-end digital marketing for Malaysian businesses — strategy, paid media, content and landing pages under one accountable team.",
+    "faqs": [
+      {
+        "q": "What does the full-service engagement include?",
+        "a": "Strategy, channel selection, campaign management across Meta/Google/TikTok, creative direction, landing pages and consolidated reporting — scoped to your goals after a consultation."
+      },
+      {
+        "q": "How is pricing determined?",
+        "a": "Full-service scope is custom-quoted based on channels, volume and targets. Book a free consultation and we will propose a scope with clear deliverables and pricing."
+      },
+      {
+        "q": "Do you replace our internal team?",
+        "a": "We usually complement it. Some clients hand us everything; others keep content in-house while we run paid media. The scope is built around what you already have."
+      },
+      {
+        "q": "How soon can we see results?",
+        "a": "Paid campaigns generate data within days and meaningful optimisation within 2–4 weeks. We set expectations per channel during the consultation — no inflated promises."
+      },
+      {
+        "q": "Is there a minimum commitment?",
+        "a": "Engagements run in 30-day cycles with a quarterly strategy rhythm. No long-term lock-in — the work has to justify itself."
+      }
+    ],
+    "why_features": [
+      {
+        "icon": "🧭",
+        "title": "One Accountable Team",
+        "desc": "Strategy, ads, content and pages in one place — no finger-pointing between vendors."
+      },
+      {
+        "icon": "📊",
+        "title": "Consolidated Reporting",
+        "desc": "One dashboard, one weekly report across every channel — in plain language."
+      },
+      {
+        "icon": "🔁",
+        "title": "Budget Fluidity",
+        "desc": "Budget moves to whichever channel is performing this month — because we manage them all."
       }
     ],
     "how_steps": [
@@ -959,27 +1190,75 @@
         "num": "01",
         "tag": "WEEK 1",
         "title": "Audit & Strategy",
-        "desc": "Deep audit existing marketing stack, competitor analysis, dan cocokan dengan objective Anda."
+        "desc": "We audit your current funnel and propose a channel mix with clear targets."
       },
       {
         "num": "02",
         "tag": "WEEK 2",
-        "title": "Setup Multi-Channel",
-        "desc": "Launch 2-4 platform iklan paralel, plus organic content production mulai jalan."
+        "title": "Setup Sprint",
+        "desc": "Accounts, tracking, creative and landing pages prepared in one coordinated sprint."
       },
       {
         "num": "03",
         "tag": "WEEK 3+",
-        "title": "30 Hari Pertama",
-        "desc": "Fase learning. Iklan tayang, organic publish rutin, data mulai terkumpul."
+        "title": "Launch & Learn",
+        "desc": "Campaigns go live across the selected channels; early data guides quick corrections."
       },
       {
         "num": "04",
         "tag": "MONTHLY",
-        "title": "Review & Pivot",
-        "desc": "Setiap bulan: strategy review, budget reallocation, ekspansi winning channel."
+        "title": "Optimise & Reallocate",
+        "desc": "Monthly review moves budget to winners and cuts what underperforms."
       }
     ],
-    "city_intro_template": ""
+    "city_intro_template": "",
+    "tiers": [
+      {
+        "name": "Starter",
+        "priceLabel": "Free",
+        "duration": "60-minute session",
+        "tagline": "A strategy consultation — walk away with a channel plan even if we never work together.",
+        "features": [
+          "Funnel & ad account review",
+          "Channel mix recommendation",
+          "Budget allocation guidance",
+          "Priority quick-wins list",
+          "No obligation"
+        ],
+        "priceNote": "free consultation",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Growth",
+        "priceLabel": "Custom",
+        "duration": "30-day cycles",
+        "tagline": "Multi-channel management scoped to your targets.",
+        "features": [
+          "2–3 channels managed (Meta/Google/TikTok)",
+          "Creative direction included",
+          "Landing page optimisation",
+          "Weekly consolidated reporting",
+          "Monthly strategy call"
+        ],
+        "highlight": true,
+        "priceNote": "custom quote after consultation",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      },
+      {
+        "name": "Scale",
+        "priceLabel": "Custom",
+        "duration": "30-day cycles",
+        "tagline": "Full-funnel programme for aggressive growth targets.",
+        "features": [
+          "All channels + YouTube",
+          "Dedicated strategist & designer",
+          "CRO programme on pages",
+          "Weekly strategy rhythm",
+          "Quarterly executive review"
+        ],
+        "priceNote": "custom quote after consultation",
+        "disclaimer": "Ad budget is paid directly to the platform via your own account."
+      }
+    ]
   }
 ]

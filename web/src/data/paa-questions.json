@@ -1,431 +1,422 @@
 {
-  "jasa-iklan-facebook": [
+  "facebook-ads-management": [
     {
-      "q": "Berapa biaya jasa iklan Facebook di Indonesia?",
-      "a": "Biaya jasa pengelolaan iklan Facebook di Beriklan mulai dari Rp 1.750.000 per 30 hari untuk paket Standart dan Rp 3.750.000 untuk paket Business. Angka tersebut adalah fee manajemen — ad spend Meta dibayar terpisah langsung ke Meta oleh klien, sehingga tidak ada biaya tersembunyi."
+      "q": "How much does Facebook Ads management cost in Malaysia?",
+      "a": "Beriklan's facebook ads management packages start from RM 990/month and go up to RM 2,990 for the most complete plan. The fee covers strategy, setup, creative direction, daily optimisation and weekly reporting. Ad spend is paid separately to Meta, directly from your own account."
     },
     {
-      "q": "Apa bedanya paket Standart dan Business di Beriklan?",
-      "a": "Paket Standart cocok untuk UMKM yang baru mulai dengan 1-2 iklan aktif dan targeting sederhana. Paket Business mencakup 3 iklan aktif, setup remarketing + lookalike audience, jangkauan lebih luas (4.000-15.000/hari), dan review bulanan via video call untuk optimasi lebih agresif."
+      "q": "What is a reasonable monthly ad budget for Meta in Malaysia?",
+      "a": "For most Malaysian SMEs we recommend starting with RM 1,500 to RM 5,000 per month in ad spend. This gives the algorithm enough data to optimise within 2–4 weeks. We help you scale the budget only after the numbers prove the campaign is profitable."
     },
     {
-      "q": "Berapa lama sampai iklan Facebook menghasilkan leads atau chat WhatsApp?",
-      "a": "Iklan mulai tayang dalam 24 jam setelah setup. Chat WhatsApp pertama biasanya masuk di minggu pertama. Data historis kami menunjukkan minggu ke-3 hingga ke-4 adalah fase di mana pola konsisten mulai terlihat, dengan ROAS stabil setelah 30 hari pertama."
+      "q": "Is the ad budget included in the management fee?",
+      "a": "No. The management fee covers our work — strategy, setup, creatives, optimisation and reporting. Your ad budget is paid directly to Meta through your own ad account, so you keep full ownership and can see every ringgit of spend."
     },
     {
-      "q": "Apakah tim Beriklan sudah bersertifikasi Meta Business Partner?",
-      "a": "Ya. Tim Beriklan merupakan Meta Business Partner bersertifikat dengan akses langsung ke support Meta dan best practice terbaru dari platform. Sertifikasi ini mencakup Meta Certified Media Planning Professional dan Meta Certified Media Buying Professional."
+      "q": "Is there a minimum contract or lock-in period?",
+      "a": "No long-term lock-in. All packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay for years because the results make sense — not because a contract forces them to."
     },
     {
-      "q": "Bagaimana sistem tracking leads dari Facebook Ads?",
-      "a": "Kami setup Meta Pixel di website Anda, konfigurasi event tracking untuk button click dan form submission, serta integrasi WhatsApp click. Semua leads ter-record di dashboard Meta Ads Manager yang bisa Anda akses kapan saja karena kami berikan akses penuh ke akun iklan."
+      "q": "How long before I see results from facebook ads management?",
+      "a": "Initial data comes in within the first 7 days, and the learning phase typically stabilises in 2–4 weeks. By the end of the first 30-day cycle you will have a clear picture of cost per result, and we use that data to scale what works."
     },
     {
-      "q": "Apakah iklan Facebook cocok untuk bisnis lokal?",
-      "a": "Sangat cocok. Meta Ads memiliki fitur target wilayah yang detail — bisa membatasi penayangan berdasarkan kota, provinsi, atau radius tertentu dari lokasi bisnis. Untuk UMKM di Bandung, Jabodetabek, atau kota spesifik lainnya, targeting geografis ini menghasilkan efisiensi budget yang signifikan."
+      "q": "What reports will I receive?",
+      "a": "A weekly report every Monday in plain language — spend, results, cost per result and what we are changing next — plus a real-time dashboard you can open any time. No jargon-filled PDFs that nobody reads."
     },
     {
-      "q": "Berapa budget ad spend Meta yang ideal untuk bisnis baru?",
-      "a": "Minimum ad spend yang direkomendasikan adalah Rp 500.000 per hari atau Rp 15.000.000 per bulan untuk campaign yang stabil. Untuk niche kompetitif seperti properti atau edukasi, Rp 30-50 juta per bulan lebih ideal agar algoritma Meta punya cukup data untuk belajar dan optimize."
+      "q": "Who owns the ad account and the data?",
+      "a": "You do. We work inside your own ad account with partner access, so all campaign history, pixels, audiences and billing stay under your control. If we ever part ways, everything remains yours."
     },
     {
-      "q": "Bisakah saya kelola sendiri iklan Facebook setelah paket selesai?",
-      "a": "Bisa. Karena kami berikan akses penuh ke akun iklan Anda, seluruh data historis, konfigurasi campaign, dan pixel tetap menjadi milik Anda. Jika sewaktu-waktu Anda ingin kelola sendiri atau pindah ke agency lain, tidak ada lock-in atau hambatan teknis."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We manage campaigns for clients across Malaysia — KL, Selangor, Penang, Johor Bahru, East Malaysia — and everything runs remotely via WhatsApp, video calls and a shared dashboard, so location is never a barrier."
     },
     {
-      "q": "Apa bedanya Facebook Ads dengan Instagram Ads?",
-      "a": "Secara teknis, Meta Ads Manager mengelola keduanya sebagai satu platform dengan placement terpisah. Facebook Ads cenderung menghasilkan leads dari audience usia 25-55+, sedangkan Instagram Ads lebih efektif untuk audience 18-35 tahun dengan fokus visual. Kami biasanya rekomendasikan keduanya untuk coverage maksimal."
+      "q": "Is Facebook Ads still effective in Malaysia in 2026?",
+      "a": "Yes. Facebook remains one of Malaysia's largest ad platforms with over 20 million users, and it is still the most cost-efficient channel for lead generation and local awareness — especially for F&B, services, property and retail businesses targeting Malaysians aged 25 and above."
     },
     {
-      "q": "Apakah iklan Facebook aman dari banned atau suspend?",
-      "a": " Aman jika dikelola sesuai Meta Advertising Standards. Tim kami memastikan compliance dari awal: review copy dan creative sebelum launch, monitoring harian untuk deteksi warning, dan penyesuaian cepat jika ada flag dari sistem. Akun klien kami yang patuh umumnya tidak pernah kena suspend."
+      "q": "What is the difference between boosting a post and Facebook Ads management?",
+      "a": "Boosting only pushes a single post with basic targeting. Proper Facebook Ads management uses Meta Ads Manager: full-funnel campaign structure, pixel and conversion tracking, custom and lookalike audiences, A/B-tested creatives and continuous optimisation — which is where real ROAS comes from."
     }
   ],
-
-  "jasa-iklan-instagram": [
+  "instagram-ads-management": [
     {
-      "q": "Berapa biaya jasa iklan Instagram di Beriklan?",
-      "a": "Biaya jasa pengelolaan iklan Instagram mulai dari Rp 2.250.000 per 30 hari untuk paket Standart dan Rp 4.250.000 untuk paket Business. Belum termasuk ad spend Meta yang dibayar terpisah langsung oleh klien. Tidak ada kontrak minimum."
+      "q": "How much does Instagram Ads management cost in Malaysia?",
+      "a": "Beriklan's instagram ads management packages start from RM 990/month and go up to RM 2,990 for the most complete plan. The fee covers strategy, setup, creative direction, daily optimisation and weekly reporting. Ad spend is paid separately to Meta, directly from your own account."
     },
     {
-      "q": "Apakah Instagram Ads lebih efektif dari Facebook Ads?",
-      "a": "Tergantung target market. Instagram Ads lebih efektif untuk audience usia 18-35 tahun, produk visual (fashion, F&B, beauty, lifestyle), dan objective brand awareness. Facebook Ads lebih cocok untuk audience 25-55+ dan objective lead generation. Banyak bisnis sukses menjalankan keduanya secara paralel."
+      "q": "What is a reasonable monthly ad budget for Meta in Malaysia?",
+      "a": "For most Malaysian SMEs we recommend starting with RM 1,500 to RM 5,000 per month in ad spend. This gives the algorithm enough data to optimise within 2–4 weeks. We help you scale the budget only after the numbers prove the campaign is profitable."
     },
     {
-      "q": "Bagaimana cara iklan Instagram muncul di Reels dan Explore?",
-      "a": "Kami setup placement Instagram di Meta Ads Manager dengan format yang sesuai: video 9:16 untuk Reels, carousel untuk Feed, dan single image untuk Explore. Algoritma Meta akan otomatis optimasi ke placement dengan performa terbaik setelah 7-14 hari."
+      "q": "Is the ad budget included in the management fee?",
+      "a": "No. The management fee covers our work — strategy, setup, creatives, optimisation and reporting. Your ad budget is paid directly to Meta through your own ad account, so you keep full ownership and can see every ringgit of spend."
     },
     {
-      "q": "Apakah perlu akun Instagram bisnis dulu sebelum pasang iklan?",
-      "a": "Sangat direkomendasikan. Akun Instagram bisnis (bukan personal) memberi Anda akses ke Insights, contact button, dan kemampuan untuk menjalankan ads. Jika belum punya, kami bantu setup dari awal termasuk migrasi akun personal ke akun profesional bisnis."
+      "q": "Is there a minimum contract or lock-in period?",
+      "a": "No long-term lock-in. All packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay for years because the results make sense — not because a contract forces them to."
     },
     {
-      "q": "Berapa lama sampai Instagram Ads menghasilkan penjualan?",
-      "a": "Iklan mulai tayang 24 jam setelah setup. Untuk objective traffic dan engagement, hasil mulai terlihat di hari pertama. Untuk objective conversion atau sale, biasanya 7-14 hari setelah pixel belajar dan algoritma menemukan audience yang tepat."
+      "q": "How long before I see results from instagram ads management?",
+      "a": "Initial data comes in within the first 7 days, and the learning phase typically stabilises in 2–4 weeks. By the end of the first 30-day cycle you will have a clear picture of cost per result, and we use that data to scale what works."
     },
     {
-      "q": "Apa bedanya Boost Post dengan Instagram Ads profesional?",
-      "a": "Boost Post adalah fitur sederhana dengan targeting terbatas — cocok untuk promote post organik ke followers. Instagram Ads via Ads Manager memberi akses ke custom audience, lookalike, retargeting pixel, multiple placements, dan optimasi yang jauh lebih powerful untuk objective bisnis."
+      "q": "What reports will I receive?",
+      "a": "A weekly report every Monday in plain language — spend, results, cost per result and what we are changing next — plus a real-time dashboard you can open any time. No jargon-filled PDFs that nobody reads."
     },
     {
-      "q": "Apakah iklan Instagram cocok untuk toko online?",
-      "a": "Sangat cocok, terutama untuk toko online fashion, beauty, dan produk visual. Instagram adalah platform discovery — orang scroll untuk mencari produk baru. Dengan creative yang tepat (lifestyle shot, video pendek, UGC-style), ROAS 3-5x untuk toko online sangat achievable."
+      "q": "Who owns the ad account and the data?",
+      "a": "You do. We work inside your own ad account with partner access, so all campaign history, pixels, audiences and billing stay under your control. If we ever part ways, everything remains yours."
     },
     {
-      "q": "Berapa budget Instagram Ads minimum untuk UMKM?",
-      "a": "Minimum Rp 300.000-500.000 per hari untuk campaign discovery dan brand awareness. Untuk objective conversion atau sale, minimum Rp 1.000.000 per hari. Total budget bulanan Rp 5-15 juta adalah titik awal yang sehat untuk UMKM yang serius menjalankan Instagram Ads."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We manage campaigns for clients across Malaysia — KL, Selangor, Penang, Johor Bahru, East Malaysia — and everything runs remotely via WhatsApp, video calls and a shared dashboard, so location is never a barrier."
     },
     {
-      "q": "Apakah wajib punya banyak followers dulu untuk pasang Instagram Ads?",
-      "a": "Tidak wajib. Instagram Ads menggunakan Meta targeting, bukan audience followers. Bahkan akun baru (0 followers) bisa langsung menjalankan iklan dengan targeting interest, behavior, dan lookalike audience. Iklan akan muncul di Explore dan Feed dari orang-orang yang sesuai targeting, bukan followers Anda."
+      "q": "Which businesses get the best results from Instagram Ads in Malaysia?",
+      "a": "Visual-first businesses perform best: beauty and skincare, fashion, F&B, fitness, travel and lifestyle services. Instagram's Malaysian audience skews 18–40, so brands targeting younger urban consumers in KL, Penang and JB typically see the strongest engagement and conversion rates."
     },
     {
-      "q": "Bagaimana cara track ROAS Instagram Ads dengan akurat?",
-      "a": "Kami setup Meta Pixel di website, konfigurasi event ViewContent, AddToCart, dan Purchase, serta integrasi dengan Shopify atau toko online backend. ROAS yang akurat = revenue dari pixel events ÷ ad spend. Dashboard Meta Ads Manager akan menampilkan real-time."
+      "q": "Do I need good creatives before running Instagram Ads?",
+      "a": "Creative quality is the biggest performance lever on Instagram, but you do not need an expensive production house. We provide creative direction, hooks and copy, and can turn simple phone-shot footage into scroll-stopping Reels and story ads that convert."
     }
   ],
-
-  "jasa-iklan-tiktok": [
+  "tiktok-ads-management": [
     {
-      "q": "Berapa biaya jasa iklan TikTok di Beriklan?",
-      "a": "Biaya jasa pengelolaan iklan TikTok mulai dari Rp 2.500.000 per 30 hari untuk paket Standart dan Rp 4.500.000 untuk paket Business. Belum termasuk ad spend TikTok yang dibayar terpisah langsung ke TikTok oleh klien."
+      "q": "How much does TikTok Ads management cost in Malaysia?",
+      "a": "Beriklan's tiktok ads management packages start from RM 790/month and go up to RM 1,990 for the most complete plan. The fee covers strategy, setup, creative direction, daily optimisation and weekly reporting. Ad spend is paid separately to TikTok, directly from your own account."
     },
     {
-      "q": "Apa bedanya TikTok Ads dengan Instagram atau Facebook Ads?",
-      "a": "TikTok Ads fokus pada video pendek format 9:16 dengan algoritma For You Page yang agresif. Audience lebih muda (16-30 tahun), engagement lebih tinggi per impression, tapi conversion rate ke action bisa lebih rendah dibanding Meta. Cocok untuk brand awareness dan viral product discovery."
+      "q": "What is a reasonable monthly ad budget for TikTok in Malaysia?",
+      "a": "For most Malaysian SMEs we recommend starting with RM 1,000 to RM 3,000 per month in ad spend. This gives the algorithm enough data to optimise within 2–4 weeks. We help you scale the budget only after the numbers prove the campaign is profitable."
     },
     {
-      "q": "Apakah TikTok Ads cocok untuk UMKM Indonesia?",
-      "a": "Sangat cocok, terutama untuk produk F&B, fashion, beauty, dan jasa ke anak muda. TikTok di Indonesia memiliki penetrasi tinggi dan cost per view paling murah di antara semua platform. Banyak UMKM lokal yang viral dan closing jutaan rupiah dari satu video TikTok."
+      "q": "Is the ad budget included in the management fee?",
+      "a": "No. The management fee covers our work — strategy, setup, creatives, optimisation and reporting. Your ad budget is paid directly to TikTok through your own ad account, so you keep full ownership and can see every ringgit of spend."
     },
     {
-      "q": "Bagaimana Spark Ads bekerja di TikTok?",
-      "a": "Spark Ads adalah format iklan TikTok yang memungkinkan Anda boost post organik (termasuk dari creator lain yang Anda authorized) sebagai iklan. Format ini terasa lebih natural dan authentic karena muncul di FYP seperti konten organik biasa, dengan label kecil 'Sponsored'."
+      "q": "Is there a minimum contract or lock-in period?",
+      "a": "No long-term lock-in. All packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay for years because the results make sense — not because a contract forces them to."
     },
     {
-      "q": "Berapa budget minimum untuk TikTok Ads?",
-      "a": "Minimum harian Rp 200.000-300.000 sudah cukup untuk campaign discovery. Untuk objective traffic dan conversion, minimum Rp 500.000-1.000.000 per hari. Budget bulanan Rp 5-20 juta adalah range ideal untuk UMKM serius di TikTok Ads."
+      "q": "How long before I see results from tiktok ads management?",
+      "a": "Initial data comes in within the first 7 days, and the learning phase typically stabilises in 2–4 weeks. By the end of the first 30-day cycle you will have a clear picture of cost per result, and we use that data to scale what works."
     },
     {
-      "q": "Berapa lama sampai TikTok Ads menghasilkan leads?",
-      "a": "Lead pertama biasanya masuk di hari ke-3 sampai ke-7 setelah launch. Algoritma TikTok cukup agresif dalam belajar, tapi creative fatigue juga cepat — biasanya setiap 7-10 hari perlu refresh creative baru untuk menjaga performance."
+      "q": "What reports will I receive?",
+      "a": "A weekly report every Monday in plain language — spend, results, cost per result and what we are changing next — plus a real-time dashboard you can open any time. No jargon-filled PDFs that nobody reads."
     },
     {
-      "q": "Apakah wajib bikin akun TikTok dulu sebelum pasang iklan?",
-      "a": "Tidak wajib, tapi sangat direkomendasikan. Akun TikTok bisnis memberi Anda Insight data dan opsi Spark Ads. Jika bisnis Anda belum punya akun, kami bantu setup akun profesional yang siap untuk organic content + paid ads."
+      "q": "Who owns the ad account and the data?",
+      "a": "You do. We work inside your own ad account with partner access, so all campaign history, pixels, audiences and billing stay under your control. If we ever part ways, everything remains yours."
     },
     {
-      "q": "Bagaimana cara bikin iklan TikTok yang tidak skip dalam 3 detik?",
-      "a": "Kunci ada di 3 detik pertama: hook visual menarik (motion, warna kontras), pattern interrupt (pertanyaan, suara mengejutkan), atau langsung tunjukkan hasil/transformasi. Tim kami punya library 50+ hook pattern yang teruji untuk niche Indonesia."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We manage campaigns for clients across Malaysia — KL, Selangor, Penang, Johor Bahru, East Malaysia — and everything runs remotely via WhatsApp, video calls and a shared dashboard, so location is never a barrier."
     },
     {
-      "q": "Apakah TikTok Ads bisa target usia 40+ tahun?",
-      "a": "Bisa, tapi persentasenya kecil. TikTok audience di Indonesia didominasi usia 16-30 tahun (60-70% userbase). Untuk target 40+, Meta Ads (Facebook/Instagram) biasanya lebih efektif dan cost-efficient."
+      "q": "Is TikTok Ads cheaper than Facebook Ads in Malaysia?",
+      "a": "Generally yes — TikTok CPMs in Malaysia are still lower than Meta's, so reach is cheaper. Conversion costs depend on your offer and creative, but for impulse-friendly products under RM 200, TikTok often delivers the lowest cost per purchase of any platform."
     },
     {
-      "q": "Bagaimana tracking leads dari TikTok Ads?",
-      "a": "Kami setup TikTok Pixel di website, konfigurasi event tracking button dan form, serta integrasi WhatsApp click. Lead yang masuk via WhatsApp akan di-tag dari campaign TikTok sehingga Anda bisa hitung cost per lead akurat dari dashboard TikTok Ads Manager."
+      "q": "What is Spark Ads and why does it matter?",
+      "a": "Spark Ads lets you boost organic TikTok posts — yours or a creator's — as native ads that keep all likes, comments and shares. They consistently outperform standard in-feed ads because they look and feel like real content, not advertising."
     }
   ],
-
-  "jasa-iklan-google": [
+  "google-ads-management": [
     {
-      "q": "Berapa biaya jasa iklan Google Ads di Beriklan?",
-      "a": "Biaya jasa pengelolaan Google Ads mulai dari Rp 2.500.000 per 30 hari untuk paket Standart, Rp 4.500.000 untuk Business, dan Rp 7.500.000 untuk Premium (multi-campaign). Belum termasuk ad spend Google yang dibayar langsung ke Google oleh klien."
+      "q": "How much does Google Ads management cost in Malaysia?",
+      "a": "Beriklan's google ads management packages start from RM 990/month and go up to RM 2,790 for the most complete plan. The fee covers strategy, setup, creative direction, daily optimisation and weekly reporting. Ad spend is paid separately to Google, directly from your own account."
     },
     {
-      "q": "Apa bedanya Google Ads dengan SEO?",
-      "a": "Google Ads adalah iklan bayar per klik yang muncul di atas hasil pencarian — hasilnya instant, traffic berhenti saat budget habis. SEO adalah optimasi organik gratis — hasilnya butuh 3-6 bulan tapi sustainable jangka panjang. Idealnya keduanya并行 untuk coverage maksimal."
+      "q": "What is a reasonable monthly ad budget for Google in Malaysia?",
+      "a": "For most Malaysian SMEs we recommend starting with RM 1,500 to RM 5,000 per month in ad spend. This gives the algorithm enough data to optimise within 2–4 weeks. We help you scale the budget only after the numbers prove the campaign is profitable."
     },
     {
-      "q": "Apakah Google Ads cocok untuk bisnis lokal?",
-      "a": "Sangat cocok, terutama untuk bisnis dengan intent tinggi seperti service (AC repair, dokter, hukum), B2B, dan e-commerce. Google Ads menangkap orang yang SEDANG mencari produk/jasa Anda, bukan sekadar scroll. Untuk toko retail lokal, Search Ads + Maps Ads sangat efektif."
+      "q": "Is the ad budget included in the management fee?",
+      "a": "No. The management fee covers our work — strategy, setup, creatives, optimisation and reporting. Your ad budget is paid directly to Google through your own ad account, so you keep full ownership and can see every ringgit of spend."
     },
     {
-      "q": "Berapa budget minimum untuk Google Ads?",
-      "a": "Minimum harian Rp 200.000-500.000 untuk niche kompetitif rendah. Untuk niche kompetitif tinggi (hukum, asuransi, real estate), minimum Rp 1.000.000-2.000.000 per hari agar campaign punya cukup data belajar. Budget bulanan Rp 5-20 juta untuk UMKM."
+      "q": "Is there a minimum contract or lock-in period?",
+      "a": "No long-term lock-in. All packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay for years because the results make sense — not because a contract forces them to."
     },
     {
-      "q": "Bagaimana cara Google Ads menentukan posisi iklan?",
-      "a": "Posisi iklan ditentukan oleh Ad Rank = Quality Score × Max Bid. Quality Score dipengaruhi oleh CTR, relevansi iklan, dan pengalaman landing page. Kampanye dengan Quality Score tinggi bisa di posisi atas dengan bid lebih rendah — inilah kenapa optimasi oleh expert sangat penting."
+      "q": "How long before I see results from google ads management?",
+      "a": "Initial data comes in within the first 7 days, and the learning phase typically stabilises in 2–4 weeks. By the end of the first 30-day cycle you will have a clear picture of cost per result, and we use that data to scale what works."
     },
     {
-      "q": "Apa itu Negative Keywords dan mengapa penting?",
-      "a": "Negative keywords adalah daftar kata kunci yang Anda EXCLUDE dari penayangan iklan. Contoh: untuk jasa service AC, 'AC gratis' atau 'cara pasang AC sendiri' adalah negative keyword. Tanpa negative keyword yang baik, budget Anda habis untuk traffic yang tidak akan convert."
+      "q": "What reports will I receive?",
+      "a": "A weekly report every Monday in plain language — spend, results, cost per result and what we are changing next — plus a real-time dashboard you can open any time. No jargon-filled PDFs that nobody reads."
     },
     {
-      "q": "Apakah Google Ads lebih mahal dari Facebook Ads?",
-      "a": "Bisa lebih mahal per klik di niche kompetitif, tapi biasanya lebih murah per acquisition karena user Google SEDANG mencari (high intent) vs Facebook yang berjumpa iklan saat scroll (lower intent). Untuk bisnis jasa dan B2B, Google Ads biasanya lebih cost-efficient."
+      "q": "Who owns the ad account and the data?",
+      "a": "You do. We work inside your own ad account with partner access, so all campaign history, pixels, audiences and billing stay under your control. If we ever part ways, everything remains yours."
     },
     {
-      "q": "Berapa lama sampai Google Ads menghasilkan leads?",
-      "a": "Lead pertama bisa masuk di hari pertama setelah campaign live (Google Ads tidak butuh 'learning phase' panjang seperti Meta). Untuk hasil optimal, biasanya butuh 2-4 minggu optimasi karena kami identifikasi keyword terbaik, tulis ulang ad copy, dan refine bidding strategy."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We manage campaigns for clients across Malaysia — KL, Selangor, Penang, Johor Bahru, East Malaysia — and everything runs remotely via WhatsApp, video calls and a shared dashboard, so location is never a barrier."
     },
     {
-      "q": "Apakah saya perlu website dulu sebelum Google Ads?",
-      "a": "Sangat disarankan. Google Ads mengarahkan traffic ke landing page — jika landing page buruk, conversion rate rendah dan biaya per acquisition mahal. Kami bisa bantu buat landing page optimal untuk Google Ads sebagai paket bundle (Landing Page + Google Ads)."
+      "q": "What is the difference between Google Ads and SEO?",
+      "a": "Google Ads puts you at the top of search results immediately and you pay per click; SEO builds free rankings over 6–12 months. They complement each other: Ads captures demand today while SEO compounds. For fast, measurable leads, Google Ads is the starting point."
     },
     {
-      "q": "Bagaimana tracking conversion Google Ads?",
-      "a": "Kami setup Google Tag Manager, Google Ads conversion tracking, dan Google Analytics 4. Setiap form submission, button click, dan purchase akan ter-record dengan attribution source yang akurat. Anda bisa lihat di dashboard Google Ads real-time."
+      "q": "Which Google Ads campaign types do you manage?",
+      "a": "Search, Performance Max, Display, Shopping and YouTube campaigns. For most Malaysian service businesses we start with Search — capturing people actively looking for what you sell — then layer in Performance Max or remarketing once conversion data builds up."
     }
   ],
-
-  "jasa-iklan-youtube": [
+  "youtube-ads-management": [
     {
-      "q": "Berapa biaya jasa iklan YouTube di Beriklan?",
-      "a": "Biaya jasa pengelolaan YouTube Ads mulai dari Rp 3.500.000 per 30 hari untuk paket Standart dan Rp 6.500.000 untuk paket Business. Belum termasuk ad spend Google yang dibayar terpisah. Cocok untuk objective brand awareness dan video view."
+      "q": "How much does YouTube Ads management cost in Malaysia?",
+      "a": "Beriklan's youtube ads management packages start from RM 890/month and go up to RM 2,490 for the most complete plan. The fee covers strategy, setup, creative direction, daily optimisation and weekly reporting. Ad spend is paid separately to Google, directly from your own account."
     },
     {
-      "q": "Apa bedanya YouTube Ads dengan TV Commercial?",
-      "a": "YouTube Ads lebih murah (mulai Rp 50/view vs Rp 50.000+/spot TV), lebih targeted (berdasarkan minat, demografi, affinity), dan measurable (view duration, klik, brand lift). TV hanya jangkau audience luas tanpa targeting detail dan sulit diukur dampaknya secara real-time."
+      "q": "What is a reasonable monthly ad budget for Google in Malaysia?",
+      "a": "For most Malaysian SMEs we recommend starting with RM 1,000 to RM 3,000 per month in ad spend. This gives the algorithm enough data to optimise within 2–4 weeks. We help you scale the budget only after the numbers prove the campaign is profitable."
     },
     {
-      "q": "Format YouTube Ads mana yang paling efektif?",
-      "a": "Tergantung objective. Untuk brand awareness, TrueView In-stream 15s non-skipable sangat efektif. Untuk consideration, In-stream 30s dengan skip setelah 5 detik. Untuk action, Bumper Ads 6 detik (non-skipable, pas untuk retargeting)."
+      "q": "Is the ad budget included in the management fee?",
+      "a": "No. The management fee covers our work — strategy, setup, creatives, optimisation and reporting. Your ad budget is paid directly to Google through your own ad account, so you keep full ownership and can see every ringgit of spend."
     },
     {
-      "q": "Apakah YouTube Ads cocok untuk UMKM Indonesia?",
-      "a": "Cocok untuk UMKM dengan budget awareness Rp 10-30 juta/bulan. Untuk UMKM budget kecil (< Rp 5 juta), biasanya lebih efisien ke Meta atau TikTok Ads. YouTube Ads paling optimal untuk brand yang sudah profitable dan butuh scale awareness ke audience luas."
+      "q": "Is there a minimum contract or lock-in period?",
+      "a": "No long-term lock-in. All packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay for years because the results make sense — not because a contract forces them to."
     },
     {
-      "q": "Bagaimana cara bikin iklan YouTube yang tidak di-skip?",
-      "a": "Untuk format In-stream (skip setelah 5 detik), hook 5 detik pertama sangat kritikal — langsung tunjukkan value proposition, visual menarik, atau cerita. Untuk Bumper Ads (6 detik non-skipable), fokus pada satu pesan sederhana dengan visual yang memorable."
+      "q": "How long before I see results from youtube ads management?",
+      "a": "Initial data comes in within the first 7 days, and the learning phase typically stabilises in 2–4 weeks. By the end of the first 30-day cycle you will have a clear picture of cost per result, and we use that data to scale what works."
     },
     {
-      "q": "Berapa lama sampai YouTube Ads menghasilkan leads?",
-      "a": "YouTube Ads adalah awareness platform — biasanya tidak menghasilkan direct lead di minggu pertama. Efek brand awareness biasanya terlihat di minggu ke-2-4 (brand search naik, direct traffic naik). Untuk direct response, biasanya perlu retargeting via Meta Ads setelah audience ter-expose YouTube."
+      "q": "What reports will I receive?",
+      "a": "A weekly report every Monday in plain language — spend, results, cost per result and what we are changing next — plus a real-time dashboard you can open any time. No jargon-filled PDFs that nobody reads."
     },
     {
-      "q": "Apakah YouTube Ads bisa untuk B2B?",
-      "a": "Bisa, terutama untuk B2B dengan target decision maker. YouTube punya audience profesional yang besar. Targeting bisa berdasarkan affinity (e.g. 'Business News', 'Entrepreneurship'), in-market (e.g. 'Business Services > Consulting'), atau custom intent (URL competitor)."
+      "q": "Who owns the ad account and the data?",
+      "a": "You do. We work inside your own ad account with partner access, so all campaign history, pixels, audiences and billing stay under your control. If we ever part ways, everything remains yours."
     },
     {
-      "q": "Bagaimana tracking YouTube Ads ke konversi?",
-      "a": "Kami setup Google Ads conversion tracking + GA4 untuk view-through conversion (yang nonton iklan lalu convert dalam 30 hari). Untuk B2B lead form, integration dengan CRM. Brand lift study juga tersedia untuk measure efek awareness secara kuantitatif."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We manage campaigns for clients across Malaysia — KL, Selangor, Penang, Johor Bahru, East Malaysia — and everything runs remotely via WhatsApp, video calls and a shared dashboard, so location is never a barrier."
     },
     {
-      "q": "Berapa view minimum yang ideal untuk YouTube Ads?",
-      "a": "Untuk campaign awareness, target minimal 100.000 view per bulan dengan view rate > 30% (artinya iklan Anda engaging). Untuk B2B atau niche spesifik, bahkan 10.000 view berkualitas sudah bisa menghasilkan beberapa qualified leads via retargeting."
+      "q": "How much does it cost to advertise on YouTube in Malaysia?",
+      "a": "YouTube views in Malaysia typically cost between RM 0.03 and RM 0.15 per view depending on targeting and format. With a RM 1,000–3,000 monthly budget you can realistically reach tens of thousands of relevant viewers, making it one of the cheapest awareness channels available."
     },
     {
-      "q": "Mana yang lebih baik: YouTube Ads atau TV?",
-      "a": "Untuk UMKM dan bisnis menengah, YouTube Ads lebih efektif dari TV karena: (1) biaya 95% lebih murah per view, (2) targeting presisi, (3) measurable real-time, (4) bisa optimize kapan saja. TV hanya unggul jika Anda target audience nasional usia 35+ dengan budget > Rp 500 juta."
+      "q": "Do I need a professionally produced video to run YouTube Ads?",
+      "a": "No. A clear 15–30 second video shot on a phone with a strong hook in the first 5 seconds often outperforms polished TV-style commercials. We provide the script structure and hook formulas, and can guide simple production remotely."
     }
   ],
-
-  "jasa-digital-marketing": [
+  "digital-marketing-agency": [
     {
-      "q": "Apa yang termasuk jasa digital marketing di Beriklan?",
-      "a": "Layanan kami mencakup iklan berbayar (Meta Ads, Google Ads, TikTok Ads, YouTube Ads), organic social media management (Instagram, TikTok), landing page development, dan analytics setup. Bisa dipilih per channel atau paket kombinasi multi-channel."
+      "q": "How much does it cost to hire a digital marketing agency in Malaysia?",
+      "a": "Malaysian agencies typically charge RM 1,500–8,000 per month depending on scope. Beriklan works differently: we start with a free audit, then quote a custom retainer based on the channels you actually need — most multi-channel clients invest RM 2,000–5,000 per month in management fees."
     },
     {
-      "q": "Berapa biaya jasa digital marketing di Indonesia?",
-      "a": "Biaya jasa bervariasi tergantung scope. Single channel (mis. hanya Facebook Ads): Rp 1.750.000/bulan. Multi-channel combo: Rp 5-10 juta/bulan. Full-service (ads + organic + landing page): Rp 10-20 juta/bulan. Semua fee manajemen, ad spend dibayar terpisah."
+      "q": "What does a digital marketing agency actually do?",
+      "a": "A performance-focused agency plans your channel strategy, runs and optimises your ad campaigns, manages content, tracks every conversion and reports results in plain language. The goal is simple: turn your marketing budget into measurable revenue, not vanity metrics."
     },
     {
-      "q": "Apakah digital marketing cocok untuk UMKM?",
-      "a": "Sangat cocok. Digital marketing memungkinkan UMKM compete dengan bisnis besar karena targeting presisi dan budget fleksibel. UMKM dengan budget Rp 5-15 juta/bulan sudah bisa menjalankan campaign Meta Ads + Google Ads yang profitable."
+      "q": "How do I choose the right digital marketing agency in Malaysia?",
+      "a": "Look for three things: transparent reporting with real numbers, direct access to your own ad accounts, and no long-term lock-in contracts. If an agency hides the ad account, hides the data or needs a 12-month contract to keep you — walk away."
     },
     {
-      "q": "Mana yang lebih efektif: digital marketing atau traditional marketing?",
-      "a": "Untuk UMKM dan bisnis menengah di 2026, digital marketing 3-5x lebih cost-efficient dari traditional (koran, TV, radio, billboard) karena: measurable real-time, targeting presisi, optimization cepat. Traditional masih relevan untuk brand awareness nasional dengan budget besar."
+      "q": "Should I hire an agency or build an in-house team?",
+      "a": "An in-house marketer in Malaysia costs RM 4,000–8,000 per month for one person's skill set. An agency gives you a full team — strategist, media buyer, designer, copywriter — for a similar or lower cost, plus cross-industry data an individual hire cannot match."
     },
     {
-      "q": "Berapa lama sampai digital marketing menghasilkan ROI?",
-      "a": "Untuk paid ads, ROI positif biasanya terlihat di bulan ke-2 atau ke-3 setelah campaign dioptimasi. Untuk SEO/organic, butuh 3-6 bulan. Untuk social media, 2-4 bulan. ROI keseluruhan paling realistis diukur setelah 6 bulan dengan strategy yang konsisten."
+      "q": "Which digital marketing channels work best in Malaysia?",
+      "a": "It depends on the business: Meta (Facebook and Instagram) for local leads and retail, Google Search for high-intent services, TikTok for products under RM 200 and younger audiences, and YouTube for awareness. We audit first, then recommend only the channels the data supports."
     },
     {
-      "q": "Apakah saya perlu website dulu sebelum digital marketing?",
-      "a": "Untuk Google Ads, ya (karena traffic perlu tujuan). Untuk Meta/TikTok Ads, tidak wajib — bisa gunakan WhatsApp sebagai conversion target. Untuk SEO, wajib punya website. Kami bisa bantu buat website/landing page sebagai bundle jika belum punya."
+      "q": "Is there a minimum contract?",
+      "a": "No long-term lock-in. Engagements run in 30-day cycles, and you can adjust the channel mix or stop at the end of any cycle. We believe results — not contracts — should be the reason clients stay."
     },
     {
-      "q": "Channel digital marketing mana yang paling cocok untuk bisnis saya?",
-      "a": "Tergantung target market dan objective. B2B/jasa profesional → Google Ads + LinkedIn. B2C/retail → Meta Ads + TikTok. Brand awareness → YouTube + TikTok. Lokal → Meta Ads + Google Maps. Kami biasanya audit dulu untuk rekomendasikan mix optimal."
+      "q": "What reports will I receive?",
+      "a": "A single consolidated weekly report across all channels — spend, results, cost per result and next actions — plus a real-time dashboard. One report, plain language, every Monday."
     },
     {
-      "q": "Bagaimana cara pilih agency digital marketing yang bagus?",
-      "a": "Cek: (1) track record dengan case study real (bukan angka fantastis), (2) akses penuh ke akun iklan (bukan agency yang lock akun), (3) laporan berkala dengan bahasa manusia, (4) sertifikasi resmi (Meta/Google Partner), (5) tim yang bisa dihubungi langsung."
+      "q": "Who owns the ad accounts and data?",
+      "a": "You do. All ad accounts, pixels, audiences and creative assets are set up under your business's ownership with Beriklan added as a partner. If we ever part ways, every asset and every byte of data stays with you."
     },
     {
-      "q": "Berapa lama kontrak minimum jasa digital marketing?",
-      "a": "Di Beriklan, tidak ada kontrak minimum — sistem kerja bulanan. Anda bebas lanjut atau berhenti setiap periode. Ini bentuk komitmen kami untuk menjaga kualitas kerja — bukan jebakan kontrak panjang seperti agency lain."
+      "q": "Do you work with small businesses or only large brands?",
+      "a": "Both. Most of our clients are Malaysian SMEs spending RM 1,500–15,000 per month on ads. Our packages are structured so a growing business can start lean on one channel and scale into multi-channel as revenue grows."
     },
     {
-      "q": "Apakah digital marketing ada garansi hasilnya?",
-      "a": "Tidak ada garansi nominal karena hasil dipengaruhi banyak faktor di luar kontrol agency (kualitas produk, harga, landing page, niche). Yang kami garansi adalah proses yang terukur dan transparan: audit dulu, strategi berdasarkan data, eksekusi teruji, laporan rutin."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. We work with clients across Malaysia and the region entirely remotely — onboarding, strategy calls and reporting all happen online, so you get the same service whether you are in KL, Penang, JB, Kota Kinabalu or Kuching."
     }
   ],
-
-  "jasa-kelola-instagram": [
+  "instagram-management": [
     {
-      "q": "Berapa biaya jasa kelola Instagram bulanan di Beriklan?",
-      "a": "Paket mulai Rp 2.500.000/bulan untuk 12 posting + 30 story. Paket Growth Rp 4.500.000 include reels dan community management. Paket Premium Rp 7.500.000 include produksi on-location dan campaign launching."
+      "q": "How much does instagram management cost in Malaysia?",
+      "a": "Beriklan's instagram management packages start from RM 1,290/month, with the most complete plan at RM 1,990 (with custom plans above that). The fee covers content planning, production, captions, scheduling, community management and monthly performance reports."
     },
     {
-      "q": "Berapa posting Instagram per minggu yang ideal?",
-      "a": "Untuk akun aktif, 4-5 posting per minggu + daily story. Untuk akun baru, 3 posting per minggu + 5-7 story per minggu. Konsistensi lebih penting dari volume — algoritma Instagram reward akun yang post teratur dengan reach lebih tinggi."
+      "q": "Is there a minimum contract?",
+      "a": "No long-term lock-in. Packages run in 30-day cycles. We do recommend at least 3 months, because organic growth compounds — but that is a recommendation based on data, not a contractual obligation."
     },
     {
-      "q": "Apakah konten Instagram harus original 100%?",
-      "a": "Idealnya ya, tapi banyak strategi mix: original content untuk hero posts, UGC atau curated content untuk variety, dan trend-jacking untuk visibility. Yang penting adalah setiap posting punya angle unik dan sesuai brand voice, bukan copy-paste."
+      "q": "Who creates the content — you or my team?",
+      "a": "We do. Our team plans the monthly calendar, writes the hooks and captions, and produces the designs or edits the videos. You review and approve everything before it goes live on Instagram, and we can also repurpose raw footage from your side."
     },
     {
-      "q": "Berapa lama sampai Instagram account mulai menghasilkan leads?",
-      "a": "Untuk akun baru, butuh 2-3 bulan untuk build foundation (konten konsisten + audience engaged). Lead pertama biasanya masuk di bulan ke-2 atau ke-3. Untuk akun existing dengan followers banyak, bisa lebih cepat (1-2 bulan) dengan strategi konten tepat."
+      "q": "What reports will I receive?",
+      "a": "A monthly performance report covering follower growth, reach, engagement rate and top-performing content — plus a content calendar for the month ahead so you always know what is being published and why."
     },
     {
-      "q": "Apakah perlu tampil di depan kamera untuk Instagram?",
-      "a": "Tidak wajib. Kami bisa produksi konten tanpa wajah (text-on-screen, B-roll, voiceover, atau AI avatar). Tapi riset menunjukkan konten dengan wajah asli biasanya perform 2-3x lebih baik di engagement rate dan trust building."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. Clients across Malaysia work with us fully remotely — content approvals happen via WhatsApp and a shared calendar, and video raw materials can be shot on a phone following our simple shot list."
     },
     {
-      "q": "Apa bedanya Reels dengan posting biasa di Instagram?",
-      "a": "Reels adalah video pendek (15-90 detik) yang muncul di Explore, FYP, dan tab Reels — reach 2-3x lebih luas dari posting biasa. Posting biasa (image/carousel) muncul di Feed followers. Idealnya mix keduanya: 3-4 Reels + 1-2 posting biasa per minggu."
+      "q": "How many posts per month do I get?",
+      "a": "Our packages range from 12 to 20 pieces of content per month — a strategic mix of feed posts, Reels and Stories. The exact mix is set in your monthly calendar based on what the data shows is growing your reach and engagement."
     },
     {
-      "q": "Bagaimana cara cepat naik followers Instagram secara organik?",
-      "a": "Kombinasi dari: (1) Reels 3-4x per minggu dengan hook 3 detik pertama yang kuat, (2) hashtag mix (5-10 relevan + 3-5 trending), (3) kolaborasi dengan micro-influencer, (4) engagement aktif dengan audience (reply comment, like post mereka). Tidak ada shortcut — growth organik butuh 6-12 bulan konsisten."
+      "q": "How long does it take to grow an Instagram account organically?",
+      "a": "Meaningful growth typically shows within 2–3 months of consistent, strategy-led posting. Reels are the fastest lever for reach in Malaysia right now; engagement and follower quality compound from there. Anyone promising thousands of followers in a week is selling bots."
     },
     {
-      "q": "Apakah boleh beli followers Instagram untuk cepat populer?",
-      "a": "Tidak disarankan. Followers palsu: (1) tidak engage dengan konten, (2) menurunkan engagement rate Anda, (3) algoritma Instagram bisa deteksi dan limit reach akun Anda, (4) menurunkan trust dari brand/calon klien. Investasi di konten berkualitas selalu lebih baik."
+      "q": "Do you reply to comments and DMs?",
+      "a": "Community management is included in our higher-tier packages — we respond to comments and route sales enquiries to your team via WhatsApp. On the starter package we provide response templates and flag important conversations for you."
     },
     {
-      "q": "Berapa lama kontrak jasa kelola Instagram?",
-      "a": "Minimum 3 bulan — Instagram adalah platform jangka panjang, hasil optimal butuh waktu untuk algoritma belajar dan audience terbentuk. Setelah 3 bulan, evaluasi bulanan dengan opsi break dengan notice 30 hari."
+      "q": "Can you combine Instagram management with paid ads?",
+      "a": "Yes, and it is the most effective setup: organic content builds trust and social proof while a small ad budget amplifies the best-performing posts. Many clients bundle Instagram management with Meta ads for a complete funnel."
     },
     {
-      "q": "Bagaimana sistem laporan kelola Instagram?",
-      "a": "Laporan bulanan via WhatsApp/email setiap awal bulan dengan metric: reach, engagement rate, follower growth, top-performing content, dan rekomendasi strategi bulan depan. Dashboard real-time juga bisa diakses via akun bisnis Instagram Anda."
+      "q": "Will my account be safe? Do you need my password?",
+      "a": "We work through Meta Business Suite partner access wherever possible, so you never need to hand over your password. Your account, followers and data remain fully yours at all times."
     }
   ],
-
-  "jasa-kelola-tiktok": [
+  "tiktok-management": [
     {
-      "q": "Berapa biaya jasa kelola TikTok bulanan di Beriklan?",
-      "a": "Paket mulai Rp 2.500.000/bulan untuk 12 video pendek. Paket Growth Rp 4.500.000 include live session dan community management. Paket Premium Rp 7.500.000 include produksi on-location dan campaign launching."
+      "q": "How much does tiktok management cost in Malaysia?",
+      "a": "Beriklan's tiktok management packages start from RM 990/month, with the most complete plan at RM 2,490 (20 videos per month). The fee covers content planning, production, captions, scheduling, community management and monthly performance reports."
     },
     {
-      "q": "Berapa video TikTok per minggu yang ideal?",
-      "a": "Untuk akun baru, 3-5 video per minggu. Untuk akun aktif, 5-7 video per minggu. Yang penting: konsistensi. Algoritma TikTok sangat reward akun yang post teratur, dan akan limit reach akun yang post jarang."
+      "q": "Is there a minimum contract?",
+      "a": "No long-term lock-in. Packages run in 30-day cycles. We do recommend at least 3 months, because organic growth compounds — but that is a recommendation based on data, not a contractual obligation."
     },
     {
-      "q": "Apakah TikTok perlu tampil muka untuk viral?",
-      "a": "Tidak wajib. Banyak akun viral tanpa muka: text-on-screen, B-roll footage, voiceover narasi, atau konten animasi. Tapi untuk personal brand dan trust building, tampil muka biasanya lebih efektif."
+      "q": "Who creates the content — you or my team?",
+      "a": "We do. Our team plans the monthly calendar, writes the hooks and captions, and produces the designs or edits the videos. You review and approve everything before it goes live on TikTok, and we can also repurpose raw footage from your side."
     },
     {
-      "q": "Berapa lama sampai akun TikTok mulai viral?",
-      "a": "Tidak ada jaminan viral — itu tergantung algoritma dan konten. Tapi dengan ritme posting konsisten + pattern yang teruji (hook 3 detik, story arc, CTA), mayoritas akun kami mencapai 100K+ views/bulan di bulan ke-2 atau ke-3. Viral instan biasanya terjadi pada 5-10% video."
+      "q": "What reports will I receive?",
+      "a": "A monthly performance report covering follower growth, reach, engagement rate and top-performing content — plus a content calendar for the month ahead so you always know what is being published and why."
     },
     {
-      "q": "Apa bedanya TikTok organic dengan TikTok Ads?",
-      "a": "Organic TikTok adalah posting gratis yang muncul di FYP via algoritma — reach terbatas tapi cost-free. TikTok Ads adalah iklan berbayar dengan targeting dan budget terkontrol — reach lebih luas dan predictable. Idealnya kombinasi: organic untuk brand building, ads untuk scale."
+      "q": "Do you serve businesses outside Kuala Lumpur?",
+      "a": "Yes. Clients across Malaysia work with us fully remotely — content approvals happen via WhatsApp and a shared calendar, and video raw materials can be shot on a phone following our simple shot list."
     },
     {
-      "q": "Bagaimana cara bikin video TikTok yang engaging?",
-      "a": "Pattern yang teruji: (1) hook 3 detik pertama (pertanyaan, visual mengejutkan, atau promise), (2) story arc pendek (problem-solution-result), (3) CTA di akhir (follow, share, save). Video 15-30 detik biasanya paling optimal untuk completion rate."
+      "q": "How many TikTok videos do I get per month?",
+      "a": "Packages range from 8 to 20 edited videos per month. The top tier at RM 2,490 includes 20 videos — enough for near-daily posting, which is the consistency level the TikTok algorithm rewards most in Malaysia."
     },
     {
-      "q": "Apakah TikTok cocok untuk B2B?",
-      "a": "Bisa, terutama untuk B2B dengan target audience profesional muda (25-35 tahun). Industri seperti SaaS, edutech, dan konsultan mulai banyak yang sukses di TikTok. Format: educational content, behind-the-scenes, myth-busting."
+      "q": "How do I get on the FYP (For You Page) in Malaysia?",
+      "a": "The FYP rewards watch time and completion rate, not follower count. That means strong hooks in the first 2 seconds, native-style editing, trending sounds used early and consistent posting. Our editors build every video around these signals."
     },
     {
-      "q": "Bagaimana cara monetisasi akun TikTok?",
-      "a": "Beberapa cara: (1) brand deal/sponsorship (biasanya mulai Rp 500K-2jt per video untuk akun 10K-100K followers), (2) affiliate link di bio, (3) jualan sendiri via TikTok Shop, (4) bawa audience ke WhatsApp untuk closing high-ticket product."
+      "q": "Do I need to appear on camera?",
+      "a": "It helps but is not mandatory. We build content systems around faceless formats too — product demos, voiceovers, text-led storytelling and trends. If you or a team member can front the camera, we script everything so filming takes minutes."
     },
     {
-      "q": "Berapa lama kontrak jasa kelola TikTok?",
-      "a": "Minimum 3 bulan — algoritma TikTok perlu waktu untuk belajar pattern akun Anda. Setelah 3 bulan, evaluasi bulanan dengan opsi break dengan notice 30 hari."
+      "q": "Can TikTok content really drive sales, not just views?",
+      "a": "Yes — Malaysia is one of TikTok Shop's strongest markets globally. We structure content to move viewers from entertainment to action: hook, value, soft pitch, and a clear next step to your TikTok Shop, WhatsApp or website."
     },
     {
-      "q": "Bagaimana sistem laporan kelola TikTok?",
-      "a": "Laporan bulanan via WhatsApp/email setiap awal bulan: total views, watch-time rata-rata, top 5 video, follower growth, share rate, dan rekomendasi strategi bulan depan. Anda juga mendapat akses ke akun TikTok untuk monitor real-time."
+      "q": "Can you combine TikTok management with TikTok Ads?",
+      "a": "Yes, and it compounds: organic videos identify winning angles for free, then Spark Ads amplify the proven winners. Clients who bundle management with ads typically reach profitable scale faster than with either alone."
     }
   ],
-
-  "jasa-pembuatan-website": [
+  "website-development": [
     {
-      "q": "Berapa biaya jasa pembuatan website di Beriklan?",
-      "a": "Landing page mulai Rp 3.000.000, company profile Rp 8.000.000, toko online Rp 18.000.000. Custom (multi-bahasa, membership system, booking): di-quote terpisah berdasarkan scope. Include domain .co.id/.id/.com + hosting 1 tahun."
+      "q": "How much does website development cost in Malaysia?",
+      "a": "Beriklan's website packages start from RM 1,499 for a professional company profile, RM 3,999 for a business website with CMS, and from RM 6,999 for custom builds or e-commerce. All packages include mobile-responsive design, SSL and basic SEO setup."
     },
     {
-      "q": "Berapa lama proses pembuatan website?",
-      "a": "Landing page 5-7 hari kerja. Company profile 14-21 hari. Toko online 21-30 hari. Custom: 30-60 hari. Revisi 2-3x included sebelum launch. Setelah deal, kami kirim timeline detail di kickoff meeting."
+      "q": "How long does it take to build a website?",
+      "a": "A company profile site takes 2–3 weeks from brief to launch. Business sites with CMS take 3–5 weeks, and custom or e-commerce projects 6–10 weeks depending on scope. Timelines are locked in writing before the project starts."
     },
     {
-      "q": "WordPress atau custom code untuk website?",
-      "a": "Tergantung. Untuk update rutin (blog, news): WordPress atau Headless CMS. Untuk performance maksimal (landing page campaign): static site (Astro/Next.js). Untuk toko online: Shopify (managed) atau WooCommerce (customizable). Kami rekomendasikan berdasarkan use case."
+      "q": "Will my website be mobile-friendly and fast?",
+      "a": "Yes. Over 80% of Malaysian web traffic is mobile, so we design mobile-first and build for speed — optimised images, modern frameworks and Core Web Vitals in the green. Speed is a ranking factor and a conversion factor; we treat it as non-negotiable."
     },
     {
-      "q": "Apakah website yang dibuat sudah SEO-friendly?",
-      "a": "Ya. Semua website kami include: SEO on-page (meta tags, structured data, semantic HTML), performance optimization (lazy loading, image compression, CDN), mobile-responsive, dan Core Web Vitals optimal. Untuk SEO lanjutan (backlink, content strategy), kami punya paket terpisah."
+      "q": "Do you include SEO in website development?",
+      "a": "Every build includes technical SEO fundamentals: clean structure, meta tags, schema markup, sitemap, fast load times and Google Search Console setup. Ongoing SEO content and link building are available separately if you want to grow organic traffic."
     },
     {
-      "q": "Apakah termasuk domain dan hosting?",
-      "a": "Ya, include 1 tahun. Domain .co.id/.id/.com (sesuai kebutuhan bisnis). Hosting managed Indonesia dengan SSD, SSL gratis, CDN, dan backup harian. Perpanjangan tahun kedua mulai Rp 1.5-3 juta/tahun tergantung paket."
+      "q": "Can I update the website content myself?",
+      "a": "Yes. CMS-based packages let your team edit text, images, blog posts and products without touching code. We include a handover session and a short guide so updating your site takes minutes, not support tickets."
     },
     {
-      "q": "Bagaimana jika saya ingin edit sendiri websitenya?",
-      "a": "Untuk WordPress dan Headless CMS, kami kasih akses admin dan training singkat. Untuk static site (Astro/Next.js), edit perlu via developer. Kami bisa setup content management system (Sanity, Contentful, Strapi) agar Anda bisa edit tanpa coding."
+      "q": "Do you provide hosting and domain?",
+      "a": "We can register your .com or .com.my domain and set up fast, secure hosting on your behalf — registered under your ownership, not ours. If you already have hosting, we deploy there instead. Either way, you own everything."
     },
     {
-      "q": "Apakah website yang dibuat sudah mobile-friendly?",
-      "a": "Sangat mobile-friendly. Semua website kami mobile-first design — di-test di 5 viewport (iPhone, Android, tablet, laptop, desktop). Mobile conversion rate biasanya 60-70% dari total traffic untuk landing page campaign."
+      "q": "What do I need to prepare before the project starts?",
+      "a": "Just three things: your logo and brand assets, the content or bullet points for each page (we help polish the copy), and examples of websites you like. We handle structure, design, copy refinement and everything technical."
     },
     {
-      "q": "Bagaimana dengan maintenance website setelah launch?",
-      "a": "Opsional. Landing page biasanya tidak perlu maintenance. Company profile Rp 500.000/bulan (update konten, security patch, backup). Toko online Rp 1.000.000/bulan (update produk, payment gateway maintenance, security). Bisa di-cancel kapan saja."
+      "q": "Will the website be ready to run ads to?",
+      "a": "Yes — every site ships with Google Analytics 4, Meta Pixel and conversion tracking pre-installed. If you plan to run Google or Meta ads, your website is ad-ready from day one, with WhatsApp click tracking included."
     },
     {
-      "q": "Bisakah integrasi dengan payment gateway dan WhatsApp?",
-      "a": "Ya. Untuk payment gateway: Midtrans, Xendit, Doku (mendukung semua bank lokal, e-wallet, virtual account). Untuk WhatsApp: WhatsApp Business API integration atau simple WhatsApp click-to-chat button. Kami konfigurasi sesuai kebutuhan Anda."
+      "q": "Do you offer maintenance after launch?",
+      "a": "Every project includes 30 days of free post-launch support for bug fixes and small tweaks. After that, optional monthly maintenance covers updates, backups, security and small content changes — or your team can take over fully."
     },
     {
-      "q": "Apakah website yang dibuat sudah include analytics?",
-      "a": "Ya, include Google Analytics 4 dan Meta Pixel setup. Untuk website dengan iklan aktif, kami juga setup Google Tag Manager untuk flexible event tracking. Dashboard analytics bisa Anda akses kapan saja untuk monitor traffic dan conversion."
+      "q": "Do you build e-commerce websites for the Malaysian market?",
+      "a": "Yes — online stores with local payment gateways (FPX, e-wallets, cards), shipping integrations and product management. We also advise on when a full store makes sense versus starting leaner with a landing page plus WhatsApp ordering."
     }
   ],
-
-  "jasa-pembuatan-landing-page": [
+  "landing-page-design": [
     {
-      "q": "Apa bedanya landing page dengan website biasa?",
-      "a": "Landing page fokus pada SATU objectif (lead generation atau sale) tanpa distraksi menu/navigasi. Konversi rate biasanya 3-5x lebih tinggi dari website umum karena menghilangkan friction. Cocok untuk campaign iklan (Meta, Google, TikTok Ads)."
+      "q": "How much does a landing page cost in Malaysia?",
+      "a": "Beriklan's landing page packages start from RM 1,299 — including copywriting, mobile-first design, WhatsApp integration and conversion tracking. The RM 2,999 bundle adds Google Ads setup and first-month management, so you launch page and traffic together."
     },
     {
-      "q": "Berapa biaya jasa pembuatan landing page?",
-      "a": "Single landing page Rp 3.000.000. Multi-page funnel (3-5 halaman interconnected) Rp 8-15.000.000. Include copywriting, design custom, integrasi tracking pixel + form WhatsApp. Bundle dengan Google Ads / Meta Ads bisa dapet diskon."
+      "q": "What is the difference between a landing page and a website?",
+      "a": "A website serves many goals and audiences; a landing page has exactly one job — convert visitors from a specific ad into leads or sales. One offer, one message, one call to action. That focus is why landing pages consistently out-convert homepages for paid traffic."
     },
     {
-      "q": "Berapa lama proses pembuatan landing page?",
-      "a": "Single page 5-7 hari kerja. Multi-page funnel 14-21 hari. Pengerjaan paralel dengan setup iklan (kalau bundle) sehingga campaign bisa live di minggu pertama setelah deal."
+      "q": "Why do my ads need a dedicated landing page?",
+      "a": "Sending paid traffic to a generic homepage is the most common money leak we find in audits. A dedicated page that mirrors the ad's promise typically converts 2–5× better, which directly cuts your cost per lead — often more than any targeting tweak can."
     },
     {
-      "q": "Apakah landing page harus pakai WordPress?",
-      "a": "Tidak harus. Untuk performance terbaik, kami rekomendasikan static site (Astro/Next.js) karena load time 2-3x lebih cepat dari WordPress. Loading speed直接影响 bounce rate dan quality score Google Ads. Landing page cepat = konversi lebih tinggi."
+      "q": "How long does it take to build a landing page?",
+      "a": "7–10 working days from brief to live page, including copywriting, design, WhatsApp integration and tracking setup. If you take the Google Ads bundle, campaigns typically go live within 2 weeks of project start."
     },
     {
-      "q": "Apakah termasuk copywriting di paket landing page?",
-      "a": "Ya. Kami riset pain point, benefit, dan objection handling customer Anda. Copywriting persuasif mengikuti best practice direct response: headline kuat, social proof, benefit-driven body copy, multiple CTA, urgency/scarcity elements."
+      "q": "Is copywriting included?",
+      "a": "Yes — persuasion-focused copy is the core of the service, not an add-on. We research your offer and audience, then write the headline, body and call-to-action structure. You review and approve everything before design begins."
     },
     {
-      "q": "Apa saja yang harus ada di landing page yang converting?",
-      "a": "9 elemen wajib: (1) headline yang match dengan iklan, (2) subheadline jelaskan value, (3) hero image/video, (4) benefit block (3-5 poin), (5) social proof (testimonial, logo client), (6) FAQ block, (7) multiple CTA button, (8) trust badges, (9) form WhatsApp yang simple."
+      "q": "Will the landing page work with WhatsApp?",
+      "a": "Yes. Every page ships with WhatsApp click-to-chat buttons carrying pre-filled context messages, plus click tracking — so you know exactly which ad and which page section generated each enquiry."
     },
     {
-      "q": "Bagaimana cara track conversion di landing page?",
-      "a": "Kami setup Meta Pixel, Google Tag Manager, Google Analytics 4, dan event tracking button/CTA. Setiap form submission, WhatsApp click, dan page view ter-record dengan attribution source. Anda bisa lihat cost per lead dan ROAS real-time."
+      "q": "Do you set up conversion tracking?",
+      "a": "Yes — Google Analytics 4, Meta Pixel, Google Ads conversion tags and WhatsApp click events are installed and tested before launch. Without proper tracking you cannot optimise; we treat it as part of the build, not an optional extra."
     },
     {
-      "q": "Apakah landing page bisa untuk Google Ads?",
-      "a": "Sangat cocok. Landing page + Google Ads adalah kombinasi paling efektif untuk high-intent traffic. Google Ads mengirim visitor SEDANG mencari → landing page convert → WhatsApp close. Conversion rate rata-rata 3-8% untuk niche jasa/profesional."
+      "q": "Can you also run the ads to my landing page?",
+      "a": "Yes — that is exactly what the RM 2,999 bundle is for: landing page plus Google Ads setup and first-month management in one package. One team owning both page and traffic means faster iteration and cheaper leads."
     },
     {
-      "q": "Berapa conversion rate yang bagus untuk landing page?",
-      "a": "Bervariasi per niche. Untuk jasa/profesional: 3-8%. Untuk e-commerce: 1-3%. Untuk B2B: 2-5%. Untuk lead magnet (ebook, webinar): 10-20%. Yang penting: track dari awal, optimasi rutin, A/B test headline dan CTA untuk improve."
+      "q": "Can I request changes after the page goes live?",
+      "a": "Yes. Two revision rounds are included during the build, plus 30 days of post-launch support. After launch we also recommend small conversion-driven tweaks based on real visitor data — that is where the biggest wins usually come from."
     },
     {
-      "q": "Apa bedanya landing page dengan microsite?",
-      "a": "Landing page biasanya 1 halaman fokus 1 objectif. Microsite multi-halaman (3-10 halaman) untuk campaign besar atau product launch. Microsite cocok untuk brand awareness dan storytelling panjang. Landing page cocok untuk direct response."
+      "q": "Do landing pages help lower my cost per lead?",
+      "a": "Almost always. Because the page matches the ad's promise and removes distractions, conversion rates rise — and since you pay the same for each click, every extra conversion directly lowers your cost per lead. Most clients see the page pay for itself within the first campaign cycles."
     }
   ]
 }
