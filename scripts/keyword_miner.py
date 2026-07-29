@@ -119,6 +119,9 @@ INDUSTRIES = [
 INTENT_PREFIX = ['best', 'top', 'affordable', 'hire', 'professional', 'trusted']
 INTENT_SUFFIX = ['price', 'pricing', 'cost', 'packages', 'for sme', 'for small business',
                  'freelance vs agency', 'services', '2026']
+# Live-viewer boosting: buying a service, NOT an agency-hire decision → restricted set
+LIVE_INTENT_PREFIX = ['best', 'cheap', 'affordable', 'real', 'instant', 'safe']
+LIVE_INTENT_SUFFIX = ['price', 'pricing', 'cost', 'packages', 'service', 'cheap', '2026']
 QUESTION_TEMPLATES = [
     'how much does {kw} cost in malaysia',
     'how much is {kw} in malaysia',
@@ -143,6 +146,13 @@ FOREIGN_GEO = re.compile(
     r'\b(india|kannur|kerala|mumbai|delhi|philippines|manila|nigeria|lagos|'
     r'pakistan|karachi|dhaka|bangladesh|vietnam|hanoi|thailand|bangkok|'
     r'indonesia|jakarta|dubai|uae|london|uk\b|usa|new york|australia|sydney)\b',
+    re.IGNORECASE,
+)
+# Non-English (Malay/Indonesian) noise from Suggest — keep the queue English-only
+NON_ENGLISH = re.compile(
+    r'\b(jasa|cara|murah|harga|biaya|khidmat|perkhidmatan|syarikat|terbaik|'
+    r'percuma|untuk|bikin|buat|kelola|paket|reka|bentuk|laman|pengurusan|'
+    r'iklan|siaran|langsung|beli|jual|kos|berapa|terpercaya|dengan|yang|tanpa)\b',
     re.IGNORECASE,
 )
 
@@ -240,7 +250,7 @@ def mine_suggest(intl=False):
                 s = s.strip()
                 if not (5 < len(s) < 80):
                     continue
-                if EXCLUDE.search(s) or FOREIGN_GEO.search(s):
+                if EXCLUDE.search(s) or FOREIGN_GEO.search(s) or NON_ENGLISH.search(s):
                     continue
                 src = 'suggest_my' if gl == 'my' else 'suggest_intl'
                 results.append((s, slug, src))
@@ -266,11 +276,13 @@ def expand_combinatorial():
             pats.append((f'{base} malaysia', None, None))
             for geo in GEO_MODIFIERS:
                 pats.append((f'{base} {geo}', None, None))
-            # Intent prefix/suffix
-            for pre in INTENT_PREFIX:
+            # Intent prefix/suffix (restricted set for live-viewer boosting)
+            pre_set = LIVE_INTENT_PREFIX if is_live else INTENT_PREFIX
+            suf_set = LIVE_INTENT_SUFFIX if is_live else INTENT_SUFFIX
+            for pre in pre_set:
                 pats.append((f'{pre} {base} malaysia', None, None))
                 pats.append((f'{pre} {base} in kl', None, None))
-            for suf in INTENT_SUFFIX:
+            for suf in suf_set:
                 pats.append((f'{base} {suf} malaysia', None, None))
                 pats.append((f'{seed} {suf}', None, None))
             # Questions
@@ -404,7 +416,7 @@ def main():
         slug = slugify(norm)
         if not norm or not slug or norm in seen:
             continue
-        if EXCLUDE.search(norm) or FOREIGN_GEO.search(norm):
+        if EXCLUDE.search(norm) or FOREIGN_GEO.search(norm) or NON_ENGLISH.search(norm):
             continue
         # Defensive: drop awkward double-geo ('... malaysia <city/geo> ...')
         tail = norm.split('malaysia', 1)[1] if 'malaysia' in norm else ''

@@ -1,14 +1,14 @@
 {
-  "last_run": "2026-07-29T19:05:06.671596+00:00",
+  "last_run": "2026-07-29T19:23:20.352957+00:00",
   "market": "MY",
-  "total_raw": 5487,
-  "queue_size": 5228,
-  "from_suggest": 731,
-  "from_expansion": 4497,
+  "total_raw": 5411,
+  "queue_size": 5150,
+  "from_suggest": 729,
+  "from_expansion": 4421,
   "international": 106,
-  "high_priority": 1716,
+  "high_priority": 1628,
   "by_service": {
-    "digital-marketing-agency": 400,
+    "digital-marketing-agency": 401,
     "google-ads-management": 379,
     "facebook-ads-management": 367,
     "tiktok-ads-management": 360,
@@ -18,17 +18,17 @@
     "instagram-ads-management": 337,
     "youtube-ads-management": 337,
     "tiktok-management": 333,
-    "tiktok-live-viewers": 289,
-    "twitch-live-viewers": 289,
-    "youtube-live-viewers": 276,
-    "live-stream-viewers": 271,
-    "shopee-live-viewers": 270,
-    "instagram-live-viewers": 263
+    "tiktok-live-viewers": 276,
+    "twitch-live-viewers": 276,
+    "youtube-live-viewers": 264,
+    "live-stream-viewers": 258,
+    "shopee-live-viewers": 256,
+    "instagram-live-viewers": 249
   },
   "by_intent": {
-    "transactional": 1208,
-    "commercial": 3819,
-    "informational": 201
+    "transactional": 1162,
+    "commercial": 3815,
+    "informational": 173
   },
   "sample_top20": [
     {
