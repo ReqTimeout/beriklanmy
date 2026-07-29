@@ -38,7 +38,7 @@ ROOT = Path(__file__).parent.parent.parent
 SCHEMA = Path(__file__).parent / "schema.sql"
 KEYWORDS_JSON = ROOT / "src/data/keywords.json"
 
-DEFAULT_DB = "beriklan-seo"
+DEFAULT_DB = "beriklan-my-seo"
 
 def run_local(sql: str, db: str = DEFAULT_DB) -> Tuple[bool, str]:
     """Run SQL via wrangler CLI. Returns (success, output)."""

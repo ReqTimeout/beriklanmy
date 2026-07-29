@@ -17,7 +17,7 @@ CONTENT = os.path.join(WEB, "src/data/city-content.json")
 
 def d1_query(sql):
     r = subprocess.run(
-        ["npx", "wrangler", "d1", "execute", "beriklan-seo", "--remote", "--command", sql],
+        ["npx", "wrangler", "d1", "execute", "beriklan-my-seo", "--remote", "--command", sql],
         cwd=WEB, capture_output=True, text=True,
     )
     return r.stdout

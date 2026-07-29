@@ -12,7 +12,7 @@
   "r2_buckets": [
     {
       "binding": "QUEUE",
-      "bucket_name": "idberiklan"
+      "bucket_name": "myberiklan"
     }
   ],
   "ai": {
