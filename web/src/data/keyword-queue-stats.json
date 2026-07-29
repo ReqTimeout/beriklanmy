@@ -1,34 +1,38 @@
 {
-  "last_run": "2026-07-29T19:23:20.352957+00:00",
+  "last_run": "2026-07-29T19:29:41.413234+00:00",
   "market": "MY",
-  "total_raw": 5411,
-  "queue_size": 5150,
-  "from_suggest": 729,
-  "from_expansion": 4421,
+  "total_raw": 6155,
+  "queue_size": 5863,
+  "from_suggest": 899,
+  "from_expansion": 4964,
   "international": 106,
-  "high_priority": 1628,
+  "high_priority": 1759,
+  "by_language": {
+    "en": 5151,
+    "ms": 712
+  },
   "by_service": {
-    "digital-marketing-agency": 401,
-    "google-ads-management": 379,
-    "facebook-ads-management": 367,
-    "tiktok-ads-management": 360,
-    "landing-page-design": 359,
-    "website-development": 357,
-    "instagram-management": 341,
-    "instagram-ads-management": 337,
-    "youtube-ads-management": 337,
-    "tiktok-management": 333,
-    "tiktok-live-viewers": 276,
-    "twitch-live-viewers": 276,
-    "youtube-live-viewers": 264,
-    "live-stream-viewers": 258,
-    "shopee-live-viewers": 256,
-    "instagram-live-viewers": 249
+    "digital-marketing-agency": 466,
+    "website-development": 464,
+    "facebook-ads-management": 447,
+    "landing-page-design": 422,
+    "google-ads-management": 417,
+    "tiktok-ads-management": 400,
+    "instagram-management": 393,
+    "tiktok-management": 385,
+    "instagram-ads-management": 378,
+    "youtube-ads-management": 377,
+    "tiktok-live-viewers": 313,
+    "twitch-live-viewers": 290,
+    "shopee-live-viewers": 287,
+    "youtube-live-viewers": 285,
+    "instagram-live-viewers": 270,
+    "live-stream-viewers": 269
   },
   "by_intent": {
-    "transactional": 1162,
-    "commercial": 3815,
-    "informational": 173
+    "transactional": 1316,
+    "commercial": 4330,
+    "informational": 217
   },
   "sample_top20": [
     {
@@ -39,6 +43,11 @@
     {
       "keyword": "wordpress web design services klang malaysia",
       "score": 76,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "harga iklan di instagram malaysia",
+      "score": 74,
       "source": "suggest_my"
     },
     {
@@ -123,11 +132,6 @@
     },
     {
       "keyword": "how much does facebook advertising services cost in malaysia",
-      "score": 70,
-      "source": "expansion_my"
-    },
-    {
-      "keyword": "how much is facebook advertising services in malaysia",
       "score": 70,
       "source": "expansion_my"
     }
