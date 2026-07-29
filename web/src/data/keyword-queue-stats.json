@@ -1,1 +1,135 @@
-{}
+{
+  "last_run": "2026-07-29T19:05:06.671596+00:00",
+  "market": "MY",
+  "total_raw": 5487,
+  "queue_size": 5228,
+  "from_suggest": 731,
+  "from_expansion": 4497,
+  "international": 106,
+  "high_priority": 1716,
+  "by_service": {
+    "digital-marketing-agency": 400,
+    "google-ads-management": 379,
+    "facebook-ads-management": 367,
+    "tiktok-ads-management": 360,
+    "landing-page-design": 359,
+    "website-development": 357,
+    "instagram-management": 341,
+    "instagram-ads-management": 337,
+    "youtube-ads-management": 337,
+    "tiktok-management": 333,
+    "tiktok-live-viewers": 289,
+    "twitch-live-viewers": 289,
+    "youtube-live-viewers": 276,
+    "live-stream-viewers": 271,
+    "shopee-live-viewers": 270,
+    "instagram-live-viewers": 263
+  },
+  "by_intent": {
+    "transactional": 1208,
+    "commercial": 3819,
+    "informational": 201
+  },
+  "sample_top20": [
+    {
+      "keyword": "live commerce agency malaysia price",
+      "score": 78,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "wordpress web design services klang malaysia",
+      "score": 76,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "best google ads agency malaysia",
+      "score": 74,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "best web design company malaysia",
+      "score": 74,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "best website design company in malaysia",
+      "score": 74,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "best digital marketing agency malaysia",
+      "score": 74,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "top digital marketing agency malaysia",
+      "score": 74,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "sme web design company malaysia",
+      "score": 73,
+      "source": "suggest_my"
+    },
+    {
+      "keyword": "facebook ads agency price malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook ads agency pricing malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook ads agency cost malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook ads agency packages malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "how much does facebook ads agency cost in malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "how much is facebook ads agency in malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook advertising services price malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook advertising services pricing malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook advertising services cost malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "facebook advertising services packages malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "how much does facebook advertising services cost in malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    },
+    {
+      "keyword": "how much is facebook advertising services in malaysia",
+      "score": 70,
+      "source": "expansion_my"
+    }
+  ]
+}
