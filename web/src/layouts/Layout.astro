@@ -1,0 +1,712 @@
+---
+import FloatingWhatsApp from '../components/FloatingWhatsApp.svelte';
+import CookieConsent from '../components/CookieConsent.astro';
+// (NAPBlock removed - Footer.svelte already has canonical NAP info)
+import Schema from '../components/Schema.astro';
+import type { FAQItem, BreadcrumbItem, ServiceData, LocalBusinessData } from '../components/Schema.astro';
+
+interface Props {
+    title?: string;
+    description?: string;
+    canonical?: string;
+    ogImage?: string;
+    schema?: 'service' | 'organization' | 'auto';
+    noindex?: boolean;
+    prevUrl?: string;
+    nextUrl?: string;
+    faq?: FAQItem[];
+    breadcrumb?: BreadcrumbItem[];
+    service?: ServiceData;
+    localBusiness?: LocalBusinessData;
+    heroImage?: string;
+    heroImageWidth?: number;
+    heroImageHeight?: number;
+}
+
+const {
+    title = 'Beriklan.co.id — Jasa Digital Marketing Indonesia | Sejak 2016',
+    description = 'Agency digital marketing Indonesia — Facebook Ads, Google Ads, TikTok Ads, YouTube, Landing Page. Tim bersertifikasi Meta & Google, berpengalaman mengelola campaign sejak 2016. Sesi konsultasi awal 15 menit.',
+    canonical = 'https://beriklan.my/',
+    ogImage = 'https://beriklan.my/og-image.png',
+    schema = 'auto',
+    noindex = false,
+    prevUrl,
+    nextUrl,
+    faq,
+    breadcrumb,
+    service,
+    localBusiness,
+    heroImage,
+    heroImageWidth = 1200,
+    heroImageHeight = 675,
+} = Astro.props as Props;
+
+// Auto-detect schema: ProfessionalService on all pages (sitewide), Organization always
+const showProfessional = schema === 'service' || schema === 'auto';
+const showOrganization = true;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		{heroImage && (
+			<link
+				rel="preload"
+				as="image"
+				href={heroImage}
+				fetchpriority="high"
+			/>
+		)}
+		<meta name="description" content={description} />
+		<meta name="keywords" content="jasa digital marketing, agency digital marketing indonesia, facebook ads, google ads, tiktok ads, instagram ads, landing page, jasa iklan, agency iklan" />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="language" content="Indonesian" />
+		<meta name="author" content="Beriklan.co.id" />
+
+		<link rel="canonical" href={canonical} />
+		{prevUrl && <link rel="prev" href={prevUrl} />}
+		{nextUrl && <link rel="next" href={nextUrl} />}
+
+		<!-- Open Graph Tags -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="Beriklan.co.id" />
+		<meta property="og:locale" content="id_ID" />
+
+		<!-- Twitter Card Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonical} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+		<link rel="shortcut icon" href="/favicon.ico?v=2" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png?v=2" />
+		<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png?v=2" />
+		<meta name="generator" content={Astro.generator} />
+
+		<link rel="stylesheet" href="/fonts/fonts.css">
+
+		{showProfessional && (
+			<script type="application/ld+json" set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'ProfessionalService',
+				name: 'Beriklan.co.id',
+				description: 'Agency digital marketing Indonesia — Facebook Ads, Google Ads, TikTok Ads, Landing Page, dan social media management.',
+				url: 'https://beriklan.my',
+				logo: 'https://beriklan.my/logoweb.webp',
+				image: 'https://beriklan.my/logoweb.webp',
+				priceRange: 'Rp 2.500.000 - Rp 10.000.000',
+				telephone: '+62-22-XXXXXXX',
+				address: {
+					'@type': 'PostalAddress',
+					addressCountry: 'ID',
+					addressLocality: 'Bandung',
+					addressRegion: 'Jawa Barat'
+				},
+				areaServed: { '@type': 'Country', 'name': 'Indonesia' },
+				openingHours: 'Mo-Sa 09:00-18:00',
+				knowsAbout: ['Facebook Ads', 'Google Ads', 'TikTok Ads', 'Performance Marketing', 'Landing Page', 'Conversion Optimization'],
+			})}></script>
+		)}
+
+		{showOrganization && (
+			<script type="application/ld+json" set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Organization',
+				name: 'Beriklan.co.id',
+				url: 'https://beriklan.my',
+				logo: 'https://beriklan.my/logoweb.webp',
+				description: 'Agency performance marketing Indonesia berbasis di Bandung — mengelola campaign sejak 2016.',
+				foundingDate: '2016',
+				sameAs: [
+					'https://www.instagram.com/beriklan.my',
+					'https://www.facebook.com/beriklan.my'
+				]
+			})}></script>
+		)}
+
+		{/* P1: Additional structured data — FAQ, Breadcrumb, Service, LocalBusiness */}
+		<Schema faq={faq} breadcrumb={breadcrumb} service={service} localBusiness={localBusiness} />
+
+		<!-- Google Tag Manager -->
+		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MJXSNCSD');</script>
+		<!-- End Google Tag Manager -->
+
+		<!-- Global dataLayer push helpers (GTM event tracking) -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			// Helper: derive event key + payload from any anchor or button
+			function bk_attr(el, key) { return el.getAttribute(key) || el.dataset[key] || ''; }
+			function bk_text(el) { return (el.textContent || '').trim().slice(0, 60); }
+			function pushDL(obj) { window.dataLayer.push(obj); }
+
+			// ========== CLICK TRACKER (wa, tel, cta, internal, outbound, file) ==========
+			document.addEventListener('click', function(e) {
+				var t = e.target;
+				while (t && t !== document.body) {
+					if (t.tagName === 'A' || t.tagName === 'BUTTON') break;
+					t = t.parentElement;
+				}
+				if (!t || t === document.body) return;
+				var href = (t.href || bk_attr(t, 'href') || '').toLowerCase();
+				var isWa = href.indexOf('wa.me/') !== -1 || href.indexOf('whatsapp') !== -1;
+				var isTel = href.indexOf('tel:') === 0;
+				var isDownload = /\.(pdf|doc|docx|xls|xlsx|zip|rar|7z|jpg|png|webp|svg)$/i.test(href.split('?')[0].split('#')[0]);
+				var isOutbound = href && !href.startsWith(window.location.origin) && !href.startsWith('/') && !href.startsWith('#') && !isWa && !isTel;
+
+				if (isWa) {
+					pushDL({
+						event: 'whatsapp_click',
+						event_category: 'contact',
+						event_label: t.dataset.cta || bk_text(t) || 'whatsapp',
+						page_location: window.location.pathname,
+						page_title: document.title,
+						service_slug: t.dataset.service || '',
+						package_name: t.dataset.package || '',
+						package_price: t.dataset.price || '',
+						cta_location: t.dataset.ctaLocation || '',
+						link_url: t.href || ''
+					});
+				} else if (isTel) {
+					pushDL({
+						event: 'phone_click',
+						event_category: 'contact',
+						event_label: bk_text(t) || 'phone',
+						link_url: t.href || '',
+						page_location: window.location.pathname
+					});
+				} else if (isDownload) {
+					var fname = href.split('/').pop().split('?')[0];
+					var ext = (fname.match(/\.([^.]+)$/) || ['','file'])[1];
+					pushDL({
+						event: 'file_download',
+						event_category: 'engagement',
+						event_label: fname,
+						file_name: fname,
+						file_extension: ext,
+						link_url: t.href || '',
+						page_location: window.location.pathname
+					});
+				} else if (isOutbound) {
+					pushDL({
+						event: 'outbound_click',
+						event_category: 'engagement',
+						event_label: bk_text(t) || t.hostname,
+						outbound_url: t.href || '',
+						page_location: window.location.pathname
+					});
+				} else if (t.hostname === window.location.hostname && t.pathname && t.pathname !== window.location.pathname) {
+					// Internal link click (different page on same site)
+					pushDL({
+						event: 'internal_link_click',
+						event_category: 'engagement',
+						event_label: bk_text(t),
+						internal_link_text: bk_text(t),
+						internal_link_url: t.href || '',
+						page_location: window.location.pathname
+					});
+				}
+
+				// Generic CTA tracking
+				if (t.dataset.cta) {
+					pushDL({
+						event: 'cta_click',
+						event_category: 'engagement',
+						event_label: t.dataset.cta,
+						cta_text: bk_text(t),
+						cta_location: t.dataset.ctaLocation || '',
+						page_location: window.location.pathname
+					});
+				}
+			}, true);
+
+			// ========== PRICING TIER VIEW (IntersectionObserver) ==========
+			(function() {
+				if (typeof IntersectionObserver === 'undefined') return;
+				var io = new IntersectionObserver(function(entries) {
+					entries.forEach(function(en) {
+						if (en.isIntersecting) {
+							var el = en.target;
+							pushDL({
+								event: 'view_pricing_tier',
+								event_category: 'engagement',
+								event_label: el.dataset.tier || el.id || 'tier',
+								package_name: el.dataset.tier || '',
+								package_price: el.dataset.price || '',
+								page_location: window.location.pathname
+							});
+							io.unobserve(el);
+						}
+					});
+				}, { threshold: 0.4 });
+				document.addEventListener('DOMContentLoaded', function() {
+					document.querySelectorAll('[data-tier]').forEach(function(el) { io.observe(el); });
+				});
+			})();
+
+			// ========== SCROLL DEPTH (25/50/75/100%) ==========
+			(function() {
+				var fired = {};
+				function check() {
+					var h = document.documentElement;
+					var b = document.body;
+					var st = window.pageYOffset || h.scrollTop || b.scrollTop;
+					var sh = (h.scrollHeight || b.scrollHeight) - window.innerHeight;
+					if (sh <= 0) return;
+					var pct = Math.min(100, Math.round((st / sh) * 100));
+					[25, 50, 75, 100].forEach(function(mark) {
+						if (pct >= mark && !fired[mark]) {
+							fired[mark] = true;
+							pushDL({
+								event: 'scroll_' + mark,
+								event_category: 'engagement',
+								event_label: 'scroll_' + mark,
+								scroll_percent: mark,
+								page_location: window.location.pathname
+							});
+						}
+					});
+				}
+				var ticking = false;
+				window.addEventListener('scroll', function() {
+					if (!ticking) { requestAnimationFrame(function() { check(); ticking = false; }); ticking = true; }
+				}, { passive: true });
+				window.addEventListener('load', check);
+			})();
+
+			// ========== TIME ON PAGE (30/60/180s) ==========
+			(function() {
+				var startTime = Date.now();
+				var fired = {};
+				[30, 60, 180].forEach(function(s) {
+					setTimeout(function() {
+						if (fired[s]) return;
+						fired[s] = true;
+						pushDL({
+							event: 'time_' + s + 's',
+							event_category: 'engagement',
+							event_label: 'time_' + s + 's',
+							time_seconds: s,
+							page_location: window.location.pathname
+						});
+					}, s * 1000);
+				});
+			})();
+
+			// ========== BLOG READ COMPLETE (75% scroll on /blog/*) ==========
+			(function() {
+				if (window.location.pathname.indexOf('/blog/') !== 0) return;
+				var fired = false;
+				function checkRead() {
+					if (fired) return;
+					var h = document.documentElement;
+					var b = document.body;
+					var st = window.pageYOffset || h.scrollTop || b.scrollTop;
+					var sh = (h.scrollHeight || b.scrollHeight) - window.innerHeight;
+					if (sh <= 0) return;
+					var pct = Math.min(100, Math.round((st / sh) * 100));
+					if (pct >= 75) {
+						fired = true;
+						pushDL({
+							event: 'blog_read_complete',
+							event_category: 'engagement',
+							event_label: 'read_75pct',
+							page_location: window.location.pathname,
+							page_title: document.title
+						});
+					}
+				}
+				var ticking = false;
+				window.addEventListener('scroll', function() {
+					if (!ticking) { requestAnimationFrame(function() { checkRead(); ticking = false; }); ticking = true; }
+				}, { passive: true });
+				window.addEventListener('load', checkRead);
+			})();
+
+			// ========== FORM START (first focus on form field) ==========
+			(function() {
+				var fired = false;
+				document.addEventListener('focusin', function(e) {
+					if (fired) return;
+					var t = e.target;
+					if (!t) return;
+					if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT') {
+						var f = t.closest('form');
+						if (f) {
+							fired = true;
+							pushDL({
+								event: 'form_start',
+								event_category: 'engagement',
+								event_label: f.dataset.track || f.id || 'form',
+								form_name: f.dataset.track || f.id || 'form',
+								page_location: window.location.pathname
+							});
+						}
+					}
+				});
+			})();
+
+			// ========== FORM SUBMIT ==========
+			document.addEventListener('submit', function(e) {
+				var f = e.target;
+				if (!f || f.tagName !== 'FORM') return;
+				if (f.dataset.track) {
+					pushDL({
+						event: 'form_submit',
+						event_category: 'conversion',
+						event_label: f.dataset.track,
+						form_name: f.dataset.track,
+						page_location: window.location.pathname
+					});
+				}
+			}, true);
+
+			// ========== PAGE VIEW (manual + GTM own) ==========
+			pushDL({
+				event: 'page_view',
+				page_location: window.location.pathname,
+				page_title: document.title
+			});
+		</script>
+	</head>
+	<body class="font-sans text-primary bg-white antialiased pb-24 lg:pb-0">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJXSNCSD"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<slot />
+	<FloatingWhatsApp client:only="svelte" />
+	<CookieConsent />
+
+	<!-- Scroll-triggered reveal system -->
+	<script is:inline>
+		(function() {
+			if (typeof IntersectionObserver === 'undefined') return;
+			// Mark html so CSS only hides elements when JS observer is ready
+			document.documentElement.classList.add('js-reveal-ready');
+			const items = document.querySelectorAll('[data-reveal], .reveal-stagger');
+			if (!items.length) return;
+			const io = new IntersectionObserver((entries) => {
+				entries.forEach(e => {
+					if (e.isIntersecting) {
+						e.target.classList.add('revealed');
+						io.unobserve(e.target);
+					}
+				});
+			}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+			items.forEach(el => io.observe(el));
+		})();
+	</script>
+
+	<!-- Reveal observer (was: at end of file outside </html> — moved here) -->
+	<script>
+		(function() {
+			if (typeof IntersectionObserver === 'undefined') return;
+			const observer = new IntersectionObserver((entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('revealed');
+						observer.unobserve(entry.target);
+					}
+				}
+			}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+			const selector = '.reveal, .reveal-stagger, .reveal-lift, .reveal-left, .reveal-right';
+			const seen = new WeakSet();
+			function observeAll() {
+				document.querySelectorAll(selector).forEach((el) => {
+					if (!seen.has(el)) { seen.add(el); observer.observe(el); }
+				});
+			}
+			if (document.readyState !== 'loading') observeAll();
+			else document.addEventListener('DOMContentLoaded', observeAll);
+			document.addEventListener('astro:page-load', observeAll);
+			if (typeof MutationObserver !== 'undefined') {
+				const mo = new MutationObserver((mutations) => {
+					for (const m of mutations) {
+						for (const n of m.addedNodes) {
+							if (!(n instanceof Element)) continue;
+							if (n.matches && n.matches(selector)) {
+								if (!seen.has(n)) { seen.add(n); observer.observe(n); }
+							}
+							if (n.querySelectorAll) {
+								n.querySelectorAll(selector).forEach((el) => {
+									if (!seen.has(el)) { seen.add(el); observer.observe(el); }
+								});
+							}
+						}
+					}
+				});
+				const startObs = () => {
+					if (document.body) mo.observe(document.body, { childList: true, subtree: true });
+					else setTimeout(startObs, 50);
+				};
+				startObs();
+			}
+			let ticks = 0;
+			const id = setInterval(() => {
+				observeAll();
+				if (++ticks > 5) clearInterval(id);
+			}, 1500);
+		})();
+	</script>
+
+	<!-- Newsletter form handler (P2.6) -->
+	<script is:inline>
+		(function() {
+			function attachNewsletter() {
+				var form = document.getElementById('nl-form');
+				if (!form || form.__attached) return;
+				form.__attached = true;
+				var status = form.querySelector('.nl-status');
+				var btn = form.querySelector('button[type="submit"]');
+				form.addEventListener('submit', async function(e) {
+					e.preventDefault();
+					if (btn.disabled) return;
+					var honeypot = form.querySelector('input[name="website"]').value;
+					if (honeypot) { status.textContent = 'Terima kasih!'; status.className = 'nl-status text-xs text-green-300'; return; }
+					var email = form.querySelector('input[name="email"]').value.trim().toLowerCase();
+					var name = form.querySelector('input[name="name"]').value.trim();
+					if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+						status.textContent = 'Format email tidak valid.';
+						status.className = 'nl-status text-xs text-red-300';
+						return;
+					}
+					btn.disabled = true;
+					btn.textContent = '...';
+					try {
+						var r = await fetch('/api/newsletter/subscribe', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({
+								email: email, name: name,
+								page_url: location.pathname, source: document.referrer || ''
+							}),
+						});
+						var data = await r.json();
+						if (data.ok) {
+							status.textContent = data.already ? 'Anda sudah terdaftar.' : 'Terima kasih! Update akan kami kirim via email.';
+							status.className = 'nl-status text-xs text-green-300';
+							form.querySelector('input[name="email"]').value = '';
+							form.querySelector('input[name="name"]').value = '';
+						} else {
+							status.textContent = data.error || 'Gagal. Coba lagi.';
+							status.className = 'nl-status text-xs text-red-300';
+						}
+					} catch (err) {
+						status.textContent = 'Gagal menghubungi server.';
+						status.className = 'nl-status text-xs text-red-300';
+					}
+					btn.disabled = false;
+					btn.textContent = 'Daftar';
+				});
+			}
+			if (document.readyState !== 'loading') attachNewsletter();
+			else document.addEventListener('DOMContentLoaded', attachNewsletter);
+			document.addEventListener('astro:page-load', attachNewsletter);
+		})();
+	</script>
+	</body>
+</html>
+
+<style is:global>
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Soft fade-in animation */
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-move 12s ease infinite;
+    }
+    
+    @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* === GLOBAL: smooth scroll-reveal animations (progressive enhancement) ===
+       Content is visible by default. JS marks html.js-reveal-ready BEFORE the
+       observer runs, so reveal animation only hides content when JS is alive
+       and ready to reveal it. If JS / observer fails, content stays visible. */
+    @media (prefers-reduced-motion: no-preference) {
+        html.js-reveal-ready .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        html.js-reveal-ready .reveal.revealed { opacity: 1; transform: translateY(0); }
+        
+        /* Reveal animation — progressive enhancement.
+           Children start visible by default; if JS marks .js-reveal-ready on
+           html, we hide them and the observer flips to .revealed on scroll.
+           This guarantees content is visible even if JS / observer fails. */
+        html.js-reveal-ready .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        html.js-reveal-ready .reveal-stagger.revealed > * { opacity: 1; transform: translateY(0); }
+        .reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0ms; }
+        .reveal-stagger.revealed > *:nth-child(2) { transition-delay: 80ms; }
+        .reveal-stagger.revealed > *:nth-child(3) { transition-delay: 160ms; }
+        .reveal-stagger.revealed > *:nth-child(4) { transition-delay: 240ms; }
+        .reveal-stagger.revealed > *:nth-child(5) { transition-delay: 320ms; }
+        .reveal-stagger.revealed > *:nth-child(6) { transition-delay: 400ms; }
+        .reveal-stagger.revealed > *:nth-child(7) { transition-delay: 480ms; }
+        .reveal-stagger.revealed > *:nth-child(8) { transition-delay: 560ms; }
+        .reveal-stagger.revealed > *:nth-child(9) { transition-delay: 640ms; }
+        .reveal-stagger.revealed > *:nth-child(10) { transition-delay: 720ms; }
+        
+        .reveal-lift {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+            transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-lift.revealed { opacity: 1; transform: translateY(0) scale(1); }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-left.revealed { opacity: 1; transform: translateX(0); }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-right.revealed { opacity: 1; transform: translateX(0); }
+        
+        .perf-gpu { will-change: transform; transform: translateZ(0); }
+
+        /* GPU compositing for infinite CSS animations — invisible perf hint */
+        .anim-float, .anim-drift, .anim-drift-slow {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* Off-screen sections skip layout/paint — biggest scroll-perf win on long pages */
+        section.cv-auto {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 800px;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(8px, -10px); }
+        }
+        .anim-drift { animation: drift 8s ease-in-out infinite; }
+        .anim-drift-slow { animation: drift 14s ease-in-out infinite; }
+
+        @keyframes float-shape {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        .anim-float { animation: float-shape 7s ease-in-out infinite; }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+	/* ===== Scroll reveal animations ===== */
+	[data-reveal], [data-reveal-stagger] > * {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	[data-reveal].is-visible, [data-reveal-stagger].is-visible > * {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	[data-reveal-stagger] > *:nth-child(1) { transition-delay: 0ms; }
+	[data-reveal-stagger] > *:nth-child(2) { transition-delay: 80ms; }
+	[data-reveal-stagger] > *:nth-child(3) { transition-delay: 160ms; }
+	[data-reveal-stagger] > *:nth-child(4) { transition-delay: 240ms; }
+	[data-reveal-stagger] > *:nth-child(5) { transition-delay: 320ms; }
+	[data-reveal-stagger] > *:nth-child(6) { transition-delay: 400ms; }
+	[data-reveal="left"] {
+		transform: translateX(-32px);
+	}
+	[data-reveal="right"] {
+		transform: translateX(32px);
+	}
+	[data-reveal="left"].is-visible, [data-reveal="right"].is-visible {
+		transform: translateX(0);
+	}
+	[data-reveal="scale"] {
+		transform: scale(0.94);
+	}
+	[data-reveal="scale"].is-visible {
+		transform: scale(1);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		[data-reveal], [data-reveal-stagger] > * {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
+	}
+
+	/* ===== Testimonial cards (global, used by all service + city pages) ===== */
+	.tst-card {
+		background: white;
+		border-radius: 1.5rem;
+		padding: 2rem 1.75rem;
+		border: 1px solid #f1f3f8;
+		box-shadow: 0 1px 2px rgba(15,30,61,.04), 0 8px 24px rgba(15,30,61,.06);
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+	.tst-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px -8px rgba(15,30,61,0.15); }
+	.tst-quote-mark {
+		position: absolute; top: -20px; right: 20px;
+		font-family: serif; font-size: 6rem; line-height: 1;
+		color: rgba(245,158,11,0.15);
+		pointer-events: none;
+	}
+	.tst-body { font-size: 0.9375rem; color: #5b6478; line-height: 1.7; margin-bottom: 1.5rem; }
+	.tst-author { display: flex; align-items: center; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid #f1f3f8; }
+	.tst-avatar { width: 2.75rem; height: 2.75rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; flex-shrink: 0; }
+	.tst-name { font-family: 'Plus Jakarta Sans Variable', sans-serif; font-weight: 700; font-size: 0.875rem; color: #0b1426; }
+	.tst-role { font-size: 0.75rem; color: #5b6478; margin-top: 0.125rem; }
+	.tst-metric { font-size: 0.75rem; color: #f59e0b; font-weight: 700; margin-top: 0.25rem; }
+
+	/* ===== City content meta bar (no top margin crash) ===== */
+	.city-content-block { padding-top: 3rem; }
+	@media (min-width: 768px) { .city-content-block { padding-top: 4rem; } }
+
+	/* ===== FAQ trigger text visibility fix (was faint due to CSS override) ===== */
+	.faq-trigger span { color: #0f1e3d !important; }
+	.faq-trigger span:hover { color: #f59e0b !important; }
+	.faq-item { background: white !important; }
+
+</style>

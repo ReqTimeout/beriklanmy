@@ -1,0 +1,90 @@
+{
+    "schema_version": "1.0",
+    "last_updated": "2026-07-15",
+    "description": "Internal linking matrix for RelatedServices component. Each main service has 3 strongly-related services. City pages use parent service's matrix.",
+    
+    "services": {
+        "facebook-ads-management": [
+            { "slug": "instagram-ads-management", "label": "Instagram Ads", "icon": "📷", "desc": "Visual storytelling untuk menemukan audiens baru di Feed, Stories, dan Reels." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Jangkau audiens muda lewat konten video pendek yang menghibur dan mengonversi." },
+            { "slug": "google-ads-management", "label": "Google Search Ads", "icon": "🔍", "desc": "Tangkap intent tinggi dari orang yang sedang mencari produk atau layanan Anda." }
+        ],
+        "instagram-ads-management": [
+            { "slug": "facebook-ads-management", "label": "Facebook Ads", "icon": "📘", "desc": "Ads Manager Meta yang sama. Cocok di-manage berbarengan dengan Instagram." },
+            { "slug": "instagram-management", "label": "Kelola Instagram", "icon": "📱", "desc": "Organic content & community management untuk akun IG Anda." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Tambah kanal video pendek untuk mengisi funnel top." }
+        ],
+        "tiktok-ads-management": [
+            { "slug": "tiktok-management", "label": "Kelola TikTok", "icon": "📱", "desc": "Organic content TikTok rutin, konsisten dengan paid ads." },
+            { "slug": "tiktok-live-viewers", "label": "Jasa View Live TikTok", "icon": "🔴", "desc": "Boost viewers saat live streaming TikTok untuk algoritma lebih cepat naik." },
+            { "slug": "instagram-ads-management", "label": "Instagram Ads", "icon": "📷", "desc": "Cross-channel: reach IG via content repurposed dari TikTok." }
+        ],
+        "google-ads-management": [
+            { "slug": "youtube-ads-management", "label": "YouTube Ads", "icon": "▶️", "desc": "Lewat Google Ads network, jangkau audiens via video di YouTube." },
+            { "slug": "website-development", "label": "Jasa Pembuatan Website", "icon": "💻", "desc": "Landing destination untuk traffic Google Ads yang lebih kuat." },
+            { "slug": "landing-page-design", "label": "Jasa Pembuatan Landing Page", "icon": "🎯", "desc": "LP konversi tinggi dirancang spesifik untuk Google Ads campaign." }
+        ],
+        "youtube-ads-management": [
+            { "slug": "google-ads-management", "label": "Google Ads", "icon": "🔍", "desc": "YouTube Ads bagian dari Google Ads network. Manage bareng lebih efisien." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Video ads pendek. Cocok untuk brand yang sama di multi-format." },
+            { "slug": "youtube-live-viewers", "label": "Jasa View Live YouTube", "icon": "🔴", "desc": "Boost viewers Live YouTube agar trending lebih cepat." }
+        ],
+        "instagram-management": [
+            { "slug": "instagram-ads-management", "label": "Instagram Ads", "icon": "📷", "desc": "Paid ads untuk scaling; kelola organik untuk nurture." },
+            { "slug": "facebook-ads-management", "label": "Facebook Ads", "icon": "📘", "desc": "Lintas platform Meta. Satu strategi Ads Manager untuk IG & FB." },
+            { "slug": "tiktok-management", "label": "Kelola TikTok", "icon": "📱", "desc": "Organic TikTok sebagai amplifier IG content." }
+        ],
+        "tiktok-management": [
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Boost konten organik terbaik dengan paid ads untuk scale." },
+            { "slug": "tiktok-live-viewers", "label": "Jasa View Live TikTok", "icon": "🔴", "desc": "Saat live, viewers jadi pemicu algoritma. Boost untuk growth." },
+            { "slug": "instagram-ads-management", "label": "Instagram Ads", "icon": "📷", "desc": "Repurpose TikTok content untuk IG; paid boost untuk reach." }
+        ],
+        "website-development": [
+            { "slug": "landing-page-design", "label": "Pembuatan Landing Page", "icon": "🎯", "desc": "LP untuk campaign spesifik — design & copy di-tuning untuk konversi." },
+            { "slug": "google-ads-management", "label": "Google Ads", "icon": "🔍", "desc": "Traffic dari Google Search Ads ke website baru Anda yang sudah SEO-ready." },
+            { "slug": "digital-marketing-agency", "label": "Digital Marketing", "icon": "📈", "desc": "Setelah website live, butuh full-funnel marketing untuk pertumbuhan." }
+        ],
+        "landing-page-design": [
+            { "slug": "google-ads-management", "label": "Google Ads", "icon": "🔍", "desc": "Landing Page + Google Ads: paket konversi yang saling melengkapi." },
+            { "slug": "facebook-ads-management", "label": "Facebook Ads", "icon": "📘", "desc": "Traffic dari FB Ads ke LP yang sudah di-tuning untuk Meta pixel." },
+            { "slug": "website-development", "label": "Pembuatan Website", "icon": "💻", "desc": "Bangun brand utama di website, lalu gunakan LP untuk campaign spesifik." }
+        ],
+        "digital-marketing-agency": [
+            { "slug": "facebook-ads-management", "label": "Facebook Ads", "icon": "📘", "desc": "Channel utama untuk B2C, lead gen, dan brand awareness." },
+            { "slug": "google-ads-management", "label": "Google Ads", "icon": "🔍", "desc": "Tangkap high-intent search traffic yang siap konversi." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Jangkau audiens muda + viral potential untuk FYP." }
+        ],
+        "live-stream-viewers": [
+            { "slug": "tiktok-live-viewers", "label": "View Live TikTok", "icon": "🔴", "desc": "Boost viewers TikTok Live untuk trending." },
+            { "slug": "instagram-live-viewers", "label": "View Live Instagram", "icon": "🔴", "desc": "Boost viewers saat IG Live jualan/product launch." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Pasca live, lanjut dengan paid ads untuk scale." }
+        ],
+        "tiktok-live-viewers": [
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Paid ads + boost live viewers = scale cepat." },
+            { "slug": "shopee-live-viewers", "label": "View Live Shopee", "icon": "🛒", "desc": "Cross-platform: TikTok → Shopee Live untuk ecommerce." },
+            { "slug": "instagram-live-viewers", "label": "View Live Instagram", "icon": "📷", "desc": "Multi-channel live strategy." }
+        ],
+        "instagram-live-viewers": [
+            { "slug": "instagram-ads-management", "label": "Instagram Ads", "icon": "📷", "desc": "Paid boosting untuk post-live content." },
+            { "slug": "tiktok-live-viewers", "label": "View Live TikTok", "icon": "🔴", "desc": "Cross-platform: IG + TikTok Live bersamaan." },
+            { "slug": "instagram-management", "label": "Kelola Instagram", "icon": "📱", "desc": "Organic + live boosts untuk full funnel." }
+        ],
+        "shopee-live-viewers": [
+            { "slug": "tiktok-live-viewers", "label": "View Live TikTok", "icon": "🔴", "desc": "Banyak audience cari TikTok Live → Shopee saat flash sale." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Drive traffic ke Shopee Live via TikTok ads." },
+            { "slug": "instagram-live-viewers", "label": "View Live Instagram", "icon": "📷", "desc": "Multi-platform Shopee + IG boosts." }
+        ],
+        "youtube-live-viewers": [
+            { "slug": "youtube-ads-management", "label": "YouTube Ads", "icon": "▶️", "desc": "Pre-recorded ads + live = full funnel YouTube." },
+            { "slug": "tiktok-live-viewers", "label": "View Live TikTok", "icon": "🔴", "desc": "Cross-platform: YouTube + TikTok Live." },
+            { "slug": "twitch-live-viewers", "label": "View Live Twitch", "icon": "🎮", "desc": "Gaming/community live boost." }
+        ],
+        "twitch-live-viewers": [
+            { "slug": "youtube-live-viewers", "label": "View Live YouTube", "icon": "🔴", "desc": "Cross-platform live: Twitch + YouTube." },
+            { "slug": "tiktok-live-viewers", "label": "View Live TikTok", "icon": "🎴", "desc": "Twitch audience → TikTok growth." },
+            { "slug": "tiktok-ads-management", "label": "TikTok Ads", "icon": "🎵", "desc": "Twitch + TikTok ads = gaming/esports exposure." }
+        ]
+    },
+    
+    "city_pages_alias": "_use_parent_service_"
+}

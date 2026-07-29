@@ -1,0 +1,476 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.svelte';
+import StickyCTA from '../../components/StickyCTA.svelte';
+import Footer from '../../components/Footer.svelte';
+import { Calendar, Clock, ArrowRight, ArrowLeft, MessageCircle, BookOpen, Tag } from 'lucide-svelte';
+import posts from '../../data/posts.json';
+
+// AdSense configuration (4 slots)
+const ADSENSE_CLIENT = 'ca-pub-4438184351486735';
+// Replace with real ad-unit slot IDs from AdSense dashboard (one per position)
+const ADSENSE_SLOTS = {
+  inlineTop: '1101825065',   // in-article, autorelaxed
+  inlineMid: '6162580059',   // in-article, fluid
+  afterArticle: '4505315237',// autorelaxed, after article
+  sidebar: '1237556436',     // sidebar, auto responsive
+};
+
+const SERVICE_NAMES = {
+  'digital-marketing-agency': 'Digital Marketing',
+  'facebook-ads-management': 'Facebook Ads',
+  'instagram-ads-management': 'Instagram Ads',
+  'tiktok-ads-management': 'TikTok Ads',
+  'google-ads-management': 'Google Ads',
+  'youtube-ads-management': 'YouTube Ads',
+  'instagram-management': 'Manajemen Instagram',
+  'tiktok-management': 'Manajemen TikTok',
+  'website-development': 'Pembuatan Website',
+  'landing-page-design': 'Landing Page',
+};
+
+// Pick featured image: post.featuredImage OR service-specific OR hash-based category pool (50+ images)
+import { getFeaturedImage as getFeaturedImageRich } from '../../utils/featured_image.js';
+function getFeaturedImage(post) {
+    return getFeaturedImageRich(post);
+}
+
+export function getStaticPaths() {
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const featuredImage = getFeaturedImage(post);
+
+const waLink = `https://wa.me/62811919328?text=${encodeURIComponent(`Halo Beriklan, saya tertarik dengan topik "${post.title}" — mohon info lebih lanjut.`)}`;
+
+const related = posts
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 3);
+
+const recentPosts = posts
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 4)
+    .map((p) => ({ ...p, featuredImage: getFeaturedImage(p) }));
+
+const allTags = Array.from(new Set(posts.flatMap((p) => p.tags || []))).slice(0, 12);
+
+const categoryCounts = posts.reduce((acc, p) => {
+    acc[p.category] = (acc[p.category] || 0) + 1;
+    return acc;
+}, {});
+
+const categoryLabels = {
+    'meta': 'Facebook & Instagram',
+    'tiktok': 'TikTok',
+    'google': 'Google Ads',
+    'youtube': 'YouTube',
+    'strategy': 'Strategi',
+    'case-study': 'Studi Kasus',
+};
+const categoryLabel = categoryLabels[post.category] || 'Strategi';
+const fullUrl = `https://beriklan.my/blog/${post.slug}`;
+
+const sidebarCategories = [
+    { id: 'all', label: 'Semua Topik' },
+    { id: 'meta', label: 'Facebook & Instagram', count: categoryCounts.meta || 0 },
+    { id: 'tiktok', label: 'TikTok', count: categoryCounts.tiktok || 0 },
+    { id: 'google', label: 'Google Ads', count: categoryCounts.google || 0 },
+    { id: 'youtube', label: 'YouTube', count: categoryCounts.youtube || 0 },
+    { id: 'strategy', label: 'Strategi', count: categoryCounts.strategy || 0 },
+    { id: 'case-study', label: 'Studi Kasus', count: categoryCounts['case-study'] || 0 },
+];
+
+const AUTHOR = {
+    name: 'Tim Beriklan',
+    role: 'Performance Marketing Strategist',
+    credentials: 'Tim bersertifikasi Meta & Google sejak 2016 · mengelola campaign untuk ratusan UMKM & bisnis menengah Indonesia',
+    url: 'https://beriklan.my/about-us/',
+};
+
+// Freshness layer (truthful). last_reviewed is set by scripts/freshness_engine.py:
+// it equals the publish date unless the post was genuinely re-edited (REFRESHED_SLUGS).
+const REFRESHED_SLUGS = {
+    // "slug-yang-direfresh": "2026-07-15T10:00:00",
+};
+const lastReviewed = post.last_reviewed || post.iso_date;
+const isRefreshed = post.slug in REFRESHED_SLUGS;
+const freshness = post.freshness || 'recent';
+
+const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.iso_date,
+    dateModified: lastReviewed,
+    author: {
+        '@type': 'Person',
+        name: AUTHOR.name,
+        jobTitle: AUTHOR.role,
+        url: AUTHOR.url,
+        worksFor: {
+            '@type': 'Organization',
+            name: 'Beriklan.co.id',
+            url: 'https://beriklan.my/',
+            logo: { '@type': 'ImageObject', url: 'https://beriklan.my/logoweb.webp' }
+        }
+    },
+    publisher: {
+        '@type': 'Organization',
+        name: 'Beriklan.co.id',
+        logo: { '@type': 'ImageObject', url: 'https://beriklan.my/logoweb.webp' }
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': fullUrl },
+    articleSection: categoryLabel,
+    keywords: post.tags.join(', '),
+};
+---
+<Layout
+    title={`${post.title} — Blog Beriklan.co.id`}
+    description={post.excerpt}
+    canonical={fullUrl}
+    heroImage={featuredImage || undefined}
+    heroImageWidth={1200}
+    heroImageHeight={675}
+>
+
+    <Navbar client:only="svelte" />
+    <StickyCTA client:only="svelte" />
+
+    <script is:inline>
+        // Lazy load AdSense — only when user scrolls near ads or after 3s idle
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.__loadAdSense = function() {
+            if (window.__adSenseLoaded) return;
+            window.__adSenseLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+        };
+        // Trigger on user interaction or after timeout
+        ['scroll', 'click', 'touchstart', 'keydown'].forEach(function(evt) {
+            window.addEventListener(evt, window.__loadAdSense, { once: true, passive: true });
+        });
+        setTimeout(window.__loadAdSense, 3000);
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+
+    <header class="relative pt-28 md:pt-40 pb-12 md:pb-16 bg-gradient-to-br from-white via-soft to-beige overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.4] pointer-events-none hero-grid"></div>
+        <div class="abs-blob abs-blob-1"></div>
+        <div class="abs-blob abs-blob-2"></div>
+
+        <div class="container mx-auto px-6 max-w-3xl relative z-10">
+            <nav class="text-xs text-muted mb-6 flex items-center gap-1.5 anim-fade-in">
+                <a href="/" class="hover:text-accent transition">Beranda</a>
+                <span class="text-muted/40">›</span>
+                <a href="/blog" class="hover:text-accent transition">Blog</a>
+                <span class="text-muted/40">›</span>
+                <span class="text-ink font-semibold">{categoryLabel}</span>
+            </nav>
+
+            <div class="mb-5 anim-fade-up" style="animation-delay: 60ms;">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent text-ink text-[11px] font-bold uppercase tracking-wider rounded-full">
+                    <Tag class="w-3 h-3" />
+                    {categoryLabel}
+                </span>
+            </div>
+
+            <h1 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.1] tracking-tight mb-6 anim-fade-up" style="animation-delay: 120ms;">
+                {post.title}
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted anim-fade-up" style="animation-delay: 180ms;">
+                <span class="flex items-center gap-1.5">
+                    <Calendar class="w-3.5 h-3.5" />
+                    {isRefreshed ? (
+                        <time datetime={lastReviewed}>Diperbarui {post.date}</time>
+                    ) : (
+                        <time datetime={post.iso_date}>Dipublikasikan {post.date}</time>
+                    )}
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <Clock class="w-3.5 h-3.5" />
+                    {post.readTime} baca
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <BookOpen class="w-3.5 h-3.5" />
+                    Oleh {AUTHOR.name}
+                </span>
+                {freshness === 'recent' && !isRefreshed && (
+                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green/10 text-green font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green"></span>
+                        Konten terbaru
+                    </span>
+                )}
+            </div>
+        </div>
+    </header>
+
+    <article class="py-14 md:py-20 bg-white overflow-x-clip">
+        <div class="container mx-auto px-6 max-w-6xl">
+            {featuredImage && (
+                <div class="mb-10 rounded-2xl overflow-hidden border border-gray-100 shadow-soft">
+                    <img
+                        src={featuredImage}
+                        alt={post.title}
+                        width={1200}
+                        height={675}
+                        decoding="async"
+                        fetchpriority="high"
+                        class="w-full h-auto max-h-[480px] object-cover"
+                        loading="eager"
+                        onerror={`this.onerror=null;this.src='https://picsum.photos/seed/beriklan-${post.slug}/1200/675';`}
+                    />
+                </div>
+            )}
+
+            <div class="grid lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-8 min-w-0 overflow-x-clip">
+                    <!-- AdSense Slot 1: Inline top (autorelaxed) -->
+                    <div class="my-8 p-4 bg-soft/30 rounded-xl border border-gray-100">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-3">Advertisement</p>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
+                             data-ad-client={ADSENSE_CLIENT}
+                             data-ad-slot={ADSENSE_SLOTS.inlineTop}></ins>
+                        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
+                    <div class="prose prose-lg max-w-none text-ink leading-relaxed overflow-x-hidden" set:html={post.content} />
+
+                    <!-- AdSense Slot 2: Inline mid (in-article, fluid) -->
+                    <div class="mt-8 p-4 bg-soft/30 rounded-xl border border-gray-100">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-3">Advertisement</p>
+                        <ins class="adsbygoogle"
+                             style="display:block; text-align:center;"
+                             data-ad-layout="in-article"
+                             data-ad-format="fluid"
+                             data-ad-client={ADSENSE_CLIENT}
+                             data-ad-slot={ADSENSE_SLOTS.inlineMid}></ins>
+                        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
+                    <!-- AdSense Slot 3: After-article (autorelaxed) -->
+                    <div class="mt-10 p-4 bg-soft/30 rounded-xl border border-gray-100">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-3">Advertisement</p>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
+                             data-ad-client={ADSENSE_CLIENT}
+                             data-ad-slot={ADSENSE_SLOTS.afterArticle}></ins>
+                        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
+                    {post.tags.length > 0 && (
+                        <div class="mt-12 pt-8 border-t border-gray-100">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-muted mb-3">Topik Terkait:</p>
+                            <div class="flex flex-wrap gap-2">
+                                {post.tags.map((tag) => (
+                                    <span class="px-3 py-1.5 bg-soft text-ink text-xs font-semibold rounded-full border border-gray-100">
+                                        #{tag.toLowerCase().replace(/\s+/g, '-')}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {post.service && (
+                        <div class="mt-8 p-5 bg-gradient-to-br from-soft to-white rounded-2xl border border-accent/20">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1.5">Mau belajar lebih dalam?</p>
+                            <h4 class="font-display font-bold text-lg text-ink leading-snug mb-2">Panduan Lengkap {SERVICE_NAMES[post.service] || post.service}</h4>
+                            <p class="text-xs text-muted leading-relaxed mb-3">Strategi, format iklan, optimasi budget, dan cara ukur ROI dari tim Beriklan.</p>
+                            <a href={`/${post.service}/pilar/`} class="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:text-ink transition-colors group">
+                                Baca panduan pilar
+                                <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                            </a>
+                        </div>
+                    )}
+
+                    <div class="mt-12 p-6 md:p-8 bg-gradient-to-br from-ink via-primary-2 to-ink rounded-2xl text-white relative overflow-hidden">
+                        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);"></div>
+                        <div class="relative flex flex-col md:flex-row items-start md:items-center gap-5">
+                            <div class="flex-1">
+                                <h3 class="font-display font-extrabold text-xl md:text-2xl leading-tight mb-2">
+                                    Butuh strategi iklan untuk bisnis Anda?
+                                </h3>
+                                <p class="text-white/70 text-sm leading-relaxed">
+                                    Diskusi gratis 15-30 menit via WhatsApp. Tim kami akan tinjau kondisi campaign Anda saat ini.
+                                </p>
+                            </div>
+                            <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-full font-bold text-sm shadow-lg hover:shadow-pop transition-all btn-shine-accent shrink-0">
+                                <MessageCircle class="w-4 h-4" />
+                                Chat Tim
+                                <ArrowRight class="w-4 h-4" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-6 md:p-7 bg-white border border-gray-100 rounded-2xl shadow-soft flex items-start gap-4">
+                        <div class="shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-2 flex items-center justify-center text-white font-display font-extrabold text-lg">
+                            {AUTHOR.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1">Ditulis oleh</p>
+                            <a href={AUTHOR.url} class="font-display font-bold text-ink text-base hover:text-accent transition-colors">{AUTHOR.name}</a>
+                            <p class="text-xs text-muted font-semibold mb-1.5">{AUTHOR.role}</p>
+                            <p class="text-xs text-muted leading-relaxed">{AUTHOR.credentials}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <a href="/blog" class="inline-flex items-center gap-2 text-sm font-bold text-ink hover:text-accent transition">
+                            <ArrowLeft class="w-4 h-4" />
+                            Kembali ke semua artikel
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-32 lg:self-start">
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-soft">
+                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-muted mb-4">Topik</h3>
+                        <ul class="space-y-2">
+                            {sidebarCategories.map((cat) => (
+                                <li>
+                                    <a href={cat.id === 'all' ? '/blog' : `/blog`} class="flex items-center justify-between text-sm font-semibold text-ink hover:text-accent transition-colors py-1.5">
+                                        <span>{cat.id === post.category ? <strong>{cat.label}</strong> : cat.label}</span>
+                                        {cat.count > 0 && <span class="text-xs text-muted">{cat.count}</span>}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-soft">
+                        <h3 class="font-display font-bold text-sm uppercase tracking-wider text-muted mb-4">Artikel Terbaru</h3>
+                        <ul class="space-y-4">
+                            {recentPosts.map((rp) => (
+                                <li>
+                                    <a href={`/blog/${rp.slug}`} class="flex items-start gap-3 group">
+                                        {rp.featuredImage ? (
+                                            <img src={rp.featuredImage} alt="" class="w-14 h-14 object-cover rounded-lg shrink-0" loading="lazy" onerror={`this.onerror=null;this.src='https://picsum.photos/seed/beriklan-${rp.slug}/120/120';`} />
+                                        ) : (
+                                            <div class="w-14 h-14 rounded-lg bg-soft shrink-0"></div>
+                                        )}
+                                        <div class="flex-1 min-w-0">
+                                            <h4 class="font-bold text-sm text-ink leading-tight line-clamp-2 group-hover:text-accent transition-colors">{rp.title}</h4>
+                                            <p class="text-[11px] text-muted mt-1">{rp.date}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {post.tags.length > 0 && (
+                        <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-soft">
+                            <h3 class="font-display font-bold text-sm uppercase tracking-wider text-muted mb-4">Tag</h3>
+                            <div class="flex flex-wrap gap-2">
+                                {post.tags.map((tag) => (
+                                    <span class="px-2.5 py-1 bg-soft text-ink text-[11px] font-semibold rounded-full border border-gray-100">
+                                        #{tag.toLowerCase().replace(/\s+/g, '-')}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    <!-- AdSense Slot 4: Sidebar (desktop, auto responsive) -->
+                    <div class="hidden lg:block p-4 bg-soft/30 rounded-2xl border border-gray-100">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-3">Advertisement</p>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client={ADSENSE_CLIENT}
+                             data-ad-slot={ADSENSE_SLOTS.sidebar}
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-ink via-primary-2 to-ink rounded-2xl p-6 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.18) 0%, transparent 60%);"></div>
+                        <div class="relative">
+                            <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Diskusi Gratis 15 Menit</h3>
+                            <p class="text-white/70 text-xs leading-relaxed mb-4">Tim kami tinjau campaign Anda, kasih rekomendasi konkret.</p>
+                            <a href={`https://wa.me/62811919328?text=${encodeURIComponent(`Halo Beriklan, saya baca artikel "${post.title}" dan ingin diskusi.`)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-accent text-ink px-4 py-2 rounded-full font-bold text-xs shadow-md hover:shadow-pop transition-all">
+                                <MessageCircle class="w-3.5 h-3.5" />
+                                Chat WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </article>
+
+    {related.length > 0 && (
+        <section class="py-16 md:py-20 bg-soft">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <div class="flex items-center gap-3 mb-8">
+                    <span class="w-8 h-px bg-accent"></span>
+                    <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-accent">Artikel Serupa</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5 reveal-stagger">
+                    {related.map((rel) => (
+                        <a href={`/blog/${rel.slug}`} class="related-card group block bg-white rounded-2xl border border-gray-100 hover:border-accent/40 hover:shadow-pop transition-all p-5">
+                            <span class="inline-block px-2 py-0.5 bg-soft text-accent text-[10px] font-bold uppercase tracking-wider rounded mb-3">{categoryLabels[rel.category] || 'Strategi'}</span>
+                            <h3 class="font-display font-bold text-base text-ink leading-snug mb-2 group-hover:text-accent transition-colors line-clamp-2">
+                                {rel.title}
+                            </h3>
+                            <p class="text-xs text-muted leading-relaxed line-clamp-2 mb-3">{rel.excerpt}</p>
+                            <div class="flex items-center gap-3 text-[10px] text-muted">
+                                <span class="flex items-center gap-1"><Calendar class="w-3 h-3" />{rel.date}</span>
+                                <span class="flex items-center gap-1"><Clock class="w-3 h-3" />{rel.readTime}</span>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <Footer />
+</Layout>
+
+<style is:global>
+    .prose { color: #1f2937; overflow-wrap: anywhere; word-break: break-word; min-width: 0; max-width: 100%; }
+    .prose a, .prose code { overflow-wrap: anywhere; word-break: break-word; }
+    .prose pre { overflow-x: auto; max-width: 100%; }
+    .prose img, .prose iframe, .prose video, .prose table { max-width: 100%; }
+    .prose h1 { font-size: 1.875rem; font-weight: 800; margin: 2rem 0 1rem; color: #0f1e3d; line-height: 1.2; }
+    .prose h2 { font-size: 1.5rem; font-weight: 800; margin: 2.5rem 0 1rem; color: #0f1e3d; line-height: 1.25; }
+    .prose h3 { font-size: 1.25rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0f1e3d; line-height: 1.3; }
+    .prose p { margin: 0 0 1.25rem; line-height: 1.8; font-size: 1rem; }
+    .prose a { color: #f59e0b; text-decoration: underline; text-underline-offset: 3px; }
+    .prose a:hover { color: #ea580c; }
+    .prose strong { font-weight: 700; color: #0f1e3d; }
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin: 1rem 0 1.5rem; }
+    .prose ol { list-style: decimal; padding-left: 1.5rem; margin: 1rem 0 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; line-height: 1.7; }
+    .prose blockquote { border-left: 4px solid #f59e0b; padding: 0.75rem 1rem; background: #fffbeb; margin: 1.5rem 0; font-style: italic; color: #1f2937; }
+    .prose img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1.5rem 0; }
+    .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+    .prose th { background: #f3f4f6; padding: 0.625rem 0.75rem; text-align: left; font-weight: 700; color: #0f1e3d; border: 1px solid #e5e7eb; }
+    .prose td { padding: 0.625rem 0.75rem; border: 1px solid #e5e7eb; }
+    .prose code { background: #f3f4f6; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875em; }
+    .prose hr { border: 0; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
+    .hero-grid {
+        background-image: linear-gradient(rgba(15,30,61,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,30,61,.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+    }
+    .abs-blob { position: absolute; border-radius: 9999px; pointer-events: none; }
+    .abs-blob-1 { top: 5rem; right: -8rem; width: 420px; height: 420px; background: rgba(245, 158, 11, 0.10); filter: blur(48px); }
+    .abs-blob-2 { bottom: 0; left: -5rem; width: 288px; height: 288px; background: rgba(14, 165, 233, 0.10); filter: blur(48px); }
+    .anim-fade-in { animation: fadeIn 0.6s ease 0.2s forwards; }
+    .anim-fade-up { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+</style>

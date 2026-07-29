@@ -1,0 +1,323 @@
+---
+/**
+ * LocalSchema.astro - Reusable LocalBusiness + Service + FAQPage schema component
+ *
+ * Usage:
+ *   <LocalSchema
+ *     type="city-service"
+ *     city={cityObj}
+ *     service={serviceObj}
+ *     faqs={[{q: "...", a: "..."}]}
+ *     pageUrl="/facebook-ads-management/jakarta/"
+ *     breadcrumbs={[["Beranda","/"], ["Facebook Ads","/facebook-ads-management/"], ["Jakarta","/facebook-ads-management/jakarta/"]]}
+ *   />
+ *
+ * Or via JSON-stringified props (build-time safe):
+ *   <LocalSchema type="city-service" cityJson={JSON.stringify(city)} ...
+ */
+interface FAQ {
+    q: string;
+    a: string;
+}
+
+interface City {
+    slug: string;
+    name: string;
+    province?: string;
+    lat?: number;
+    lng?: number;
+}
+
+interface Service {
+    slug: string;
+    name: string;
+    description?: string;
+}
+
+interface Tier {
+    name: string;
+    priceLabel: string;
+    duration?: string;
+    tagline?: string;
+    features?: string[];
+    priceNote?: string;
+    disclaimer?: string;
+    highlight?: boolean;
+}
+
+interface HowStep {
+    num?: string;
+    tag?: string;
+    title: string;
+    desc: string;
+}
+
+interface Testimonial {
+    quote: string;
+    author: string;
+    role?: string;
+    metric?: string;
+    avatar?: string;
+    color?: string;
+}
+
+interface Props {
+    type?: "city-service" | "service-only" | "city-only" | "article";
+    city?: City;
+    service?: Service;
+    tiers?: Tier[];
+    faqs?: FAQ[];
+    howSteps?: HowStep[];
+    testimonials?: Testimonial[];
+    pageUrl?: string;
+    breadcrumbs?: [string, string][];
+    title?: string;
+    datePublished?: string;
+    dateModified?: string;
+    author?: string;
+}
+
+const {
+    type = "city-service",
+    city,
+    service,
+    tiers = [],
+    faqs = [],
+    howSteps = [],
+    testimonials = [],
+    pageUrl = "",
+    breadcrumbs = [],
+    title,
+    datePublished,
+    dateModified,
+    author = "Tim Beriklan",
+} = Astro.props as Props;
+
+const baseUrl = "https://beriklan.my";
+const fullUrl = pageUrl.startsWith("http") ? pageUrl : `${baseUrl}${pageUrl}`;
+const canonicalUrl = fullUrl.endsWith("/") ? fullUrl : `${fullUrl}/`;
+
+function genLocalBusiness(c: City) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": `${canonicalUrl}#business`,
+        "name": `Beriklan.co.id — ${c.name}`,
+        "image": `${baseUrl}/logoweb.webp`,
+        "url": canonicalUrl,
+        "telephone": "+62-81-1919-328",
+        "email": "info@beriklan.my",
+        "priceRange": "Rp 12.000 - Rp 175.000",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jl. Arcamanik Endah No.76",
+            "addressLocality": "Bandung",
+            "addressRegion": "Jawa Barat",
+            "postalCode": "40195",
+            "addressCountry": "ID"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": c.lat ?? -6.9175,
+            "longitude": c.lng ?? 107.6191
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "10:00",
+                "closes": "14:00"
+            }
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+62-81-1919-328",
+            "contactType": "customer service",
+            "areaServed": ["ID","MY","SG"],
+            "availableLanguage": ["Indonesian","English","Malay"]
+        },
+        "areaServed": { "@type": "City", "name": c.name }
+    };
+}
+
+function genService(s: Service, c?: City) {
+    // Build offer catalog from tiers if available, else omit
+    let offerCatalog: any = null;
+    if (tiers && tiers.length > 0) {
+        offerCatalog = {
+            "@type": "OfferCatalog",
+            "name": `Paket ${s.name}`,
+            "itemListElement": tiers.map((t) => ({
+                "@type": "Offer",
+                "name": `${t.name} · ${s.name}`,
+                "price": (t.priceLabel || "0").replace(/\./g, ""),
+                "priceCurrency": "IDR"
+            }))
+        };
+    }
+    return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": s.name,
+        "provider": {
+            "@type": "Organization",
+            "@id": `${canonicalUrl}#business`,
+            "name": "Beriklan.co.id",
+            "url": "https://beriklan.my/",
+            "logo": { "@type": "ImageObject", "url": `${baseUrl}/logoweb.webp` },
+            "sameAs": [
+                "https://www.instagram.com/beriklan.my",
+                "https://www.facebook.com/beriklan.my"
+            ],
+            "foundingDate": "2016",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jl. Arcamanik Endah No.76",
+                "addressLocality": "Bandung",
+                "addressRegion": "Jawa Barat",
+                "postalCode": "40195",
+                "addressCountry": "ID"
+            }
+        },
+        "areaServed": c ? { "@type": "City", "name": c.name } : { "@type": "Country", "name": "Indonesia" },
+        ...(offerCatalog && { "hasOfferCatalog": offerCatalog })
+    };
+}
+
+function genFAQPage(faqs: FAQ[]) {
+    if (faqs.length === 0) return null;
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(f => ({
+            "@type": "Question",
+            "name": f.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+            }
+        }))
+    };
+}
+
+function genBreadcrumbList(items: [string, string][]) {
+    if (items.length === 0) return null;
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": items.map((item, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": item[0],
+            "item": item[1].startsWith("http") ? item[1] : `${baseUrl}${item[1]}`
+        }))
+    };
+}
+
+function genHowTo(steps: HowStep[], s?: Service, c?: City) {
+    if (steps.length === 0) return null;
+    const name = s ? `Cara memulai ${s.name}` : "Cara memulai layanan Beriklan";
+    const locText = c ? ` di ${c.name}` : "";
+    return {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": `${name}${locText}`,
+        "description": s?.description || "Langkah-langkah mengelola campaign iklan bersama Beriklan.",
+        "totalTime": "P7D",
+        "step": steps.map((step, i) => ({
+            "@type": "HowToStep",
+            "position": i + 1,
+            "name": step.title,
+            "text": step.desc,
+            ...(step.tag ? { "alternateName": step.tag } : {})
+        }))
+    };
+}
+
+function genReviews(items: Testimonial[]) {
+    if (items.length === 0) return [];
+    return items.map(t => ({
+        "@type": "Review",
+        "author": { "@type": "Person", "name": t.author },
+        "reviewBody": t.quote,
+        ...(t.role ? { "authorRole": t.role } : {}),
+        ...(t.metric ? { "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": 5,
+            "bestRating": 5,
+            "worstRating": 1,
+            "description": t.metric
+        } } : {})
+    }));
+}
+
+function genArticle(t: string, pubDate?: string, modDate?: string, auth?: string) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": t,
+        "image": `${baseUrl}/og-image.png`,
+        "datePublished": pubDate ?? new Date().toISOString(),
+        "dateModified": modDate ?? new Date().toISOString(),
+        "author": { "@type": "Person", "name": auth ?? "Tim Beriklan" },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Beriklan.co.id",
+            "logo": { "@type": "ImageObject", "url": `${baseUrl}/logoweb.webp` }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalUrl
+        }
+    };
+}
+
+const reviewSchemas = genReviews(testimonials);
+const howToSchema = genHowTo(howSteps, service, city);
+
+const schemas: any[] = [];
+if (type === "city-service" && city && service) {
+    const lb = genLocalBusiness(city);
+    if (reviewSchemas.length > 0) lb.review = reviewSchemas;
+    schemas.push(lb);
+    const svc = genService(service, city);
+    if (howToSchema) svc.hasPart = howToSchema;
+    if (reviewSchemas.length > 0) svc.review = reviewSchemas;
+    schemas.push(svc);
+}
+if (type === "city-only" && city) {
+    const lb = genLocalBusiness(city);
+    if (reviewSchemas.length > 0) lb.review = reviewSchemas;
+    schemas.push(lb);
+}
+if (type === "service-only" && service) {
+    const svc = genService(service);
+    if (howToSchema) svc.hasPart = howToSchema;
+    if (reviewSchemas.length > 0) svc.review = reviewSchemas;
+    schemas.push(svc);
+}
+if (type === "article" && title) {
+    schemas.push(genArticle(title, datePublished, dateModified, author));
+}
+if (howToSchema && !(type === "city-service" || type === "service-only")) {
+    schemas.push(howToSchema);
+}
+const faqSchema = genFAQPage(faqs);
+if (faqSchema) schemas.push(faqSchema);
+const breadcrumbSchema = genBreadcrumbList(breadcrumbs);
+if (breadcrumbSchema) schemas.push(breadcrumbSchema);
+---
+{schemas.map(s => (
+    <script type="application/ld+json" set:html={JSON.stringify(s)} />
+))}
+---
+<!-- Build time parsing of pre-stringified JSON (used by bulk_generate.py output) -->
+<!-- The component above uses Astro props; for build-time generated pages,
+     include a parallel LocalSchema call with cityJson/serviceJson/faqsJson props if needed -->
+
