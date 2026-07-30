@@ -1,0 +1,11 @@
+{
+  "generated_by": "pack_llm_drafts.py",
+  "live_existing": 0,
+  "written": 1503,
+  "qc_failed": 0,
+  "qc_fail_reasons": {},
+  "shards": [
+    "queue_00000.ndjson"
+  ],
+  "shard_size": 5000
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Batch article generator from keyword queue — no external API.
 Replaces placeholder keywords with unique article content per slug.
-CTA uses "Hubungi kami" (no "konsultasi gratis 15 menit").
+CTA uses "Hubungi kami" (no "konsultasi").
 """
 import os, sys, json, re, argparse
 from pathlib import Path

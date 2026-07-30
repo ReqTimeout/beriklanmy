@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-30T13:56:50",
+  "generated_at": "2026-07-30T16:15:26",
   "keywords": {
     "total": 298736,
-    "generated": 0,
-    "pending": 298736,
+    "generated": 799,
+    "pending": 297937,
     "live_in_posts": 0,
-    "coverage": 0.0
+    "coverage": 0.3
   },
   "posts": {
     "total": 0,
@@ -16,58 +16,58 @@
     {
       "key": "Lainnya / Umum",
       "total": 105526,
-      "generated": 0,
-      "pending": 105526,
-      "coverage": 0.0
+      "generated": 178,
+      "pending": 105348,
+      "coverage": 0.2
     },
     {
       "key": "Jasa Iklan Google",
       "total": 32258,
-      "generated": 0,
-      "pending": 32258,
-      "coverage": 0.0
+      "generated": 79,
+      "pending": 32179,
+      "coverage": 0.2
     },
     {
       "key": "Jasa Pembuatan Landing Page",
       "total": 28611,
-      "generated": 0,
-      "pending": 28611,
-      "coverage": 0.0
+      "generated": 104,
+      "pending": 28507,
+      "coverage": 0.4
     },
     {
       "key": "Jasa Iklan TikTok",
       "total": 26633,
-      "generated": 0,
-      "pending": 26633,
-      "coverage": 0.0
+      "generated": 79,
+      "pending": 26554,
+      "coverage": 0.3
     },
     {
       "key": "Jasa Iklan YouTube",
       "total": 26537,
-      "generated": 0,
-      "pending": 26537,
-      "coverage": 0.0
+      "generated": 59,
+      "pending": 26478,
+      "coverage": 0.2
     },
     {
       "key": "Jasa Iklan Facebook",
       "total": 24866,
-      "generated": 0,
-      "pending": 24866,
-      "coverage": 0.0
+      "generated": 142,
+      "pending": 24724,
+      "coverage": 0.6
     },
     {
       "key": "Jasa Iklan Instagram",
       "total": 24730,
-      "generated": 0,
-      "pending": 24730,
-      "coverage": 0.0
+      "generated": 79,
+      "pending": 24651,
+      "coverage": 0.3
     },
     {
       "key": "Jasa Digital Marketing",
       "total": 20867,
-      "generated": 0,
-      "pending": 20867,
-      "coverage": 0.0
+      "generated": 79,
+      "pending": 20788,
+      "coverage": 0.4
     },
     {
       "key": "Jasa Pembuatan Website",
@@ -132,16 +132,16 @@
     {
       "key": "expansion_l2_en",
       "total": 10809,
-      "generated": 0,
-      "pending": 10809,
-      "coverage": 0.0
+      "generated": 710,
+      "pending": 10099,
+      "coverage": 6.6
     },
     {
       "key": "expansion_l2_ms",
       "total": 4830,
-      "generated": 0,
-      "pending": 4830,
-      "coverage": 0.0
+      "generated": 25,
+      "pending": 4805,
+      "coverage": 0.5
     },
     {
       "key": "expansion_w2_en",
@@ -167,9 +167,9 @@
     {
       "key": "suggest_my",
       "total": 888,
-      "generated": 0,
-      "pending": 888,
-      "coverage": 0.0
+      "generated": 1,
+      "pending": 887,
+      "coverage": 0.1
     },
     {
       "key": "expansion_l5_en",
@@ -188,9 +188,9 @@
     {
       "key": "expansion_w3_ms",
       "total": 700,
-      "generated": 0,
-      "pending": 700,
-      "coverage": 0.0
+      "generated": 63,
+      "pending": 637,
+      "coverage": 9.0
     },
     {
       "key": "expansion_l6_en",
@@ -235,5 +235,366 @@
       "coverage": 0.0
     }
   ],
-  "recent_generated": []
+  "recent_generated": [
+    {
+      "keyword": "harga iklan facebook untuk restoran 2026",
+      "slug": "harga-iklan-facebook-untuk-restoran-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-restoran-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk restoran 2027",
+      "slug": "harga-iklan-facebook-untuk-restoran-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-restoran-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk makanan halal 2026",
+      "slug": "harga-iklan-facebook-untuk-makanan-halal-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-makanan-halal-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk makanan halal 2027",
+      "slug": "harga-iklan-facebook-untuk-makanan-halal-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-makanan-halal-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk hartanah 2026",
+      "slug": "harga-iklan-facebook-untuk-hartanah-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-hartanah-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk hartanah 2027",
+      "slug": "harga-iklan-facebook-untuk-hartanah-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-hartanah-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai online 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-online-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-online-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai online 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-online-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-online-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk pusat tuisyen 2026",
+      "slug": "harga-iklan-facebook-untuk-pusat-tuisyen-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-pusat-tuisyen-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk pusat tuisyen 2027",
+      "slug": "harga-iklan-facebook-untuk-pusat-tuisyen-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-pusat-tuisyen-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk klinik 2026",
+      "slug": "harga-iklan-facebook-untuk-klinik-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-klinik-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk klinik 2027",
+      "slug": "harga-iklan-facebook-untuk-klinik-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-klinik-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk salon kecantikan 2026",
+      "slug": "harga-iklan-facebook-untuk-salon-kecantikan-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-salon-kecantikan-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk salon kecantikan 2027",
+      "slug": "harga-iklan-facebook-untuk-salon-kecantikan-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-salon-kecantikan-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk butik 2026",
+      "slug": "harga-iklan-facebook-untuk-butik-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-butik-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk butik 2027",
+      "slug": "harga-iklan-facebook-untuk-butik-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-butik-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk agensi pelancongan 2026",
+      "slug": "harga-iklan-facebook-untuk-agensi-pelancongan-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-agensi-pelancongan-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk agensi pelancongan 2027",
+      "slug": "harga-iklan-facebook-untuk-agensi-pelancongan-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-agensi-pelancongan-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai kereta 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-kereta-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-kereta-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai kereta 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-kereta-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-kereta-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk firma guaman 2026",
+      "slug": "harga-iklan-facebook-untuk-firma-guaman-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-firma-guaman-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk firma guaman 2027",
+      "slug": "harga-iklan-facebook-untuk-firma-guaman-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-firma-guaman-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk pusat kecergasan 2026",
+      "slug": "harga-iklan-facebook-untuk-pusat-kecergasan-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-pusat-kecergasan-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk pusat kecergasan 2027",
+      "slug": "harga-iklan-facebook-untuk-pusat-kecergasan-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-pusat-kecergasan-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk syarikat renovasi 2026",
+      "slug": "harga-iklan-facebook-untuk-syarikat-renovasi-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-syarikat-renovasi-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk syarikat renovasi 2027",
+      "slug": "harga-iklan-facebook-untuk-syarikat-renovasi-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-syarikat-renovasi-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk syarikat logistik 2026",
+      "slug": "harga-iklan-facebook-untuk-syarikat-logistik-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-syarikat-logistik-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk syarikat logistik 2027",
+      "slug": "harga-iklan-facebook-untuk-syarikat-logistik-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-syarikat-logistik-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai runcit 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-runcit-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-runcit-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai runcit 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-runcit-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-runcit-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai gadget 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-gadget-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-gadget-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai gadget 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-gadget-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-gadget-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai emas 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-emas-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-emas-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai emas 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-emas-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-emas-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai perabot 2026",
+      "slug": "harga-iklan-facebook-untuk-kedai-perabot-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-perabot-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk kedai perabot 2027",
+      "slug": "harga-iklan-facebook-untuk-kedai-perabot-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-kedai-perabot-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk ejen takaful 2026",
+      "slug": "harga-iklan-facebook-untuk-ejen-takaful-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-ejen-takaful-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk ejen takaful 2027",
+      "slug": "harga-iklan-facebook-untuk-ejen-takaful-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-ejen-takaful-2027/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk perancang perkahwinan 2026",
+      "slug": "harga-iklan-facebook-untuk-perancang-perkahwinan-2026",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-perancang-perkahwinan-2026/"
+    },
+    {
+      "keyword": "harga iklan facebook untuk perancang perkahwinan 2027",
+      "slug": "harga-iklan-facebook-untuk-perancang-perkahwinan-2027",
+      "service": "Jasa Iklan Facebook",
+      "city": null,
+      "live": false,
+      "created_at": "2026-07-30T04:25:46",
+      "url": "https://beriklan.my/blog/harga-iklan-facebook-untuk-perancang-perkahwinan-2027/"
+    }
+  ]
 }

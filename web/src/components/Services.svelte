@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { Megaphone, Camera, Music2, Search, Play, FileText, Globe, Film, Smartphone, ArrowUpRight, Check } from 'lucide-svelte';
 
-    const waLink = "https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20a%20free%20consultation";
+    const waLink = "https://wa.me/62811919328?text=Hello%20Beriklan%2C%20I%27d%20like%20a%20consultation";
 
     let visible = false;
     let activeTab = 'all';
@@ -242,7 +242,7 @@
             <p class="text-sm text-muted">
                 Need a recommendation or want to discuss budget?
                 <a href={waLink} class="text-accent font-bold hover:underline ml-1 group inline-flex items-center gap-1">
-                    Free consultation on WhatsApp
+                    Consultation on WhatsApp
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
             </p>

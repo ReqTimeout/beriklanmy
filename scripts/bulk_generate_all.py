@@ -10,7 +10,7 @@ Usage:
   python3 scripts/bulk_generate_all.py --resume
   python3 scripts/bulk_generate_all.py --limit 100
 """
-import argparse, json, os, re, sys, time, requests, threading
+import argparse, hashlib, json, os, re, sys, time, requests, threading
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -23,7 +23,7 @@ ZEN_KEY_PATH = os.path.expanduser("~/.beriklan/zen-key")
 
 ZEN_URL = "https://opencode.ai/zen/v1/chat/completions"
 # Multi-model rotation. Each model has independent rate limit on free tier.
-MODELS = ["deepseek-v4-flash-free", "nemotron-3-ultra-free"]
+MODELS = ["nemotron-3-ultra-free", "ling-3.0-flash-free", "north-mini-code-free", "deepseek-v4-flash-free", "mimo-v2.5-free", "laguna-s-2.1-free"]
 MAX_WORKERS = 5
 ERR_LOG = "/tmp/bulk_generate_err.log"
 
@@ -34,17 +34,22 @@ model_lock = threading.Lock()
 LOCKOUT_S = 15  # seconds to wait before retrying a rate-limited model
 
 SERVICE_NAMES = {
-    "facebook-ads-management": "Jasa Iklan Facebook Ads",
-    "instagram-ads-management": "Jasa Iklan Instagram",
-    "tiktok-ads-management": "Jasa Iklan TikTok Ads",
-    "google-ads-management": "Jasa Iklan Google Ads",
-    "youtube-ads-management": "Jasa Iklan YouTube",
-    "instagram-management": "Jasa Kelola Instagram",
-    "tiktok-management": "Jasa Kelola TikTok",
-    "website-development": "Jasa Pembuatan Website",
-    "landing-page-design": "Jasa Pembuatan Landing Page",
-    "digital-marketing-agency": "Jasa Digital Marketing",
-    "live-stream-viewers": "Jasa View Live",
+    "facebook-ads-management": "Facebook Ads Management",
+    "instagram-ads-management": "Instagram Ads Management",
+    "tiktok-ads-management": "TikTok Ads Management",
+    "google-ads-management": "Google Ads Management",
+    "youtube-ads-management": "YouTube Ads Management",
+    "instagram-management": "Instagram Management",
+    "tiktok-management": "TikTok Management",
+    "website-development": "Website Development",
+    "landing-page-design": "Landing Page Design",
+    "digital-marketing-agency": "Digital Marketing Agency",
+    "live-stream-viewers": "Live Stream Viewers",
+    "tiktok-live-viewers": "TikTok Live Viewers",
+    "shopee-live-viewers": "Shopee Live Viewers",
+    "youtube-live-viewers": "YouTube Live Viewers",
+    "twitch-live-viewers": "Twitch Live Viewers",
+    "instagram-live-viewers": "Instagram Live Viewers",
 }
 
 SERVICE_PATHS = {
@@ -59,6 +64,11 @@ SERVICE_PATHS = {
     "landing-page-design": "landing-page-design",
     "digital-marketing-agency": "digital-marketing-agency",
     "live-stream-viewers": "live-stream-viewers",
+    "tiktok-live-viewers": "tiktok-live-viewers",
+    "shopee-live-viewers": "shopee-live-viewers",
+    "youtube-live-viewers": "youtube-live-viewers",
+    "twitch-live-viewers": "twitch-live-viewers",
+    "instagram-live-viewers": "instagram-live-viewers",
 }
 
 def read_zen_key():
@@ -90,32 +100,97 @@ def load_live_slugs():
     except:
         return set()
 
+# Anti-doorway: deterministic per-keyword structure variants so the ~298k articles
+# do NOT share one identical heading template (scaled-content-abuse footprint).
+PROMPT_VARIANTS = [
+    ("600-750", [
+        ("Introduction", "define {kw} in 1-2 short paragraphs with local {loc}/Malaysia context."),
+        ("Key Benefits", "3-4 points in a <ul>."),
+        ("How It Works", "3-4 steps in an <ol>."),
+        ("Pricing in Malaysia", "realistic ranges in RM (e.g. \"from RM990/month\"); explain what affects cost."),
+        ("Common Mistakes to Avoid", "2-3 pitfalls in a <ul>."),
+        ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
+        ("Conclusion", "1 paragraph, ending with a WhatsApp call to action."),
+    ]),
+    ("550-700", [
+        ("What Is {kw}?", "explain the concept in 1-2 paragraphs for a Malaysian business owner."),
+        ("Why It Matters for Malaysian Businesses", "2-3 paragraphs on real business impact."),
+        ("Step-by-Step Process", "3-4 steps in an <ol>."),
+        ("Cost & Budget Guide (RM)", "realistic RM ranges; explain what drives the budget."),
+        ("Questions Business Owners Ask", "3 <h3> questions, each answered in a <p>."),
+        ("Getting Started", "1 paragraph, ending with a WhatsApp call to action."),
+    ]),
+    ("650-800", [
+        ("Overview", "introduce {kw} with {loc}/Malaysia context in 1-2 paragraphs."),
+        ("Who Should Consider This", "describe the ideal business or situation in a <ul>."),
+        ("Key Advantages", "3-4 points in a <ul>."),
+        ("How the Process Works", "3-4 steps in an <ol>."),
+        ("Pricing Explained (RM)", "realistic RM ranges and the main cost factors."),
+        ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
+        ("Final Thoughts", "1 paragraph, ending with a WhatsApp call to action."),
+    ]),
+    ("600-750", [
+        ("{kw}: A Practical Guide", "1-2 paragraph introduction with {loc}/Malaysia context."),
+        ("Benefits You Can Expect", "3-4 points in a <ul>."),
+        ("How We Approach It", "3-4 steps in an <ol>."),
+        ("Investment & Pricing (RM)", "realistic RM ranges; explain what affects cost."),
+        ("Local Considerations in {loc}", "1-2 paragraphs on the local market."),
+        ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
+        ("Next Steps", "1 paragraph, ending with a WhatsApp call to action."),
+    ]),
+    ("550-700", [
+        ("Understanding {kw}", "define it in 1-2 paragraphs with Malaysia context."),
+        ("When to Use It", "2-3 scenarios in a <ul>."),
+        ("Process & Timeline", "3-4 steps in an <ol>."),
+        ("Budget Ranges in RM", "realistic RM figures and what affects them."),
+        ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
+        ("Conclusion", "1 paragraph, ending with a WhatsApp call to action."),
+    ]),
+]
+
+ANGLES = [
+    "Emphasise measurable ROI and lead quality.",
+    "Write for a beginner who is new to paid advertising.",
+    "Focus on the local Malaysian market and buyer behaviour.",
+    "Take a practical, no-hype, budget-conscious angle.",
+    "Highlight realistic expectations and common outcomes.",
+]
+
 def build_prompt(kw, svc_name, city, svc_key):
-    loc = city.capitalize() if city else "ID"
+    loc = city.title() if city else "Malaysia"
     svc_path = SERVICE_PATHS.get(svc_key, svc_key)
     ilink = f"https://beriklan.my/{svc_path}/"
-    
+
     platform = svc_name.lower()
-    if "google" in platform: elink = "https://ads.google.com/intl/id_id/home/"
+    if "google" in platform: elink = "https://ads.google.com/intl/en_my/home/"
     elif "facebook" in platform or "instagram" in platform: elink = "https://www.facebook.com/business/ads"
     elif "tiktok" in platform: elink = "https://ads.tiktok.com/"
     elif "youtube" in platform: elink = "https://www.youtube.com/ads/"
-    else: elink = "https://beriklan.my/"
-    
-    return f"""Buat artikel HTML 400 kata untuk: {kw}
-Layanan: {svc_name}. Lokasi: {loc}.
+    else: elink = "https://business.google.com/my/"
 
-<h2>Pendahuluan</h2> definisi {kw} 1 paragraf
-<h2>Manfaat</h2> 3 poin <ul>
-<h2>Cara Kerja</h2> 3 langkah <ol>
-<h2>Biaya</h2> "Mulai Rp500rb"
-<h2>FAQ</h2> 3 <h3>+<p>
-<h2>Kesimpulan</h2> 1 paragraf + WA
+    hv = int(hashlib.md5(f"{kw}|{svc_key}".encode("utf-8")).hexdigest(), 16)
+    word_range, sections = PROMPT_VARIANTS[hv % len(PROMPT_VARIANTS)]
+    angle = ANGLES[(hv // 7) % len(ANGLES)]
+    heading_block = "\n".join(
+        f"<h2>{t.format(kw=kw, loc=loc)}</h2> {g.format(kw=kw, loc=loc)}"
+        for t, g in sections
+    )
 
-Wajib: 2x link {ilink}, 1x <a href="{elink}" rel=nofollow>
-Penulis: Tim Beriklan
-Formal Indo. Jangan: bikin,gak,nggak,pasti,garansi
-Output HANYA HTML dari <h2>."""
+    return f"""Write a well-structured, factual HTML article ({word_range} words) in professional Malaysian English about: {kw}
+Service: {svc_name}. Location: {loc}.
+Editorial angle: {angle}
+
+Use these exact <h2> headings in order:
+{heading_block}
+
+Requirements:
+- Link twice to {ilink} with natural anchor text.
+- Link once to <a href="{elink}" rel="nofollow"> as an external reference.
+- Voice: the Beriklan team, an agency running ad campaigns since 2016.
+- Natural professional Malaysian English. Currency in RM only (never Rp).
+- Vary sentence structure and openings; do not reuse boilerplate phrasing across sections.
+- Avoid hype words: guaranteed, best, 100%, cheapest.
+- Output ONLY HTML starting from the first <h2>. No preamble, no markdown code fences."""
 
 ERR_LOG = "/tmp/bulk_generate_err.log"
 
@@ -178,6 +253,20 @@ def clean_html(html):
     if h.endswith("```"): h = h[:-3]
     return h.strip()
 
+WA_LINK = "https://wa.me/62811919328"
+
+def cta_block(svc_name, svc_key):
+    svc_path = SERVICE_PATHS.get(svc_key, svc_key)
+    return (
+        "\n<hr/>\n<h2>Work With Beriklan</h2>\n"
+        "<p>Beriklan has managed paid ad campaigns since 2016 — transparent, measurable, "
+        "with weekly reporting and full access to your ad accounts. "
+        f"Explore our <a href=\"https://beriklan.my/{svc_path}/\">{svc_name} packages</a> "
+        "or start a consultation.</p>\n"
+        f"<p><a href=\"{WA_LINK}?text=Hi%20Beriklan%2C%20I%20would%20like%20a%20consultation.\" "
+        "rel=\"nofollow\">Chat with our team on WhatsApp</a> — reply within 1 hour (business hours).</p>"
+    )
+
 def make_article(item, zen_key, live_slugs):
     kw = item["keyword"]
     slug = item.get("slug") or re.sub(r"[^a-z0-9-]", "", kw.lower().replace(" ", "-"))[:80]
@@ -194,10 +283,19 @@ def make_article(item, zen_key, live_slugs):
     raw = call_zen(prompt, zen_key)
     if not raw:
         return None
-    
+
     content = clean_html(raw)
+    # QC: retry once if too short (<450 words) for better quality
+    if len(content.split()) < 450:
+        raw2 = call_zen(prompt, zen_key)
+        if raw2 and len(clean_html(raw2).split()) > len(content.split()):
+            content = clean_html(raw2)
     if not content.startswith("<h2>"):
         content = f"<h2>{title}</h2>\n" + content
+
+    # Guarantee internal link to service page + WhatsApp CTA
+    if content.count(f"/{SERVICE_PATHS.get(svc, svc)}/") < 1 or "wa.me" not in content:
+        content += cta_block(svc_name, svc)
     
     excerpt = re.sub(r'<[^>]+>', ' ', content).strip()
     excerpt = re.sub(r'\s+', ' ', excerpt)[:180] + "..."
@@ -240,6 +338,8 @@ def main():
     print(f"Queue: {len(queue)} total, {len(pending)} pending, {len(live_slugs)} live slugs")
     
     pending = [x for x in pending if x.get("slug") not in processed and x.get("slug") not in live_slugs]
+    # Priority order: best keywords first (highest priority_score)
+    pending.sort(key=lambda x: int(x.get("priority_score") or 0), reverse=True)
     if args.limit > 0:
         pending = pending[:args.limit]
     

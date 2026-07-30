@@ -6459,7 +6459,7 @@ const chosen = pool[Math.floor(Math.random() * pool.length)];
 
     // Internal-link CTA block → money page (critical for ranking + conversion)
     if (!article.includes("<!-- internal-cta -->")) {
-      article += `\n<!-- internal-cta -->\n<hr/>\n<h2>Butuh Jasa Digital Marketing?</h2>\n<p>Tim Beriklan mengelola campaign sejak 2016 — transparan, terukur, dengan laporan mingguan dan akses penuh ke akun Anda. Sesi konsultasi awal 15 menit, gratis.</p>\n<ul>\n<li><a href="/jasa-digital-marketing/">Lihat paket Jasa Digital Marketing — harga &amp; fitur lengkap</a></li>\n<li><a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20membaca%20artikel%20Anda%20dan%20tertarik%20konsultasi%20digital%20marketing." rel="nofollow">Konsultasi via WhatsApp — respon dalam 1 jam (jam kerja)</a></li>\n</ul>`;
+      article += `\n<!-- internal-cta -->\n<hr/>\n<h2>Butuh Jasa Digital Marketing?</h2>\n<p>Tim Beriklan mengelola campaign sejak 2016 — transparan, terukur, dengan laporan mingguan dan akses penuh ke akun Anda. Sesi konsultasi via WhatsApp.</p>\n<ul>\n<li><a href="/jasa-digital-marketing/">Lihat paket Jasa Digital Marketing — harga &amp; fitur lengkap</a></li>\n<li><a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20membaca%20artikel%20Anda%20dan%20tertarik%20konsultasi%20digital%20marketing." rel="nofollow">Konsultasi via WhatsApp — respon dalam 1 jam (jam kerja)</a></li>\n</ul>`;
     }
 
     // Step 4: Save to D1
@@ -7883,7 +7883,7 @@ function tagAsTrending(post) {
   post.source = 'google_trends_rss';
   if (post.content && !post.content.includes('<!-- internal-cta -->')) {
     post.content = post.content.trimEnd() +
-      `\n<!-- internal-cta -->\n<hr/>\n<h2>Panduan Lengkap Jasa Digital Marketing</h2>\n<p>Tim Beriklan mengelola campaign iklan sejak 2016 — transparan, terukur, laporan mingguan. Sesi konsultasi awal 15 menit, gratis.</p>\n<ul><li><a href="/jasa-digital-marketing/">Lihat paket Jasa Digital Marketing</a></li><li><a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20artikel%20${encodeURIComponent(post.title)}">Konsultasi via WhatsApp →</a></li></ul>`;
+      `\n<!-- internal-cta -->\n<hr/>\n<h2>Panduan Lengkap Jasa Digital Marketing</h2>\n<p>Tim Beriklan mengelola campaign iklan sejak 2016 — transparan, terukur, laporan mingguan. Sesi konsultasi via WhatsApp.</p>\n<ul><li><a href="/jasa-digital-marketing/">Lihat paket Jasa Digital Marketing</a></li><li><a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20tertarik%20dengan%20artikel%20${encodeURIComponent(post.title)}">Konsultasi via WhatsApp →</a></li></ul>`;
   }
   return post;
 }
@@ -8980,7 +8980,7 @@ const SERVICE_CONFIGS = [
       { short: "🤝", title: "1 account manager", desc: "Satu kontak untuk semua kebutuhan digital marketing Anda. Tidak ada miskomunikasi." }
     ],
     steps: [
-      { num: "01", tag: "MINGGU 1", title: "Audit Gratis", desc: "Kami audit semua channel digital Anda — website, ads, SEO, social. Temukan kebocoran budget." },
+      { num: "01", tag: "MINGGU 1", title: "Audit", desc: "Kami audit semua channel digital Anda — website, ads, SEO, social. Temukan kebocoran budget." },
       { num: "02", tag: "MINGGU 2-3", title: "Strategi & Setup", desc: "Susun rencana 90 hari. Setup pixel, tracking, campaign awal di semua channel prioritas." },
       { num: "03", tag: "BULAN 2+", title: "Eksekusi & Optimasi", desc: "Jalankan campaign, produksi artikel SEO, optimasi mingguan berdasarkan data." },
       { num: "04", tag: "ONGOING", title: "Report & Scale Up", desc: "Laporan bulanan bahasa manusia. Scale up channel yang perform, cut yang tidak." }
@@ -9098,7 +9098,7 @@ ${stepsHTML}
 <!-- Final CTA -->
 <tr><td style="padding:28px 28px;background:#f7f8fb;border-top:1px solid #e2e8f0;">
 <p style="color:#0f1e3d;font-size:16px;margin:0 0 8px;font-weight:700;text-align:center;">Mau diskusi strategi untuk {{company}}?</p>
-<p style="color:#6b7280;font-size:13px;margin:0 0 18px;line-height:1.6;text-align:center;">Lihat paket, harga, dan cara kerja di halaman layanan kami. Atau konsultasi gratis 15 menit — kami analisis kondisi campaign Anda.</p>
+<p style="color:#6b7280;font-size:13px;margin:0 0 18px;line-height:1.6;text-align:center;">Lihat paket, harga, dan cara kerja di halaman layanan kami. Atau konsultasi — kami analisis kondisi campaign Anda.</p>
 <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
 <tr><td style="background:#f59e0b;border-radius:100px;padding:13px 28px;font-weight:700;font-size:14px;">
 <a href="${c.cta_url}" style="color:#0f1e3d;text-decoration:none;display:block;">${c.cta_text} &rarr;</a>
@@ -9147,7 +9147,7 @@ const GENERIC_TEMPLATES = [
 
 <tr><td style="padding:8px 28px 24px;background:#ffffff;">
 <table width="100%" cellpadding="0" cellspacing="0">
-<tr><td style="padding:6px 0;"><table width="100%" style="background:#f7f8fb;border-radius:10px;padding:14px 18px;"><tr><td width="36" valign="middle" style="background:#f59e0b;color:#0f1e3d;border-radius:50%;width:36px;height:36px;text-align:center;line-height:36px;font-weight:800;font-size:14px;">1</td><td style="padding-left:14px;vertical-align:middle;"><strong style="color:#0f1e3d;font-size:14px;display:block;margin-bottom:2px;">Konsultasi Gratis 15 Menit</strong><span style="color:#6b7280;font-size:12px;">Ceritakan tujuan Anda, kami sarankan strateginya</span></td></tr></table></td></tr>
+<tr><td style="padding:6px 0;"><table width="100%" style="background:#f7f8fb;border-radius:10px;padding:14px 18px;"><tr><td width="36" valign="middle" style="background:#f59e0b;color:#0f1e3d;border-radius:50%;width:36px;height:36px;text-align:center;line-height:36px;font-weight:800;font-size:14px;">1</td><td style="padding-left:14px;vertical-align:middle;"><strong style="color:#0f1e3d;font-size:14px;display:block;margin-bottom:2px;">Hubungi Kami</strong><span style="color:#6b7280;font-size:12px;">Ceritakan tujuan Anda, kami sarankan strateginya</span></td></tr></table></td></tr>
 <tr><td style="padding:6px 0;"><table width="100%" style="background:#f7f8fb;border-radius:10px;padding:14px 18px;"><tr><td width="36" valign="middle" style="background:#10b981;color:#fff;border-radius:50%;width:36px;height:36px;text-align:center;line-height:36px;font-weight:800;font-size:14px;">2</td><td style="padding-left:14px;vertical-align:middle;"><strong style="color:#0f1e3d;font-size:14px;display:block;margin-bottom:2px;">Dashboard Real-time</strong><span style="color:#6b7280;font-size:12px;">Pantau ROI 24/7 dari mana saja</span></td></tr></table></td></tr>
 <tr><td style="padding:6px 0;"><table width="100%" style="background:#f7f8fb;border-radius:10px;padding:14px 18px;"><tr><td width="36" valign="middle" style="background:#0ea5e9;color:#fff;border-radius:50%;width:36px;height:36px;text-align:center;line-height:36px;font-weight:800;font-size:14px;">3</td><td style="padding-left:14px;vertical-align:middle;"><strong style="color:#0f1e3d;font-size:14px;display:block;margin-bottom:2px;">Laporan Bahasa Manusia</strong><span style="color:#6b7280;font-size:12px;">Mingguan tanpa jargon teknis</span></td></tr></table></td></tr>
 </table>
@@ -10164,7 +10164,7 @@ async function handleCronSendEmail(request, env) {
         bodyHtml = bodyHtml.replace(/\{\{cta_url\}\}/g, "https://wa.me/62811919328?text=" + encodeURIComponent(`Halo Beriklan, saya tertarik info lebih lanjut setelah menerima email "${subject}".`));
         bodyHtml = bodyHtml.replace(/\{\{cta_text\}\}/g, "Diskusi via WhatsApp");
         bodyHtml = bodyHtml.replace(/\{\{title\}\}/g, subject);
-        bodyHtml = bodyHtml.replace(/\{\{subtitle\}\}/g, "Konsultasi gratis 15 menit untuk campaign Anda.");
+        bodyHtml = bodyHtml.replace(/\{\{subtitle\}\}/g, "Konsultasi untuk campaign Anda.");
         bodyHtml = bodyHtml.replace(/\{\{tracking_pixel\}\}/g, `<img src="https://beriklan.my/api/track/open?id=${trackingId}" width="1" height="1" alt="" style="display:none;">`);
         if (!bodyHtml.includes("Berhenti berlangganan") && !bodyHtml.includes("unsubscribe_url")) bodyHtml += unsubFooter;
 
@@ -10263,7 +10263,7 @@ async function handleEmailTemplatePreview(request, env) {
   html = html.replace(/\{\{excerpt\}\}/g, "Contoh preview dari template email Beriklan.");
   html = html.replace(/\{\{articles\}\}/g, "");
   html = html.replace(/\{\{cta_url\}\}/g, "https://wa.me/62811919328");
-  html = html.replace(/\{\{cta_text\}\}/g, "Konsultasi Gratis");
+  html = html.replace(/\{\{cta_text\}\}/g, "Hubungi Kami");
   html = html.replace(/\{\{title\}\}/g, "Judul Promo");
   html = html.replace(/\{\{subtitle\}\}/g, "Subtitle promo");
   const frame = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Preview: ${escHtml(tpl.name)}</title>
@@ -11150,7 +11150,7 @@ ${(searches.results||[]).map(s => `<li><span><strong>${escHtml(s.query || s.cate
 </div>` : ''}
 ${remaining === 0 ? `<div class="upgrade">
 <h3>🚀 Limit tercapai — Mau akses full?</h3>
-<p>Dapatkan akses tanpa limit + fitur export CRM-ready. Konsultasi gratis 15 menit.</p>
+<p>Dapatkan akses tanpa limit + fitur export CRM-ready. Konsultasi.</p>
 <a href="https://wa.me/62811919328?text=Halo%20Beriklan%2C%20saya%20sudah%20trial%20scrape.beriklan.my%20dan%20tertarik%20akses%20full">Hubungi WhatsApp →</a>
 </div>` : ''}
 </div>
@@ -11442,7 +11442,7 @@ function _buildArticleBody(slug, meta, content, relatedRows) {
   <div class="relative flex flex-col md:flex-row items-start md:items-center gap-5">
     <div class="flex-1">
       <h3 class="font-display font-extrabold text-xl md:text-2xl leading-tight mb-2">Butuh strategi iklan untuk bisnis Anda?</h3>
-      <p class="text-white/70 text-sm leading-relaxed">Diskusi gratis 15-30 menit via WhatsApp. Tim kami akan tinjau kondisi campaign Anda saat ini.</p>
+      <p class="text-white/70 text-sm leading-relaxed">Diskusi via WhatsApp. Tim kami akan tinjau kondisi campaign Anda saat ini.</p>
     </div>
     <a href="https://wa.me/62811919328?text=${encodeURIComponent('Halo Beriklan, saya tertarik dengan topik "' + (meta.title || slug) + '" — mohon info lebih lanjut.')}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-full font-bold text-sm shadow-lg hover:shadow-pop transition-all btn-shine-accent shrink-0">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide-icon lucide lucide-message-circle w-4 h-4"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
@@ -11511,7 +11511,7 @@ function _buildArticleBody(slug, meta, content, relatedRows) {
   <div class="bg-gradient-to-br from-ink via-primary-2 to-ink rounded-2xl p-6 text-white relative overflow-hidden">
     <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(circle at 80% 20%,rgba(245,158,11,0.18) 0%,transparent 60%);"></div>
     <div class="relative">
-      <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Diskusi Gratis 15 Menit</h3>
+      <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Hubungi Kami</h3>
       <p class="text-white/70 text-xs leading-relaxed mb-4">Tim kami tinjau campaign Anda, kasih rekomendasi konkret.</p>
       <a href="https://wa.me/62811919328?text=${encodeURIComponent('Halo Beriklan, saya baca artikel "' + (meta.title || slug) + '" dan ingin diskusi.')}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-accent text-ink px-4 py-2 rounded-full font-bold text-xs shadow-md hover:shadow-pop transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide-icon lucide lucide-message-circle w-3.5 h-3.5"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>

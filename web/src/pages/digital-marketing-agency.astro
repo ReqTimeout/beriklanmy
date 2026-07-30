@@ -20,7 +20,7 @@ import { MessageCircle, ArrowRight, Target, Sparkles, Repeat, MapPin, Database, 
 const waLink = "https://wa.me/62811919328?text=Hi%20Beriklan%2C%20I%27m%20interested%20in%20your%20digital%20marketing%20services.%20Please%20share%20packages%20and%20pricing.";
 
 const tiers = [
-    { name: 'Starter', priceLabel: 'Free', duration: '60-minute session', tagline: 'A strategy consultation — walk away with a channel plan even if we never work together.', features: ['Funnel & ad account review', 'Channel mix recommendation', 'Budget allocation guidance', 'Priority quick-wins list', 'No obligation'], priceNote: 'free consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
+    { name: 'Starter', priceLabel: 'Free', duration: '60-minute session', tagline: 'A strategy consultation — walk away with a channel plan even if we never work together.', features: ['Funnel & ad account review', 'Channel mix recommendation', 'Budget allocation guidance', 'Priority quick-wins list', 'No obligation'], priceNote: 'consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
     { name: 'Growth', priceLabel: 'Custom', duration: '30-day cycles', tagline: 'Multi-channel management scoped to your targets.', features: ['2–3 channels managed (Meta/Google/TikTok)', 'Creative direction included', 'Landing page optimisation', 'Weekly consolidated reporting', 'Monthly strategy call'], priceNote: 'custom quote after consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.', highlight: true },
     { name: 'Scale', priceLabel: 'Custom', duration: '30-day cycles', tagline: 'Full-funnel programme for aggressive growth targets.', features: ['All channels + YouTube', 'Dedicated strategist & designer', 'CRO programme on pages', 'Weekly strategy rhythm', 'Quarterly executive review'], priceNote: 'custom quote after consultation', disclaimer: 'Ad budget is paid directly to the platform via your own account.' },
 ];
@@ -43,7 +43,7 @@ const steps = [
 
 const faqs = [
     { q: 'What does the full-service engagement include?', a: 'Strategy, channel selection, campaign management across Meta/Google/TikTok, creative direction, landing pages and consolidated reporting — scoped to your goals after a consultation.' },
-    { q: 'How is pricing determined?', a: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a free consultation and we will propose a scope with clear deliverables and pricing.' },
+    { q: 'How is pricing determined?', a: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a consultation and we will propose a scope with clear deliverables and pricing.' },
     { q: 'Do you replace our internal team?', a: 'We usually complement it. Some clients hand us everything; others keep content in-house while we run paid media. The scope is built around what you already have.' },
     { q: 'How soon can we see results?', a: 'Paid campaigns generate data within days and meaningful optimisation within 2–4 weeks. We set expectations per channel during the consultation — no inflated promises.' },
     { q: 'Is there a minimum commitment?', a: 'Engagements run in 30-day cycles with a quarterly strategy rhythm. No long-term lock-in — the work has to justify itself.' },
@@ -59,11 +59,11 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
 
 <Layout
     title="Digital Marketing Agency Malaysia | Multi-Channel Growth — Beriklan"
-    description="Multi-channel digital marketing: Facebook, Instagram, Google, TikTok, YouTube ads and landing pages, integrated for measurable growth. Free growth audit to start."
+    description="Multi-channel digital marketing: Facebook, Instagram, Google, TikTok, YouTube ads and landing pages, integrated for measurable growth. growth audit to start."
     canonical="https://beriklan.my/digital-marketing-agency/"
     faq={[
         { question: 'What does the full-service engagement include?', answer: 'Strategy, channel selection, campaign management across Meta/Google/TikTok, creative direction, landing pages and consolidated reporting — scoped to your goals after a consultation.' },
-        { question: 'How is pricing determined?', answer: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a free consultation and we will propose a scope with clear deliverables and pricing.' },
+        { question: 'How is pricing determined?', answer: 'Full-service scope is custom-quoted based on channels, volume and targets. Book a consultation and we will propose a scope with clear deliverables and pricing.' },
         { question: 'Do you replace our internal team?', answer: 'We usually complement it. Some clients hand us everything; others keep content in-house while we run paid media. The scope is built around what you already have.' },
         { question: 'How soon can we see results?', answer: 'Paid campaigns generate data within days and meaningful optimisation within 2–4 weeks. We set expectations per channel during the consultation — no inflated promises.' },
         { question: 'Is there a minimum commitment?', answer: 'Engagements run in 30-day cycles with a quarterly strategy rhythm. No long-term lock-in — the work has to justify itself.' }
@@ -270,7 +270,7 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                         </div>
                         <div>
                             <p class="font-display font-bold text-base text-ink mb-1">Not sure which package fits?</p>
-                            <p class="text-sm text-muted leading-relaxed">A free 15-minute consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
+                            <p class="text-sm text-muted leading-relaxed">A consultation. We help you pick the package that best fits your ad budget and campaign objective.</p>
                             <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-accent hover:text-ink transition-colors group">
                                 Consult on WhatsApp
                                 <ArrowRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -454,7 +454,7 @@ const relatedItems = (relatedMap.services['digital-marketing-agency'] || []).map
                         View Packages & Pricing
                     </a>
                 </div>
-                <p class="text-white/50 text-xs mt-6">15-minute consultation · free of charge</p>
+                <p class="text-white/50 text-xs mt-6">consultation · free of charge</p>
             </div>
         </div>
     </section>

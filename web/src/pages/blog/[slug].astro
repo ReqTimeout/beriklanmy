@@ -319,7 +319,7 @@ const articleSchema = {
                             {AUTHOR.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1">Ditulis oleh</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-accent mb-1">Written by</p>
                             <a href={AUTHOR.url} class="font-display font-bold text-ink text-base hover:text-accent transition-colors">{AUTHOR.name}</a>
                             <p class="text-xs text-muted font-semibold mb-1.5">{AUTHOR.role}</p>
                             <p class="text-xs text-muted leading-relaxed">{AUTHOR.credentials}</p>
@@ -398,7 +398,7 @@ const articleSchema = {
                     <div class="bg-gradient-to-br from-ink via-primary-2 to-ink rounded-2xl p-6 text-white relative overflow-hidden">
                         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.18) 0%, transparent 60%);"></div>
                         <div class="relative">
-                            <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Free 15-Minute Discussion</h3>
+                            <h3 class="font-display font-extrabold text-lg leading-tight mb-2">Contact Us</h3>
                             <p class="text-white/70 text-xs leading-relaxed mb-4">Our team reviews your campaign and gives concrete recommendations.</p>
                             <a href={`https://wa.me/62811919328?text=${encodeURIComponent(`Hi Beriklan, I read the article "${post.title}" and would like to discuss.`)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-accent text-ink px-4 py-2 rounded-full font-bold text-xs shadow-md hover:shadow-pop transition-all">
                                 <MessageCircle class="w-3.5 h-3.5" />
