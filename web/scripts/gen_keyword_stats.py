@@ -174,11 +174,13 @@ def main():
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(stats, open(OUT, "w"), ensure_ascii=False, indent=2)
-    # Also expose lightweight queue to Worker via ASSETS (so /api/cron/hourly-generate can read it)
-    import shutil
+    # Also expose lightweight queue to Worker via ASSETS (fallback D1 gagal; slim — file penuh 152MB > limit asset 25MB)
     queue_public = os.path.join(WEB, "public", "data", "keyword-queue.json")
     os.makedirs(os.path.dirname(queue_public), exist_ok=True)
-    shutil.copy(QUEUE, queue_public)
+    slim = [q for q in queue if q.get("status") == "pending" and not q.get("has_post")]
+    slim.sort(key=lambda q: q.get("priority_score") or 0, reverse=True)
+    slim = [{k: q.get(k) for k in ("id", "keyword", "keyword_normalized", "service", "city", "priority_score", "intent", "status", "has_post")} for q in slim[:1000]]
+    json.dump(slim, open(queue_public, "w"), ensure_ascii=False)
     print(f"keyword-queue.json: {total} keywords ({generated} gen / {pending} pending), {len(posts)} posts")
     print(f"  copied -> public/data/keyword-queue.json for Worker ASSETS access")
 

@@ -139,13 +139,15 @@ const showOrganization = true;
 		{/* P1: Additional structured data — FAQ, Breadcrumb, Service, LocalBusiness */}
 		<Schema faq={faq} breadcrumb={breadcrumb} service={service} localBusiness={localBusiness} />
 
-		<!-- Google Tag Manager -->
-		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-MJXSNCSD');</script>
-		<!-- End Google Tag Manager -->
+		<!-- Google tag (gtag.js) — GA4 beriklan.my -->
+		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-7RB4G5GC1X"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-7RB4G5GC1X');
+		</script>
+		<!-- End Google tag -->
 
 		<!-- Global dataLayer push helpers (GTM event tracking) -->
 		<script is:inline>
@@ -153,7 +155,13 @@ const showOrganization = true;
 			// Helper: derive event key + payload from any anchor or button
 			function bk_attr(el, key) { return el.getAttribute(key) || el.dataset[key] || ''; }
 			function bk_text(el) { return (el.textContent || '').trim().slice(0, 60); }
-			function pushDL(obj) { window.dataLayer.push(obj); }
+			function pushDL(obj) {
+				if (obj && obj.event && typeof gtag === 'function') {
+					var name = obj.event; var params = {};
+					for (var k in obj) { if (k !== 'event') params[k] = obj[k]; }
+					gtag('event', name, params);
+				} else { window.dataLayer.push(obj); }
+			}
 
 			// ========== CLICK TRACKER (wa, tel, cta, internal, outbound, file) ==========
 			document.addEventListener('click', function(e) {
@@ -385,11 +393,6 @@ const showOrganization = true;
 		</script>
 	</head>
 	<body class="font-sans text-primary bg-white antialiased pb-24 lg:pb-0">
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJXSNCSD"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
-
 		<slot />
 	<FloatingWhatsApp client:only="svelte" />
 	<CookieConsent />

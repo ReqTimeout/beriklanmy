@@ -6,3 +6,7 @@ dist/
 *.log
 drafts/
 web/src/data/keyword-queue.json
+
+# GSC service account credential — JANGAN pernah di-commit
+cool-component-*.json
+*gserviceaccount*.json

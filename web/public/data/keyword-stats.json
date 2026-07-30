@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-30T11:09:21",
+  "generated_at": "2026-07-30T13:56:50",
   "keywords": {
-    "total": 5863,
+    "total": 298736,
     "generated": 0,
-    "pending": 5863,
+    "pending": 298736,
     "live_in_posts": 0,
     "coverage": 0.0
   },
@@ -15,72 +15,72 @@
   "by_service": [
     {
       "key": "Lainnya / Umum",
-      "total": 3868,
+      "total": 105526,
       "generated": 0,
-      "pending": 3868,
-      "coverage": 0.0
-    },
-    {
-      "key": "Jasa Pembuatan Landing Page",
-      "total": 333,
-      "generated": 0,
-      "pending": 333,
-      "coverage": 0.0
-    },
-    {
-      "key": "Jasa Digital Marketing",
-      "total": 293,
-      "generated": 0,
-      "pending": 293,
+      "pending": 105526,
       "coverage": 0.0
     },
     {
       "key": "Jasa Iklan Google",
-      "total": 293,
+      "total": 32258,
       "generated": 0,
-      "pending": 293,
+      "pending": 32258,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Pembuatan Landing Page",
+      "total": 28611,
+      "generated": 0,
+      "pending": 28611,
       "coverage": 0.0
     },
     {
       "key": "Jasa Iklan TikTok",
-      "total": 285,
+      "total": 26633,
       "generated": 0,
-      "pending": 285,
-      "coverage": 0.0
-    },
-    {
-      "key": "Jasa Iklan Instagram",
-      "total": 282,
-      "generated": 0,
-      "pending": 282,
-      "coverage": 0.0
-    },
-    {
-      "key": "Jasa Iklan Facebook",
-      "total": 253,
-      "generated": 0,
-      "pending": 253,
+      "pending": 26633,
       "coverage": 0.0
     },
     {
       "key": "Jasa Iklan YouTube",
-      "total": 189,
+      "total": 26537,
       "generated": 0,
-      "pending": 189,
+      "pending": 26537,
       "coverage": 0.0
     },
     {
-      "key": "Jasa View Live",
-      "total": 57,
+      "key": "Jasa Iklan Facebook",
+      "total": 24866,
       "generated": 0,
-      "pending": 57,
+      "pending": 24866,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan Instagram",
+      "total": 24730,
+      "generated": 0,
+      "pending": 24730,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Digital Marketing",
+      "total": 20867,
+      "generated": 0,
+      "pending": 20867,
       "coverage": 0.0
     },
     {
       "key": "Jasa Pembuatan Website",
-      "total": 10,
+      "total": 7503,
       "generated": 0,
-      "pending": 10,
+      "pending": 7503,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa View Live",
+      "total": 1205,
+      "generated": 0,
+      "pending": 1205,
       "coverage": 0.0
     }
   ],
@@ -95,10 +95,73 @@
   ],
   "by_source": [
     {
+      "key": "expansion_l3_en",
+      "total": 105000,
+      "generated": 0,
+      "pending": 105000,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w1_en",
+      "total": 70000,
+      "generated": 0,
+      "pending": 70000,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l3_ms",
+      "total": 43750,
+      "generated": 0,
+      "pending": 43750,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w1_ms",
+      "total": 26250,
+      "generated": 0,
+      "pending": 26250,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l4_en",
+      "total": 22332,
+      "generated": 0,
+      "pending": 22332,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l2_en",
+      "total": 10809,
+      "generated": 0,
+      "pending": 10809,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l2_ms",
+      "total": 4830,
+      "generated": 0,
+      "pending": 4830,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w2_en",
+      "total": 4550,
+      "generated": 0,
+      "pending": 4550,
+      "coverage": 0.0
+    },
+    {
       "key": "expansion_my",
       "total": 4419,
       "generated": 0,
       "pending": 4419,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w3_en",
+      "total": 1400,
+      "generated": 0,
+      "pending": 1400,
       "coverage": 0.0
     },
     {
@@ -109,10 +172,59 @@
       "coverage": 0.0
     },
     {
+      "key": "expansion_l5_en",
+      "total": 840,
+      "generated": 0,
+      "pending": 840,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w2_ms",
+      "total": 732,
+      "generated": 0,
+      "pending": 732,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_w3_ms",
+      "total": 700,
+      "generated": 0,
+      "pending": 700,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l6_en",
+      "total": 668,
+      "generated": 0,
+      "pending": 668,
+      "coverage": 0.0
+    },
+    {
       "key": "expansion_ms",
       "total": 545,
       "generated": 0,
       "pending": 545,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l5_ms",
+      "total": 475,
+      "generated": 0,
+      "pending": 475,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l4_ms",
+      "total": 467,
+      "generated": 0,
+      "pending": 467,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_l6_ms",
+      "total": 70,
+      "generated": 0,
+      "pending": 70,
       "coverage": 0.0
     },
     {
