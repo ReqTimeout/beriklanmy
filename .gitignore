@@ -5,3 +5,4 @@ dist/
 .DS_Store
 *.log
 drafts/
+web/src/data/keyword-queue.json

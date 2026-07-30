@@ -1,6 +1,10 @@
 {
-  "name": "beriklanweb",
+  "name": "beriklanmy",
   "main": "src/worker-entry.js",
+  "routes": [
+    { "pattern": "beriklan.my", "custom_domain": true },
+    { "pattern": "www.beriklan.my", "custom_domain": true }
+  ],
   "compatibility_date": "2026-01-01",
   "d1_databases": [
     {
@@ -19,7 +23,7 @@
     "binding": "AI"
   },
   "vars": {
-    "ADMIN_TOKEN": "beriklan-admin-2026"
+    "ADMIN_TOKEN": "beriklan-my-admin-2026"
   },
   "observability": {
     "enabled": true
@@ -30,11 +34,7 @@
   "assets": {
     "binding": "ASSETS",
     "directory": "dist"
-  },
-  "triggers": {
-    "crons": [
-      "0 * * * *",
-      "*/15 * * * *"
-    ]
   }
+  // crons dilepas: akun CF free sudah 5/5 cron trigger (beriklan-app 3 + beriklanweb 2).
+  // Pengganti: cron-job.org GET /api/cron/tick?token=ADMIN_TOKEN tiap jam (menit 0).
 }

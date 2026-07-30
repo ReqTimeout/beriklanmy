@@ -1,0 +1,214 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.svelte';
+import StickyCTA from '../../../components/StickyCTA.svelte';
+import Footer from '../../../components/Footer.svelte';
+import RelatedServices from '../../../components/RelatedServices.svelte';
+import { MessageCircle, ArrowRight, BookOpen } from 'lucide-svelte';
+
+const SERVICE_SLUG = "youtube-ads-management";
+const SERVICE_NAME = "YouTube Ads";
+const PILLAR_TITLE = "YouTube Ads for Brand Awareness & Video Marketing";
+const PILLAR_INTRO = "YouTube is Malaysia's largest video platform, reaching well over 20 million viewers. Learn the ad formats (skippable, bumper, Shorts), targeting and how to make video that holds attention.";
+const PRICE_RANGE = "RM 890 - RM 2,490";
+const SERVICE_TYPE = "YouTube Ads";
+const STATS = [{"num": "24M+", "label": "YouTube users in Malaysia"}, {"num": "Video", "label": "Awareness at scale"}, {"num": "Weekly", "label": "Plain-language reporting"}, {"num": "100%", "label": "Full ad account access"}];
+const CLUSTERS = [{"tag": "Format", "title": "YouTube Ad Formats", "desc": "Skippable in-stream (5s skip), bumper (6s non-skip), discovery ads and YouTube Shorts."}, {"tag": "Targeting", "title": "Premium Malaysian Audiences", "desc": "Reaching professionals, gamers and 25–54 year olds with strong purchasing power."}, {"tag": "Production", "title": "Video Ad Production", "desc": "A hook in 5 seconds, 15–30 second storytelling and a CTA that doesn't feel like a hard sell."}, {"tag": "Performance", "title": "View-Through & Click-Through", "desc": "Understanding the two key YouTube Ads metrics and how to optimise both."}, {"tag": "Channel", "title": "YouTube Channel Strategy", "desc": "Building an organic channel alongside paid ads for compounding growth."}];
+const FAQS = [{"q": "How much does YouTube Ads management cost at Beriklan?", "a": "Packages start from RM 890/month and go up to RM 2,490 for our most complete plan with full campaign management. Ad spend (media budget) is paid separately to the platform. Contact us for a free 15-minute consultation."}, {"q": "How long does it take to set up a YouTube Ads management campaign?", "a": "Initial setup takes 1–3 working days, including audience research, creative preparation and tracking configuration. Your campaign goes live shortly after you approve the strategy."}, {"q": "Is the ad budget included in the package price?", "a": "No. The package covers strategy, setup, creative direction, optimisation and reporting. Your ad budget is paid directly to the ad platform through your own account — you keep full ownership and transparency."}, {"q": "Is there a minimum contract?", "a": "No long-term lock-in. Packages run in 30-day cycles and you can pause or stop at the end of any cycle. Most clients stay because the numbers make sense, not because of a contract."}, {"q": "What reporting will I receive?", "a": "A weekly report in plain language every Monday — spend, results, cost per result and what we are changing next — plus real-time dashboard access so you can verify everything yourself."}];
+const TIERS = [{"name": "Basic", "priceLabel": "890", "duration": "30-day campaign", "tagline": "Entry video campaign to test YouTube for your brand.", "features": ["Campaign setup & audience research", "1 video format (in-stream or Shorts)", "Basic conversion tracking", "Weekly plain-language report", "Real-time dashboard access"], "priceNote": "per month, excludes ad spend", "disclaimer": "Ad budget is paid directly to the platform via your own account."}, {"name": "Starter", "priceLabel": "1,490", "duration": "30-day campaign", "tagline": "Broader reach with multiple formats and audience testing.", "features": ["Everything in Basic", "2 video formats running in parallel", "Audience A/B testing", "Remarketing audience building", "Weekly plain-language report"], "priceNote": "per month, excludes ad spend", "disclaimer": "Ad budget is paid directly to the platform via your own account."}, {"name": "Standard", "priceLabel": "1,990", "duration": "30-day campaign", "tagline": "Structured awareness-to-action funnel on YouTube.", "features": ["Everything in Starter", "Full-funnel campaign structure", "Custom intent audiences", "Landing page recommendations", "Weekly plain-language report"], "highlight": true, "priceNote": "per month, excludes ad spend", "disclaimer": "Ad budget is paid directly to the platform via your own account."}, {"name": "Business", "priceLabel": "2,490", "duration": "30-day campaign", "tagline": "Complete YouTube programme with dedicated strategy.", "features": ["Everything in Standard", "Creative direction & script input", "Advanced measurement setup", "Quarterly strategy review", "Dedicated account strategist", "Priority support"], "priceNote": "per month, excludes ad spend", "disclaimer": "Ad budget is paid directly to the platform via your own account."}];
+const CITIES = [{"slug": "kuala-lumpur", "name": "Kuala Lumpur"}, {"slug": "petaling-jaya", "name": "Petaling Jaya"}, {"slug": "shah-alam", "name": "Shah Alam"}, {"slug": "subang-jaya", "name": "Subang Jaya"}, {"slug": "johor-bahru", "name": "Johor Bahru"}, {"slug": "penang", "name": "Penang"}, {"slug": "ipoh", "name": "Ipoh"}, {"slug": "melaka", "name": "Melaka"}, {"slug": "seremban", "name": "Seremban"}, {"slug": "kota-kinabalu", "name": "Kota Kinabalu"}, {"slug": "kuching", "name": "Kuching"}, {"slug": "klang", "name": "Klang"}, {"slug": "putrajaya", "name": "Putrajaya"}, {"slug": "cyberjaya", "name": "Cyberjaya"}, {"slug": "kuantan", "name": "Kuantan"}, {"slug": "alor-setar", "name": "Alor Setar"}, {"slug": "kota-bharu", "name": "Kota Bharu"}, {"slug": "kuala-terengganu", "name": "Kuala Terengganu"}, {"slug": "miri", "name": "Miri"}, {"slug": "sandakan", "name": "Sandakan"}, {"slug": "tawau", "name": "Tawau"}, {"slug": "iskandar-puteri", "name": "Iskandar Puteri"}, {"slug": "batu-pahat", "name": "Batu Pahat"}, {"slug": "sibu", "name": "Sibu"}, {"slug": "langkawi", "name": "Langkawi"}];
+const RELATED_ITEMS = [{"icon": "🔍", "label": "Google Ads", "desc": "YouTube Ads is part of the Google Ads network. Managing both together is more efficient.", "href": "/google-ads-management/"}, {"icon": "🎵", "label": "TikTok Ads", "desc": "Short-form video ads. Great for running the same brand in multiple formats.", "href": "/tiktok-ads-management/"}, {"icon": "🔴", "label": "YouTube Live Viewers", "desc": "Boost YouTube Live viewers to trend faster.", "href": "/youtube-live-viewers/"}];
+
+const canonical = `https://beriklan.my/${SERVICE_SLUG}/pilar/`;
+const waLink = `https://wa.me/62811919328?text=${encodeURIComponent(`Hi Beriklan, I'm interested in ${SERVICE_NAME}. Please share more details.`)}`;
+---
+
+<Layout
+    title={`${PILLAR_TITLE} | Complete Guide | Beriklan`}
+    description={PILLAR_INTRO.slice(0, 160)}
+    canonical={canonical}
+    breadcrumb={[
+        { name: "Home", url: "https://beriklan.my/" },
+        { name: SERVICE_NAME, url: `https://beriklan.my/${SERVICE_SLUG}/` },
+        { name: "Complete Guide", url: canonical }
+    ]}
+    faq={FAQS.map(f => ({ question: f.q, answer: f.a }))}
+    service={{
+        name: PILLAR_TITLE,
+        description: PILLAR_INTRO.slice(0, 200),
+        url: canonical,
+        priceRange: PRICE_RANGE,
+        serviceType: SERVICE_TYPE,
+        areaServed: "Malaysia",
+        provider: { name: "Beriklan.my", url: "https://beriklan.my" }
+    }}
+>
+    <Navbar client:only="svelte" />
+    <StickyCTA client:only="svelte" />
+
+    <!-- ====================== HERO ====================== -->
+    <header class="relative pt-28 md:pt-40 pb-16 md:pb-20 overflow-hidden bg-gradient-to-br from-white via-soft to-beige">
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            <nav class="text-xs text-muted mb-6 flex items-center gap-1.5">
+                <a href="/" class="hover:text-accent transition">Home</a>
+                <span class="text-muted/40">›</span>
+                <a href={`/${SERVICE_SLUG}/`} class="hover:text-accent transition">{SERVICE_NAME}</a>
+                <span class="text-muted/40">›</span>
+                <span class="text-ink font-semibold">Complete Guide</span>
+            </nav>
+
+            <div class="mb-5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent text-ink text-[11px] font-bold uppercase tracking-wider rounded-full">
+                    <BookOpen class="w-3 h-3" />
+                    Complete Guide
+                </span>
+            </div>
+
+            <h1 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.1] tracking-tight mb-6">
+                {PILLAR_TITLE}
+            </h1>
+
+            <p class="text-base md:text-lg text-muted leading-relaxed mb-8">
+                {PILLAR_INTRO}
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+                <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent/90 text-ink font-bold text-sm rounded-full shadow-pop transition">
+                    <MessageCircle class="w-4 h-4" />
+                    Free Consultation
+                </a>
+                <a href={`/${SERVICE_SLUG}/`} class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold text-sm rounded-full transition">
+                    View Packages & Pricing
+                    <ArrowRight class="w-4 h-4" />
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================== STATS ====================== -->
+    <section class="py-12 md:py-16 bg-white border-y border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                {STATS.map((stat) => (
+                    <div class="text-center reveal">
+                        <div class="text-2xl md:text-4xl font-display font-extrabold text-primary mb-1 tabular-nums">{stat.num}</div>
+                        <div class="text-xs md:text-sm text-muted leading-snug">{stat.label}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== CLUSTERS ====================== -->
+    <section class="py-16 md:py-20">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-12 reveal">
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent">Topical Clusters</span>
+                <h2 class="text-3xl md:text-4xl font-display font-extrabold text-ink mt-3 mb-4">
+                    5 Key {SERVICE_NAME} Topics
+                </h2>
+                <p class="text-base md:text-lg text-muted max-w-2xl mx-auto">
+                    The core areas we work through with every client — from strategy to measurable results.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 reveal-stagger">
+                {CLUSTERS.map((cluster) => (
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100 hover:border-accent/30 hover:shadow-pop transition-all duration-300">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-wider rounded-full mb-4">
+                            {cluster.tag}
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-ink mb-2 leading-snug">{cluster.title}</h3>
+                        <p class="text-sm text-muted leading-relaxed">{cluster.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== CITIES ====================== -->
+    <section class="py-16 md:py-20 bg-soft">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-10 reveal">
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent">Coverage Area</span>
+                <h2 class="text-3xl md:text-4xl font-display font-extrabold text-ink mt-3 mb-4">
+                    Available in {CITIES.length}+ Malaysian Cities
+                </h2>
+                <p class="text-base md:text-lg text-muted max-w-2xl mx-auto">
+                    {SERVICE_NAME} for SMEs and businesses in your city. Every city page has local context: audience, SME landscape and regional trust signals.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 reveal-stagger">
+                {CITIES.map((c) => (
+                    <a href={`/${SERVICE_SLUG}/${c.slug}/`} class="text-center px-3 py-3 bg-white border border-gray-100 rounded-xl hover:border-accent/30 hover:shadow-sm transition text-sm font-semibold text-ink hover:text-accent">
+                        {c.name}
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== FAQ ====================== -->
+    {FAQS.length > 0 && (
+    <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <div class="text-center mb-10 reveal">
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-display font-extrabold text-ink mt-3">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="space-y-4 reveal-stagger">
+                {FAQS.map((faq) => (
+                    <details class="group bg-soft rounded-2xl border border-gray-100 overflow-hidden">
+                        <summary class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer font-display font-bold text-ink hover:text-accent transition">
+                            <span class="text-base md:text-lg">{faq.q}</span>
+                            <span class="shrink-0 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-6 pb-5 text-muted leading-relaxed text-sm md:text-base">
+                            {faq.a}
+                        </div>
+                    </details>
+                ))}
+            </div>
+        </div>
+    </section>
+    )}
+
+    <!-- ====================== RELATED SERVICES ====================== -->
+    <RelatedServices
+        client:visible
+        items={RELATED_ITEMS}
+        title="Combine With Other Channels"
+        subtitle="Effective businesses usually run ads on 2-3 channels at once so they reinforce each other."
+    />
+
+    <!-- ====================== FINAL CTA ====================== -->
+    <section class="py-20 md:py-28 bg-gradient-to-br from-primary via-primary-2 to-primary text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 max-w-3xl text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur text-white text-xs font-bold uppercase tracking-wider rounded-full mb-6">
+                Team online · replies within 1 hour
+            </div>
+            <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl mb-6 leading-tight">
+                Ready to Improve Your {SERVICE_NAME} Performance?
+            </h2>
+            <p class="text-base md:text-lg text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">
+                A free 15-minute initial consultation — no commitment. We discuss your goals, then map out a measurable {SERVICE_NAME} strategy.
+            </p>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href={waLink} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-4 bg-accent hover:bg-accent/90 text-ink font-bold text-sm md:text-base rounded-full shadow-lg transition">
+                    <MessageCircle class="w-5 h-5" />
+                    Chat on WhatsApp
+                </a>
+                <a href={`/${SERVICE_SLUG}/`} class="inline-flex items-center gap-2 px-7 py-4 bg-white/10 hover:bg-white/20 backdrop-blur text-white font-bold text-sm md:text-base rounded-full border border-white/20 transition">
+                    View Packages & Pricing
+                    <ArrowRight class="w-4 h-4" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>

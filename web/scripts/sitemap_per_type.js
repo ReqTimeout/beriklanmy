@@ -69,7 +69,13 @@ const staticPages = [
   { path: "/ad-budget-calculator/", priority: 0.8, changefreq: "monthly" },
   { path: "/roas-calculator/", priority: 0.8, changefreq: "monthly" },
   { path: "/roi-calculator/", priority: 0.8, changefreq: "monthly" },
-  { path: "/research/laporan-industri-iklan-digital-indonesia-2026/", priority: 0.9, changefreq: "weekly" },
+  { path: "/research/malaysia-digital-advertising-report-2026/", priority: 0.9, changefreq: "weekly" },
+  { path: "/live-stream-viewers/", priority: 0.9, changefreq: "weekly" },
+  { path: "/tiktok-live-viewers/", priority: 0.9, changefreq: "weekly" },
+  { path: "/instagram-live-viewers/", priority: 0.9, changefreq: "weekly" },
+  { path: "/shopee-live-viewers/", priority: 0.9, changefreq: "weekly" },
+  { path: "/youtube-live-viewers/", priority: 0.9, changefreq: "weekly" },
+  { path: "/twitch-live-viewers/", priority: 0.9, changefreq: "weekly" },
 ];
 const staticEntries = staticPages.map(p => urlEntry(`${SITE}${p.path}`, TODAY, p.changefreq, p.priority));
 fs.writeFileSync(path.join(DIST, "sitemap-static.xml"), sitemapXml(staticEntries));
@@ -120,6 +126,23 @@ for (const svc of KNOWN_SERVICES) {
     const indexPath = path.join(svcDir, city, "index.html");
     if (!fs.existsSync(indexPath)) continue;
     cityEntries.push(urlEntry(`${SITE}/${svc}/${city}/`, TODAY, "weekly", 0.85));
+  }
+}
+// Live-viewer city pages: /{platform}-live-viewers/{city}/ (tier-1 cities)
+const LIVE_SERVICES = [
+  "tiktok-live-viewers",
+  "instagram-live-viewers",
+  "shopee-live-viewers",
+  "youtube-live-viewers",
+  "twitch-live-viewers",
+];
+for (const lsvc of LIVE_SERVICES) {
+  const lsvcDir = path.join(DIST, lsvc);
+  if (!fs.existsSync(lsvcDir)) continue;
+  for (const city of listDirs(lsvcDir)) {
+    const indexPath = path.join(lsvcDir, city, "index.html");
+    if (!fs.existsSync(indexPath)) continue;
+    cityEntries.push(urlEntry(`${SITE}/${lsvc}/${city}/`, TODAY, "weekly", 0.8));
   }
 }
 // live-stream-viewers is 2 levels deep: /live-stream-viewers/{platform}/{city}/

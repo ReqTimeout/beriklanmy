@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-30T01:41:14",
+  "generated_at": "2026-07-30T11:09:21",
   "keywords": {
-    "total": 0,
+    "total": 5863,
     "generated": 0,
-    "pending": 0,
+    "pending": 5863,
     "live_in_posts": 0,
     "coverage": 0.0
   },
@@ -12,8 +12,116 @@
     "generated": 0,
     "by_service": {}
   },
-  "by_service": [],
-  "by_city": [],
-  "by_source": [],
+  "by_service": [
+    {
+      "key": "Lainnya / Umum",
+      "total": 3868,
+      "generated": 0,
+      "pending": 3868,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Pembuatan Landing Page",
+      "total": 333,
+      "generated": 0,
+      "pending": 333,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Digital Marketing",
+      "total": 293,
+      "generated": 0,
+      "pending": 293,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan Google",
+      "total": 293,
+      "generated": 0,
+      "pending": 293,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan TikTok",
+      "total": 285,
+      "generated": 0,
+      "pending": 285,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan Instagram",
+      "total": 282,
+      "generated": 0,
+      "pending": 282,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan Facebook",
+      "total": 253,
+      "generated": 0,
+      "pending": 253,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Iklan YouTube",
+      "total": 189,
+      "generated": 0,
+      "pending": 189,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa View Live",
+      "total": 57,
+      "generated": 0,
+      "pending": 57,
+      "coverage": 0.0
+    },
+    {
+      "key": "Jasa Pembuatan Website",
+      "total": 10,
+      "generated": 0,
+      "pending": 10,
+      "coverage": 0.0
+    }
+  ],
+  "by_city": [
+    {
+      "key": "Bali",
+      "total": 1,
+      "generated": 0,
+      "pending": 1,
+      "coverage": 0.0
+    }
+  ],
+  "by_source": [
+    {
+      "key": "expansion_my",
+      "total": 4419,
+      "generated": 0,
+      "pending": 4419,
+      "coverage": 0.0
+    },
+    {
+      "key": "suggest_my",
+      "total": 888,
+      "generated": 0,
+      "pending": 888,
+      "coverage": 0.0
+    },
+    {
+      "key": "expansion_ms",
+      "total": 545,
+      "generated": 0,
+      "pending": 545,
+      "coverage": 0.0
+    },
+    {
+      "key": "suggest_intl",
+      "total": 11,
+      "generated": 0,
+      "pending": 11,
+      "coverage": 0.0
+    }
+  ],
   "recent_generated": []
 }

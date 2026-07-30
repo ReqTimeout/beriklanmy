@@ -1,1 +1,492 @@
-{}
+{
+  "facebook-ads-management": {
+    "title": "The Complete Guide to Facebook Ads for Malaysian Businesses",
+    "intro": "Facebook remains one of the most effective paid channels for reaching Malaysian audiences, with well over 20 million users nationwide. Learn targeting strategy, ad formats, budget optimisation and how to measure real ROI.",
+    "clusters": [
+      {
+        "tag": "Targeting",
+        "title": "Reaching the Right Audience",
+        "desc": "Interests, behaviours, lookalike and custom audiences to find prospects with precision."
+      },
+      {
+        "tag": "Creative",
+        "title": "Ad Creative That Performs",
+        "desc": "Image vs video formats, copywriting formulas and the creative patterns that drive the most engagement."
+      },
+      {
+        "tag": "Optimisation",
+        "title": "Improving ROAS Over Time",
+        "desc": "A/B testing, scaling, retargeting and how the Meta Pixel supports data-driven decisions."
+      },
+      {
+        "tag": "Budget",
+        "title": "Managing Ad Spend Efficiently",
+        "desc": "How much minimum budget you need, when to scale up and how to avoid wasted spend."
+      },
+      {
+        "tag": "Conversion",
+        "title": "From Likes to WhatsApp Chats",
+        "desc": "Turning interactions into qualified leads and measurable closings."
+      }
+    ],
+    "stats": [
+      {
+        "num": "22M+",
+        "label": "Facebook users in Malaysia"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Managing Meta campaigns"
+      },
+      {
+        "num": "Weekly",
+        "label": "Plain-language reporting"
+      },
+      {
+        "num": "100%",
+        "label": "Full ad account access"
+      }
+    ]
+  },
+  "instagram-ads-management": {
+    "title": "Instagram Ads Strategy for Malaysian Brands",
+    "intro": "Instagram is a visual-first platform with strong engagement among younger Malaysians. Learn how to use Reels, Stories, Feed and Shopping ads to build your brand and convert an audience.",
+    "clusters": [
+      {
+        "tag": "Visual",
+        "title": "Best Visual Ad Formats",
+        "desc": "Reels vs Stories vs Feed — when to use each format for different objectives."
+      },
+      {
+        "tag": "Audience",
+        "title": "Young & Premium Audiences",
+        "desc": "Reaching 18–34 year olds with premium interests, lifestyle and visual content consumption."
+      },
+      {
+        "tag": "Creative",
+        "title": "Production Value Without a Studio",
+        "desc": "Tips for producing Instagram-grade content with a smartphone, a ring light and templates."
+      },
+      {
+        "tag": "Shopping",
+        "title": "Instagram Shopping Integration",
+        "desc": "Tag products in organic posts and ads, plus in-app checkout for e-commerce."
+      },
+      {
+        "tag": "Creator",
+        "title": "Creator Collabs & Paid Ads",
+        "desc": "Using user-generated content and creator partnerships for social proof."
+      }
+    ],
+    "stats": [
+      {
+        "num": "15M+",
+        "label": "Instagram users in Malaysia"
+      },
+      {
+        "num": "Reels",
+        "label": "Highest organic reach format"
+      },
+      {
+        "num": "Weekly",
+        "label": "Plain-language reporting"
+      },
+      {
+        "num": "100%",
+        "label": "Full ad account access"
+      }
+    ]
+  },
+  "tiktok-ads-management": {
+    "title": "TikTok Ads for Businesses That Want to Go Viral",
+    "intro": "TikTok is one of the fastest-growing platforms in Malaysia, reaching tens of millions of adults. The For You feed gives strong organic exposure — learn how to build native content and Spark Ads that perform.",
+    "clusters": [
+      {
+        "tag": "FYP",
+        "title": "Understanding the For You Algorithm",
+        "desc": "The 3-second hook, the retention curve and the signals the algorithm uses to push content to the FYP."
+      },
+      {
+        "tag": "Spark",
+        "title": "Spark Ads vs In-Feed Ads",
+        "desc": "Using organic content as paid ads — the most authentic and cost-efficient format."
+      },
+      {
+        "tag": "Creator",
+        "title": "Working With TikTok Creators",
+        "desc": "Finding, briefing and measuring UGC for campaigns — including disclosure compliance."
+      },
+      {
+        "tag": "Trend",
+        "title": "Riding Trends & Sounds",
+        "desc": "How to follow trending audio and hashtags without losing your brand identity."
+      },
+      {
+        "tag": "Conversion",
+        "title": "TikTok Shop & Lead Ads",
+        "desc": "Turning viewers into customers through in-app checkout or lead generation."
+      }
+    ],
+    "stats": [
+      {
+        "num": "28M+",
+        "label": "TikTok adult reach in Malaysia"
+      },
+      {
+        "num": "Spark Ads",
+        "label": "Authentic native format"
+      },
+      {
+        "num": "Weekly",
+        "label": "Plain-language reporting"
+      },
+      {
+        "num": "100%",
+        "label": "Full ad account access"
+      }
+    ]
+  },
+  "google-ads-management": {
+    "title": "Google Ads for Capturing High-Intent Buyers",
+    "intro": "Google Ads captures audiences who are actively searching for your product or service — not just scrolling. Learn Search, Display, YouTube and Performance Max to dominate the first page.",
+    "clusters": [
+      {
+        "tag": "Search",
+        "title": "Search Ads for High Intent",
+        "desc": "Keyword research, match types and copywriting for text ads in search results."
+      },
+      {
+        "tag": "Display",
+        "title": "Display Network for Awareness",
+        "desc": "Banner ads across millions of websites — great for retargeting and brand exposure."
+      },
+      {
+        "tag": "YouTube",
+        "title": "YouTube Ads for Video Marketing",
+        "desc": "Skippable in-stream, bumper and discovery ads to reach a premium audience."
+      },
+      {
+        "tag": "PMax",
+        "title": "Performance Max Optimisation",
+        "desc": "Google's automated campaign that combines all inventory — it needs specific setup."
+      },
+      {
+        "tag": "Conversion",
+        "title": "Tracking & Attribution",
+        "desc": "Google Tag, GA4, the conversion API and how to measure accurate ROI across devices."
+      }
+    ],
+    "stats": [
+      {
+        "num": "95%+",
+        "label": "Search market share in Malaysia"
+      },
+      {
+        "num": "High Intent",
+        "label": "Reaches active searchers"
+      },
+      {
+        "num": "Weekly",
+        "label": "Plain-language reporting"
+      },
+      {
+        "num": "100%",
+        "label": "Full ad account access"
+      }
+    ]
+  },
+  "youtube-ads-management": {
+    "title": "YouTube Ads for Brand Awareness & Video Marketing",
+    "intro": "YouTube is Malaysia's largest video platform, reaching well over 20 million viewers. Learn the ad formats (skippable, bumper, Shorts), targeting and how to make video that holds attention.",
+    "clusters": [
+      {
+        "tag": "Format",
+        "title": "YouTube Ad Formats",
+        "desc": "Skippable in-stream (5s skip), bumper (6s non-skip), discovery ads and YouTube Shorts."
+      },
+      {
+        "tag": "Targeting",
+        "title": "Premium Malaysian Audiences",
+        "desc": "Reaching professionals, gamers and 25–54 year olds with strong purchasing power."
+      },
+      {
+        "tag": "Production",
+        "title": "Video Ad Production",
+        "desc": "A hook in 5 seconds, 15–30 second storytelling and a CTA that doesn't feel like a hard sell."
+      },
+      {
+        "tag": "Performance",
+        "title": "View-Through & Click-Through",
+        "desc": "Understanding the two key YouTube Ads metrics and how to optimise both."
+      },
+      {
+        "tag": "Channel",
+        "title": "YouTube Channel Strategy",
+        "desc": "Building an organic channel alongside paid ads for compounding growth."
+      }
+    ],
+    "stats": [
+      {
+        "num": "24M+",
+        "label": "YouTube users in Malaysia"
+      },
+      {
+        "num": "Video",
+        "label": "Awareness at scale"
+      },
+      {
+        "num": "Weekly",
+        "label": "Plain-language reporting"
+      },
+      {
+        "num": "100%",
+        "label": "Full ad account access"
+      }
+    ]
+  },
+  "instagram-management": {
+    "title": "Professional Instagram Management for a Consistent Brand",
+    "intro": "Organic Instagram remains one of the most effective brand-building channels. Learn content strategy, hashtags, Reels, community management and how to sustain a healthy engagement rate.",
+    "clusters": [
+      {
+        "tag": "Content",
+        "title": "Content Calendar & Planning",
+        "desc": "A 30-day content framework, pillar content and when to post for maximum reach."
+      },
+      {
+        "tag": "Reels",
+        "title": "Reels for Organic Reach",
+        "desc": "Reels formats that reach far without needing to go viral — the algorithm supports every niche."
+      },
+      {
+        "tag": "Hashtag",
+        "title": "Hashtag Strategy 2026",
+        "desc": "Moving from 30 hashtags to 3–5 relevant ones — why it's better for reach."
+      },
+      {
+        "tag": "Community",
+        "title": "DM & Comment Management",
+        "desc": "Response templates, follow-up flows and converting DMs into WhatsApp or checkout."
+      },
+      {
+        "tag": "Analytics",
+        "title": "Reading Instagram Insights",
+        "desc": "Which metrics matter: reach, saves and shares — not just likes."
+      }
+    ],
+    "stats": [
+      {
+        "num": "12-20",
+        "label": "Optimal posts per month"
+      },
+      {
+        "num": "Organic",
+        "label": "Brand building without ad spend"
+      },
+      {
+        "num": "Monthly",
+        "label": "Reports with actionable insights"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Managing social accounts"
+      }
+    ]
+  },
+  "tiktok-management": {
+    "title": "TikTok Management for Consistently Engaging Content",
+    "intro": "Organic TikTok delivers the best ROI when done consistently. Learn how to produce a steady stream of videos, ride trending sounds and grow an account naturally.",
+    "clusters": [
+      {
+        "tag": "Video",
+        "title": "Batch Production Workflow",
+        "desc": "Shoot one day for a month of content — scripts, hooks and editing templates."
+      },
+      {
+        "tag": "Hook",
+        "title": "The Decisive First 3 Seconds",
+        "desc": "Hook patterns that stop the swipe — the 'POV', 'stop scrolling' and story-opening formulas."
+      },
+      {
+        "tag": "Sound",
+        "title": "Trending Sounds & Audio",
+        "desc": "How to spot trending sounds early and ride the wave without looking forced."
+      },
+      {
+        "tag": "Community",
+        "title": "Comment & Stitch Strategy",
+        "desc": "Building community with reply videos, stitches and duets that convert followers."
+      },
+      {
+        "tag": "Monetise",
+        "title": "Affiliate & TikTok Shop",
+        "desc": "Turning a following into revenue through affiliate content and TikTok Shop."
+      }
+    ],
+    "stats": [
+      {
+        "num": "Consistent",
+        "label": "Regular video cadence"
+      },
+      {
+        "num": "Organic",
+        "label": "Growth without ad spend"
+      },
+      {
+        "num": "Monthly",
+        "label": "Reports with actionable insights"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Managing social accounts"
+      }
+    ]
+  },
+  "website-development": {
+    "title": "A Guide to Building a Professional Website for Malaysian SMEs",
+    "intro": "Your website is your digital storefront, open 24/7. Learn the difference between company profiles, e-commerce and landing pages, and which platform fits your budget and business scale.",
+    "clusters": [
+      {
+        "tag": "Company Profile",
+        "title": "Company Profile Websites",
+        "desc": "5–7 pages to present your brand, services, portfolio and contact details professionally."
+      },
+      {
+        "tag": "E-commerce",
+        "title": "Online Stores & E-commerce",
+        "desc": "WooCommerce, Shopify and custom builds — the features you need and a realistic budget."
+      },
+      {
+        "tag": "Landing Page",
+        "title": "Landing Pages for Campaigns",
+        "desc": "Single-page, conversion-focused builds for Meta or Google Ads traffic."
+      },
+      {
+        "tag": "Custom",
+        "title": "Web Apps & Custom Systems",
+        "desc": "Booking systems, admin dashboards and internal tools — when to go custom vs off-the-shelf."
+      },
+      {
+        "tag": "Maintenance",
+        "title": "Maintenance & Security",
+        "desc": "SSL, backups, CMS updates and security patches — the annual running costs."
+      }
+    ],
+    "stats": [
+      {
+        "num": "RM 1.5K+",
+        "label": "Starting website price"
+      },
+      {
+        "num": "Mobile-first",
+        "label": "Responsive on every device"
+      },
+      {
+        "num": "SEO-ready",
+        "label": "Built to be found on Google"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Building for Malaysian SMEs"
+      }
+    ]
+  },
+  "landing-page-design": {
+    "title": "Landing Pages for a High Conversion Rate",
+    "intro": "A good landing page can double or multiply the ROI of your ads. Learn the structure, copy and visual elements that produce strong conversion rates.",
+    "clusters": [
+      {
+        "tag": "Structure",
+        "title": "High-Converting Page Structure",
+        "desc": "Hook → Problem → Solution → Proof → CTA — the pattern that drives strong conversion."
+      },
+      {
+        "tag": "Copy",
+        "title": "Copywriting for Landing Pages",
+        "desc": "Headline formulas, subheadings, social proof and CTA copy that isn't generic."
+      },
+      {
+        "tag": "Speed",
+        "title": "PageSpeed & Core Web Vitals",
+        "desc": "LCP < 2.5s, CLS < 0.1, INP < 200ms — why they're critical for ad performance."
+      },
+      {
+        "tag": "Tracking",
+        "title": "Conversion Tracking Setup",
+        "desc": "Meta Pixel, Google Tag and the conversion API — the right setup for clean data."
+      },
+      {
+        "tag": "Testing",
+        "title": "A/B Testing for Landing Pages",
+        "desc": "What to test first: the headline, the CTA, the hero image or the form fields."
+      }
+    ],
+    "stats": [
+      {
+        "num": "RM 1.3K+",
+        "label": "Starting landing page price"
+      },
+      {
+        "num": "1 page",
+        "label": "Focused single conversion"
+      },
+      {
+        "num": "Ad-ready",
+        "label": "Tuned for Meta & Google Ads"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Building conversion pages"
+      }
+    ]
+  },
+  "digital-marketing-agency": {
+    "title": "360° Digital Marketing for Business Growth",
+    "intro": "Digital marketing is more than running ads — it's an integrated strategy across paid ads, SEO, content, social media and analytics. Learn how to build a system that's sustainable.",
+    "clusters": [
+      {
+        "tag": "Strategy",
+        "title": "Digital Marketing Strategy",
+        "desc": "Business audit, customer journey mapping, channel selection and KPI setting."
+      },
+      {
+        "tag": "Paid Ads",
+        "title": "Multi-Channel Paid Advertising",
+        "desc": "Meta, Google, TikTok, YouTube — when and how to combine them."
+      },
+      {
+        "tag": "SEO",
+        "title": "Search Engine Optimisation",
+        "desc": "On-page, off-page, technical SEO and content strategy for organic traffic."
+      },
+      {
+        "tag": "Content",
+        "title": "Content Marketing",
+        "desc": "Blog, video and infographics — pillar content that generates leads."
+      },
+      {
+        "tag": "Analytics",
+        "title": "Analytics & Reporting",
+        "desc": "GA4, attribution models, KPI dashboards and reading data to make decisions."
+      }
+    ],
+    "stats": [
+      {
+        "num": "Multi-channel",
+        "label": "Meta, Google, TikTok & more"
+      },
+      {
+        "num": "Integrated",
+        "label": "Channels reinforce each other"
+      },
+      {
+        "num": "Weekly",
+        "label": "Transparent reporting"
+      },
+      {
+        "num": "Since 2016",
+        "label": "Running growth campaigns"
+      }
+    ]
+  }
+}
