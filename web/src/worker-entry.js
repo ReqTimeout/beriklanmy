@@ -11347,6 +11347,60 @@ async function _getBlogTpl(env) {
 }
 
 // ─── Build middle section: Article schema + header + article + sidebar + related ───
+// ─── Featured image (local /images/blog/ webp) — worker & static konsisten ───
+const SVC_IMG = {
+  "facebook-ads-management": "jasafacebokads",
+  "instagram-ads-management": "jasainstagramads",
+  "tiktok-ads-management": "jasatiktokads",
+  "google-ads-management": "jasagoogleads",
+  "youtube-ads-management": "jasayoutubeads",
+  "instagram-management": "jasainstagramads",
+  "tiktok-management": "jasatiktokads",
+  "digital-marketing-agency": "jasadigitalmarketing1",
+  "website-development": "jasapembuatanwebsite",
+  "landing-page-design": "jasapembuatanwebsite",
+  "live-stream-viewers": "jasaviewlivetiktok",
+  "tiktok-live-viewers": "jasaviewlivetiktok",
+  "shopee-live-viewers": "jasaviewliveshopee",
+  "youtube-live-viewers": "jasaviewliveyoutube",
+  "twitch-live-viewers": "jasaviewlivetwitch",
+  "instagram-live-viewers": "jasaviewliveinstagram",
+};
+function _inferSvcFromTitle(title) {
+  const t = (title || "").toLowerCase();
+  if (t.includes("live") && (t.includes("viewer") || t.includes("view") || t.includes("stream"))) {
+    if (t.includes("shopee")) return "shopee-live-viewers";
+    if (t.includes("youtube")) return "youtube-live-viewers";
+    if (t.includes("twitch")) return "twitch-live-viewers";
+    if (t.includes("instagram")) return "instagram-live-viewers";
+    if (t.includes("tiktok")) return "tiktok-live-viewers";
+    return "live-stream-viewers";
+  }
+  const rules = [["facebook","facebook-ads-management"],["instagram","instagram-ads-management"],
+    ["tiktok","tiktok-ads-management"],["google","google-ads-management"],["youtube","youtube-ads-management"],
+    ["website","website-development"],["landing page","landing-page-design"],
+    ["digital marketing","digital-marketing-agency"],["ads","google-ads-management"]];
+  for (const [kw, svc] of rules) if (t.includes(kw)) return svc;
+  return "";
+}
+function _featuredImageFor(meta) {
+  const svcRaw = (meta?.service || "").toLowerCase();
+  const inferred = _inferSvcFromTitle(meta?.title);
+  const svc = (!svcRaw || svcRaw === "digital-marketing-agency") ? (inferred || svcRaw) : svcRaw;
+  let name = "jasadigitalmarketing1";
+  if (svc === "live-stream-viewers") {
+    const t = `${meta?.title || ""} ${meta?.slug || ""}`.toLowerCase();
+    if (t.includes("shopee")) name = "jasaviewliveshopee";
+    else if (t.includes("youtube")) name = "jasaviewliveyoutube";
+    else if (t.includes("twitch")) name = "jasaviewlivetwitch";
+    else if (t.includes("instagram")) name = "jasaviewliveinstagram";
+    else name = "jasaviewlivetiktok";
+  } else if (SVC_IMG[svc]) {
+    name = SVC_IMG[svc];
+  }
+  return `/images/blog/${name}.webp`;
+}
+
 function _buildArticleBody(slug, meta, content, relatedRows) {
   const title = escHtml(meta.title || slug);
   const cat = escHtml(meta.category || 'Blog');
@@ -11403,6 +11457,8 @@ function _buildArticleBody(slug, meta, content, relatedRows) {
   </span>
 </div>`;
 
+  const featImg = _featuredImageFor(meta);
+  const featAlt = escHtml(meta.title || slug);
   const headerSection = `<header class="relative pt-28 md:pt-40 pb-12 md:pb-16 bg-gradient-to-br from-white via-soft to-beige overflow-hidden">
   <div class="absolute inset-0 opacity-[0.4] pointer-events-none hero-grid"></div>
   <div class="abs-blob abs-blob-1"></div>
@@ -11412,6 +11468,9 @@ function _buildArticleBody(slug, meta, content, relatedRows) {
     ${catPill}
     <h1 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.1] tracking-tight mb-6 anim-fade-up" style="animation-delay: 120ms;">${title}</h1>
     ${metaBar}
+    <figure class="mt-8 rounded-2xl overflow-hidden shadow-pop anim-fade-up" style="animation-delay: 240ms;">
+      <img src="${featImg}" alt="${featAlt}" width="1600" height="894" loading="eager" fetchpriority="high" decoding="async" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='/images/blog/jasadigitalmarketing1.webp';">
+    </figure>
   </div>
 </header>`;
 
@@ -11609,6 +11668,7 @@ async function renderBlogPost(slug, env) {
     const excerpt = escHtml(meta.excerpt || '');
     const canonical = `https://beriklan.my/blog/${slug}/`;
     const ogTitle = escHtml(meta.title || slug);
+    const featImgAbs = `https://beriklan.my${_featuredImageFor(meta)}`;
 
     let relatedRows = [];
     try {
@@ -11619,7 +11679,7 @@ async function renderBlogPost(slug, env) {
     } catch (e) {}
 
     const tpl = await _getBlogTpl(env);
-    let prefix = tpl ? tpl.prefix : _fallbackPrefix(canonical, ogTitle, excerpt, title);
+    let prefix = tpl ? tpl.prefix : _fallbackPrefix(canonical, ogTitle, excerpt, title, featImgAbs);
     const suffix = tpl ? tpl.suffix : _fallbackSuffix();
 
     if (tpl) {
@@ -11631,6 +11691,8 @@ async function renderBlogPost(slug, env) {
         .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${ogTitle}"`)
         .replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${excerpt}"`)
         .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${canonical}"`)
+        .replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${featImgAbs}"`)
+        .replace(/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${featImgAbs}"`)
         .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${ogTitle}"`)
         .replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${excerpt}"`)
         .replace(/<meta name="twitter:url" content="[^"]*"/, `<meta name="twitter:url" content="${canonical}"`);
@@ -11649,11 +11711,12 @@ async function renderBlogPost(slug, env) {
 }
 
 // ─── Fallback prefix/suffix when ASSETS fetch fails ───
-function _fallbackPrefix(canonical, ogTitle, excerpt, title) {
+function _fallbackPrefix(canonical, ogTitle, excerpt, title, ogImg) {
+  const _ogImg = ogImg || "https://beriklan.my/og-image.png";
   const orgJson = JSON.stringify({"@context":"https://schema.org","@type":"ProfessionalService","name":"Beriklan.my","description":"Agency digital marketing Indonesia — Facebook Ads, Google Ads, TikTok Ads, Landing Page, dan social media management.","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","image":"https://beriklan.my/logoweb.webp","priceRange":"Rp 2.500.000 - Rp 10.000.000","telephone":"+62-22-XXXXXXX","address":{"@type":"PostalAddress","addressCountry":"ID","addressLocality":"Bandung","addressRegion":"Jawa Barat"},"areaServed":{"@type":"Country","name":"Indonesia"},"openingHours":"Mo-Sa 09:00-18:00","knowsAbout":["Facebook Ads","Google Ads","TikTok Ads","Performance Marketing","Landing Page","Conversion Optimization"]});
   const org2Json = JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"Beriklan.my","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","description":"Agency performance marketing Indonesia berbasis di Bandung — mengelola campaign sejak 2016.","foundingDate":"2016","sameAs":["https://www.instagram.com/beriklan.my","https://www.facebook.com/beriklan.my"]});
-  const gtm = 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-7RB4G5GC1X\');gtag(\'config\',\'G-PBQF8MMN40\');';
-  return `<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>${title} — Blog Beriklan.my</title><meta name="description" content="${excerpt}"><meta name="robots" content="index,follow"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${excerpt}"><meta property="og:image" content="https://beriklan.my/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="${canonical}"><meta name="twitter:title" content="${ogTitle}"><meta name="twitter:description" content="${excerpt}"><meta name="twitter:image" content="https://beriklan.my/og-image.png"><link rel="stylesheet" href="/fonts/fonts.css"><script type="application/ld+json">${orgJson}</script><script type="application/ld+json">${org2Json}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-7RB4G5GC1X"></script><script>${gtm}</script></head><body class="font-sans text-primary bg-white antialiased">`;
+  const gtm = 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-7RB4G5GC1X\');gtag(\'config\',\'G-PBQF8MMN40\');gtag("config","AW-18065868782",{allow_enhanced_conversions:true});function gtag_report_conversion(url){var cb=function(){if(typeof(url)!="undefined"){window.location=url;}};gtag("event","conversion",{send_to:"AW-18065868782/2EboCKa6odkcEO6PvaZD",value:1000.0,currency:"IDR",event_callback:cb});return false;}document.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body){if(t.tagName==="A"||t.tagName==="BUTTON")break;t=t.parentElement;}if(!t||t===document.body)return;var href=((t.href||(t.getAttribute&&t.getAttribute("href"))||"")+"").toLowerCase();if(href.indexOf("wa.me/")===-1&&href.indexOf("whatsapp")===-1)return;try{gtag("event","conversion",{send_to:"AW-18065868782/2EboCKa6odkcEO6PvaZD",value:1000.0,currency:"IDR",transport_type:"beacon"});}catch(err){}},true);';
+  return `<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="google-adsense-account" content="ca-pub-4438184351486735"><title>${title} — Blog Beriklan.my</title><meta name="description" content="${excerpt}"><meta name="robots" content="index,follow"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${excerpt}"><meta property="og:image" content="${_ogImg}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="${canonical}"><meta name="twitter:title" content="${ogTitle}"><meta name="twitter:description" content="${excerpt}"><meta name="twitter:image" content="${_ogImg}"><link rel="stylesheet" href="/fonts/fonts.css"><script type="application/ld+json">${orgJson}</script><script type="application/ld+json">${org2Json}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-7RB4G5GC1X"></script><script>${gtm}</script></head><body class="font-sans text-primary bg-white antialiased">`;
 }
 function _fallbackSuffix() {
   return `</body></html>`;
