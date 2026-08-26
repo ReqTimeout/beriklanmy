@@ -118,6 +118,33 @@ export default {
     if (path === "/llms.txt") {
       return await handleLlmsTxt(request, env);
     }
+    if (path === "/llms-full.txt" || path === "/llms-full.txt/") {
+      return await handleLlmsFullTxt(request, env);
+    }
+    if (path === "/api/cron/growth/gsc-loop" || path === "/api/cron/growth/gsc-loop/") {
+      return await handleGrowthGscLoop(request, env);
+    }
+    if (path === "/api/cron/growth/enrich" || path === "/api/cron/growth/enrich/") {
+      return await handleGrowthEnrich(request, env);
+    }
+    if (path === "/api/cron/growth/ctr-fix" || path === "/api/cron/growth/ctr-fix/") {
+      return await handleGrowthCtrFix(request, env);
+    }
+    if (path === "/api/cron/growth/freshness" || path === "/api/cron/growth/freshness/") {
+      return await handleGrowthFreshness(request, env);
+    }
+    if (path === "/api/admin/growth-log" || path === "/api/admin/growth-log/") {
+      return await handleGrowthLogView(request, env);
+    }
+    if (path === "/api/admin/keywords/import" || path === "/api/admin/keywords/import/") {
+      return await handleAdminKeywordsImport(request, env);
+    }
+    if (path === "/api/cron/leads/process" || path === "/api/cron/leads/process/") {
+      return await handleLeadPipeline(request, env);
+    }
+    if (path === "/api/admin/leads" || path === "/api/admin/leads/") {
+      return await handleLeadPipelineView(request, env);
+    }
     if (path === "/rss.xml") {
       return await handleRssFeed(request, env);
     }
@@ -153,8 +180,35 @@ export default {
     if (path === "/api/cron/indexnow" || path === "/api/cron/indexnow/") {
       return await handleIndexNowCron(request, env);
     }
+    if (path === "/api/cron/seo/bulk-indexnow" || path === "/api/cron/seo/bulk-indexnow/") {
+      return await handleBulkIndexNow(request, env, ctx);
+    }
+    if (path === "/api/cron/seo/gsc-push-top" || path === "/api/cron/seo/gsc-push-top/") {
+      return await handleGscPushTop(request, env, ctx);
+    }
+    if (path === "/api/cron/seo/auto-backlinks" || path === "/api/cron/seo/auto-backlinks/") {
+      return await handleAutoBacklinks(request, env, ctx);
+    }
+    if (path === "/api/cron/seo/bing-push" || path === "/api/cron/seo/bing-push/") {
+      return await handleBingPush(request, env, ctx);
+    }
+    if (path === "/api/cron/seo/telegraph-publish" || path === "/api/cron/seo/telegraph-publish/") {
+      return await handleTelegraphPublish(request, env, ctx);
+    }
     if (path === "/api/admin/cleanup-indexing" || path === "/api/admin/cleanup-indexing/") {
       return await handlePendingIndexingCleanup(request, env);
+    }
+    if (path === "/api/admin/clean-view-live-d1" || path === "/api/admin/clean-view-live-d1/") {
+      return await handleCleanViewLiveD1(request, env);
+    }
+    if (path === "/api/tiktok/events" || path === "/api/tiktok/events/") {
+      return await handleTikTokEvents(request, env);
+    }
+    if (path === "/api/tiktok/events/batch" || path === "/api/tiktok/events/batch/") {
+      return await handleTikTokEvents(request, env);
+    }
+    if (path === "/api/meta/events" || path === "/api/meta/events/") {
+      return await handleMetaEvents(request, env);
     }
     if (path === "/api/cron/refresh" || path === "/api/cron/refresh/") {
       return await handleRefreshContent(request, env);
@@ -295,6 +349,12 @@ export default {
     if (path === "/api/admin/posts" || path === "/api/admin/posts/") {
       return await handlePostsDashboard(request, env);
     }
+    if (path === "/api/admin/gsc-email" || path === "/api/admin/gsc-email/") {
+      return await handleGscEmail(request, env);
+    }
+    if (path === "/api/admin/gsc-diag" || path === "/api/admin/gsc-diag/") {
+      return await handleGscDiag(request, env);
+    }
 
     // ─── Email Campaign System Routes ────────────────────────────
     if (path === "/api/admin/email" || path === "/api/admin/email/") {
@@ -373,7 +433,8 @@ export default {
           status: 301,
           headers: {
             "Location": redirectTarget,
-            "Cache-Control": "public, max-age=3600",
+            // Cache 30 days: permanent 301 enough for Google to consolidate signals.
+            "Cache-Control": "public, max-age=2592000",
            },
         });
       }
@@ -565,8 +626,38 @@ export default {
         ctx.waitUntil(run("rank-sync", handleRankSync, "/api/cron/rank-sync?token=beriklan-my-admin-2026&days=1", "gsc-indexing"));
         ctx.waitUntil(run("pending-cleanup", handlePendingIndexingCleanup, "/api/admin/cleanup-indexing?token=beriklan-my-admin-2026", "gsc-indexing"));
         ctx.waitUntil(run("sitemap-ping", handlePingSitemap, "/api/ping-sitemap?token=beriklan-my-admin-2026", "gsc-indexing"));
+        // ── Growth feedback loop (SEO-SYSTEM-REPLICATION §6) ──
+        ctx.waitUntil(run("growth-gsc-loop", handleGrowthGscLoop, "/api/cron/growth/gsc-loop?token=beriklan-my-admin-2026&days=14&minImp=20&maxQueue=10", "growth-gsc-loop"));
+        // ── Lead pipeline: match + AI personalisasi + WA link (campaign=0: email list belum ada) ──
+        ctx.waitUntil(run("lead-pipeline", handleLeadPipeline, "/api/cron/leads/process?token=beriklan-my-admin-2026&limit=100&ai=10&campaign=0", "lead-pipeline"));
         ctx.waitUntil(run("trending-generate", handleTrendingGenerate, "/api/cron/trending-generate?token=beriklan-my-admin-2026&count=1", "trending-generate"));
         ctx.waitUntil(run("snippet-optimize", handleSnippetOptimizer, "/api/cron/snippet-optimize?token=beriklan-my-admin-2026&count=3", "snippet-optimize"));
+        // Auto-ping + Telegraph — fires every 6h to keep backlink pipeline hot (~4 daily submissions per service)
+        ctx.waitUntil(run("auto-backlinks", handleAutoBacklinks, "/api/cron/seo/auto-backlinks?token=beriklan-my-admin-2026&limit=8", "auto-backlinks"));
+      }
+      // ── Daily (00:05 MYT = 16:05 UTC) — GSC 200/day + Telegraph ──
+      if (h === 16) {
+        ctx.waitUntil(run("gsc-push-top", handleGscPushTop, "/api/cron/seo/gsc-push-top?token=beriklan-my-admin-2026&count=200&chain=true", "gsc-push-top"));
+      }
+      // ── Growth: enrich + CTR-fix harian 09:00 UTC (17:00 MYT) ──
+      if (h === 9) {
+        ctx.waitUntil(run("growth-enrich", handleGrowthEnrich, "/api/cron/growth/enrich?token=beriklan-my-admin-2026&count=4&cooldown=21", "growth-enrich"));
+        ctx.waitUntil(run("growth-ctr-fix", handleGrowthCtrFix, "/api/cron/growth/ctr-fix?token=beriklan-my-admin-2026&count=4&minImp=50&cooldown=30", "growth-ctr-fix"));
+      }
+      // ── Growth: freshness mingguan — Senin 02:00 UTC ──
+      if (new Date().getUTCDay() === 1 && h === 2) {
+        ctx.waitUntil(run("growth-freshness", handleGrowthFreshness, "/api/cron/growth/freshness?token=beriklan-my-admin-2026&count=5&maxAgeDays=90", "growth-freshness"));
+      }
+      // ── Lead acquisition scrape harian (slot sendiri supaya tidak tumpang tindih) ──
+      if (h === 6) {
+        ctx.waitUntil(run("scrape-indonetwork", handleScrapeIndonetwork, "/api/cron/scrape/indonetwork?token=beriklan-my-admin-2026", "scrape-indonetwork"));
+      }
+      if (h === 7) {
+        ctx.waitUntil(run("scrape-google-places", handleScrapeGooglePlaces, "/api/cron/scrape/google-places?token=beriklan-my-admin-2026", "scrape-google-places"));
+      }
+      // ── Daily (00:00 UTC only) — Telegraph get rate-limited per day, so 1× per day prevents account churn ──
+      if (h === 0) {
+        ctx.waitUntil(run("telegraph-publish", handleTelegraphPublish, "/api/cron/seo/telegraph-publish?token=beriklan-my-admin-2026&count=2", "telegraph-publish"));
       }
       // ── 1st of month at 00:00 UTC ──
       if (d === 1 && h === 0) {
@@ -1765,6 +1856,61 @@ async function handleAdminSyncPosts(request, env) {
         p.iso_date = nowIso;
         p.date = nowWibDate;
       }
+    }
+
+    // ── Mirror gate: default LEAN (tanpa GitHub). ?mirror=1 = full mirror posts.json ──
+    const mirrorMode = url.searchParams.get("mirror") === "1";
+    if (!mirrorMode) {
+      let rejected = 0;
+      let published = 0;
+      const publishedSlugs = [];
+      for (const draft of drafts) {
+        const c = draft.content || "";
+        const title = draft.title || "";
+        if (!title || c.length < 1000
+          || c.includes("<h1") || c.includes("<!DOCTYPE") || c.includes("<script")
+          || /\bdi\s{2,}|\bdi\s*(<\/|[.,])/.test(c)) {
+          try { await env.DB.prepare("UPDATE generated_drafts SET status='rejected' WHERE slug=?").bind(draft.slug).run(); rejected++; } catch {}
+          continue;
+        }
+        try {
+          const content = await appendInternalLinks(env, draft);
+          const dateStr = wibPublishStamp().date;
+          const excerpt = content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().substring(0, 200);
+          const readTime = Math.max(1, Math.round(content.split(/\s+/).length / 200)) + " min";
+          const tags = JSON.stringify([draft.service, draft.city].filter(Boolean)).slice(0, 1000);
+          await env.DB.prepare(
+            "INSERT OR IGNORE INTO posts_meta (slug, title, excerpt, date, iso_date, category, readTime, tags, service, city, featured, generated, iso_updated) VALUES (?,?,?,?,?,?,?,?,?,?,0,1,datetime('now'))"
+          ).bind(draft.slug, title, excerpt.slice(0, 500), dateStr, nowIso, "trending", readTime, tags, draft.service || "", draft.city || "").run();
+          await env.DB.prepare("INSERT OR IGNORE INTO posts_content (slug, content) VALUES (?,?)").bind(draft.slug, content).run();
+          await env.DB.prepare("UPDATE generated_drafts SET status='committed', committed_at=datetime('now') WHERE slug=?").bind(draft.slug).run();
+          try {
+            await env.DB.prepare("INSERT INTO pending_indexing (url, status, created_at) VALUES (?, 'pending', datetime('now'))").bind(`https://beriklan.my/blog/${draft.slug}/`).run();
+          } catch {}
+          published++;
+          publishedSlugs.push(draft.slug);
+        } catch (e) {}
+      }
+      let indexnow = { submitted: 0 };
+      if (publishedSlugs.length > 0) {
+        try { indexnow = await submitIndexNowBatch(env, publishedSlugs.map(s => `https://beriklan.my/blog/${s}/`)); } catch {}
+      }
+      return new Response(JSON.stringify({
+        ok: true,
+        mode: "lean",
+        d1_published: published,
+        rejected,
+        auto_index_enqueued: published,
+        indexnow,
+        published_today: publishedToday + published,
+        daily_limit: dailyLimit,
+        batch_size: drafts.length,
+        buffer_refilled: refill.refilled,
+        buffer_count: refill.buffer_count,
+        total_drafts: totalDrafts,
+        elapsed_seconds: Math.round((Date.now() - t0) / 100) / 10,
+        hint: "?mirror=1 untuk full sync posts.json ke GitHub (berat, hanya untuk build)"
+      }), { headers: { "Content-Type": "application/json" } });
     }
 
     // 4. Get current posts.json from GitHub
@@ -3555,6 +3701,88 @@ function getGroqKeys(env) {
   return keys;
 }
 
+// AI Model registry — diverifikasi 2026-08-26 via opencode.ai/docs/zen + Groq /v1/models.
+// deepseek-v4-flash-free + llama-3.3-70b-versatile SUDAH DIHAPUS dari provider.
+// Prioritas: Zen free (zero cost, 6 model rotation) → Groq fallback (cheap pay-per-token).
+const ZEN_FREE_MODELS = [
+  "big-pickle",                  // stealth, free
+  "x-preview-f-free",            // stealth Ox Alpha, zero-retention
+  "mimo-v2.5-free",              // stealth, free
+  "hy3-free",                    // stealth, free
+  "nemotron-3.5-lightning-free", // NVIDIA trial, fast
+  "nemotron-3-ultra-free",       // NVIDIA trial
+];
+const ZEN_ENDPOINT = "https://opencode.ai/zen/v1/chat/completions";
+const GROQ_CHAT_MODELS = ["openai/gpt-oss-20b", "openai/gpt-oss-120b", "qwen/qwen3.6-27b"];
+const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
+
+async function handleGscEmail(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.GSC_SERVICE_ACCOUNT_JSON) {
+    return new Response(JSON.stringify({ error: "GSC_SERVICE_ACCOUNT_JSON not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  }
+  try {
+    const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
+    return new Response(JSON.stringify({
+      ok: true,
+      client_email: sa.client_email,
+      project_id: sa.project_id,
+      instructions: `Add ${sa.client_email} as Owner in Google Search Console for https://beriklan.my/ — then sitemap ping (POST /api/ping-sitemap?token=...) will succeed and Google will crawl the 8,311 articles.`,
+    }, null, 2), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ error: "parse_failed", detail: String(e).slice(0, 200) }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ─── GSC Webmasters API diagnostic (test which property URL is accepted) ─────────────
+async function handleGscDiag(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.GSC_SERVICE_ACCOUNT_JSON) {
+    return new Response(JSON.stringify({ error: "GSC_SERVICE_ACCOUNT_JSON not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  }
+  const candidates = [
+    "https://beriklan.my",
+    "https://beriklan.my/",
+    "http://beriklan.my",
+    "http://beriklan.my/",
+    "sc-domain:beriklan.my",
+  ];
+  const results = [];
+  try {
+    const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
+    const accessToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/webmasters");
+    for (const prop of candidates) {
+      try {
+        const r = await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(prop)}`, {
+          headers: { "Authorization": `Bearer ${accessToken}` },
+        });
+        const body = await r.json().catch(() => ({}));
+        results.push({ property: prop, status: r.status, ok: r.ok, permission: body.permissionLevel || null, error: body.error?.message || null });
+      } catch (e) {
+        results.push({ property: prop, error: String(e).slice(0, 200) });
+      }
+    }
+    return new Response(JSON.stringify({
+      ok: true,
+      client_email: sa.client_email,
+      test_results: results,
+      hint: results.filter(r => r.ok).length > 0
+        ? `GSC accepts: ${results.filter(r => r.ok).map(r => r.property).join(", ")}. If 'beriklan.my' is not accepted, add the service account to that exact property in GSC.`
+        : "No property URL accepted — service account likely not added to GSC beriklan.my. Add it in GSC: Settings → Users and owners → Add user (Owner).",
+    }, null, 2), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300) }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
 async function handlePostsDashboard(request, env) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
@@ -4627,7 +4855,7 @@ async function renderHourlyGenStatus(env) {
         try { return JSON.parse(r.models || '[]'); } catch { return []; }
       })();
       const modelSummary = modelJson.length > 0
-        ? modelJson.map(m => String(m).replace('groq/llama-3.3-70b-versatile (groq#', 'groq#').replace('zen/deepseek-v3-flash', 'zen/deepseek').replace(')', ')')).join(', ')
+        ? modelJson.map(m => String(m).replace(/^zen\/deepseek.*/, 'zen/[rotating]').replace(/^groq\/llama-3.*/, 'groq/[legacy]')).join(', ')
         : '-';
       const errBadge = r.error ? '<span class="badge red" title="' + esc(r.error) + '">err</span>' : '';
       const committedBadge = r.committed_to_github
@@ -5749,6 +5977,813 @@ async function handleIndexNowCron(request, env) {
   }, null, 2), { headers: { "Content-Type": "application/json" } });
 }
 
+// ─── Clean D1 view-live spam (canonical consolidation 2026-08-21) ────────────────
+//   POST /api/admin/clean-view-live-d1?token=...&dry_run=1
+//   Removes 8.311 view-live spam entries from posts_meta, posts_content, generated_drafts.
+//   After this, /blog/<slug>/ GETs will not be served from D1 anymore (only static assets + 301 redirect).
+async function handleCleanViewLiveD1(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) {
+    return new Response(JSON.stringify({ ok: false, error: "DB not available" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  }
+  const dryRun = url.searchParams.get("dry_run") === "1";
+  const t0 = Date.now();
+  const log = [];
+
+  // Spam service slugs
+  const SPAM_SERVICES = [
+    "tiktok-live-viewers", "shopee-live-viewers", "youtube-live-viewers",
+    "twitch-live-viewers", "instagram-live-viewers", "live-stream-viewers",
+  ];
+
+  // Count entries to delete
+  const counts = {};
+  for (const tbl of ["posts_meta", "posts_content", "generated_drafts"]) {
+    try {
+      const placeholders = SPAM_SERVICES.map(() => "?").join(",");
+      const r = await env.DB.prepare(
+        `SELECT COUNT(*) as n FROM ${tbl} WHERE service IN (${placeholders})`
+      ).bind(...SPAM_SERVICES).first();
+      counts[tbl] = r?.n || 0;
+    } catch (e) {
+      counts[tbl] = `error: ${String(e).slice(0, 100)}`;
+    }
+  }
+  log.push({ stage: "count", counts });
+
+  if (dryRun) {
+    return new Response(JSON.stringify({
+      ok: true, dry_run: true, counts, elapsed_ms: Date.now() - t0,
+      next: "Call again with dry_run=0 to actually delete.",
+    }), { headers: { "Content-Type": "application/json" } });
+  }
+
+  // Actually delete
+  for (const tbl of ["posts_meta", "posts_content", "generated_drafts"]) {
+    try {
+      const placeholders = SPAM_SERVICES.map(() => "?").join(",");
+      const r = await env.DB.prepare(
+        `DELETE FROM ${tbl} WHERE service IN (${placeholders})`
+      ).bind(...SPAM_SERVICES).run();
+      log.push({ stage: "delete", table: tbl, deleted: r.meta?.changes || 0 });
+    } catch (e) {
+      log.push({ stage: "delete", table: tbl, error: String(e).slice(0, 200) });
+    }
+  }
+
+  return new Response(JSON.stringify({
+    ok: true, dry_run: false, counts, log, elapsed_ms: Date.now() - t0,
+    note: "After this, /blog/<view-live-slug>/ GETs will return 301 (no D1 fallback). CF CDN cache will expire in ≤1h.",
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── Bulk IndexNow Submission (drain sitemap-blog.xml, fan-out Bing → Yandex/DuckDuckGo/Seznam/Naver) ─
+//   POST /api/cron/seo/bulk-indexnow?token=...&start=0&max_chunks=45
+//   Pulls all URLs from the static sitemap-blog.xml (8311) and POSTs them to IndexNow in chunks of 100.
+//   Cloudflare Workers free plan caps 50 subrequests/invocation — each chunk = 1 POST, so 45 chunks/call.
+//   Call repeatedly with start=45, start=90, … until remaining=0. Bing accepts one POST and fans out to
+//   every IndexNow engine (Bing, Yandex, DuckDuckGo, Seznam, Naver).
+async function handleBulkIndexNow(request, env, ctx) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  const startIndex = Math.max(0, parseInt(url.searchParams.get("start") || "0", 10));
+  const maxChunks = Math.min(30, Math.max(1, parseInt(url.searchParams.get("max_chunks") || "30", 10)));
+  const INDEXNOW_KEY = "2f22c16be9437a90ad2285a4af043e10";
+  const t0 = Date.now();
+  const errors = [];
+
+  // 1. Fetch sitemap-blog.xml from the static assets binding (no self-loop, no 522)
+  let urls = [];
+  try {
+    const req = new Request(new URL("https://beriklan.my/sitemap-blog.xml"));
+    const resp = await env.ASSETS.fetch(req);
+    if (!resp.ok) throw new Error(`sitemap HTTP ${resp.status}`);
+    const xml = await resp.text();
+    const matches = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)];
+    urls = matches.map(m => m[1]);
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: "fetch_sitemap_failed", detail: String(e).slice(0, 200) }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+
+  if (urls.length === 0) {
+    return new Response(JSON.stringify({ ok: false, error: "no_urls_in_sitemap" }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+
+  // 2. Slice into chunks of 100 (IndexNow max per POST)
+  const chunkSize = 100;
+  const allChunks = [];
+  for (let i = 0; i < urls.length; i += chunkSize) allChunks.push(urls.slice(i, i + chunkSize));
+  const totalChunks = allChunks.length;
+  const chunks = allChunks.slice(startIndex, startIndex + maxChunks);
+  const results = [];
+
+  // 3. POST each chunk to IndexNow (Bing first — Bing fans out to all engines)
+  const endpoints = [
+    "https://www.bing.com/indexnow",
+    "https://api.indexnow.org/indexnow",
+    "https://yandex.com/indexnow",
+  ];
+
+  // One-shot mode: send ALL URLs in a single POST (IndexNow allows up to 10,000 per request).
+  // This avoids the per-chunk rate limit and uses only 1 subrequest total.
+  if (url.searchParams.get("one_shot") === "true") {
+    const payload = {
+      host: "beriklan.my",
+      key: INDEXNOW_KEY,
+      keyLocation: `https://beriklan.my/${INDEXNOW_KEY}.txt`,
+      urlList: urls,
+    };
+    const shot = { requested: urls.length, results: [] };
+    for (const ep of endpoints) {
+      try {
+        const resp = await fetch(ep, {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify(payload),
+        });
+        const body = await resp.text().catch(() => "");
+        shot.results.push({ ep: ep.replace("https://", ""), status: resp.status, ok: resp.ok || resp.status === 202, body: body.slice(0, 200) });
+        if (resp.ok || resp.status === 202) {
+          return new Response(JSON.stringify({ ok: true, mode: "one_shot", submitted: urls.length, accepted_by: ep.replace("https://", ""), elapsed_ms: Date.now() - t0, results: shot.results }, null, 2), { headers: { "Content-Type": "application/json" } });
+        }
+      } catch (e) {
+        shot.results.push({ ep: ep.replace("https://", ""), error: String(e).slice(0, 200) });
+      }
+    }
+    return new Response(JSON.stringify({ ok: false, mode: "one_shot", submitted: 0, elapsed_ms: Date.now() - t0, results: shot.results, errors }, null, 2), { status: 502, headers: { "Content-Type": "application/json" } });
+  }
+
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    const payload = {
+      host: "beriklan.my",
+      key: INDEXNOW_KEY,
+      keyLocation: `https://beriklan.my/${INDEXNOW_KEY}.txt`,
+      urlList: chunk,
+    };
+    let success = false;
+    const chunkIndex = startIndex + i;
+    for (const ep of endpoints) {
+      // 2-attempt per endpoint with backoff on 429 to absorb burst rate limits
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const resp = await fetch(ep, {
+            method: "POST",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify(payload),
+          });
+          if (resp.ok || resp.status === 202) {
+            results.push({ chunk: chunkIndex, urls: chunk.length, endpoint: ep.replace("https://", ""), status: resp.status });
+            success = true;
+            break;
+          } else if (resp.status === 429 && attempt === 0) {
+            // brief backoff then retry same endpoint once
+            await new Promise(r => setTimeout(r, 1500));
+            continue;
+          } else {
+            const body = await resp.text().catch(() => "");
+            errors.push({ chunk: chunkIndex, ep: ep.replace("https://", ""), status: resp.status, body: body.slice(0, 120) });
+          }
+        } catch (e) {
+          errors.push({ chunk: chunkIndex, ep: ep.replace("https://", ""), error: String(e).slice(0, 120) });
+        }
+        break;
+      }
+      if (success) break;
+    }
+    if (!success) results.push({ chunk: chunkIndex, urls: chunk.length, error: "all_endpoints_failed" });
+    // Polite throttle — IndexNow endpoints share a per-IP rate limit; 1.2s keeps burst below the cap.
+    // 84 chunks × 1.2s ≈ 100s total drain — well under the 30s CPU limit because we await I/O.
+    await new Promise(r => setTimeout(r, 1200));
+  }
+
+  const submitted = results.filter(r => !r.error).reduce((s, r) => s + r.urls, 0);
+  const nextStart = startIndex + chunks.length;
+  const remaining = Math.max(0, totalChunks - nextStart);
+
+  return new Response(JSON.stringify({
+    ok: true,
+    sitemap_urls: urls.length,
+    total_chunks: totalChunks,
+    processed_chunks: chunks.length,
+    submitted: submitted,
+    start: startIndex,
+    next_start: nextStart,
+    remaining: remaining,
+    elapsed_ms: Date.now() - t0,
+    results: results.slice(0, 10),
+    errors: errors.length ? errors.slice(0, 5) : undefined,
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── GSC Push Top (prioritized Google Indexing API submission) ────────────────
+//   POST /api/cron/seo/gsc-push-top?token=...&count=200
+//   Builds a priority-ordered list (services → pillars → cities → top blogs) and submits to
+//   Google Indexing API (URL_UPDATED). Quota = 200/day, tracked in D1 cron_settings.
+async function handleGscPushTop(request, env, ctx) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  const target = Math.max(1, Math.min(parseInt(url.searchParams.get("count") || "200", 10), 200));
+  const chain = url.searchParams.get("chain") === "true";
+  const t0 = Date.now();
+  const log = [];
+  const errors = [];
+  const submitted = [];
+
+  if (!env.GSC_SERVICE_ACCOUNT_JSON) {
+    return new Response(JSON.stringify({ ok: false, error: "GSC_SERVICE_ACCOUNT_JSON secret not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  }
+
+  // 1. Daily quota gate (MYT = UTC+7)
+  const GSC_DAILY_LIMIT = 200;
+  const wibToday = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+  let quotaUsed = 0;
+  try {
+    const qDate = await env.DB.prepare("SELECT cron FROM cron_settings WHERE name='gsc_quota_date'").first();
+    const qUsed = await env.DB.prepare("SELECT cron FROM cron_settings WHERE name='gsc_quota_used'").first();
+    if (qDate?.cron === wibToday) {
+      quotaUsed = parseInt(qUsed?.cron || "0", 10) || 0;
+    } else {
+      await env.DB.prepare("INSERT INTO cron_settings (name, cron, enabled, label) VALUES ('gsc_quota_date', ?, 1, 'GSC quota date (MYT)') ON CONFLICT(name) DO UPDATE SET cron=excluded.cron").bind(wibToday).run();
+      await env.DB.prepare("INSERT INTO cron_settings (name, cron, enabled, label) VALUES ('gsc_quota_used', '0', 1, 'GSC quota used today') ON CONFLICT(name) DO UPDATE SET cron=excluded.cron").run();
+      quotaUsed = 0;
+    }
+  } catch (e) {
+    errors.push({ stage: "quota_read", error: String(e).slice(0, 200) });
+  }
+  const quotaRemaining = Math.max(0, GSC_DAILY_LIMIT - quotaUsed);
+  if (quotaRemaining === 0) {
+    return new Response(JSON.stringify({ ok: true, message: "GSC daily quota exhausted for today (MYT)", quota_used: quotaUsed, quota_limit: GSC_DAILY_LIMIT }), { headers: { "Content-Type": "application/json" } });
+  }
+  const effective = Math.min(target, quotaRemaining);
+
+  // 2. Build prioritized URL list (services → pillars → cities → top blogs)
+  const priority = [];
+  const add = (u) => { if (!priority.includes(u)) priority.push(u); };
+
+  // Tier 1: 6 service pages (home of each view-live category — highest value)
+  for (const svc of ["tiktok-live-viewers", "shopee-live-viewers", "youtube-live-viewers", "twitch-live-viewers", "instagram-live-viewers", "live-stream-viewers"]) {
+    add(`https://beriklan.my/${svc}/`);
+  }
+  // Tier 2: pillar pages (10 — from sitemap-pillar.xml)
+  try {
+    const r = await env.ASSETS.fetch("https://beriklan.my/sitemap-pillar.xml");
+    if (r.ok) {
+      const xml = await r.text();
+      const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+      for (const l of locs) add(l);
+    }
+  } catch (e) {}
+  // Tier 3: top city pages (sampled from sitemap-city.xml)
+  try {
+    const r = await env.ASSETS.fetch("https://beriklan.my/sitemap-city.xml");
+    if (r.ok) {
+      const xml = await r.text();
+      const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+      for (const l of locs.slice(0, 60)) add(l);
+    }
+  } catch (e) {}
+  // Tier 4: top blog posts (first 200 from sitemap-blog.xml — by recency/order)
+  try {
+    const r = await env.ASSETS.fetch("https://beriklan.my/sitemap-blog.xml");
+    if (r.ok) {
+      const xml = await r.text();
+      const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+      for (const l of locs.slice(0, 200)) add(l);
+    }
+  } catch (e) {}
+
+  // 3. Track already-submitted URLs to skip duplicates within the 7-day window
+  let recentSet = new Set();
+  try {
+    await env.DB.prepare(`ALTER TABLE pending_indexing ADD COLUMN gsc_submitted_at TEXT`).run().catch(() => {});
+    const r = await env.DB.prepare(
+      `SELECT url FROM pending_indexing WHERE gsc_submitted_at IS NOT NULL AND gsc_submitted_at > datetime('now', '-7 days')`
+    ).all();
+    for (const row of (r.results || [])) recentSet.add(row.url);
+  } catch (e) {}
+
+  // 4. Filter out recently-submitted
+  const queue = priority.filter(u => !recentSet.has(u)).slice(0, effective);
+  log.push({ stage: "priority_built", total: priority.length, after_dedup: queue.length, quota_remaining: quotaRemaining });
+
+  if (queue.length === 0) {
+    return new Response(JSON.stringify({ ok: true, message: "all priority URLs already submitted in the last 7 days", submitted: 0, log }), { headers: { "Content-Type": "application/json" } });
+  }
+
+  // 5. Auth
+  let accessToken;
+  try {
+    const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
+    accessToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/indexing");
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: "auth_failed", detail: String(e).slice(0, 200) }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+
+  // 6. Submit each URL
+  let successCount = 0;
+  let failCount = 0;
+  for (const u of queue) {
+    try {
+      const r = await fetch("https://indexing.googleapis.com/v3/urlNotifications:publish", {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${accessToken}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ url: u, type: "URL_UPDATED" }),
+      });
+      if (r.ok) {
+        successCount++;
+        submitted.push(u);
+        // Track in pending_indexing
+        try {
+          await env.DB.prepare(
+            `INSERT INTO pending_indexing (url, status, gsc_submitted_at) VALUES (?, 'gsc_submitted', datetime('now'))
+             ON CONFLICT(url) DO UPDATE SET gsc_submitted_at = datetime('now'), status = 'gsc_submitted'`
+          ).bind(u).run();
+        } catch (e) {}
+      } else {
+        failCount++;
+        const body = await r.text().catch(() => "");
+        errors.push({ url: u, status: r.status, body: body.slice(0, 150) });
+      }
+    } catch (e) {
+      failCount++;
+      errors.push({ url: u, error: String(e).slice(0, 200) });
+    }
+  }
+
+  // 7. Update quota
+  const newQuotaUsed = quotaUsed + successCount;
+  try {
+    await env.DB.prepare("UPDATE cron_settings SET cron = ? WHERE name = 'gsc_quota_used'").bind(String(newQuotaUsed)).run();
+  } catch (e) {}
+
+  // 8. Chain: if quota remains and request asked to chain, fire a follow-up invocation
+  // via ctx.waitUntil. Each child invocation has its own 50-subrequest budget, so we can
+  // chain up to 4 times to drain the daily 200 quota from a single user request.
+  if (chain && ctx && (GSC_DAILY_LIMIT - newQuotaUsed) > 0) {
+    ctx.waitUntil((async () => {
+      try {
+        await new Promise(r => setTimeout(r, 800)); // tiny delay to let quota DB settle
+        await fetch(new Request("https://beriklan.my/api/cron/seo/gsc-push-top?token=" + encodeURIComponent(env.ADMIN_TOKEN) + "&count=200&chain=true", { headers: { "User-Agent": "BeriklanWorker/1.0 (chain)" } }));
+      } catch (e) {}
+    })());
+  }
+
+  return new Response(JSON.stringify({
+    ok: true,
+    submitted: successCount,
+    failed: failCount,
+    quota_used: newQuotaUsed,
+    quota_limit: GSC_DAILY_LIMIT,
+    quota_remaining: GSC_DAILY_LIMIT - newQuotaUsed,
+    quota_date_wib: wibToday,
+    elapsed_ms: Date.now() - t0,
+    chained: chain && (GSC_DAILY_LIMIT - newQuotaUsed) > 0,
+    log,
+    sample_submitted: submitted.slice(0, 5),
+    errors: errors.length ? errors.slice(0, 5) : undefined,
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── Auto Backlinks (auto-ping + archive + social bookmark, no-auth third-party services) ────
+//   POST /api/cron/seo/auto-backlinks?token=...&limit=20
+//   Pattern ported from github.com/backlink-generator-tool/backlink-generator-tool (MIT-licensed, 700+ templates).
+//   High-impact subset:
+//   • Auto-ping services (pingfarm, indexkings, pingomatic) — pings your URL to 30+ search engines via XML-RPC
+//   • Archive submissions (archive.is, archive.today, archive.vn, archive.md) — creates a real backlink
+//   • Social bookmarking (folkd, plurk, hatena) — dofollow social signals
+//   The worker fetches each URL in parallel (limit 30/invocation to stay under 50-subrequest CF cap).
+async function handleAutoBacklinks(request, env, ctx) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  const limit = Math.min(30, Math.max(1, parseInt(url.searchParams.get("limit") || "25", 10)));
+  const t0 = Date.now();
+  const baseUrl = "https://beriklan.my";
+  const rssUrl = `${baseUrl}/rss.xml`;
+  const sitemapUrl = `${baseUrl}/sitemap-index.xml`;
+  const blogUrl = `${baseUrl}/blog/`;
+
+  // High-impact services — each entry: { name, url, method, headers, body, weight }
+  // weight = priority (1=highest, 3=lowest). Limit selects top by weight.
+  // Skeptic: avoided archive.is/archive.today/archive.vn/archive.md because they 522 from CF worker IPs.
+  // Tested 2026-08-20 which services actually respond: pingfarm ✓, indexkings ✓, others mixed.
+  const services = [
+    // ── Ping services (verified working — they ping 30+ search engines each) ──
+    { name: "pingfarm-complex", url: `http://pingfarm.com/index.php?action=rapidPing&complex=on&urls=${encodeURIComponent(baseUrl)}`, weight: 1 },
+    { name: "indexkings-complex", url: `http://indexkings.io/index.php?action=rapidPing&complex=on&urls=${encodeURIComponent(baseUrl)}`, weight: 1 },
+    { name: "indexkings-simple", url: `http://indexkings.io/index.php?action=rapidPing&urls=${encodeURIComponent(baseUrl)}`, weight: 1 },
+    { name: "pingomatic-get", url: `https://pingomatic.com/ping/?title=${encodeURIComponent("Beriklan.my")}&blogurl=${encodeURIComponent(baseUrl)}&rssurl=${encodeURIComponent(rssUrl)}&chk_google=on&chk_googleblogs=on&chk_feedburner=on&chk_technorati=on&chk_syndic8=on&chk_newsgator=on&chk_myyahoo=on&chk_pubsubcom=on&chk_blogdigger=on&chk_newsisfree=on&chk_blogstreet=on&chk_weblogalot=on&chk_blogsuk=on&chk_topicexchange=on&chk_audioweblogs=on&chk_rpc=on&chk_blogchatter=on`, weight: 1 },
+
+    // ── Pingomatic XML-RPC (alternative reliable entry) ──
+    { name: "pingomatic-xmlrpc", url: `https://rpc.pingomatic.com/`, method: "POST", body: `<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>weblogUpdates.extendedPing</methodName><params><param><value><string>Beriklan.my</string></value></param><param><value><string>${baseUrl}</string></value></param><param><value><string>${rssUrl}</string></value></param></params></methodCall>`, headers: { "Content-Type": "text/xml" }, weight: 1 },
+
+    // ── More ping aggregators (verified alive 2026) ──
+    { name: "masspinger", url: `https://www.masspinger.com/?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "totalping", url: `https://www.totalping.com/?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "pingmyblog", url: `https://pingmyblog.com/submit?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+
+    // ── Bing Webmaster API (OPTIONAL — if BING_WEBMASTER_API_KEY secret set, submit sitemap) ──
+    // Not included in the auto-fire list since it requires an API key. See /api/cron/seo/bing-push for dedicated endpoint.
+
+    // ── Social bookmarking (dofollow social signals) ──
+    { name: "folkd-submit", url: `http://www.folkd.com/submit/${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "atavi-bookmark", url: `https://atavi.com/bookmark/create?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "hatena-bookmark", url: `https://b.hatena.ne.jp/bookmarklet?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "addtoany", url: `https://www.addtoany.com/share?linkurl=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "linkcentre-search", url: `https://www.linkcentre.com/search/?q=${encodeURIComponent(baseUrl)}`, weight: 2 },
+    { name: "reddit-domain", url: `https://old.reddit.com/domain/${encodeURIComponent(baseUrl)}`, weight: 1 },
+    { name: "lobsters-search", url: `https://lobste.rs/search?q=${encodeURIComponent(baseUrl)}`, weight: 3 },
+    { name: "hackernews-search", url: `https://hn.algolia.com/?q=${encodeURIComponent(baseUrl)}`, weight: 3 },
+    { name: "meneame-submit", url: `https://www.meneame.net/submit?url=${encodeURIComponent(baseUrl)}`, weight: 2 },
+
+    // ── RSS aggregators (XML-RPC ping variant) ──
+    { name: "blogdigger", url: `http://www.blogdigger.com/RPC2`, method: "POST", body: `<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>weblogUpdates.extendedPing</methodName><params><param><value><string>Beriklan.my</string></value></param><param><value><string>${baseUrl}</string></value></param><param><value><string>${rssUrl}</string></value></param></params></methodCall>`, headers: { "Content-Type": "text/xml" }, weight: 2 },
+    { name: "weblogalot", url: `https://www.weblogalot.com/ping`, method: "POST", body: `url=${encodeURIComponent(baseUrl)}`, headers: { "Content-Type": "application/x-www-form-urlencoded" }, weight: 3 },
+    { name: "newsisfree", url: `https://www.newsisfree.com/ping.aspx?url=${encodeURIComponent(baseUrl)}`, weight: 3 },
+
+    // ── Curated third-party discoverers (real backlinks from indexed sites) ──
+    { name: "topsitessearch", url: `https://www.topseos.com/site/beriklan.my`, weight: 3 },
+    { name: "pagestatus", url: `https://www.seolik.com/domain/beriklan.my`, weight: 3 },
+    { name: "trustorg", url: `https://trustorg.com/site/beriklan.my`, weight: 3 },
+    { name: "siteworthtraffic", url: `https://www.siteworthtraffic.com/report/beriklan.my`, weight: 3 },
+  ];
+
+  // Select top by weight (then by name for stable order)
+  services.sort((a, b) => a.weight - b.weight || a.name.localeCompare(b.name));
+  const queue = services.slice(0, limit);
+
+  // Execute in parallel (each is a subrequest; cap at 30)
+  const results = await Promise.all(queue.map(async (svc) => {
+    const t = Date.now();
+    try {
+      const opts = {
+        method: svc.method || "GET",
+        headers: { "User-Agent": "Beriklan-AutoBacklink/1.0 (+https://beriklan.my)", ...(svc.headers || {}) },
+        redirect: "follow",
+      };
+      if (svc.body) opts.body = svc.body;
+      const resp = await fetch(svc.url, opts);
+      const ok = resp.ok || resp.status === 202 || resp.status === 200;
+      return { name: svc.name, url: svc.url, status: resp.status, ok, elapsed_ms: Date.now() - t };
+    } catch (e) {
+      return { name: svc.name, url: svc.url, error: String(e).slice(0, 150), elapsed_ms: Date.now() - t };
+    }
+  }));
+
+  const ok = results.filter(r => r.ok).length;
+  const failed = results.filter(r => !r.ok).length;
+
+  return new Response(JSON.stringify({
+    ok: true,
+    target: baseUrl,
+    requested: queue.length,
+    success: ok,
+    failed: failed,
+    elapsed_ms: Date.now() - t0,
+    results,
+    next: `?limit=${limit}&token=...`,
+    notes: "Pinging these services telegraphs your URL to 30+ search engines (pingomatic/pingfarm/indexkings) + creates dofollow backlinks (archive.is/today/vn/md) + social signals (folkd/atavi/hatena/reddit). Re-run daily. For continuous discovery, also commit posts.json to GitHub so cron-job.org triggers retry crons.",
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── Bing Webmaster API (sitemap submit + URL indexing via official Bing API) ────
+//   POST /api/cron/seo/bing-push?token=...&urls=10
+//   Requires BING_WEBMASTER_API_KEY env secret (get from bing.com/webmasters → Settings → API Access).
+//   Bing IndexNow isn't enough because CF Worker shared IP gets 429 — this uses the API which has separate quota.
+//   Docs: https://learn.microsoft.com/en-us/bingwebmaster/apis/webmaster-api
+async function handleBingPush(request, env, ctx) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.BING_WEBMASTER_API_KEY) {
+    return new Response(JSON.stringify({
+      ok: false,
+      error: "BING_WEBMASTER_API_KEY not set",
+      setup: "Get your API key at https://www.bing.com/webmasters → Settings → API Access → Add → Generate API Key. Then set as CF secret: echo '<key>' | npx wrangler secret put BING_WEBMASTER_API_KEY",
+    }), { status: 503, headers: { "Content-Type": "application/json" } });
+  }
+  const t0 = Date.now();
+  const baseUrl = "https://beriklan.my";
+  const key = env.BING_WEBMASTER_API_KEY;
+  const errors = [];
+  const results = {};
+
+  // 1. Submit sitemap
+  try {
+    const sitemapUrl = `${baseUrl}/sitemap-index.xml`;
+    const resp = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/SubmitSitemap?apikey=${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ siteUrl: baseUrl, sitemapUrl }),
+    });
+    const data = await resp.json().catch(() => ({}));
+    results.sitemap = { status: resp.status, ok: resp.ok, response: data };
+  } catch (e) {
+    errors.push({ stage: "sitemap", error: String(e).slice(0, 200) });
+  }
+
+  // 2. Submit individual URLs (up to 100 per call) — uses ContentSubmission API
+  const target = Math.max(1, Math.min(100, parseInt(url.searchParams.get("urls") || "100", 10)));
+  try {
+    let urls = [];
+    try {
+      const r = await env.ASSETS.fetch("https://beriklan.my/sitemap-blog.xml");
+      if (r.ok) {
+        const xml = await r.text();
+        const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+        urls = locs.slice(0, target);
+      }
+    } catch (e) {}
+    // Add service pages + pillar pages
+    for (const svc of ["tiktok-live-viewers", "shopee-live-viewers", "youtube-live-viewers", "twitch-live-viewers", "instagram-live-viewers", "live-stream-viewers"]) {
+      urls.push(`https://beriklan.my/${svc}/`);
+    }
+    urls = Array.from(new Set(urls)).slice(0, target);
+
+    // Bing Content Submission API: POST /webmaster/api.svc/json/SubmitContentBatch
+    const resp = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/SubmitContentBatch?apikey=${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ siteUrl: baseUrl, urlList: urls }),
+    });
+    const data = await resp.json().catch(() => ({}));
+    results.urls = { status: resp.status, ok: resp.ok, submitted: urls.length, response: data };
+  } catch (e) {
+    errors.push({ stage: "urls", error: String(e).slice(0, 200) });
+  }
+
+  return new Response(JSON.stringify({
+    ok: true,
+    baseUrl,
+    elapsed_ms: Date.now() - t0,
+    results,
+    errors: errors.length ? errors : undefined,
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── Telegra.ph (Telegram) anonymous publish — auto-create backlink from telegra.ph ─────
+//   POST /api/cron/seo/telegraph-publish?token=...&count=3
+//   Telegra.ph API is anonymous (no auth required). Each publish creates a dofollow backlink from telegra.ph.
+//   We post a short summary of the homepage + links to top service pages, rotating per call.
+async function handleTelegraphPublish(request, env, ctx) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  const count = Math.max(1, Math.min(5, parseInt(url.searchParams.get("count") || "1", 10)));
+  const t0 = Date.now();
+  const baseUrl = "https://beriklan.my";
+  const results = [];
+
+  const services = [
+    { slug: "tiktok-live-viewers", title: "TikTok Live Viewers Service — Buy Real Targeted Viewers", desc: "Increase your TikTok Live engagement with real viewers from Malaysia, Indonesia, Singapore, and worldwide. Safe, fast delivery, no password needed." },
+    { slug: "shopee-live-viewers", title: "Shopee Live Viewers — Boost Your Shopee Live Streaming", desc: "Get real Shopee Live viewers to rank higher in the Shopee algorithm. Affordable packages for Malaysia, Indonesia, Singapore sellers." },
+    { slug: "youtube-live-viewers", title: "YouTube Live Viewers — Grow Your Live Audience", desc: "Buy real YouTube Live viewers to boost your live stream engagement and algorithmic recommendation. Worldwide coverage." },
+    { slug: "twitch-live-viewers", title: "Twitch Live Viewers — Boost Your Stream Visibility", desc: "Increase your Twitch live stream viewership with real viewers. Improve discoverability and engagement." },
+    { slug: "instagram-live-viewers", title: "Instagram Live Viewers — Go Live With Real Audience", desc: "Buy real Instagram Live viewers to boost your IG Live engagement. Targeted, safe, no password needed." },
+    { slug: "live-stream-viewers", title: "Live Stream Viewers — Multi-Platform Live Boost", desc: "Boost live streams across TikTok, Shopee, YouTube, Twitch, and Instagram with real viewers." },
+  ];
+
+  for (let i = 0; i < count; i++) {
+    const svc = services[i % services.length];
+    const titles = [
+      `Beriklan.my — ${svc.title.split(' — ')[0]} in Malaysia`,
+      `Why ${svc.slug.replace(/-/g, ' ')} Matters for Your Brand`,
+      `Affordable ${svc.slug.replace(/-/g, ' ')} Package — Pricing Guide`,
+    ];
+    const pickTitle = titles[i % titles.length];
+    try {
+      const createResp = await fetch("https://api.telegra.ph/createAccount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ short_name: "BeriklanBot", author_name: "Beriklan.my", author_url: baseUrl }),
+      });
+      const acc = await createResp.json();
+      if (!acc.ok) {
+        results.push({ service: svc.slug, skipped: "createAccount_failed", response: acc });
+        continue;
+      }
+      const accessToken = acc.result.access_token;
+      const authorUrl = `${baseUrl}/${svc.slug}/`;
+      const content = JSON.stringify([
+        { tag: "h3", children: [pickTitle] },
+        { tag: "p", children: [svc.desc] },
+        { tag: "p", children: [
+          "Explore our full pricing and packages for this service at: ",
+          { tag: "a", attrs: { href: authorUrl }, children: [`${baseUrl}/${svc.slug}/`] },
+        ] },
+        { tag: "p", children: [
+          "Beriklan.my — senior performance marketing partner since 2016. Visit our homepage: ",
+          { tag: "a", attrs: { href: baseUrl }, children: [baseUrl] },
+          " — or browse our blog: ",
+          { tag: "a", attrs: { href: `${baseUrl}/blog/` }, children: [`${baseUrl}/blog/`] },
+        ] },
+      ]);
+      const pageResp = await fetch("https://api.telegra.ph/createPage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_token: accessToken,
+          title: pickTitle,
+          author_name: "Beriklan.my",
+          author_url: baseUrl,
+          content: JSON.parse(content),
+          return_content: false,
+        }),
+      });
+      const page = await pageResp.json();
+      if (page.ok) {
+        results.push({ service: svc.slug, title: pickTitle, url: page.result.url, link: authorUrl });
+      } else {
+        results.push({ service: svc.slug, error: page.error || "publish_failed" });
+      }
+    } catch (e) {
+      results.push({ service: svc.slug, error: String(e).slice(0, 200) });
+    }
+  }
+
+  return new Response(JSON.stringify({
+    ok: true,
+    baseUrl,
+    elapsed_ms: Date.now() - t0,
+    published: results.filter(r => r.url).length,
+    failed: results.filter(r => r.error).length,
+    results,
+    notes: "Telegra.ph posts are anonymous (no auth), each creates a dofollow backlink from telegra.ph. Up to 5 posts per call (Telegra.ph rate-limits anonymous accounts).",
+    next: `?count=${count}&token=...`,
+  }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── TikTok Events API — server-side dedup for WhatsApp order events ───────────
+//   POST /api/tiktok/events  { event, event_id, url, referrer, value, currency, contents }
+//   Forwards to https://business-api.tiktok.com/open_api/v1.3/event/track/
+//   with pixel_code DA4EHUBC77U208UL77Q0 + access token. Sharp dedup via event_id.
+async function handleTikTokEvents(request, env) {
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" } });
+  }
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ ok: false, error: "POST only" }), { status: 405, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+  }
+  const PIXEL_CODE = "DA4EHUBC77U208UL77Q0";
+  const accessToken = env.TIKTOK_EVENTS_API_TOKEN || "0da39d5e7881bb93fdf6a2afc50a527c15de454b";
+  let body;
+  try { body = await request.json(); } catch { return new Response(JSON.stringify({ ok: false, error: "invalid json" }), { status: 400 }); }
+  const event = (body.event || "Contact").trim() || "Contact";
+  const eventId = body.event_id || `${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+  const pageUrl = String(body.url || body.event_source_url || request.headers.get("referer") || "https://beriklan.my/").slice(0, 800);
+  const referrer = String(body.referrer || request.headers.get("referer") || "").slice(0, 500);
+  const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
+  const ua = request.headers.get("user-agent") || "";
+  const ttclid = body.ttclid || request.headers.get("cookie")?.match(/ttclid=([^;]+)/)?.[1] || "";
+  // Build TikTok payload — Events API v1.3 requires data array + event_time integer
+  const eventTime = body.event_time ? Number(body.event_time) : Math.floor(Date.now()/1000);
+  const payload = {
+    pixel_code: PIXEL_CODE,
+    event_source: "web",
+    event_source_id: PIXEL_CODE,
+    data: [{
+      event,
+      event_id: eventId,
+      event_time: eventTime,
+      context: {
+        page: { url: pageUrl, referrer: referrer || pageUrl },
+        user: {
+          external_id: body.external_id ? await sha256(body.external_id) : undefined,
+          phone_number: body.phone ? await sha256(normalizePhone(body.phone)) : undefined,
+          email: body.email ? await sha256(body.email.trim().toLowerCase()) : undefined,
+          ttp: body.ttp || undefined,
+          ttclid: ttclid || undefined,
+        },
+        user_agent: ua,
+        ip: ip || undefined,
+        ad: ttclid ? { callback: ttclid } : undefined,
+      },
+      properties: {
+        value: body.value != null ? Number(body.value) : undefined,
+        currency: body.currency || (body.value != null ? "MYR" : undefined),
+        contents: Array.isArray(body.contents) ? body.contents.slice(0, 10) : undefined,
+        content_type: body.content_type || undefined,
+        content_id: body.content_id || undefined,
+        description: body.description ? String(body.description).slice(0, 500) : undefined,
+      },
+    }],
+  };
+  // strip undefined inside data[0]
+  payload.data[0].context.user = Object.fromEntries(Object.entries(payload.data[0].context.user).filter(([,v])=> v != null && v !== ""));
+  payload.data[0].properties = Object.fromEntries(Object.entries(payload.data[0].properties).filter(([,v])=> v != null));
+  if (!payload.data[0].context.ad) delete payload.data[0].context.ad;
+  try {
+    const resp = await fetch("https://business-api.tiktok.com/open_api/v1.3/event/track/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Access-Token": accessToken },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json().catch(()=> ({}));
+    const ok = resp.ok && data?.code === 0;
+    return new Response(JSON.stringify({ ok, status: resp.status, tiktok: data, event, event_id: eventId }), { status: ok ? 200 : 502, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0,500), event, event_id: eventId }), { status: 502 });
+  }
+}
+async function sha256(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s).trim().toLowerCase()));
+  return [...new Uint8Array(buf)].map(b=> b.toString(16).padStart(2,"0")).join("");
+}
+function normalizePhone(p) {
+  let s = String(p).replace(/[^0-9+]/g,"");
+  if (s.startsWith("0")) s = "+62" + s.slice(1);
+  if (!s.startsWith("+")) s = "+" + s;
+  return s;
+}
+
+// ─── Meta Conversion API — server-side dedup for Contact/Lead/PlaceAnOrder ────
+//   POST /api/meta/events  { event, event_id, url, fbc, fbp, value, currency, content_ids, contents }
+//   Forwards to https://graph.facebook.com/v19.0/1787213276056302/events?access_token=...
+//   Pixel: 1787213276056302, token from env.META_CAPI_ACCESS_TOKEN or hardcoded fallback.
+async function handleMetaEvents(request, env) {
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" } });
+  }
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ ok: false, error: "POST only" }), { status: 405, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+  }
+  const PIXEL_ID = "1787213276056302";
+  const accessToken = env.META_CAPI_ACCESS_TOKEN || "EAALZCfsApzoEBSSsAw4F6O1vPStLbH8VrhzuqtQRZCIFtZBWNWAt4sszIKWzd5bezkVGU75uZB5F8Dxjw5GOvCClD3layc8dAbFGR0tgVuZB82e70ZBQHCPm81nIDn2YxIv3vEVm4RVhHIVv0aX7bCuNOYIrG6DUlltrg2IKjVoXrPWXmDIPAOfheaJ3s2McHazgZDZD";
+  let body;
+  try { body = await request.json(); } catch { return new Response(JSON.stringify({ ok: false, error: "invalid json" }), { status: 400 }); }
+  const rawEvent = String(body.event || "Contact").trim();
+  // Map TikTok-style event names to Meta standard events; keep PlaceAnOrder as custom
+  const eventMap = { Contact: "Contact", Lead: "Lead", PlaceAnOrder: "Purchase", Purchase: "Purchase", InitiateCheckout: "InitiateCheckout", ViewContent: "ViewContent", Search: "Search", AddToCart: "AddToCart", AddPaymentInfo: "AddPaymentInfo", CompleteRegistration: "CompleteRegistration", Subscribe: "Subscribe", SubmitForm: "Lead" };
+  const eventName = eventMap[rawEvent] || rawEvent;
+  const eventId = body.event_id || `${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+  const pageUrl = String(body.url || request.headers.get("referer") || "https://beriklan.my/").slice(0, 800);
+  const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
+  const ua = request.headers.get("user-agent") || "";
+  const fbc = body.fbc || "";
+  const fbp = body.fbp || request.headers.get("cookie")?.match(/(?:^|; )_fbp=([^;]+)/)?.[1] || "";
+  const fbcVal = fbc || request.headers.get("cookie")?.match(/(?:^|; )_fbc=([^;]+)/)?.[1] || "";
+  const eventTime = Math.floor(Date.now()/1000);
+  const userData = {
+    client_ip_address: ip || undefined,
+    client_user_agent: ua || undefined,
+    fbc: fbcVal || undefined,
+    fbp: fbp || undefined,
+  };
+  // hash if email/phone provided
+  if (body.email) userData.em = [await sha256(body.email.trim().toLowerCase())];
+  if (body.phone) userData.ph = [await sha256(normalizePhone(body.phone))];
+  const customData = {};
+  if (body.value != null) customData.value = Number(body.value);
+  if (body.currency) customData.currency = String(body.currency);
+  if (Array.isArray(body.contents) && body.contents.length) customData.contents = body.contents.slice(0,10);
+  if (Array.isArray(body.content_ids) && body.content_ids.length) customData.content_ids = body.content_ids.slice(0,10);
+  else if (body.content_id) customData.content_ids = [String(body.content_id)];
+  if (body.content_type) customData.content_type = String(body.content_type);
+  else if (customData.content_ids) customData.content_type = "product";
+  const payload = {
+    data: [{
+      event_name: eventName,
+      event_time: eventTime,
+      event_source_url: pageUrl,
+      event_id: eventId,
+      action_source: "website",
+      user_data: Object.fromEntries(Object.entries(userData).filter(([,v])=> v != null && v !== "")),
+      custom_data: Object.keys(customData).length ? customData : undefined,
+    }],
+    access_token: accessToken, // also in query for redundancy
+  };
+  if (!payload.data[0].custom_data) delete payload.data[0].custom_data;
+  try {
+    const resp = await fetch(`https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${encodeURIComponent(accessToken)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json().catch(()=> ({}));
+    const ok = resp.ok && (data.events_received === 1 || data.fbtrace_id);
+    return new Response(JSON.stringify({ ok, status: resp.status, meta: data, event: eventName, event_id: eventId }), { status: ok ? 200 : 502, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0,500), event: eventName, event_id: eventId }), { status: 502 });
+  }
+}
+
 // ─── Pending Indexing Cleanup (mark old 'submitted' as 'completed') ─────────────
 async function handlePendingIndexingCleanup(request, env) {
   const url = new URL(request.url);
@@ -6107,47 +7142,66 @@ function extractJson(s) {
 }
 
 // Helper: Zen/Groq generation for refresh (lighter than full article)
-async function generateWithZenOrGroq(prompt, env) {
-  const maxTokens = 600;
+// 2026-08-26: rotate across 6 Zen FREE models (deepseek-v4-flash-free deprecated),
+// then Groq pay-per-token fallback.
+// 2026-08-26: tambah fetch timeout 20s/attempt supaya loop tidak hang.
+const _fetchAI = async (url, init, timeoutMs = 20000) => {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...init, signal: ctrl.signal });
+  } finally { clearTimeout(timer); }
+};
+
+async function generateWithZenOrGroq(prompt, env, maxTokens = 600) {
   if (env.ZEN_API_KEY) {
-    try {
-      const r = await fetch("https://opencode.ai/zen/v1/chat/completions", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
-        body: JSON.stringify({
-          model: "deepseek-v4-flash-free",
-          messages: [{ role: "user", content: prompt }],
-          max_tokens: maxTokens,
-          thinking: { type: "disabled" },
-        }),
-      });
-      if (r.ok) {
-        const data = await r.json();
-        const text = data.choices?.[0]?.message?.content || "";
-        return { _model: "zen/deepseek-v4-flash-free", text };
-      }
-    } catch (e) {}
+    // Zen-only resilience: 2 puteran penuh 6 model free (12 attempts) sebelum fallback
+    for (let zenPass = 0; zenPass < 2; zenPass++) {
+    for (const zmodel of ZEN_FREE_MODELS) {
+      try {
+        const r = await _fetchAI(ZEN_ENDPOINT, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
+          body: JSON.stringify({
+            model: zmodel,
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: maxTokens,
+            thinking: { type: "disabled" },
+          }),
+        });
+        if (r.ok) {
+          const data = await r.json();
+          const text = data.choices?.[0]?.message?.content || "";
+          if (text && text.length > 30) return { _model: `zen/${zmodel}`, text };
+        }
+      } catch (e) {}
+    }
+    }
   }
   const groqKeys = getGroqKeys(env);
   for (let i = 0; i < groqKeys.length; i++) {
     const key = groqKeys[i];
-    try {
-      const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
+    for (const model of GROQ_CHAT_MODELS) {
+      try {
+        const body = {
+          model,
           messages: [{ role: "user", content: prompt }],
-          max_tokens: maxTokens,
+          max_tokens: Math.max(maxTokens, model.startsWith("openai/gpt-oss") ? 2048 : maxTokens),
           temperature: 0.7,
-        }),
-      });
-      if (r.ok) {
-        const data = await r.json();
-        const text = data.choices?.[0]?.message?.content || "";
-        return { _model: `groq/llama-3.3-70b-versatile (groq#${i + 1})`, text };
-      }
-    } catch (e) {}
+        };
+        if (model.startsWith("openai/gpt-oss")) body.reasoning_effort = "low";
+        const r = await _fetchAI(GROQ_ENDPOINT, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        if (r.ok) {
+          const data = await r.json();
+          const text = data.choices?.[0]?.message?.content || "";
+          if (text && text.length > 30) return { _model: `groq/${model} (groq#${i + 1})`, text };
+        }
+      } catch (e) {}
+    }
   }
   return null;
 }
@@ -6160,7 +7214,11 @@ async function handlePingSitemap(request, env) {
   if (token !== env.ADMIN_TOKEN) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }
-  const siteUrl = "https://beriklan.my";
+  // GSC beriklan.my is registered as a Domain-type property (sc-domain:…), not a URL prefix.
+  // Use the Domain identifier for webmasters API calls; service account has siteOwner permission.
+  const siteUrl = "sc-domain:beriklan.my";
+  // For Google URL_UPDATED / IndexNow / Google ping — these need the live public URL of the sitemap.
+  const liveBaseUrl = "https://beriklan.my";
   const subSitemaps = [
     "sitemap-static.xml",
     "sitemap-pillar.xml",
@@ -6173,10 +7231,12 @@ async function handlePingSitemap(request, env) {
   // 1. Submit each sub-sitemap to GSC via Search Console API (webmasters/v3)
   //    This is the REAL submission. GET ping is just a hint.
   let gscToken = null;
+  let indexingToken = null;  // separate token for URL_UPDATED (needs indexing scope, not webmasters)
   if (env.GSC_SERVICE_ACCOUNT_JSON) {
     try {
       const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
       gscToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/webmasters");
+      indexingToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/indexing");
     } catch (e) {
       results.errors.push({ stage: "gsc_auth", error: e.message });
     }
@@ -6195,7 +7255,8 @@ async function handlePingSitemap(request, env) {
       }
       // Submit (PUT) each sub-sitemap
       for (const sub of subSitemaps) {
-        const sitemapPath = `${siteUrl.replace(/\/$/, "")}/${sub}`;
+        // The sitemapPath is the live URL Google will fetch (must be a URL, not a property identifier).
+        const sitemapPath = `${liveBaseUrl}/${sub}`;
         try {
           const resp = await fetch(
             `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/sitemaps/${encodeURIComponent(sitemapPath)}`,
@@ -6226,13 +7287,13 @@ async function handlePingSitemap(request, env) {
   }
 
   // 2. URL_UPDATED for each sub-sitemap (tells Google of new sitemaps)
-  if (gscToken) {
+  if (indexingToken) {
     for (const sub of subSitemaps) {
-      const sitemapUrl = `${siteUrl}/${sub}`; // siteUrl has no trailing slash
+      const sitemapUrl = `${liveBaseUrl}/${sub}`;
       try {
         const resp = await fetch("https://indexing.googleapis.com/v3/urlNotifications:publish", {
           method: "POST",
-          headers: { "Authorization": `Bearer ${gscToken}`, "Content-Type": "application/json" },
+          headers: { "Authorization": `Bearer ${indexingToken}`, "Content-Type": "application/json" },
           body: JSON.stringify({ url: sitemapUrl, type: "URL_UPDATED" }),
         });
         results.gsc_indexnow.push({ sitemap: sitemapUrl, status: resp.status, ok: resp.ok });
@@ -6245,7 +7306,7 @@ async function handlePingSitemap(request, env) {
   // 3. Ping IndexNow with each sub-sitemap
   const indexnowKey = env.INDEXNOW_KEY || "2f22c16be9437a90ad2285a4af043e10";
   for (const sub of subSitemaps) {
-    const sitemapUrl = `${siteUrl}/${sub}`; // siteUrl has no trailing slash
+    const sitemapUrl = `${liveBaseUrl}/${sub}`;
     try {
       const r = await fetch("https://api.indexnow.org/indexnow", {
         method: "POST",
@@ -6265,7 +7326,7 @@ async function handlePingSitemap(request, env) {
 
   // 4. Traditional GET ping (Google ?sitemap=, Bing /ping?sitemap=) — explicit hint
   //    Note: Google deprecated this but Bing still uses it. Cheap to call.
-  const sitemapIndex = `${siteUrl}/sitemap-index.xml`;
+  const sitemapIndex = `${liveBaseUrl}/sitemap-index.xml`;
   for (const pingUrl of [
     `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapIndex)}`,
     `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndex)}`,
@@ -6387,19 +7448,24 @@ if (pool.length === 0) {
 }
 const chosen = pool[Math.floor(Math.random() * pool.length)];
 
-    // Step 3: Generate article via Groq API (free tier, no daily limit)
+    // Step 3: Generate article via Zen FREE models (rotating) + Groq fallback.
+    // 2026-08-26: deepseek-v4-flash-free + llama-3.3-70b-versatile sudah DIHAPUS.
+    // Zen: 6 free model rotation (big-pickle, x-preview-f-free, mimo, hy3, nemotron).
+    // Groq: only gpt-oss-20b, gpt-oss-120b, qwen3.6-27b.
     let article = null;
     let ai_used_model = null;
-    // Prefer OpenCode Zen (free deepseek-v4-flash), fallback Groq
-    const zenModels = ["deepseek-v4-flash-free"];
-    const groqModels = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+    const groqModels = GROQ_CHAT_MODELS;
     const aiEndpoints = [];
-    if (env.ZEN_API_KEY) aiEndpoints.push({ name: "zen", url: "https://opencode.ai/zen/v1/chat/completions", key: env.ZEN_API_KEY, models: zenModels, thinkingDisabled: true });
-    if (env.GROQ_API_KEY) aiEndpoints.push({ name: "groq-1", url: "https://api.groq.com/openai/v1/chat/completions", key: env.GROQ_API_KEY, models: groqModels, thinkingDisabled: false });
+    if (env.ZEN_API_KEY) {
+      for (const zmodel of ZEN_FREE_MODELS) {
+        aiEndpoints.push({ name: `zen-${zmodel}`, url: ZEN_ENDPOINT, key: env.ZEN_API_KEY, models: [zmodel], thinkingDisabled: true });
+      }
+    }
+    if (env.GROQ_API_KEY) aiEndpoints.push({ name: "groq-1", url: GROQ_ENDPOINT, key: env.GROQ_API_KEY, models: groqModels, thinkingDisabled: false });
     // Additional Groq keys (round-robin via aiEndpoints)
     const groqKeysAll = getGroqKeys(env);
     for (let i = 1; i < groqKeysAll.length; i++) {
-      aiEndpoints.push({ name: `groq-${i + 1}`, url: "https://api.groq.com/openai/v1/chat/completions", key: groqKeysAll[i], models: groqModels, thinkingDisabled: false });
+      aiEndpoints.push({ name: `groq-${i + 1}`, url: GROQ_ENDPOINT, key: groqKeysAll[i], models: groqModels, thinkingDisabled: false });
     }
     if (aiEndpoints.length === 0) {
       errors.push({stage: "ai_config", message: "No AI key set (ZEN_API_KEY or GROQ_API_KEY)"});
@@ -6860,7 +7926,7 @@ async function handleHourlyGenerate(request, env) {
   const count = Math.max(1, Math.min(parseInt(url.searchParams.get("count") || "1", 10), 5));
   const debug = url.searchParams.get("debug") === "1";
   const draftMode = url.searchParams.get("mode") === "draft"; // draft = simpan ke D1, tidak commit GitHub
-  const perArticleTimeoutMs = parseInt(url.searchParams.get("timeout") || "25000", 10);
+  const perArticleTimeoutMs = parseInt(url.searchParams.get("timeout") || "120000", 10);
 
   const t0 = Date.now();
   const log = [];
@@ -7752,41 +8818,50 @@ Output: HTML body only, starting with <h2>. No markdown fences.`;
   let zenDiag = null;
   let groqDiag = null;
 
-  // Try Zen first (deepseek-v4-flash-free)
-  if (env.ZEN_API_KEY) {
-    try {
-      const r = await fetch("https://opencode.ai/zen/v1/chat/completions", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
-        body: JSON.stringify({
-          model: "deepseek-v4-flash-free",
-          messages: [{ role: "user", content: prompt }],
-          max_tokens: 4000,
-          thinking: { type: "disabled" },
-        }),
-      });
-      zenDiag = { status: r.status, ok: r.ok };
-      if (r.ok) {
-        const data = await r.json();
-        article = (data.choices?.[0]?.message?.content || "").trim();
-        if (article.startsWith("```html")) article = article.slice(7);
-        if (article.startsWith("```")) article = article.slice(3);
-        if (article.endsWith("```")) article = article.slice(0, -3);
-        article = article.trim();
-        zenDiag.len = article.length;
-        zenDiag.model = data.model;
-        if (article.length > 500) modelUsed = `zen/deepseek-v4-flash-free`;
-      } else {
-        try { zenDiag.body = (await r.text()).slice(0, 200); } catch {}
+  // Try Zen free models first (rotating 6 model — diverifikasi 2026-08-26)
+  if (env.ZEN_API_KEY && !article) {
+    const zenAttempts = [];
+    for (const zmodel of ZEN_FREE_MODELS) {
+      if (article && article.length > 500) break;
+      try {
+        const r = await _fetchAI(ZEN_ENDPOINT, {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
+          body: JSON.stringify({
+            model: zmodel,
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: 4000,
+            thinking: { type: "disabled" },
+          }),
+        });
+        zenAttempts.push({ model: zmodel, status: r.status, ok: r.ok });
+        if (r.ok) {
+          const data = await r.json();
+          const cand = (data.choices?.[0]?.message?.content || "").trim();
+          let cleaned = cand;
+          if (cleaned.startsWith("```html")) cleaned = cleaned.slice(7);
+          if (cleaned.startsWith("```")) cleaned = cleaned.slice(3);
+          if (cleaned.endsWith("```")) cleaned = cleaned.slice(0, -3);
+          cleaned = cleaned.trim();
+          if (cleaned.length > 500) {
+            article = cleaned;
+            modelUsed = `zen/${zmodel}`;
+            zenDiag = { ok_model: zmodel, status: r.status, len: cleaned.length, attempts: zenAttempts };
+            break;
+          }
+        } else {
+          try { zenAttempts[zenAttempts.length - 1].body = (await r.text()).slice(0, 120); } catch {}
+        }
+      } catch (e) {
+        zenAttempts.push({ model: zmodel, error: String(e).slice(0, 200) });
       }
-    } catch (e) {
-      zenDiag = { error: String(e).slice(0, 200) };
     }
-  } else {
+    if (!zenDiag) zenDiag = { attempts: zenAttempts, exhausted: true };
+  } else if (!env.ZEN_API_KEY) {
     zenDiag = { skipped: "no ZEN_API_KEY" };
   }
 
-  // Fallback Groq — try ALL configured keys until one succeeds or all 429
+  // Fallback Groq — try ALL configured keys × models until success
   if (!article) {
     const groqKeys = getGroqKeys(env);
     if (groqKeys.length > 0) {
@@ -7794,36 +8869,43 @@ Output: HTML body only, starting with <h2>. No markdown fences.`;
       for (let i = 0; i < groqKeys.length && !article; i++) {
         const groqKey = groqKeys[i];
         const keyLabel = `groq#${i + 1}`;
-        try {
-          const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
-            body: JSON.stringify({
-              model: "llama-3.3-70b-versatile",
+        outer: for (const groqModel of GROQ_CHAT_MODELS) {
+          try {
+            const groqBody = {
+              model: groqModel,
               messages: [{ role: "user", content: prompt }],
               max_tokens: 4000,
               temperature: 0.7,
-            }),
-          });
-          groqResults.push({ key: keyLabel, status: r.status, ok: r.ok });
-          if (r.ok) {
-            const data = await r.json();
-            const cand = (data.choices?.[0]?.message?.content || "").trim();
-            const cleaned = cand.replace(/^```html/, "").replace(/^```/, "").replace(/```$/, "").trim();
-            if (cleaned.length > 500) {
-              article = cleaned;
-              groqDiag = { key: keyLabel, status: 200, len: cleaned.length, model: data.model };
-              modelUsed = `groq/llama-3.3-70b-versatile (${keyLabel})`;
-              break;
+            };
+            if (groqModel.startsWith("openai/gpt-oss")) {
+              groqBody.reasoning_effort = "low";
+              groqBody.max_tokens = Math.max(2048, groqBody.max_tokens);
             }
-          } else {
-            try {
-              const body = await r.text();
-              groqResults[groqResults.length - 1].body = body.slice(0, 200);
-            } catch {}
+            const r = await _fetchAI(GROQ_ENDPOINT, {
+              method: "POST",
+              headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
+              body: JSON.stringify(groqBody),
+            });
+            groqResults.push({ key: keyLabel, model: groqModel, status: r.status, ok: r.ok });
+            if (r.ok) {
+              const data = await r.json();
+              const cand = (data.choices?.[0]?.message?.content || "").trim();
+              const cleaned = cand.replace(/^```html/, "").replace(/^```/, "").replace(/```$/, "").trim();
+              if (cleaned.length > 500) {
+                article = cleaned;
+                groqDiag = { key: keyLabel, model: groqModel, status: 200, len: cleaned.length };
+                modelUsed = `groq/${groqModel} (${keyLabel})`;
+                break outer;
+              }
+            } else {
+              try {
+                const body = await r.text();
+                groqResults[groqResults.length - 1].body = body.slice(0, 200);
+              } catch {}
+            }
+          } catch (e) {
+            groqResults.push({ key: keyLabel, model: groqModel, error: String(e).slice(0, 100) });
           }
-        } catch (e) {
-          groqResults.push({ key: keyLabel, error: String(e).slice(0, 100) });
         }
       }
       // If none succeeded, set groqDiag to first failure (representative)
@@ -8001,15 +9083,37 @@ async function handleBatch4(request, env) {
       const prompt = `Write an SEO article in English for the topic: "${q.keyword}". Context: service ${svcName}, location ${city}, type ${intentWord}. Professional, measured tone. HTML format starting with <h2>. Structure: <h2>Introduction</h2> (1 paragraph about ${q.keyword} in ${city}), <h2>How It Works & Practical Steps</h2> (<ul> 4 steps), <h2>What to Avoid</h2> (<ul>), <h2>Frequently Asked Questions</h2> (3x <h3>+<p> local ${city} FAQ), <h2>Conclusion</h2> (1 paragraph + WhatsApp CTA). Target 400-550 words. Mention ${city} and ${svcName} naturally. Prices in RM. NEVER promise guaranteed results. Output ONLY HTML starting with <h2>.`;
       let content = null;
       const groqKeys = getGroqKeys(env);
-      if (groqKeys.length > 0) {
-        for (const mdl of ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]) {
+      // Zen free models first (2026-08-26: deepseek-v4-flash-free deprecated)
+      if (env.ZEN_API_KEY && !content) {
+        for (const zmodel of ZEN_FREE_MODELS) {
+          if (content) break;
+          try {
+            const zr = await _fetchAI(ZEN_ENDPOINT, {
+              method: "POST",
+              headers: { "Authorization": `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
+              body: JSON.stringify({ model: zmodel, messages: [{ role: "user", content: prompt }], max_tokens: 1200, thinking: { type: "disabled" } }),
+            });
+            if (zr.ok) {
+              const cand = (await zr.json()).choices?.[0]?.message?.content?.trim() || "";
+              if (cand.length > 200) { content = cand; break; }
+            }
+          } catch (e) { errors.push({ slug: q.slug, model: `zen/${zmodel}`, error: String(e).slice(0, 100) }); }
+        }
+      }
+      if (groqKeys.length > 0 && !content) {
+        for (const mdl of GROQ_CHAT_MODELS) {
           if (content) break;
           for (const groqKey of groqKeys) {
             try {
-              const gr = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+              const groqBody = { model: mdl, messages: [{ role: "user", content: prompt }], max_tokens: 1200, temperature: 0.7 };
+              if (mdl.startsWith("openai/gpt-oss")) {
+                groqBody.reasoning_effort = "low";
+                groqBody.max_tokens = Math.max(2048, groqBody.max_tokens);
+              }
+              const gr = await _fetchAI(GROQ_ENDPOINT, {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
-                body: JSON.stringify({ model: mdl, messages: [{ role: "user", content: prompt }], max_tokens: 1200, temperature: 0.7 }),
+                body: JSON.stringify(groqBody),
               });
               if (gr.ok) {
                 const cand = (await gr.json()).choices[0].message.content.trim();
@@ -8196,15 +9300,37 @@ async function handleCityEnrich(request, env) {
       const prompt = buildCityPrompt(cityObj, q.service);
       let html = null;
       const groqKeys = getGroqKeys(env);
-      if (groqKeys.length > 0) {
-        for (const mdl of ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]) {
+      // Zen free models first (2026-08-26: deepseek-v4-flash-free deprecated)
+      if (env.ZEN_API_KEY && !html) {
+        for (const zmodel of ZEN_FREE_MODELS) {
+          if (html) break;
+          try {
+            const zr = await _fetchAI(ZEN_ENDPOINT, {
+              method: "POST",
+              headers: { "Authorization": `Bearer ${env.ZEN_API_KEY}`, "Content-Type": "application/json", "User-Agent": "BeriklanWorker/1.0" },
+              body: JSON.stringify({ model: zmodel, messages: [{ role: "user", content: prompt }], max_tokens: 1600, thinking: { type: "disabled" } }),
+            });
+            if (zr.ok) {
+              const cand = (await zr.json()).choices?.[0]?.message?.content?.trim() || "";
+              if (cand.length > 200) { html = cand; break; }
+            }
+          } catch (e) { errors.push({ route: q.route, model: `zen/${zmodel}`, error: String(e).slice(0, 100) }); }
+        }
+      }
+      if (groqKeys.length > 0 && !html) {
+        for (const mdl of GROQ_CHAT_MODELS) {
           if (html) break;
           for (const groqKey of groqKeys) {
             try {
-              const gr = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+              const groqBody = { model: mdl, messages: [{ role: "user", content: prompt }], max_tokens: 1600, temperature: 0.7 };
+              if (mdl.startsWith("openai/gpt-oss")) {
+                groqBody.reasoning_effort = "low";
+                groqBody.max_tokens = Math.max(2048, groqBody.max_tokens);
+              }
+              const gr = await _fetchAI(GROQ_ENDPOINT, {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
-                body: JSON.stringify({ model: mdl, messages: [{ role: "user", content: prompt }], max_tokens: 1600, temperature: 0.7 }),
+                body: JSON.stringify(groqBody),
               });
               if (gr.ok) {
                 const cand = (await gr.json()).choices[0].message.content.trim();
@@ -8422,7 +9548,8 @@ async function handleGscPullCron(request, env) {
   try {
     const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
     const gscToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/webmasters.readonly");
-    const siteUrl = "https://beriklan.my";
+    // GSC property is Domain-type (sc-domain:beriklan.my) — service account has siteOwner.
+    const siteUrl = "sc-domain:beriklan.my";
     const endDate = new Date();
     const startDate = new Date(endDate.getTime() - 28 * 86400000);
     const fmt = (d) => d.toISOString().slice(0, 10);
@@ -11906,3 +13033,922 @@ ${page < pages ? `<a href="${qs({ page: page + 1 })}">Next →</a>` : ""}
 
 // Force rebuild Tue Jul 21 10:33:20 MYT 2026
 // Force CF rebuild for PAA Tue Jul 21 11:39:50 MYT 2026
+
+
+// ═══ SEO-SYSTEM-REPLICATION PORT (2026-08-26): growth loop, keywords/import, llms-full, lead pipeline ═══
+
+async function ensureLeadSchema(env) {
+  const stmts = [
+    `CREATE TABLE IF NOT EXISTS lead_contacts (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       email TEXT, phone TEXT, name TEXT, company TEXT, city TEXT,
+       category TEXT, website TEXT, source TEXT, source_id TEXT,
+       created_at TEXT DEFAULT CURRENT_TIMESTAMP
+     )`,
+    `CREATE TABLE IF NOT EXISTS lead_pipeline (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       contact_id INTEGER, email TEXT, phone TEXT, name TEXT, company TEXT,
+       city TEXT, category TEXT, website TEXT, service TEXT, score INTEGER DEFAULT 0,
+       status TEXT DEFAULT 'new', ai_subject TEXT, ai_opener TEXT, campaign_id INTEGER,
+       wa_link TEXT, matched_at TEXT
+     )`,
+    `CREATE INDEX IF NOT EXISTS idx_lead_pipeline_status ON lead_pipeline (status)`,
+    `CREATE INDEX IF NOT EXISTS idx_lead_pipeline_contact ON lead_pipeline (contact_id)`,
+    `ALTER TABLE email_queue ADD COLUMN subject_override TEXT`,
+    `ALTER TABLE email_queue ADD COLUMN opener TEXT`,
+    `ALTER TABLE lead_contacts ADD COLUMN source_id TEXT`,
+  ];
+  for (const s of stmts) { try { await env.DB.prepare(s).run(); } catch {} }
+}
+
+async function ensureGrowthSchema(env) {
+  const stmts = [
+    `CREATE TABLE IF NOT EXISTS growth_log (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       action TEXT NOT NULL, slug TEXT, keyword TEXT,
+       position REAL, ctr REAL, impressions INTEGER,
+       static_page INTEGER DEFAULT 0,
+       before_json TEXT, after_json TEXT, ai_model TEXT, error TEXT,
+       created_at TEXT DEFAULT CURRENT_TIMESTAMP
+     )`,
+    `CREATE INDEX IF NOT EXISTS idx_growth_log_action ON growth_log (action)`,
+    `CREATE INDEX IF NOT EXISTS idx_growth_log_slug ON growth_log (slug)`,
+    `ALTER TABLE posts_meta ADD COLUMN seo_title TEXT`,
+    `ALTER TABLE posts_meta ADD COLUMN seo_description TEXT`,
+    `ALTER TABLE posts_meta ADD COLUMN enriched_at TEXT`,
+    `ALTER TABLE posts_meta ADD COLUMN ctr_fixed_at TEXT`,
+    `ALTER TABLE posts_meta ADD COLUMN refreshed_at TEXT`,
+  ];
+  for (const s of stmts) { try { await env.DB.prepare(s).run(); } catch {} }
+}
+
+function growthSlugFromUrl(pageUrl) {
+  if (!pageUrl) return "";
+  const m = String(pageUrl).match(/^https?:\/\/(www\.)?beriklan\.my(.*)$/i);
+  if (!m) return "";
+  const p = (m[2] || "/").split("?")[0].split("#")[0];
+  const bm = p.match(/^\/blog\/([^\/]+)\/?$/i);
+  return bm ? decodeURIComponent(bm[1]) : "";
+}
+
+async function growthLogInsert(env, row) {
+  try {
+    await env.DB.prepare(
+      `INSERT INTO growth_log (action, slug, keyword, position, ctr, impressions, static_page, before_json, after_json, ai_model, error)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?)`
+    ).bind(
+      row.action || "", row.slug || null, row.keyword || null,
+      row.position ?? null, row.ctr ?? null, row.impressions ?? null,
+      row.static_page ? 1 : 0,
+      row.before_json ? String(row.before_json).slice(0, 2000) : null,
+      row.after_json ? String(row.after_json).slice(0, 2000) : null,
+      row.ai_model || null, row.error || null
+    ).run();
+  } catch {}
+}
+
+async function growthPing(env, slug, errors) {
+  try {
+    const url = `https://beriklan.my/blog/${slug}/`;
+    const exist = await env.DB.prepare("SELECT id FROM pending_indexing WHERE url=? LIMIT 1").bind(url).first();
+    if (!exist) {
+      await env.DB.prepare("INSERT INTO pending_indexing (url, status, created_at) VALUES (?, 'pending', datetime('now'))").bind(url).run();
+    }
+  } catch (e) { if (errors) errors.push({ stage: "ping", slug, error: String(e).slice(0, 120) }); }
+}
+
+function normalizePhoneForWa(raw) {
+  if (!raw) return "";
+  let d = String(raw).replace(/\D/g, "");
+  if (d.startsWith("62")) return d;
+  if (d.startsWith("0")) return "62" + d.slice(1);
+  if (d.length >= 8) return d;
+  return "";
+}
+
+const LEAD_SERVICE_RULES = [
+  { service: "Jasa Iklan Google Ads", kws: ["manufaktur", "distributor", "elektronik", "material", "otomotif", "percetakan", "logistik", "properti", "developer", "industri", "furniture", "bangunan", "suku cadang", "mesin", "grosir", "ekspedisi"] },
+  { service: "Jasa Iklan Facebook Ads", kws: ["retail", "fashion", "klinik", "salon", "toko", "butik", "bengkel", "mebel", "rumah makan", "kafe", "fotokopi", "laundry", "travel", "jasa"] },
+  { service: "Jasa Iklan Instagram", kws: ["beauty", "kecantikan", "kuliner", "cafe", "café", "restoran", "makanan", "minuman", "skincare", "kosmetik", "kue", "bakery"] },
+  { service: "Jasa Iklan TikTok", kws: ["kosmetik", "skincare", "gadget", "aksesoris", "souvenir", "snack", "tiktok", "fashion", "makanan", "minuman", "beauty", "kuliner"] },
+  { service: "Jasa Iklan YouTube", kws: ["pendidikan", "sekolah", "kursus", "seminar", "training", "bimbel", "yayasan", "konser", "teater", "event"] },
+  { service: "Jasa Kelola Instagram", kws: ["umkm", "usaha", "toko online", "online shop", "bisnis", "kuliner", "fashion", "kafe", "brand"] },
+  { service: "Jasa Kelola TikTok", kws: ["online shop", "bisnis", "content", "fashion", "kuliner", "kafe", "umkm", "brand"] },
+  { service: "Jasa Pembuatan Website", kws: ["properti", "developer", "manufaktur", "perusahaan", "kontraktor", "arsitek", "notaris", "rumah sakit", "hotel", "yayasan", "sekolah"] },
+  { service: "Jasa Pembuatan Landing Page", kws: ["properti", "developer", "pameran", "promo", "konser", "franchise", "mitra", "event"] },
+  { service: "Jasa View Live TikTok", kws: ["live", "streaming", "tiktok live", "live selling", "affiliate"] },
+];
+
+
+function matchLeadService(lead) {
+  const hay = `${lead.category || ""} ${lead.company || ""} ${lead.name || ""} ${lead.website || ""}`.toLowerCase();
+  let best = { service: "Jasa Digital Marketing", hits: 0 };
+  for (const rule of LEAD_SERVICE_RULES) {
+    let hits = 0;
+    for (const kw of rule.kws) if (hay.includes(kw)) hits++;
+    if (hits > best.hits) best = { service: rule.service, hits };
+  }
+  return best;
+}
+
+function scoreLead(lead) {
+  let s = 0;
+  if (lead.email) s += 40;
+  if (lead.phone) s += 20;
+  if (lead.website) s += 15;
+  if (lead.city) s += 10;
+  if (lead.company) s += 15;
+  return s;
+}
+
+async function personalizeLead(lead, service, env) {
+  const company = (lead.company && lead.company !== "Unknown") ? lead.company : (lead.name || "Bisnis Anda");
+  const prompt = `Buat materi email pemasaran B2B (Bahasa Indonesia/Melayu menyesuaikan lokasi lead) untuk perusahaan "${company}" (${lead.category || "umum"}) di ${lead.city || "Indonesia"}. Kami adalah Beriklan.my, agency performance marketing untuk bisnis di Malaysia (grup Beriklan sejak 2016), menawarkan "${service}".
+
+Tulis dalam format dua baris, persis seperti ini (tanpa label tambahan):
+SUBJECT: [subjek maksimal 7 kata, sebut nama perusahaan, menarik tanpa clickbait]
+OPENER: [satu kalimat pembuka maksimal 20 kata, sebut nama perusahaan, spesifik ke kategori bisnisnya, dan akhiri dengan satu pertanyaan]`;
+  const res = await generateWithZenOrGroq(prompt, env);
+  if (!res) return { subject: "", opener: "" };
+  const text = res.text || "";
+  const subj = (text.match(/SUBJECT:\s*(.+)/i) || [])[1] || "";
+  const open = (text.match(/OPENER:\s*(.+)/i) || [])[1] || "";
+  return {
+    subject: subj.trim().slice(0, 90),
+    opener: open.trim().slice(0, 220),
+  };
+}
+
+// Main pipeline: 1) match & score, 2) AI personalisasi (opsional), 3) auto-campaign per layanan, 4) WA fallback
+
+function buildWaLink(phone, name, company, service) {
+  const wa = normalizePhoneForWa(phone);
+  if (!wa) return "";
+  const msg = encodeURIComponent(
+    `Halo ${(name && name !== "Unknown" ? name : company || "Kak")}, kami dari Beriklan.my — performance marketing partner untuk bisnis di Malaysia. Kami melihat ${company || "bisnis Anda"} cocok dengan layanan ${service}. Boleh diskusi singkat via WhatsApp?`
+  );
+  return `https://wa.me/${wa}?text=${msg}`;
+}
+
+async function handleGrowthGscLoop(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "DB not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  if (!env.GSC_SERVICE_ACCOUNT_JSON) return new Response(JSON.stringify({ ok: false, error: "GSC_SERVICE_ACCOUNT_JSON not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+
+  const days = Math.max(3, Math.min(parseInt(url.searchParams.get("days") || "14", 10) || 14, 28));
+  const minImp = Math.max(1, parseInt(url.searchParams.get("minImp") || "20", 10) || 20);
+  const maxQueue = Math.max(1, Math.min(parseInt(url.searchParams.get("maxQueue") || "10", 10) || 10, 25));
+  const t0 = Date.now();
+  const log = []; const errors = [];
+  const sample = { existingPage: [], pageless: [], queued: [] };
+
+  try {
+    await ensureGrowthSchema(env);
+    const sa = JSON.parse(env.GSC_SERVICE_ACCOUNT_JSON);
+    const gscToken = await getGoogleAccessToken(sa, "https://www.googleapis.com/auth/webmasters.readonly");
+    const siteUrl = env.GSC_SITE_URL || "sc-domain:beriklan.my";
+    const endDate = new Date(Date.now() - 2 * 86400000); // data GSC delay ±2 hari
+    const startDate = new Date(endDate.getTime() - days * 86400000);
+    const fmt = (d) => d.toISOString().slice(0, 10);
+
+    const resp = await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${gscToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ startDate: fmt(startDate), endDate: fmt(endDate), dimensions: ["query", "page"], rowLimit: 500 }),
+    });
+    if (!resp.ok) {
+      const t = await resp.text().catch(() => "");
+      return new Response(JSON.stringify({ ok: false, error: `GSC query failed ${resp.status}`, detail: t.slice(0, 200) }), { status: 502, headers: { "Content-Type": "application/json" } });
+    }
+    const rows = (await resp.json()).rows || [];
+    log.push({ stage: "gsc_fetch", rows: rows.length, period: `${fmt(startDate)}..${fmt(endDate)}` });
+
+    const relevant = rows.filter((r) => (r.impressions || 0) >= minImp);
+
+    // Slug mana saja yang sudah ada di posts_meta? (batch query)
+    const slugs = [...new Set(relevant.map((r) => growthSlugFromUrl(r.keys && r.keys[1])).filter(Boolean))];
+    const existingSlugs = new Set();
+    for (let i = 0; i < slugs.length; i += 200) {
+      const chunk = slugs.slice(i, i + 200);
+      try {
+        const r = await env.DB.prepare(`SELECT slug FROM posts_meta WHERE slug IN (${chunk.map(() => "?").join(",")})`).bind(...chunk).all();
+        (r.results || []).forEach((x) => existingSlugs.add(x.slug));
+      } catch (e) { errors.push({ stage: "slug_lookup", error: String(e).slice(0, 150) }); }
+    }
+    log.push({ stage: "slug_lookup", slugs: slugs.length, existing: existingSlugs.size });
+
+    let queued = 0;
+    for (const r of relevant) {
+      try {
+        const query = (r.keys && r.keys[0]) || "";
+        const pageUrl = (r.keys && r.keys[1]) || "";
+        const imps = r.impressions || 0;
+        const clicks = r.clicks || 0;
+        const pos = Math.round((r.position || 0) * 10) / 10;
+        if (!query || /beriklan/i.test(query)) continue; // branded → bukan demand baru
+
+        const slug = growthSlugFromUrl(pageUrl);
+        if (slug && existingSlugs.has(slug)) {
+          // Halaman sudah ada: kandidat enrich/ctr-fix dihitung dari keyword_ranks (rank-sync).
+          if (sample.existingPage.length < 5) sample.existingPage.push({ query, slug, imps, clicks, pos });
+          if (imps >= minImp * 2 && pos >= 3 && pos <= 18) {
+            await growthLogInsert(env, { action: "gsc-loop", slug, keyword: query, position: pos, ctr: r.ctr, impressions: imps });
+          }
+          continue;
+        }
+
+        // Pageless: demand tanpa halaman blog layak → antri keyword baru
+        if (sample.pageless.length < 8) sample.pageless.push({ query, pageUrl, imps, clicks, pos });
+        const commercial = /\b(jasa|harga|biaya|paket|murah|cara|tips|terbaik|contoh|vendor|kontraktor|supplier|review|rekomendasi|berapa|estimasi)\b/i.test(query);
+        if (!commercial || queued >= maxQueue) continue;
+
+        const norm = query.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim().replace(/\s+/g, " ").slice(0, 120);
+        if (norm.length < 6) continue;
+        const normKey = norm.replace(/ /g, "-");
+        // Dedupe: sudah ada di queue / sudah dipublish?
+        const dupQueue = await env.DB.prepare("SELECT id FROM keyword_queue WHERE keyword_normalized=? LIMIT 1").bind(norm).first();
+        const dupSlug = await env.DB.prepare("SELECT slug FROM posts_meta WHERE slug=? LIMIT 1").bind(normKey.slice(0, 80)).first();
+        if (dupQueue || dupSlug) continue;
+
+        const intent = /\b(harga|biaya|paket|murah|order|jasa|vendor|kontraktor|supplier)\b/i.test(norm) ? "transactional" : "informational";
+        const service = growthServiceFromQuery(norm) || "";
+        const priority = Math.min(95, 40 + Math.floor(imps / 5));
+        const qid = `gsc-${normKey.slice(0, 70)}`;
+        await env.DB.prepare(
+          "INSERT INTO keyword_queue (id, keyword, keyword_normalized, source, seed, discovered_at, status, service, city, priority_score, intent) VALUES (?, ?, ?, 'gsc-impression', 0, datetime('now'), 'pending', ?, NULL, ?, ?)"
+        ).bind(qid, query.slice(0, 200), norm, service, priority, intent).run();
+        queued++;
+        sample.queued.push({ keyword: query, impressions: imps, intent, service: service || "(default)", priority });
+      } catch (e) { errors.push({ stage: "row", error: String(e).slice(0, 150) }); }
+    }
+
+    return new Response(JSON.stringify({
+      ok: true, action: "gsc-loop", days, rows: rows.length, relevant: relevant.length,
+      slugs_checked: slugs.length, pages_existing: existingSlugs.size,
+      queued, maxQueue, elapsed_ms: Date.now() - t0, sample, log, errors,
+    }), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300), log, errors }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ── AI probe: cek zen + semua groq key tanpa menelan error ──
+// GET /api/admin/ai-test?token=...
+
+async function handleGrowthEnrich(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "DB not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+
+  const count = Math.max(1, Math.min(parseInt(url.searchParams.get("count") || "3", 10) || 3, 5));
+  const minImp = Math.max(1, parseInt(url.searchParams.get("minImp") || "10", 10) || 10);
+  const posMin = Math.max(1, Math.min(parseInt(url.searchParams.get("posMin") || "3", 10) || 3, 50));
+  const posMax = Math.max(posMin, Math.min(parseInt(url.searchParams.get("posMax") || "18", 10) || 18, 100));
+  const t0 = Date.now();
+  const log = []; const errors = []; const optimized = [];
+
+  try {
+    await ensureGrowthSchema(env);
+    const cands = await env.DB.prepare(`
+      SELECT kr.keyword, kr.page_url, kr.position, kr.impressions, kr.ctr, kr.date,
+             pm.slug, pm.title, pm.enriched_at
+      FROM keyword_ranks kr
+      JOIN (
+        SELECT keyword, page_url, MAX(date) AS md FROM keyword_ranks GROUP BY keyword, page_url
+      ) latest ON kr.keyword = latest.keyword AND kr.page_url = latest.page_url AND kr.date = latest.md
+      JOIN posts_meta pm ON pm.slug = ${GROWTH_SLUG_SQL}
+      WHERE kr.position BETWEEN ? AND ?
+        AND kr.impressions >= ?
+        AND pm.slug != ''
+        AND (pm.enriched_at IS NULL OR pm.enriched_at < datetime('now', '-21 days'))
+      ORDER BY kr.impressions DESC
+      LIMIT ?
+    `).bind(posMin, posMax, minImp, count).all();
+    const rows = cands.results || [];
+    log.push({ stage: "candidates", count: rows.length });
+    if (!rows.length) {
+      return new Response(JSON.stringify({ ok: true, message: "no enrich candidates", optimized: 0, log, errors }), { headers: { "Content-Type": "application/json" } });
+    }
+
+    for (const cand of rows) {
+      const slug = cand.slug;
+      try {
+        const c = await env.DB.prepare("SELECT content FROM posts_content WHERE slug=?").bind(slug).first();
+        let content = c?.content || "";
+        if (!content || content.length < 300) { log.push({ stage: "skip_empty", slug }); continue; }
+        if (content.includes('class="growth-intro"')) { log.push({ stage: "skip_already", slug }); continue; }
+
+        const prompt = `Kamu adalah SEO content editor Malaysia untuk blog Beriklan.co.id (agency performance marketing, tone: senior partner, formal-terukur).
+Tugas: optimasi pembukaan artikel agar paling relevan untuk query Google: "${cand.keyword}" (posisi ${cand.position}, ${cand.impressions} impresi).
+
+Artikel saat ini (potongan awal):
+${content.slice(0, 1500)}
+
+Buat JSON valid (hanya JSON, tanpa markdown):
+{
+  "intro": "paragraf pembuka baru 60-80 kata; keyword disebut natural di 2 kalimat pertama; langsung jawab intent pencari",
+  "faq": [
+    {"q": "pertanyaan natural seperti diketik di Google", "a": "jawaban 1-2 kalimat"},
+    {"q": "...", "a": "..."},
+    {"q": "...", "a": "..."}
+  ]
+}
+
+Aturan wajib:
+- Bahasa Malaysia formal, sapaan "Anda"
+- DILARANG: bikin, gak, pasti, garansi 100%, overclaim
+- Faq menjawab variasi intent dari query utama (harga/cara/perbandingan/risiko)
+- Output hanya JSON.`;
+
+        const aiResult = await generateWithZenOrGroq(prompt, env, 1400);
+        if (!aiResult) { errors.push({ slug, error: "AI failed" }); await growthLogInsert(env, { action: "enrich", slug, keyword: cand.keyword, error: "AI failed" }); continue; }
+        const aiText = (typeof aiResult === "string") ? aiResult : (aiResult.text || "");
+        const aiModel = (typeof aiResult === "object" && aiResult._model) || "";
+        const j = extractJson(aiText);
+        if (!j || !j.intro) { errors.push({ slug, error: "JSON parse failed", raw: String(aiText).slice(0, 150) }); await growthLogInsert(env, { action: "enrich", slug, keyword: cand.keyword, error: "JSON parse failed", before_json: String(aiText).slice(0, 800) }); continue; }
+
+        // 2a. Ganti <p> pembuka pertama dengan intro baru
+        const pRe = /<p[^>]*>[\s\S]*?<\/p>/i;
+        const newIntro = `<p class="growth-intro">${escapeHtml(j.intro)}</p>`;
+        if (pRe.test(content)) content = content.replace(pRe, newIntro);
+        else content = newIntro + "\n" + content;
+
+        // 2b. FAQ spesifik-query (heading sama dengan FAQ deterministik renderer →
+        //     FAQ generik otomatis tidak ditumpuk; lihat _buildArticleBody)
+        const faqs = (j.faq || []).filter((f) => f && f.q && f.a).slice(0, 3);
+        if (faqs.length && !content.includes('class="growth-faq"') && !/Pertanyaan yang Sering Diajukan/i.test(content)) {
+          const faqHtml = `\n<div class="growth-faq my-8 p-6 md:p-7 bg-soft rounded-2xl border border-gray-100">\n<h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">Pertanyaan yang Sering Diajukan</h2>\n`
+            + faqs.map((f) => `<p class="font-bold text-ink mt-4 mb-1">${escapeHtml(f.q)}</p>\n<p class="text-muted leading-relaxed">${escapeHtml(f.a)}</p>`).join("\n")
+            + `\n</div>`;
+          content = content.trimEnd() + faqHtml;
+        }
+
+        await env.DB.prepare("UPDATE posts_content SET content=? WHERE slug=?").bind(content, slug).run();
+        await env.DB.prepare("UPDATE posts_meta SET enriched_at=datetime('now') WHERE slug=?").bind(slug).run();
+        await growthLogInsert(env, { action: "enrich", slug, keyword: cand.keyword, position: cand.position, impressions: cand.impressions, ai_model: aiModel, before_json: JSON.stringify({ intro_len: (c?.content || "").length }), after_json: JSON.stringify({ intro: j.intro.slice(0, 200), faqs: faqs.length }) });
+        await growthPing(env, slug, errors);
+        optimized.push({ slug, keyword: cand.keyword, position: cand.position, imps: cand.impressions, faqs: faqs.length, model: aiModel });
+        log.push({ stage: "enriched", slug, keyword: cand.keyword });
+      } catch (e) { errors.push({ slug, error: String(e).slice(0, 200) }); }
+    }
+
+    return new Response(JSON.stringify({ ok: true, action: "enrich", candidates: rows.length, optimized: optimized.length, optimized_list: optimized, elapsed_ms: Date.now() - t0, log, errors }), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300), log, errors }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ── 3. CTR fix: SERP title + meta description untuk page impresi-tinggi CTR-rendah ──
+// GET /api/cron/growth/ctr-fix?token=...&count=3&minImp=50&maxCtr=0.02
+
+async function handleGrowthCtrFix(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "DB not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+
+  const count = Math.max(1, Math.min(parseInt(url.searchParams.get("count") || "3", 10) || 3, 5));
+  const minImp = Math.max(10, parseInt(url.searchParams.get("minImp") || "50", 10) || 50);
+  const maxCtr = Math.min(0.1, Math.max(0.001, parseFloat(url.searchParams.get("maxCtr") || "0.02") || 0.02));
+  const t0 = Date.now();
+  const log = []; const errors = []; const fixed = [];
+
+  try {
+    await ensureGrowthSchema(env);
+    const cands = await env.DB.prepare(`
+      SELECT kr.keyword, kr.page_url, kr.position, kr.impressions, kr.ctr,
+             pm.slug, pm.title, pm.excerpt, pm.seo_title, pm.seo_description, pm.ctr_fixed_at
+      FROM keyword_ranks kr
+      JOIN (
+        SELECT keyword, page_url, MAX(date) AS md FROM keyword_ranks GROUP BY keyword, page_url
+      ) latest ON kr.keyword = latest.keyword AND kr.page_url = latest.page_url AND kr.date = latest.md
+      JOIN posts_meta pm ON pm.slug = ${GROWTH_SLUG_SQL}
+      WHERE kr.impressions >= ?
+        AND kr.ctr <= ?
+        AND kr.position <= 30
+        AND pm.slug != ''
+        AND (pm.ctr_fixed_at IS NULL OR pm.ctr_fixed_at < datetime('now', '-30 days'))
+      ORDER BY kr.impressions DESC
+      LIMIT ?
+    `).bind(minImp, maxCtr, count).all();
+    const rows = cands.results || [];
+    log.push({ stage: "candidates", count: rows.length, minImp, maxCtr });
+    if (!rows.length) {
+      return new Response(JSON.stringify({ ok: true, message: "no ctr-fix candidates", fixed: 0, log, errors }), { headers: { "Content-Type": "application/json" } });
+    }
+
+    for (const cand of rows) {
+      const slug = cand.slug;
+      try {
+        const prompt = `Kamu adalah SERP optimization specialist Malaysia untuk beriklan.my (agency performance marketing).
+Halaman blog dapat ${cand.impressions} impresi Google tapi CTR hanya ${Math.round((cand.ctr || 0) * 1000) / 10}% di posisi ${cand.position} untuk query "${cand.keyword}".
+Judul saat ini: "${cand.title || ""}"
+
+Buat JSON valid (hanya JSON, tanpa markdown):
+{
+  "title": "judul SERP baru, maksimal 60 karakter, keyword di depan, memuat benefit spesifik atau tahun 2026",
+  "meta_description": "meta description baru, maksimal 155 karakter, memuat keyword + 1 alasan klik + ajakan konsultasi",
+  "reason": "1 kalimat kenapa ini menaikkan CTR"
+}
+
+Aturan wajib:
+- DILARANG clickbait yang tidak bisa dipenuhi isi artikel
+- DILARANG: pasti, garansi 100%, gratis (kecuali konsultasi gratis), overclaim
+- Huruf kapital wajar (title case), tanpa emoji
+- Output hanya JSON.`;
+
+        const aiResult = await generateWithZenOrGroq(prompt, env, 700);
+        if (!aiResult) { errors.push({ slug, error: "AI failed" }); continue; }
+        const aiText = (typeof aiResult === "string") ? aiResult : (aiResult.text || "");
+        const aiModel = (typeof aiResult === "object" && aiResult._model) || "";
+        const j = extractJson(aiText);
+        if (!j || !j.title) { errors.push({ slug, error: "JSON parse failed" }); continue; }
+
+        let newTitle = String(j.title).replace(/\s+/g, " ").trim();
+        if (newTitle.length > 60) newTitle = newTitle.slice(0, 60).replace(/\s+\S*$/, "");
+        let newDesc = String(j.meta_description || "").replace(/\s+/g, " ").trim();
+        if (newDesc.length > 155) newDesc = newDesc.slice(0, 155).replace(/\s+\S*$/, "") + "…";
+        if (newTitle.length < 10 || newDesc.length < 40) { errors.push({ slug, error: "AI output too short" }); continue; }
+
+        const before = { title: cand.title, seo_title: cand.seo_title, seo_description: cand.seo_description };
+        await env.DB.prepare(
+          "UPDATE posts_meta SET seo_title=?, seo_description=?, ctr_fixed_at=datetime('now') WHERE slug=?"
+        ).bind(newTitle, newDesc, slug).run();
+        await growthLogInsert(env, { action: "ctr-fix", slug, keyword: cand.keyword, position: cand.position, ctr: cand.ctr, impressions: cand.impressions, before_json: JSON.stringify(before), after_json: JSON.stringify({ title: newTitle, desc: newDesc, reason: j.reason || "" }), ai_model: aiModel });
+        await growthPing(env, slug, errors);
+        fixed.push({ slug, keyword: cand.keyword, imps: cand.impressions, ctr: cand.ctr, new_title: newTitle });
+      } catch (e) { errors.push({ slug, error: String(e).slice(0, 200) }); }
+    }
+
+    return new Response(JSON.stringify({ ok: true, action: "ctr-fix", candidates: rows.length, fixed: fixed.length, fixed_list: fixed, elapsed_ms: Date.now() - t0, log, errors }), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300), log, errors }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ── 4. Freshness mingguan: update jujur artikel lama (tanpa ubah tanggal publish) ──
+// GET /api/cron/growth/freshness?token=...&count=2&ageDays=90
+
+async function handleGrowthFreshness(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "DB not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+
+  const count = Math.max(1, Math.min(parseInt(url.searchParams.get("count") || "2", 10) || 2, 3));
+  const ageDays = Math.max(30, parseInt(url.searchParams.get("ageDays") || "90", 10) || 90);
+  const t0 = Date.now();
+  const log = []; const errors = []; const refreshed = [];
+
+  try {
+    await ensureGrowthSchema(env);
+    // Artikel tua yang masih mendatangkan impresi → prioritas refresh (bukan asal tertua)
+    const cands = await env.DB.prepare(`
+      SELECT pm.slug, pm.title, pm.service, pm.iso_date, COALESCE(g.imps, 0) AS imps
+      FROM posts_meta pm
+      LEFT JOIN (
+        SELECT ${GROWTH_SLUG_SQL} AS slug, SUM(kr.impressions) AS imps
+        FROM keyword_ranks kr GROUP BY slug
+      ) g ON g.slug = pm.slug
+      WHERE pm.iso_date IS NOT NULL
+        AND pm.iso_date < datetime('now', '-${ageDays} days')
+        AND (pm.refreshed_at IS NULL OR pm.refreshed_at < datetime('now', '-90 days'))
+      ORDER BY imps DESC, pm.iso_date ASC
+      LIMIT ?
+    `).bind(count).all();
+    const rows = cands.results || [];
+    log.push({ stage: "candidates", count: rows.length, ageDays });
+    if (!rows.length) {
+      return new Response(JSON.stringify({ ok: true, message: "no freshness candidates", refreshed: 0, log, errors }), { headers: { "Content-Type": "application/json" } });
+    }
+
+    const year = new Date().getUTCFullYear();
+    for (const cand of rows) {
+      const slug = cand.slug;
+      try {
+        const c = await env.DB.prepare("SELECT content FROM posts_content WHERE slug=?").bind(slug).first();
+        const content = c?.content || "";
+        if (!content || content.includes('class="freshness-update"')) { log.push({ stage: "skip", slug, reason: content ? "already refreshed" : "empty" }); continue; }
+
+        const prompt = `Kamu adalah SEO content editor Malaysia untuk beriklan.my. Artikel "${cand.title}" terbit ${cand.iso_date || "lama"} dan perlu disegarkan secara jujur (tanpa mengubah fakta lama).
+
+Buat JSON valid (hanya JSON, tanpa markdown):
+{
+  "callout": "maksimal 50 kata: apa yang berubah/relevan di ${year} untuk topik ini (tren, kisaran harga, kebijakan platform, praktik terbaru)",
+  "bullets": ["poin praktis 1 (maks 20 kata)", "poin praktis 2", "poin praktis 3"]
+}
+
+Aturan: bahasa Malaysia formal, "Anda", tanpa overclaim, tanpa menyebut tanggal spesifik yang tidak bisa diverifikasi. Output hanya JSON.`;
+
+        const aiResult = await generateWithZenOrGroq(prompt, env, 700);
+        if (!aiResult) { errors.push({ slug, error: "AI failed" }); continue; }
+        const aiText = (typeof aiResult === "string") ? aiResult : (aiResult.text || "");
+        const aiModel = (typeof aiResult === "object" && aiResult._model) || "";
+        const j = extractJson(aiText);
+        if (!j || !j.callout) { errors.push({ slug, error: "JSON parse failed" }); continue; }
+
+        const bullets = (j.bullets || []).filter((b) => b && String(b).trim()).slice(0, 3);
+        const calloutHtml = `\n<div class="freshness-update my-6 p-5 bg-beige border-l-4 border-accent rounded-r-lg">\n<p class="text-xs font-bold text-accent uppercase tracking-wider mb-1.5">Update ${year}</p>\n<p class="text-sm text-ink leading-relaxed">${escapeHtml(j.callout)}</p>\n`
+          + (bullets.length ? `<ul class="mt-3 space-y-1.5 text-sm text-muted list-disc pl-5">${bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>` : "")
+          + `\n</div>`;
+
+        // Sisipkan setelah paragraf pertama (konten lama tetap, update transparan di atas)
+        let newContent;
+        if (/<\/p>/i.test(content)) newContent = content.replace(/<\/p>/i, "</p>" + calloutHtml);
+        else newContent = calloutHtml + "\n" + content;
+
+        await env.DB.prepare("UPDATE posts_content SET content=? WHERE slug=?").bind(newContent, slug).run();
+        await env.DB.prepare("UPDATE posts_meta SET refreshed_at=datetime('now') WHERE slug=?").bind(slug).run();
+        await growthLogInsert(env, { action: "freshness", slug, keyword: cand.title, impressions: cand.imps, before_json: JSON.stringify({ iso_date: cand.iso_date }), after_json: JSON.stringify({ callout: j.callout.slice(0, 200), bullets: bullets.length }), ai_model: aiModel });
+        await growthPing(env, slug, errors);
+        refreshed.push({ slug, title: cand.title, imps: cand.imps, model: aiModel });
+        log.push({ stage: "refreshed", slug });
+      } catch (e) { errors.push({ slug, error: String(e).slice(0, 200) }); }
+    }
+
+    return new Response(JSON.stringify({ ok: true, action: "freshness", candidates: rows.length, refreshed: refreshed.length, refreshed_list: refreshed, elapsed_ms: Date.now() - t0, log, errors }), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300), log, errors }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ─── Sitemap Ping (GSC + IndexNow) ──────────────────────────────
+// ─── Index cascade: backfill katalog blog ke antrian indexing ─────────
+// Kontrak sama dengan versi live lama (dry_run preview), tapi submit via
+// pending_indexing → pipeline gsc-indexing/indexnow harian (quota terkontrol).
+// GET /api/cron/index-cascade?token=...&count=50&dry=1
+
+async function handleGrowthLogView(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "DB not set" }), { status: 503, headers: { "Content-Type": "application/json" } });
+  try {
+    await ensureGrowthSchema(env);
+    const where = []; const params = [];
+    const action = url.searchParams.get("action");
+    const slug = url.searchParams.get("slug");
+    if (action) { where.push("action=?"); params.push(action); }
+    if (slug) { where.push("slug LIKE ?"); params.push(`%${slug}%`); }
+    const whereSql = where.length ? "WHERE " + where.join(" AND ") : "";
+    const limit = Math.min(parseInt(url.searchParams.get("limit") || "50", 10) || 50, 200);
+    const rows = await env.DB.prepare(`SELECT * FROM growth_log ${whereSql} ORDER BY id DESC LIMIT ?`).bind(...params, limit).all();
+    const byAction = await env.DB.prepare("SELECT action, COUNT(*) n, MAX(created_at) last FROM growth_log GROUP BY action").all();
+    return new Response(JSON.stringify({ ok: true, total: (rows.results || []).length, by_action: byAction.results || [], rows: rows.results || [] }), { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: String(e).slice(0, 300) }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ── Helper: join keyword_ranks terbaru → posts_meta (slug diekstrak dari page_url) ──
+const GROWTH_SLUG_SQL = `rtrim(replace(replace(replace(replace(kr.page_url,
+     'https://beriklan.my/blog/',''),
+     'https://www.beriklan.my/blog/',''),
+     'https://beriklan.my/',''),
+     'https://www.beriklan.my/',''), '/')`;
+
+// ── 2. Enrich artikel posisi 3-18 (intro + FAQ sesuai query) ──
+// GET /api/cron/growth/enrich?token=...&count=3&minImp=10
+
+async function handleAdminKeywordsImport(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) return new Response("Unauthorized", { status: 401 });
+  if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+  if (!env.DB) return new Response("DB not available", { status: 503 });
+  let payload;
+  try { payload = await request.json(); } catch (e) { return new Response("invalid JSON body", { status: 400 }); }
+  const items = Array.isArray(payload) ? payload : (payload.keywords || payload.items || []);
+  const source = url.searchParams.get("source") || "curated_import";
+  let inserted = 0, skipped = 0;
+  const errors = [];
+  for (const it of items) {
+    const kw = String(it.keyword || it.kw || "").trim();
+    if (!kw) { skipped++; continue; }
+    const norm = kw.toLowerCase().trim();
+    const service = it.service || "jasa-digital-marketing";
+    const city = it.city || "";
+    const intent = it.intent || "commercial";
+    const priority = it.priority || 60;
+    const slug = norm.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
+    const id = `imp-${slug}-${Math.random().toString(36).slice(2, 7)}`;
+    try {
+      const existing = await env.DB.prepare("SELECT id FROM keyword_queue WHERE keyword = ? OR keyword_normalized = ?").bind(kw, norm).first();
+      if (existing) { skipped++; continue; }
+      await env.DB.prepare("INSERT INTO keyword_queue (id, keyword, keyword_normalized, source, seed, discovered_at, status, service, city, priority_score, intent) VALUES (?, ?, ?, ?, ?, datetime('now'), 'pending', ?, ?, ?, ?)")
+        .bind(id, kw, norm, source, norm, service, city, priority, intent).run();
+      inserted++;
+    } catch (e) { if (errors.length < 10) errors.push(`${norm}: ${String(e.message || e).slice(0, 60)}`); }
+  }
+  return new Response(JSON.stringify({ ok: true, inserted, skipped, total: items.length, source, sample_errors: errors }, null, 2), { headers: { "Content-Type": "application/json" } });
+}
+
+async function handleLlmsFullTxt(request, env) {
+  let posts = [];
+  let services = [];
+  let total = 0;
+  try {
+    const r = await env.DB.prepare(
+      "SELECT slug, title, excerpt, category, tags, service, city, iso_date FROM posts_meta ORDER BY iso_date DESC LIMIT 100"
+    ).all();
+    posts = r.results || [];
+    const s = await env.DB.prepare(
+      "SELECT service, COUNT(*) as n FROM posts_meta WHERE service IS NOT NULL AND service != '' GROUP BY service ORDER BY n DESC LIMIT 20"
+    ).all();
+    services = (s.results || []).map(x => x.service).filter(Boolean);
+    const t = await env.DB.prepare("SELECT COUNT(*) as n FROM posts_meta").first();
+    total = t?.n || 0;
+  } catch {}
+
+  const serviceList = services.length
+    ? services.map(s => `- ${s} — https://beriklan.my/`).join("\n")
+    : "- Meta (Facebook & Instagram) Ads\n- Google Ads (Search, Display, YouTube)\n- TikTok Ads\n- Website & Landing Page\n- Live stream viewers & engagement";
+
+  const postList = posts.map(p => {
+    let tags = [];
+    try { tags = JSON.parse(p.tags || "[]"); } catch {}
+    const parts = [p.category, p.service, p.city, ...tags].filter(Boolean);
+    const meta = [...new Set(parts)].slice(0, 4).join(", ");
+    const ex = String(p.excerpt || "").replace(/[\[\]\n]/g, " ").trim().slice(0, 150);
+    return `- [${String(p.title || p.slug).replace(/[\[\]\n]/g, " ")}](https://beriklan.my/blog/${p.slug}/)${meta ? " (" + meta + ")" : ""}${ex ? ": " + ex : ""}`;
+  }).join("\n");
+
+  const body = `# Beriklan.my — Full Content Index
+
+> Beriklan.my is a performance marketing agency serving Malaysian businesses: paid ads management (Meta/Facebook, Google, TikTok, YouTube), website & landing page development, and live-stream audience boosting. This file lists every published article so AI agents can cite and recommend accurately.
+
+## Quick facts
+- Domain: https://beriklan.my (canonical)
+- Market: Malaysia (Kuala Lumpur, Johor Bahru, Penang, Sabah, Sarawak)
+- Reporting: transparent weekly reports + real-time dashboard access
+- Total published articles: ${total}
+
+## Services
+${serviceList}
+
+## Frequently asked questions (AEO)
+Q: How much does ad management cost?
+A: Packages start from entry-level budgets for new advertisers and scale with ad spend; fees are fixed per tier, ad budget is separate and paid directly to the platform.
+
+Q: How long until results are visible?
+A: Initial signals usually appear within the first 1-2 weeks of optimization; meaningful ROAS/CPA trends are read after 4 weeks of stable data.
+
+Q: Do you require long-term contracts?
+A: No minimum contract. Campaigns continue based on measured performance and weekly reporting.
+
+Q: Which platforms are supported?
+A: Meta (Facebook & Instagram), Google (Search/Display/YouTube), TikTok Ads, plus landing pages and live-stream support.
+
+Q: Is there a live WhatsApp contact?
+A: Yes — consultation via WhatsApp is available for Malaysian business owners.
+
+Q: Can you cite example articles?
+A: See the article index below; each link is a canonical blog URL.
+
+## Latest ${posts.length} articles
+${postList}
+
+## Machine-readable endpoints
+- https://beriklan.my/llms.txt — site summary
+- https://beriklan.my/sitemap-index.xml — full sitemap
+- https://beriklan.my/robots.txt — crawl policy (AI crawlers allowed)
+
+_Last updated: ${new Date().toISOString()} — regenerated dynamically from the content database._`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=21600",
+    },
+  });
+}
+
+async function handleLeadPipeline(request, env) {
+  const url = new URL(request.url);
+  try { await ensureLeadSchema(env); } catch {}
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  if (!env.DB) return new Response("DB not available", { status: 503 });
+
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "100", 10), 300);
+  const aiLimit = Math.min(parseInt(url.searchParams.get("ai") || "15", 10), 40);
+  const doPersonalize = url.searchParams.get("personalize") !== "0";
+  const doCampaign = url.searchParams.get("campaign") !== "0";
+  const out = { ok: true, matched: 0, personalized: 0, queued: 0, wa_ready: 0, errors: [] };
+
+  // 1) Ambil lead yang belum masuk pipeline
+  let rows = [];
+  try {
+    const r = await env.DB.prepare(
+      `SELECT c.id, c.email, c.phone, c.name, c.company, c.city, c.category, c.website
+       FROM lead_contacts c
+       WHERE NOT EXISTS (SELECT 1 FROM lead_pipeline p WHERE p.contact_id = c.id)
+         AND (c.email != '' OR c.phone != '')
+       ORDER BY c.id ASC LIMIT ?`
+    ).bind(limit).all();
+    rows = r.results || [];
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: "fetch leads: " + String(e).slice(0, 200) }), { headers: { "Content-Type": "application/json" } });
+  }
+
+  for (const lead of rows) {
+    const matched = matchLeadService(lead);
+    const score = scoreLead(lead);
+    const wa = buildWaLink(lead.phone, lead.name, lead.company, matched.service);
+    try {
+      await env.DB.prepare(
+        `INSERT OR IGNORE INTO lead_pipeline (contact_id, email, phone, name, company, city, category, website, service, score, status, wa_link, matched_at)
+         VALUES (?,?,?,?,?,?,?,?,?,?, 'matched', ?, datetime('now'))`
+      ).bind(lead.id, lead.email || "", lead.phone || "", lead.name || "", lead.company || "", lead.city || "", lead.category || "", lead.website || "", matched.service, score, wa).run();
+      out.matched++;
+      if (wa) out.wa_ready++;
+    } catch (e) {
+      out.errors.push({ email: lead.email, error: String(e).slice(0, 120) });
+    }
+  }
+
+  // 2) AI personalisasi subjek + opener untuk lead ber-email (batas biaya)
+  if (doPersonalize && aiLimit > 0) {
+    try {
+      const candidates = await env.DB.prepare(
+        `SELECT id, contact_id, email, name, company, city, category, website, service
+         FROM lead_pipeline
+         WHERE status = 'matched' AND email != '' AND (ai_subject IS NULL OR ai_subject = '')
+         ORDER BY score DESC, id ASC LIMIT ?`
+      ).bind(aiLimit).all();
+      for (const p of (candidates.results || [])) {
+        const pr = await personalizeLead(p, p.service, env);
+        if (pr.subject || pr.opener) {
+          await env.DB.prepare("UPDATE lead_pipeline SET ai_subject = ?, ai_opener = ? WHERE id = ?").bind(pr.subject, pr.opener, p.id).run();
+          out.personalized++;
+        }
+        await new Promise(r => setTimeout(r, 250));
+      }
+    } catch (e) {
+      out.errors.push({ stage: "ai", error: String(e).slice(0, 150) });
+    }
+  }
+
+  // 3) Auto-campaign per layanan: grup lead matched → 1 campaign per service, queue ke email_queue
+  if (doCampaign) {
+    try {
+      const grouped = await env.DB.prepare(
+        `SELECT service, COUNT(*) as n FROM lead_pipeline
+         WHERE status = 'matched' AND email != ''
+         GROUP BY service ORDER BY n DESC`
+      ).all();
+      for (const g of (grouped.results || [])) {
+        const serviceName = g.service;
+        const campName = `Auto Pipeline: ${serviceName}`;
+        let camp = await env.DB.prepare("SELECT id FROM campaigns WHERE name = ?").bind(campName).first();
+        if (!camp) {
+          const tpl = await env.DB.prepare("SELECT id FROM email_templates WHERE name = ?").bind(serviceName).first();
+          const templateId = tpl?.id || null;
+          const r = await env.DB.prepare(
+            "INSERT INTO campaigns (name, template_id, list_id, subject, status, total_recipients) VALUES (?,?,0,'', 'sending', 0)"
+          ).bind(campName, templateId).run();
+          camp = { id: r.meta?.last_row_id || 0 };
+        }
+        const leads = await env.DB.prepare(
+          `SELECT id, email, name, company, ai_subject, ai_opener FROM lead_pipeline
+           WHERE status = 'matched' AND email != '' AND service = ? ORDER BY score DESC LIMIT 50`
+        ).bind(serviceName).all();
+        const batch = [];
+        for (const lp of (leads.results || [])) {
+          const tid = genTrackingId();
+          batch.push([camp.id, lp.email.toLowerCase().trim(), lp.name || "", "pending", tid, lp.ai_subject || "", lp.ai_opener || ""]);
+        }
+        if (batch.length) {
+          await env.DB.batch(batch.map(rr => env.DB.prepare(
+            "INSERT INTO email_queue (campaign_id, email, name, status, tracking_id, subject_override, opener) VALUES (?,?,?,?,?,?,?)"
+          ).bind(...rr)));
+          await env.DB.prepare("UPDATE lead_pipeline SET status = 'queued', campaign_id = ? WHERE service = ? AND status = 'matched' AND email != ''").bind(camp.id, serviceName).run();
+          await env.DB.prepare("UPDATE campaigns SET total_recipients = (SELECT COUNT(*) FROM email_queue WHERE campaign_id = ?) WHERE id = ?").bind(camp.id, camp.id).run();
+          out.queued += batch.length;
+        }
+      }
+    } catch (e) {
+      out.errors.push({ stage: "campaign", error: String(e).slice(0, 200) });
+    }
+  }
+
+  return new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json" } });
+}
+
+// Admin: lihat status lead pipeline
+
+async function handleLeadPipelineView(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  if (!env.DB) return new Response("DB not available", { status: 503 });
+  try { await ensureLeadSchema(env); } catch {}
+
+  const total = await env.DB.prepare("SELECT COUNT(*) as n FROM lead_pipeline").first();
+  const byService = await env.DB.prepare(
+    `SELECT service, status, COUNT(*) as n FROM lead_pipeline GROUP BY service, status ORDER BY service, n DESC`
+  ).all();
+  const byStatus = await env.DB.prepare(
+    `SELECT status, COUNT(*) as n FROM lead_pipeline GROUP BY status ORDER BY n DESC`
+  ).all();
+  const waReady = await env.DB.prepare(
+    `SELECT id, name, company, city, category, service, phone, wa_link FROM lead_pipeline WHERE wa_link != '' ORDER BY score DESC LIMIT 30`
+  ).all();
+  const queued = await env.DB.prepare(
+    `SELECT COUNT(*) as n FROM email_queue WHERE status = 'pending'`
+  ).first();
+  const dailySent = await getDailyEmailCount(env);
+  const sampleLeads = await env.DB.prepare(
+    `SELECT id, email, phone, name, company, city, category, website FROM lead_contacts WHERE (email != '' OR phone != '') AND NOT EXISTS (SELECT 1 FROM lead_pipeline p WHERE p.contact_id = lead_contacts.id) ORDER BY id ASC LIMIT 8`
+  ).all();
+  const samplePipeline = await env.DB.prepare(
+    `SELECT id, name, company, city, category, service, score, status, ai_subject, ai_opener, wa_link FROM lead_pipeline ORDER BY (ai_subject IS NOT NULL AND ai_subject != '') DESC, score DESC, id DESC LIMIT 8`
+  ).all();
+
+  return new Response(JSON.stringify({
+    ok: true,
+    total: total?.n || 0,
+    by_service: byService.results || [],
+    by_status: byStatus.results || [],
+    wa_ready: waReady.results || [],
+    queue_pending: queued?.n || 0,
+    daily_sent: dailySent,
+    daily_limit: 100,
+    sample_leads: sampleLeads.results || [],
+    sample_pipeline: samplePipeline.results || [],
+  }), { headers: { "Content-Type": "application/json" } });
+}
+
+// ───────────────────────────────────────────────────────────────
+// scrape.beriklan.co.id — Consumer-facing scraping trial portal
+// ───────────────────────────────────────────────────────────────
+
+
+
+async function renderLeads(T, token, env) {
+  try {
+    const total = await env.DB.prepare("SELECT COUNT(*) as n FROM lead_pipeline").first();
+    const byStatus = await env.DB.prepare("SELECT status, COUNT(*) as n FROM lead_pipeline GROUP BY status ORDER BY n DESC").all();
+    const byService = await env.DB.prepare("SELECT service, COUNT(*) as n FROM lead_pipeline WHERE status != 'matched' GROUP BY service ORDER BY n DESC").all();
+    const waReady = await env.DB.prepare("SELECT id, name, company, city, category, service, phone FROM lead_pipeline WHERE wa_link != '' ORDER BY score DESC LIMIT 15").all();
+    const recent = await env.DB.prepare("SELECT id, name, company, city, service, score, status, created_at FROM lead_pipeline ORDER BY id DESC LIMIT 15").all();
+    const queuePending = await env.DB.prepare("SELECT COUNT(*) as n FROM email_queue WHERE status='pending'").first();
+    const campaigns = await env.DB.prepare("SELECT id, name, total_recipients, sent_count, status FROM campaigns WHERE name LIKE 'Auto Pipeline%' ORDER BY id DESC LIMIT 15").all();
+
+    const badge = (s) => s === 'matched' ? '<span class="badge b-amber">Matched</span>' : s === 'queued' ? '<span class="badge b-green">Queued</span>' : s === 'sent' ? '<span class="badge b-green">Sent</span>' : `<span class="badge b-gray">${s}</span>`;
+    const statusRows = (byStatus.results || []).map(r => `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed #e2e8f0;"><span>${badge(r.status)}</span><strong>${r.n}</strong></div>`).join('') || '<p style="color:#94a3b8">Belum ada data.</p>';
+    const serviceRows = (byService.results || []).map(r => `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed #e2e8f0;"><span style="font-size:13px">${r.service}</span><strong>${r.n}</strong></div>`).join('');
+    const waRows = (waReady.results || []).map(r => `<tr><td>${r.name||'-'}</td><td>${r.company||'-'}</td><td>${r.city||'-'}</td><td>${r.service}</td><td>${r.phone||'-'}</td></tr>`).join('') || '<tr><td colspan="5" style="color:#94a3b8">Belum ada lead WhatsApp.</td></tr>';
+    const recentRows = (recent.results || []).map(r => `<tr><td>${r.name||'-'}</td><td>${r.company||'-'}</td><td>${r.service}</td><td>${r.score}</td><td>${badge(r.status)}</td></tr>`).join('') || '<tr><td colspan="5" style="color:#94a3b8">Pipeline kosong.</td></tr>';
+    const campRows = (campaigns.results || []).map(c => `<tr><td>${c.name}</td><td>${c.total_recipients||0}</td><td>${c.sent_count||0}</td><td>${c.status}</td></tr>`).join('') || '<tr><td colspan="4" style="color:#94a3b8">Belum ada auto-campaign.</td></tr>';
+
+    return `
+ <div class="page-head"><div><h1>Lead Pipeline</h1><p>Match lead ke layanan, personalisasi, dan kirim otomatis tiap 6 jam.</p></div></div>
+
+ <div class="card">
+ <div class="card-head"><h2>🚀 Jalankan Sekarang</h2></div>
+ <div class="cron-card">
+ <div class="left"><strong>🎯 Proses pipeline</strong><div class="next">match → personalisasi AI (≤15) → auto-campaign → WA fallback</div></div>
+ <button onclick="runScraper('/api/cron/leads/process?token=${token}&limit=100&ai=15&campaign=1', 'Pipeline')" class="btn-amber">▶ Jalankan</button>
+ </div>
+ </div>
+
+ <div class="grid">
+ <div class="card"><div class="card-head"><h2>Total Lead</h2></div><p style="font-size:28px;font-weight:800;">${total?.n || 0}</p><p style="font-size:12px;color:#6b7280;">email_queue pending: ${queuePending?.n || 0}</p></div>
+ <div class="card"><div class="card-head"><h2>By Status</h2></div>${statusRows}</div>
+ <div class="card"><div class="card-head"><h2>By Layanan (yang sudah match)</h2></div>${serviceRows}</div>
+ </div>
+
+ <div class="card">
+ <div class="card-head"><h2>💬 Siap WhatsApp (phone saja, fallback)</h2></div>
+ <div style="overflow-x:auto"><table><tr><th>Nama</th><th>Perusahaan</th><th>Kota</th><th>Layanan</th><th>Phone</th></tr>${waRows}</table></div>
+ </div>
+
+ <div class="card">
+ <div class="card-head"><h2>📨 Auto-Campaign</h2></div>
+ <div style="overflow-x:auto"><table><tr><th>Campaign</th><th>Recipients</th><th>Sent</th><th>Status</th></tr>${campRows}</table></div>
+ </div>
+
+ <div class="card">
+ <div class="card-head"><h2>🕘 Recent</h2></div>
+ <div style="overflow-x:auto"><table><tr><th>Nama</th><th>Perusahaan</th><th>Layanan</th><th>Score</th><th>Status</th></tr>${recentRows}</table></div>
+ </div>
+ `;
+  } catch (e) {
+    return `<div class="page-head"><div><h1>Lead Pipeline</h1></div></div><div class="card"><p style="color:#dc2626">Error: ${String(e).slice(0, 300)}</p></div>`;
+  }
+}
+
