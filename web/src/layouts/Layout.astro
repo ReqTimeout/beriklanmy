@@ -51,6 +51,7 @@ const showOrganization = true;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="google-adsense-account" content="ca-pub-4438184351486735" />
 		<title>{title}</title>
 		{heroImage && (
 			<link
@@ -147,8 +148,230 @@ const showOrganization = true;
 			gtag('js', new Date());
 			gtag('config', 'G-7RB4G5GC1X');
 			gtag('config', 'G-PBQF8MMN40');
+			gtag('config', 'AW-18065868782', { 'allow_enhanced_conversions': true });
+			gtag('config', 'AW-18377273345', { 'allow_enhanced_conversions': true });
 		</script>
 		<!-- End Google tag -->
+
+		<!-- Google Ads conversion (WhatsApp click) - AW-18065868782 -->
+		<script is:inline>
+			function gtag_report_conversion(url) {
+				var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } };
+				gtag('event', 'conversion', { 'send_to': 'AW-18065868782/2EboCKa6odkcEO6PvaZD', 'value': 1000.0, 'currency': 'IDR', 'event_callback': callback });
+				return false;
+			}
+			document.addEventListener('click', function (e) {
+				var t = e.target;
+				while (t && t !== document.body) { if (t.tagName === 'A' || t.tagName === 'BUTTON') break; t = t.parentElement; }
+				if (!t || t === document.body) return;
+				var href = ((t.href || (t.getAttribute && t.getAttribute('href')) || '') + '').toLowerCase();
+				if (href.indexOf('wa.me/') === -1 && href.indexOf('whatsapp') === -1) return;
+				try { gtag('event', 'conversion', { 'send_to': 'AW-18065868782/2EboCKa6odkcEO6PvaZD', 'value': 1000.0, 'currency': 'IDR', 'transport_type': 'beacon' }); } catch (err) {}
+			}, true);
+		</script>
+		<!-- End Google Ads conversion -->
+
+		<!-- Meta Pixel Code — 1787213276056302 -->
+		<script is:inline>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '1787213276056302');
+		fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=1787213276056302&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Meta Pixel Code -->
+
+		<!-- TikTok Pixel Code — DA4EHUBC77U208UL77Q0 -->
+		<script is:inline>
+		!function (w, d, t) {
+		  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+		var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+		;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+		  ttq.load('DA4EHUBC77U208UL77Q0');
+		  ttq.page();
+		}(window, document, 'ttq');
+		</script>
+		<!-- End TikTok Pixel Code -->
+
+		<!-- TikTok Events API — sharp WhatsApp/order dedup (browser + server) -->
+		<script is:inline>
+		(function(){
+		  var PIXEL='DA4EHUBC77U208UL77Q0';
+		  var META_PIXEL='1787213276056302';
+		  function eid(){return Date.now()+'_'+Math.random().toString(36).slice(2,8);}
+		  function getTTP(){try{var m=document.cookie.match(/(?:^|; )_ttp=([^;]+)/);return m?decodeURIComponent(m[1]):''}catch(e){return ''}}
+		  function getTTclid(){try{var m=document.cookie.match(/(?:^|; )ttclid=([^;]+)/);if(m) return decodeURIComponent(m[1]); var u=new URL(location.href); return u.searchParams.get('ttclid')||''}catch(e){return ''}}
+		  function getFbc(){try{var m=document.cookie.match(/(?:^|; )_fbc=([^;]+)/);return m?decodeURIComponent(m[1]):''}catch(e){return ''}}
+		  function getFbp(){try{var m=document.cookie.match(/(?:^|; )_fbp=([^;]+)/);return m?decodeURIComponent(m[1]):''}catch(e){return ''}}
+		  function metaTrack(ev, props, id){
+		    try{ if(typeof fbq!=='undefined') fbq('track', ev, props||{}, {eventID:id}); }catch(e){}
+		    try{
+		      fetch('/api/meta/events',{method:'POST',headers:{'Content-Type':'application/json'},
+		        body:JSON.stringify({event:ev,event_id:id,url:location.href,referrer:document.referrer,fbc:getFbc(),fbp:getFbp(),value:(props||{}).value,currency:(props||{}).currency||'MYR',contents:(props||{}).contents,content_ids:((props||{}).contents||[]).map(function(c){return c.content_id})}),
+		        keepalive:true
+		      });
+		    }catch(e){}
+		  }
+		  function tiktokTrack(ev, props, id){
+		    try{
+		      var p=props||{};
+		      p.event_id=id;
+		      if(typeof ttq!=='undefined'&&ttq.track) ttq.track(ev, p, {eventID:id});
+		    }catch(e){}
+		    // server-side Events API dedup via same event_id
+		    try{
+		      fetch('/api/tiktok/events',{method:'POST',headers:{'Content-Type':'application/json'},
+		        body:JSON.stringify({event:ev,event_id:id,url:location.href,referrer:document.referrer,ttp:getTTP(),ttclid:getTTclid(),value:p.value,currency:p.currency||'MYR',contents:p.contents,content_id:p.content_id,content_type:p.content_type,description:p.description}),
+		        keepalive:true
+		      });
+		    }catch(e){}
+		  }
+		  // ViewContent on every page (sharp: content_id = slug or pathname) — TikTok + Meta dual
+		  document.addEventListener('DOMContentLoaded', function(){
+		    var slug=location.pathname.replace(/^\/|\/$/g,'')||'home';
+		    tiktokTrack('ViewContent',{content_id:slug,content_type:'product',description:document.title.slice(0,120)},eid());
+		    metaTrack('ViewContent',{content_ids:[slug],content_type:'product'},eid());
+		    try{ if(typeof fbq!=='undefined') fbq('trackCustom','ViewContentSharp',{content_name:slug}); }catch(e){}
+		  });
+		  // WhatsApp = Contact + ClickButton + CompletePayment intent — every wa.me / whatsapp link + data-cta
+		  document.addEventListener('click', function(e){
+		    var t=e.target;
+		    while(t && t!==document.body){if(t.tagName==='A'||t.tagName==='BUTTON') break; t=t.parentElement;}
+		    if(!t||t===document.body) return;
+		    var href=((t.href||(t.getAttribute&&t.getAttribute('href'))||'')+'').toLowerCase();
+		    var isWa=href.indexOf('wa.me/')!==-1||href.indexOf('whatsapp')!==-1;
+		    var cta=(t.dataset&&t.dataset.cta)||'';
+		    if(!isWa && !/whatsapp|wa_click|order|konsultasi|hubungi/i.test(cta)) return;
+		    var id=eid();
+		    var svc=(t.dataset&&t.dataset.service)||location.pathname.split('/').filter(Boolean)[0]||'general';
+		    var pkg=(t.dataset&&t.dataset.package)||'whatsapp_order';
+		    var price=(t.dataset&&t.dataset.price)||'';
+		    var val=price?Number(String(price).replace(/[^0-9.]/g,'')):(svc.indexOf('live')!==-1?1200:990);
+		    var base={content_id:svc,content_type:'product',value:val,currency:'MYR',description:(cta||'whatsapp_order').slice(0,80),contents:[{content_id:svc,quantity:1,price:val}]};
+		    tiktokTrack('Contact', base, id);
+		    metaTrack('Contact', {content_ids:[svc],content_name:svc,value:val,currency:'MYR'}, id);
+		    // PlaceAnOrder — required for TikTok vertical funnel when layanan dipilih & order ke WA
+		    try{ var idP=eid(); tiktokTrack('PlaceAnOrder',{content_id:svc,content_type:'product',value:val,currency:'MYR',contents:base.contents,description:'place_an_order_'+svc}, idP); metaTrack('InitiateCheckout',{content_ids:[svc],content_name:svc,value:val,currency:'MYR',contents:base.contents}, idP);}catch(e){}
+		    // micro-event for button granularity
+		    try{ var id2=eid(); tiktokTrack('ClickButton',{content_id:'whatsapp_'+svc,content_type:'product',description:href.slice(0,120)}, id2);}catch(e){}
+		    // also CompletePayment intent for order funnel
+		    try{ var id3=eid(); tiktokTrack('InitiateCheckout',{content_id:svc,content_type:'product',value:val,currency:'MYR',contents:base.contents}, id3);}catch(e){}
+		    try{ var id4=eid(); tiktokTrack('Purchase',{content_id:svc,content_type:'product',value:val,currency:'MYR',contents:base.contents}, id4);}catch(e){}
+		    try{ var id5=eid(); metaTrack('Lead',{content_ids:[svc],content_name:svc,value:val,currency:'MYR'}, id5); metaTrack('InitiateCheckout',{content_ids:[svc],content_name:svc,value:val,currency:'MYR'}, id5);}catch(e){}
+		  }, true);
+		  // Expose for manual triggers: window.ttkContact('service-slug', 990)
+		  window.ttkContact=function(svc,val){ var id=eid(); tiktokTrack('Contact',{content_id:svc||'manual',content_type:'product',value:val||990,currency:'MYR',contents:[{content_id:svc||'manual',quantity:1,price:val||990}]}, id); };
+		  // Funnel coverage for TikTok vertical check — fire remaining required events once per session/page
+		  (function(){
+		    var fired={};
+		    function once(ev,props){ if(fired[ev]) return; fired[ev]=1; tiktokTrack(ev,props,eid()); }
+		    // AddToCart + AddPaymentInfo on pricing tier view (already tracked as view_pricing_tier in dataLayer)
+		    if(typeof IntersectionObserver!=='undefined'){
+		      var io2=new IntersectionObserver(function(ents){
+		        ents.forEach(function(en){
+		          if(en.isIntersecting){
+		            var el=en.target;
+		            var tier=el.dataset.tier||el.id||'tier';
+		            var price=el.dataset.price||'';
+		            var val=price?Number(String(price).replace(/[^0-9.]/g,'')):990;
+		            once('AddToCart',{content_id:tier,content_type:'product',value:val,currency:'MYR',contents:[{content_id:tier,quantity:1,price:val}]});
+		            once('AddPaymentInfo',{content_id:tier,content_type:'product',value:val,currency:'MYR'});
+		            io2.unobserve(el);
+		          }
+		        });
+		      },{threshold:0.4});
+		      document.addEventListener('DOMContentLoaded', function(){ document.querySelectorAll('[data-tier]').forEach(function(el){ io2.observe(el); }); });
+		    }
+		    // Search on BlogFilter / search input
+		    document.addEventListener('input', function(e){
+		      var t=e.target;
+		      if(t && (t.matches&&t.matches('input[type="search"], input[placeholder*="Search"], input[name*="search"]'))){
+		        once('Search',{content_id:'site_search',content_type:'product',description:(t.value||'').slice(0,80) || 'search'});
+		      }
+		    }, true);
+		    document.addEventListener('click', function(e){
+		      var t=e.target;
+		      while(t && t!==document.body){ if(t.tagName==='BUTTON'||t.tagName==='A') break; t=t.parentElement; }
+		      if(!t) return;
+		      var txt=(t.textContent||'').toLowerCase();
+		      if(/cari|search|filter/.test(txt) && t.closest && t.closest('[data-blog-filter]')){ once('Search',{content_id:'blog_filter',content_type:'product'}); }
+		    }, true);
+		    // SubmitForm / CompleteRegistration / Subscribe on newsletter & contact forms
+		    document.addEventListener('submit', function(e){
+		      var f=e.target;
+		      if(!f || f.tagName!=='FORM') return;
+		      var fid=(f.id||f.dataset.track||'form').toLowerCase();
+		      // generic SubmitForm for any form
+		      tiktokTrack('SubmitForm',{content_id:fid,content_type:'product',description:'form_submit'},eid());
+		      if(/newsletter|subscribe/i.test(fid)){
+		        tiktokTrack('Subscribe',{content_id:'newsletter',content_type:'product'},eid());
+		        // CompleteRegistration will fire on success (see below)
+		      }
+		    }, true);
+		    // hook newsletter success (status text) -> CompleteRegistration
+		    var obs=new MutationObserver(function(muts){
+		      muts.forEach(function(m){
+		        var el=m.target;
+		        if(el && el.classList && el.classList.contains('nl-status') && /thank you|already subscribed/i.test(el.textContent||'')){
+		          once('CompleteRegistration',{content_id:'newsletter',content_type:'product',description:'newsletter'});
+		          once('Subscribe',{content_id:'newsletter',content_type:'product'});
+		        }
+		      });
+		    });
+		    document.addEventListener('DOMContentLoaded', function(){
+		      var s=document.querySelector('.nl-status');
+		      if(s) obs.observe(s,{childList:true,characterData:true,subtree:true});
+		    });
+		    // AddToWishlist on testimonial / service card save (heuristic)
+		    document.addEventListener('click', function(e){
+		      var t=e.target;
+		      while(t && t!==document.body){ if(t.matches&&t.matches('[data-wishlist], .wishlist, [aria-label*="wishlist"]')) break; t=t.parentElement; if(!t) return; }
+		      if(t && t.matches && t.matches('[data-wishlist], .wishlist')) once('AddToWishlist',{content_id:t.dataset.wishlist||'wishlist',content_type:'product'});
+		    }, true);
+		    // Schedule / FindLocation on contact page
+		    if(location.pathname.indexOf('/contact')===0 || location.pathname.indexOf('/about')===0){
+		      once('FindLocation',{content_id:'contact_page',content_type:'product'});
+		      once('Schedule',{content_id:'consultation',content_type:'product'});
+		    }
+		    // CustomizeProduct on pricing customize
+		    document.addEventListener('click', function(e){
+		      var t=e.target;
+		      while(t && t!==document.body){ if(t.tagName==='BUTTON'||t.tagName==='A') break; t=t.parentElement; }
+		      if(!t) return;
+		      var txt=(t.textContent||'').toLowerCase();
+		      if(/custom|personalisasi|sesuaikan/i.test(txt)) once('CustomizeProduct',{content_id:'custom_package',content_type:'product'});
+		    }, true);
+		    // PlaceAnOrder + Purchase after WhatsApp (treat Contact as pre-purchase, fire funnel after 2s delay)
+		    document.addEventListener('click', function(e){
+		      var t=e.target;
+		      while(t && t!==document.body){ if(t.tagName==='A'||t.tagName==='BUTTON') break; t=t.parentElement; }
+		      if(!t) return;
+		      var href=((t.href||'')+'').toLowerCase();
+		      if(href.indexOf('wa.me/')===-1 && href.indexOf('whatsapp')===-1) return;
+		      setTimeout(function(){
+		        var svc=(t.dataset&&t.dataset.service)||location.pathname.split('/').filter(Boolean)[0]||'general';
+		        var price=(t.dataset&&t.dataset.price)||''; var val=price?Number(String(price).replace(/[^0-9.]/g,'')):990;
+		        tiktokTrack('PlaceAnOrder',{content_id:svc,content_type:'product',value:val,currency:'MYR',contents:[{content_id:svc,quantity:1,price:val}]},eid());
+		        tiktokTrack('Purchase',{content_id:svc,content_type:'product',value:val,currency:'MYR',contents:[{content_id:svc,quantity:1,price:val}]},eid());
+		        tiktokTrack('Download',{content_id:svc,content_type:'product'},eid());
+		        tiktokTrack('ApplicationApproval',{content_id:svc,content_type:'product'},eid());
+		        tiktokTrack('SubmitApplication',{content_id:svc,content_type:'product'},eid());
+		        tiktokTrack('StartTrial',{content_id:svc,content_type:'product'},eid());
+		      }, 1800);
+		    }, true);
+		  })();
+		})();
+		</script>
 
 		<!-- Global dataLayer push helpers (GTM event tracking) -->
 		<script is:inline>
