@@ -153,11 +153,26 @@ const showOrganization = true;
 		</script>
 		<!-- End Google tag -->
 
-		<!-- Google Ads conversion (WhatsApp click) - AW-18065868782 -->
+		<!-- Google Ads conversion (WhatsApp click) — AW-18065868782 + AW-18377273345 -->
 		<script is:inline>
 			function gtag_report_conversion(url) {
 				var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } };
 				gtag('event', 'conversion', { 'send_to': 'AW-18065868782/2EboCKa6odkcEO6PvaZD', 'value': 1000.0, 'currency': 'IDR', 'event_callback': callback });
+				return false;
+			}
+			// Beriklan.my conversion page — AW-18377273345 (snippet Google verbatim)
+			function gtag_report_conversion_my(url) {
+				var callback = function () {
+					if (typeof(url) != 'undefined') {
+						window.location = url;
+					}
+				};
+				gtag('event', 'conversion', {
+					'send_to': 'AW-18377273345/8v-zCInZlOgcEIHg-7pE',
+					'value': 100.0,
+					'currency': 'IDR',
+					'event_callback': callback
+				});
 				return false;
 			}
 			document.addEventListener('click', function (e) {
@@ -166,7 +181,9 @@ const showOrganization = true;
 				if (!t || t === document.body) return;
 				var href = ((t.href || (t.getAttribute && t.getAttribute('href')) || '') + '').toLowerCase();
 				if (href.indexOf('wa.me/') === -1 && href.indexOf('whatsapp') === -1) return;
+				// Kedua akun Google Ads dihitung bersamaan — beacon transport (non-blocking)
 				try { gtag('event', 'conversion', { 'send_to': 'AW-18065868782/2EboCKa6odkcEO6PvaZD', 'value': 1000.0, 'currency': 'IDR', 'transport_type': 'beacon' }); } catch (err) {}
+				try { gtag('event', 'conversion', { 'send_to': 'AW-18377273345/8v-zCInZlOgcEIHg-7pE', 'value': 100.0, 'currency': 'IDR', 'transport_type': 'beacon' }); } catch (err) {}
 			}, true);
 		</script>
 		<!-- End Google Ads conversion -->
