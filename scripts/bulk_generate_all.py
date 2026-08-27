@@ -22,26 +22,22 @@ PROGRESS_FILE = os.path.join(DRAFTS_DIR, "_progress.json")
 ZEN_KEY_PATH = os.path.expanduser("~/.beriklan/zen-key")
 
 ZEN_URL = "https://opencode.ai/zen/v1/chat/completions"
-# TokenRouter free models. qwen3.8-max-free is a reasoning model — returns
-# content in `content` (with `reasoning_content` separate), needs large max_tokens
-# because reasoning consumes tokens before the answer. deepseek-v4-pro-0813-free
-# returned garbage (Chinese boilerplate) in testing, so it's excluded.
+# Zen free, non-reasoning chat models. Round-robin across these for best
+# throughput. Avoid reasoning models (e.g. qwen3.8-max-free) — they consume
+# tokens on internal reasoning before returning the answer, burning quota
+# without producing more content. Per-model rate limits vary, so rotation
+# spreads load. Add new free models here when discovered.
 TOKENROUTER_URL = "https://api.tokenrouter.com/v1/chat/completions"
 TOKENROUTER_KEY = "sk-ggb0nO6f0cMdIBkcWhsxwvry5F4Fc1oAmhV9gkL0yt0wMBWI"
 
-# Multi-endpoint pool: each free source has its OWN rate limit, so round-robining
-# across all of them lets us run many parallel workers without any single key
-# getting 429'd. ZEN has several models; TokenRouter adds qwen3.8-max-free.
+# Pool order = priority. big-pickle first (fastest non-reasoning chat).
 ZEN_MODELS = [
-    "ling-3.0-flash-free", "mimo-v2.5-free", "deepseek-v4-flash-free",
-    "laguna-s-2.1-free",
+    "big-pickle", "mimo-v2.5-free", "hy3-free", "nemotron-3-ultra-free",
 ]
 # Flat pool of (model, endpoint_name); endpoint_name indexes ENDPOINTS below.
 MODEL_POOL = []
 for _m in ZEN_MODELS:
     MODEL_POOL.append((_m, "zen"))
-for _m in ["qwen/qwen3.8-max-free", "qwen/qwen3.8-max-free"]:
-    MODEL_POOL.append((_m, "tokenrouter"))
 
 ENDPOINTS = {
     "zen":         {"url": ZEN_URL, "key": None},  # filled at runtime (read_zen_key)
@@ -141,7 +137,7 @@ def load_live_slugs():
 # Anti-doorway: deterministic per-keyword structure variants so the ~298k articles
 # do NOT share one identical heading template (scaled-content-abuse footprint).
 PROMPT_VARIANTS = [
-    ("350-450", [
+    ("600-800", [
         ("Introduction", "define {kw} in 1-2 short paragraphs with local {loc}/Malaysia context."),
         ("Key Benefits", "3-4 points in a <ul>."),
         ("How It Works", "3-4 steps in an <ol>."),
@@ -150,7 +146,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Conclusion", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("What Is {kw}?", "explain the concept in 1-2 paragraphs for a Malaysian business owner."),
         ("Why It Matters for Malaysian Businesses", "2-3 paragraphs on real business impact."),
         ("Step-by-Step Process", "3-4 steps in an <ol>."),
@@ -158,7 +154,7 @@ PROMPT_VARIANTS = [
         ("Questions Business Owners Ask", "3 <h3> questions, each answered in a <p>."),
         ("Getting Started", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("Overview", "introduce {kw} with {loc}/Malaysia context in 1-2 paragraphs."),
         ("Who Should Consider This", "describe the ideal business or situation in a <ul>."),
         ("Key Advantages", "3-4 points in a <ul>."),
@@ -167,7 +163,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Final Thoughts", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("{kw}: A Practical Guide", "1-2 paragraph introduction with {loc}/Malaysia context."),
         ("Benefits You Can Expect", "3-4 points in a <ul>."),
         ("How We Approach It", "3-4 steps in an <ol>."),
@@ -176,7 +172,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Next Steps", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("Understanding {kw}", "define it in 1-2 paragraphs with Malaysia context."),
         ("When to Use It", "2-3 scenarios in a <ul>."),
         ("Process & Timeline", "3-4 steps in an <ol>."),
@@ -206,7 +202,7 @@ ANGLES_MS = [
 # diterjemah secara natural ke Bahasa Melayu profesional. Voice: 'kami' (we),
 # 'anda' (you), RM currency, nada profesional agensi sejak 2016.
 PROMPT_VARIANTS_MS = [
-    ("350-450", [
+    ("600-800", [
         ("Pengenalan", "takrifkan {kw} dalam 1-2 perenggan pendek dengan konteks tempatan {loc}/Malaysia."),
         ("Kelebihan Utama", "3-4 poin dalam <ul>."),
         ("Cara Ia Berfungsi", "3-4 langkah dalam <ol>."),
@@ -215,7 +211,7 @@ PROMPT_VARIANTS_MS = [
         ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
         ("Kesimpulan", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("Apa Itu {kw}?", "jelaskan konsep dalam 1-2 perenggan untuk pemilik perniagaan di Malaysia."),
         ("Mengapa Ia Penting untuk Perniagaan Malaysia", "2-3 perenggan tentang kesan sebenar terhadap perniagaan."),
         ("Proses Langkah demi Langkah", "3-4 langkah dalam <ol>."),
@@ -223,7 +219,7 @@ PROMPT_VARIANTS_MS = [
         ("Soalan Pemilik Perniagaan", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
         ("Cara Mula", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("Gambaran Keseluruhan", "perkenalkan {kw} dengan konteks {loc}/Malaysia dalam 1-2 perenggan."),
         ("Siapa Patut Pertimbangkan", "terangkan perniagaan atau situasi yang sesuai dalam <ul>."),
         ("Kelebihan Utama", "3-4 poin dalam <ul>."),
@@ -232,7 +228,7 @@ PROMPT_VARIANTS_MS = [
         ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
         ("Fikiran Akhir", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("{kw}: Panduan Praktikal", "1-2 perenggan pengenalan dengan konteks {loc}/Malaysia."),
         ("Kelebihan Yang Boleh Dijangka", "3-4 poin dalam <ul>."),
         ("Pendekatan Kami", "3-4 langkah dalam <ol>."),
@@ -241,7 +237,7 @@ PROMPT_VARIANTS_MS = [
         ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
         ("Langkah Seterusnya", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
     ]),
-    ("350-450", [
+    ("600-800", [
         ("Memahami {kw}", "takrifkan dalam 1-2 perenggan dengan konteks Malaysia."),
         ("Bilakah Menggunakan Ia", "2-3 senario dalam <ul>."),
         ("Proses & Tempoh", "3-4 langkah dalam <ol>."),
@@ -298,12 +294,14 @@ Use these exact <h2> headings in order:
 {heading_block}
 
 Requirements:
-- STRICTLY keep the entire article between 350 and 450 words. Do NOT exceed 450 words — be concise.
+- STRICTLY keep the entire article between 600 and 800 words. Be thorough — include specific examples, concrete numbers (RM prices, percentages), and 1 inline comparison or mini-list where it helps clarity. Do NOT exceed 800 words.
 - Link twice to {ilink} with natural anchor text.
 - Link once to <a href="{elink}" rel="nofollow"> as an external reference.
 {chr(10).join(voice_lines)}
 - Vary sentence structure and openings; do not reuse boilerplate phrasing across sections.
-- Output ONLY HTML starting from the first <h2>. No preamble, no markdown code fences."""
+- Output ONLY the article HTML. Start directly with the first <h2>. Do NOT include any planning notes,
+  internal monologue, meta-commentary, requirement lists ("1.", "2.", "3."), restating of these
+  instructions, or any other text before/after the article. The reader must see ONLY clean article HTML."""
 
 ERR_LOG = "/tmp/bulk_generate_err.log"
 
@@ -339,7 +337,7 @@ def call_zen(prompt, zen_key=None, timeout=180):
             r = requests.post(ep["url"],
                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                 json={"model": model, "messages": [{"role": "user", "content": prompt}],
-                      "max_tokens": 900, "temperature": 0.4, **extra},
+                      "max_tokens": 1800, "temperature": 0.4, **extra},
                 timeout=timeout)
             if r.status_code == 200:
                 try:
@@ -399,6 +397,64 @@ def clean_html(html):
     if h.endswith("```"): h = h[:-3]
     return h.strip()
 
+# Reasoning-leak markers — when a free model bypasses the "output ONLY HTML"
+# directive and starts including planning notes / meta-commentary. Used by
+# make_article() to detect & retry such generations.
+LEAK_MARKERS = [
+    "the user wants", "the user asked", "the user is asking",
+    "let me draft", "let me write", "let me create", "let me carefully",
+    "let me start", "let me begin", "let me think", "let me outline",
+    "i need to", "i will write", "i will draft", "i will create", "i will now",
+    "i should write", "i should include", "i need", "i'll write",
+    "here is the article", "here's the article", "here is a",
+    "looking at the requirements", "based on the requirements",
+    "following the requirements", "following these requirements",
+    "in this article", "this article will",
+    "we need to", "we need", "we will", "we'll", "we should", "we must",
+    "now i will", "now let me", "first, i", "first, let me",
+    "draft:", "outline:", "structure:", "plan:",
+    "saya akan", "saya perlu", "mari saya", "berikut adalah artikel",
+    "pengguna mahu", "pengguna ingin",
+    "1.", "2.", "3.",  # numbered requirement lists at start
+]
+
+def _has_reasoning_leak(html):
+    """Detect AI planning notes / meta-commentary leaking into article body."""
+    # strip the first <h2>...</h2> block (legitimate article heading) before scanning
+    body = re.sub(r"^\s*<h2[^>]*>.*?</h2>", "", html, count=1, flags=re.S).strip()
+    # Take first 600 chars of the body — leak typically appears right after heading
+    sample = body[:600].lower()
+    if not sample:
+        return False
+    # numbered requirement list at very start (e.g. "1. Exact h2 headings...")
+    if re.match(r"^\s*\d+\.\s+\w", sample):
+        return True
+    # common leak phrasings
+    for m in LEAK_MARKERS:
+        if m in sample:
+            return True
+    return False
+
+def _strip_leak(html):
+    """If leak is sandwiched between the title <h2> and a real section <h2>,
+    drop the leak and keep from the real section onward. A 'real section <h2>'
+    has non-empty content (no nested tags) and is followed by a block-level tag.
+    Leak <h2>s from requirement lists are either empty or unclosed — filtered out."""
+    # Pattern requires well-formed h2 with non-empty content (no nested tags).
+    # This excludes empty leak <h2></h2> and unclosed <h2> in requirement lists.
+    real_h2_re = re.compile(r"<h2[^>]*>[^<]+</h2>")
+    matches = list(real_h2_re.finditer(html))
+    if len(matches) < 2:
+        return html  # not enough well-formed h2 → can't strip safely
+    first_close = matches[0].end()
+    block_tags = ("<p>", "<ul>", "<ol>", "<blockquote>", "<h3>", "<hr/>", "<table>")
+    # find first real-h2 (after title) whose tail starts with a block-level tag
+    for m in matches[1:]:
+        tail = html[m.end():m.end() + 50].lstrip()
+        if any(tail.startswith(t) for t in block_tags):
+            return html[:first_close] + "\n" + html[m.start():]
+    return html  # no real section h2 detected — leave as-is
+
 WA_LINK = "https://wa.me/62811919328"
 
 def cta_block(svc_name, svc_key, lang="en"):
@@ -447,6 +503,21 @@ def make_article(item, zen_key, live_slugs):
         raw2 = call_zen(prompt, zen_key)
         if raw2 and len(clean_html(raw2).split()) > len(content.split()):
             content = clean_html(raw2)
+    # QC: retry once if AI leaked planning notes / meta-commentary into body.
+    # Prefer a clean shorter article over a leaked long one.
+    if _has_reasoning_leak(content):
+        raw2 = call_zen(prompt, zen_key)
+        if raw2:
+            content2 = clean_html(raw2)
+            if not _has_reasoning_leak(content2) and len(content2.split()) >= 200:
+                content = content2
+    # QC: if still leaked after retry, try post-process strip (drop the text
+    # sandwiched between first <h2> and second <h2>). Common with Qwen-style
+    # reasoning models that emit planning notes before the actual article.
+    if _has_reasoning_leak(content):
+        stripped = _strip_leak(content)
+        if not _has_reasoning_leak(stripped):
+            content = stripped
     if not content.startswith("<h2>"):
         content = f"<h2>{title}</h2>\n" + content
 
