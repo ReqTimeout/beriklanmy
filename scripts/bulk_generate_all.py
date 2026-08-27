@@ -194,7 +194,64 @@ ANGLES = [
     "Highlight realistic expectations and common outcomes.",
 ]
 
-def build_prompt(kw, svc_name, city, svc_key):
+ANGLES_MS = [
+    "Tekankan ROI yang boleh diukur dan kualiti prospek.",
+    "Tulis untuk pembaca yang baru berkecimpung dalam iklan berbayar.",
+    "Fokus kepada pasaran Malaysia tempatan dan tingkah laku pembeli.",
+    "Ambil sudut praktikal, tanpa hype, dan berhemah dari segi bajet.",
+    "Tonjolkan jangkaan realistik dan hasil yang biasa dilihat oleh pelanggan.",
+]
+
+# BM (Bahasa Melayu) prompt variants — struktur sama dengan EN, headings
+# diterjemah secara natural ke Bahasa Melayu profesional. Voice: 'kami' (we),
+# 'anda' (you), RM currency, nada profesional agensi sejak 2016.
+PROMPT_VARIANTS_MS = [
+    ("350-450", [
+        ("Pengenalan", "takrifkan {kw} dalam 1-2 perenggan pendek dengan konteks tempatan {loc}/Malaysia."),
+        ("Kelebihan Utama", "3-4 poin dalam <ul>."),
+        ("Cara Ia Berfungsi", "3-4 langkah dalam <ol>."),
+        ("Harga di Malaysia", "julat harga realistik dalam RM (cth \"dari RM990/sebulan\"); jelaskan apa yang mempengaruhi kos."),
+        ("Kesilapan Lazim", "2-3 jebakan dalam <ul>."),
+        ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
+        ("Kesimpulan", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
+    ]),
+    ("350-450", [
+        ("Apa Itu {kw}?", "jelaskan konsep dalam 1-2 perenggan untuk pemilik perniagaan di Malaysia."),
+        ("Mengapa Ia Penting untuk Perniagaan Malaysia", "2-3 perenggan tentang kesan sebenar terhadap perniagaan."),
+        ("Proses Langkah demi Langkah", "3-4 langkah dalam <ol>."),
+        ("Panduan Kos & Belanjawan (RM)", "julat RM yang realistik; jelaskan apa yang mendorong bajet."),
+        ("Soalan Pemilik Perniagaan", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
+        ("Cara Mula", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
+    ]),
+    ("350-450", [
+        ("Gambaran Keseluruhan", "perkenalkan {kw} dengan konteks {loc}/Malaysia dalam 1-2 perenggan."),
+        ("Siapa Patut Pertimbangkan", "terangkan perniagaan atau situasi yang sesuai dalam <ul>."),
+        ("Kelebihan Utama", "3-4 poin dalam <ul>."),
+        ("Bagaimana Proses Berfungsi", "3-4 langkah dalam <ol>."),
+        ("Penjelasan Harga (RM)", "julat RM yang realistik dan faktor kos utama."),
+        ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
+        ("Fikiran Akhir", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
+    ]),
+    ("350-450", [
+        ("{kw}: Panduan Praktikal", "1-2 perenggan pengenalan dengan konteks {loc}/Malaysia."),
+        ("Kelebihan Yang Boleh Dijangka", "3-4 poin dalam <ul>."),
+        ("Pendekatan Kami", "3-4 langkah dalam <ol>."),
+        ("Pelaburan & Harga (RM)", "julat RM yang realistik; jelaskan apa yang mempengaruhi kos."),
+        ("Pertimbangan Tempatan di {loc}", "1-2 perenggan tentang pasaran tempatan."),
+        ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
+        ("Langkah Seterusnya", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
+    ]),
+    ("350-450", [
+        ("Memahami {kw}", "takrifkan dalam 1-2 perenggan dengan konteks Malaysia."),
+        ("Bilakah Menggunakan Ia", "2-3 senario dalam <ul>."),
+        ("Proses & Tempoh", "3-4 langkah dalam <ol>."),
+        ("Julat Belanjawan dalam RM", "angka RM yang realistik dan apa yang mempengaruhinya."),
+        ("Soalan Lazim", "3 soalan <h3>, setiap satu dijawab dalam <p>."),
+        ("Kesimpulan", "1 perenggan, diakhiri dengan panggilan tindakan WhatsApp."),
+    ]),
+]
+
+def build_prompt(kw, svc_name, city, svc_key, lang="en"):
     loc = city.title() if city else "Malaysia"
     svc_path = SERVICE_PATHS.get(svc_key, svc_key)
     ilink = f"https://beriklan.my/{svc_path}/"
@@ -206,15 +263,34 @@ def build_prompt(kw, svc_name, city, svc_key):
     elif "youtube" in platform: elink = "https://www.youtube.com/ads/"
     else: elink = "https://business.google.com/my/"
 
-    hv = int(hashlib.md5(f"{kw}|{svc_key}".encode("utf-8")).hexdigest(), 16)
-    word_range, sections = PROMPT_VARIANTS[hv % len(PROMPT_VARIANTS)]
-    angle = ANGLES[(hv // 7) % len(ANGLES)]
+    hv = int(hashlib.md5(f"{kw}|{svc_key}|{lang}".encode("utf-8")).hexdigest(), 16)
+    if lang == "ms":
+        variants = PROMPT_VARIANTS_MS
+        angles = ANGLES_MS
+        lang_directive = "Tulis artikel HTML yang berstruktur dan faktual dalam Bahasa Melayu profesional (BM Malaysia) tentang: {kw}"
+        voice_lines = [
+            "- Voice: pasukan Beriklan, agensi yang menguruskan kempen iklan sejak 2016.",
+            "- Bahasa Melayu profesional semula jadi. Guna 'kami' untuk diri sendiri, 'anda' untuk pembaca.",
+            "- Mata wang dalam RM sahaja (jangan sekali-kali guna Rp).",
+            "- Elakkan perkataan hype: dijamin, terbaik, 100%, termurah.",
+        ]
+    else:
+        variants = PROMPT_VARIANTS
+        angles = ANGLES
+        lang_directive = "Write a well-structured, factual HTML article ({wr} words) in professional Malaysian English about: {kw}"
+        voice_lines = [
+            "- Voice: the Beriklan team, an agency running ad campaigns since 2016.",
+            "- Natural professional Malaysian English. Currency in RM only (never Rp).",
+            "- Avoid hype words: guaranteed, best, 100%, cheapest.",
+        ]
+    word_range, sections = variants[hv % len(variants)]
+    angle = angles[(hv // 7) % len(angles)]
     heading_block = "\n".join(
         f"<h2>{t.format(kw=kw, loc=loc)}</h2> {g.format(kw=kw, loc=loc)}"
         for t, g in sections
     )
 
-    return f"""Write a well-structured, factual HTML article ({word_range} words) in professional Malaysian English about: {kw}
+    return f"""{lang_directive.format(kw=kw, wr=word_range)}
 Service: {svc_name}. Location: {loc}.
 Editorial angle: {angle}
 
@@ -225,10 +301,8 @@ Requirements:
 - STRICTLY keep the entire article between 350 and 450 words. Do NOT exceed 450 words — be concise.
 - Link twice to {ilink} with natural anchor text.
 - Link once to <a href="{elink}" rel="nofollow"> as an external reference.
-- Voice: the Beriklan team, an agency running ad campaigns since 2016.
-- Natural professional Malaysian English. Currency in RM only (never Rp).
+{chr(10).join(voice_lines)}
 - Vary sentence structure and openings; do not reuse boilerplate phrasing across sections.
-- Avoid hype words: guaranteed, best, 100%, cheapest.
 - Output ONLY HTML starting from the first <h2>. No preamble, no markdown code fences."""
 
 ERR_LOG = "/tmp/bulk_generate_err.log"
@@ -327,8 +401,18 @@ def clean_html(html):
 
 WA_LINK = "https://wa.me/62811919328"
 
-def cta_block(svc_name, svc_key):
+def cta_block(svc_name, svc_key, lang="en"):
     svc_path = SERVICE_PATHS.get(svc_key, svc_key)
+    if lang == "ms":
+        return (
+            "\n<hr/>\n<h2>Bekerja Bersama Beriklan</h2>\n"
+            "<p>Beriklan menguruskan kempen iklan berbayar sejak 2016 — telus, boleh diukur, "
+            "dengan laporan mingguan dan akses penuh ke akaun iklan anda. "
+            f"Terokai <a href=\"https://beriklan.my/{svc_path}/\">pakej {svc_name} kami</a> "
+            "atau mulakan rundingan.</p>\n"
+            f"<p><a href=\"{WA_LINK}?text=Hai%20Beriklan%2C%20saya%20ingin%20rundingan.\" "
+            "rel=\"nofollow\">Berhubung dengan kami di WhatsApp</a> — balasan dalam 1 jam (waktu perniagaan).</p>"
+        )
     return (
         "\n<hr/>\n<h2>Work With Beriklan</h2>\n"
         "<p>Beriklan has managed paid ad campaigns since 2016 — transparent, measurable, "
@@ -341,17 +425,18 @@ def cta_block(svc_name, svc_key):
 
 def make_article(item, zen_key, live_slugs):
     kw = item["keyword"]
+    lang = item.get("language") or "en"
     slug = item.get("slug") or re.sub(r"[^a-z0-9-]", "", kw.lower().replace(" ", "-"))[:80]
-    
+
     if slug in live_slugs:
         return None  # skip duplicate
-    
+
     svc = item.get("service") or "digital-marketing-agency"
     city = item.get("city") or ""
     svc_name = SERVICE_NAMES.get(svc, svc)
-    
+
     title = " ".join(w.capitalize() for w in kw.split())
-    prompt = build_prompt(kw, svc_name, city, svc)
+    prompt = build_prompt(kw, svc_name, city, svc, lang)
     raw = call_zen(prompt, zen_key)
     if not raw:
         return None
@@ -367,13 +452,13 @@ def make_article(item, zen_key, live_slugs):
 
     # Guarantee internal link to service page + WhatsApp CTA
     if content.count(f"/{SERVICE_PATHS.get(svc, svc)}/") < 1 or "wa.me" not in content:
-        content += cta_block(svc_name, svc)
-    
+        content += cta_block(svc_name, svc, lang)
+
     excerpt = re.sub(r'<[^>]+>', ' ', content).strip()
     excerpt = re.sub(r'\s+', ' ', excerpt)[:180] + "..."
     words = len(content.split())
     now = datetime.now()
-    
+
     return {
         "slug": slug, "title": title, "excerpt": excerpt, "content": content,
         "date": now.strftime("%d %b %Y"), "iso_date": now.isoformat(),
@@ -383,6 +468,7 @@ def make_article(item, zen_key, live_slugs):
         "featured": False, "generated": True, "service": svc,
         "city": city or None, "liveUrl": None,
         "publish_date": now.strftime("%d %b %Y"), "source": "bulk_generate",
+        "language": lang,
     }
 
 def main():
