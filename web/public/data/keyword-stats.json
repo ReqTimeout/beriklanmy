@@ -1,87 +1,104 @@
 {
-  "generated_at": "2026-07-30T16:15:26",
+  "generated_at": "2026-08-27T03:00:17",
   "keywords": {
-    "total": 298736,
-    "generated": 799,
-    "pending": 297937,
-    "live_in_posts": 0,
-    "coverage": 0.3
+    "total": 304367,
+    "generated": 3442,
+    "pending": 300925,
+    "live_in_posts": 10,
+    "coverage": 1.1
   },
   "posts": {
-    "total": 0,
-    "generated": 0,
-    "by_service": {}
+    "total": 6060,
+    "generated": 6050,
+    "by_service": {
+      "jasa-kelola-tiktok": 408,
+      "jasa-iklan-facebook": 406,
+      "jasa-iklan-instagram": 406,
+      "jasa-kelola-instagram": 406,
+      "jasa-iklan-tiktok": 388,
+      "jasa-pembuatan-landing-page": 388,
+      "jasa-iklan-google": 386,
+      "jasa-iklan-youtube": 386,
+      "live-stream-viewers": 368,
+      "tiktok-live-viewers": 364,
+      "shopee-live-viewers": 364,
+      "youtube-live-viewers": 364,
+      "instagram-live-viewers": 364,
+      "jasa-pembuatan-website": 360,
+      "jasa-digital-marketing": 349,
+      "twitch-live-viewers": 343
+    }
   },
   "by_service": [
     {
       "key": "Lainnya / Umum",
-      "total": 105526,
-      "generated": 178,
-      "pending": 105348,
-      "coverage": 0.2
+      "total": 106673,
+      "generated": 1562,
+      "pending": 105111,
+      "coverage": 1.5
     },
     {
       "key": "Jasa Iklan Google",
-      "total": 32258,
-      "generated": 79,
-      "pending": 32179,
-      "coverage": 0.2
+      "total": 32307,
+      "generated": 89,
+      "pending": 32218,
+      "coverage": 0.3
     },
     {
       "key": "Jasa Pembuatan Landing Page",
-      "total": 28611,
-      "generated": 104,
-      "pending": 28507,
+      "total": 28660,
+      "generated": 115,
+      "pending": 28545,
       "coverage": 0.4
     },
     {
       "key": "Jasa Iklan TikTok",
-      "total": 26633,
-      "generated": 79,
-      "pending": 26554,
+      "total": 26682,
+      "generated": 88,
+      "pending": 26594,
       "coverage": 0.3
     },
     {
       "key": "Jasa Iklan YouTube",
-      "total": 26537,
-      "generated": 59,
-      "pending": 26478,
-      "coverage": 0.2
-    },
-    {
-      "key": "Jasa Iklan Facebook",
-      "total": 24866,
-      "generated": 142,
-      "pending": 24724,
-      "coverage": 0.6
-    },
-    {
-      "key": "Jasa Iklan Instagram",
-      "total": 24730,
-      "generated": 79,
-      "pending": 24651,
+      "total": 26586,
+      "generated": 75,
+      "pending": 26511,
       "coverage": 0.3
     },
     {
+      "key": "Jasa Iklan Facebook",
+      "total": 24915,
+      "generated": 1274,
+      "pending": 23641,
+      "coverage": 5.1
+    },
+    {
+      "key": "Jasa Iklan Instagram",
+      "total": 24779,
+      "generated": 88,
+      "pending": 24691,
+      "coverage": 0.4
+    },
+    {
       "key": "Jasa Digital Marketing",
-      "total": 20867,
-      "generated": 79,
-      "pending": 20788,
+      "total": 20916,
+      "generated": 92,
+      "pending": 20824,
       "coverage": 0.4
     },
     {
       "key": "Jasa Pembuatan Website",
-      "total": 7503,
-      "generated": 0,
-      "pending": 7503,
-      "coverage": 0.0
+      "total": 7504,
+      "generated": 44,
+      "pending": 7460,
+      "coverage": 0.6
     },
     {
       "key": "Jasa View Live",
-      "total": 1205,
-      "generated": 0,
-      "pending": 1205,
-      "coverage": 0.0
+      "total": 5345,
+      "generated": 15,
+      "pending": 5330,
+      "coverage": 0.3
     }
   ],
   "by_city": [
@@ -97,9 +114,9 @@
     {
       "key": "expansion_l3_en",
       "total": 105000,
-      "generated": 0,
-      "pending": 105000,
-      "coverage": 0.0
+      "generated": 900,
+      "pending": 104100,
+      "coverage": 0.9
     },
     {
       "key": "expansion_w1_en",
@@ -111,9 +128,9 @@
     {
       "key": "expansion_l3_ms",
       "total": 43750,
-      "generated": 0,
-      "pending": 43750,
-      "coverage": 0.0
+      "generated": 449,
+      "pending": 43301,
+      "coverage": 1.0
     },
     {
       "key": "expansion_w1_ms",
@@ -137,6 +154,13 @@
       "coverage": 6.6
     },
     {
+      "key": "expansion_bm_v1",
+      "total": 5631,
+      "generated": 0,
+      "pending": 5631,
+      "coverage": 0.0
+    },
+    {
       "key": "expansion_l2_ms",
       "total": 4830,
       "generated": 25,
@@ -153,9 +177,9 @@
     {
       "key": "expansion_my",
       "total": 4419,
-      "generated": 0,
-      "pending": 4419,
-      "coverage": 0.0
+      "generated": 887,
+      "pending": 3532,
+      "coverage": 20.1
     },
     {
       "key": "expansion_w3_en",
@@ -167,9 +191,9 @@
     {
       "key": "suggest_my",
       "total": 888,
-      "generated": 1,
-      "pending": 887,
-      "coverage": 0.1
+      "generated": 82,
+      "pending": 806,
+      "coverage": 9.2
     },
     {
       "key": "expansion_l5_en",
@@ -188,9 +212,9 @@
     {
       "key": "expansion_w3_ms",
       "total": 700,
-      "generated": 63,
-      "pending": 637,
-      "coverage": 9.0
+      "generated": 314,
+      "pending": 386,
+      "coverage": 44.9
     },
     {
       "key": "expansion_l6_en",
@@ -202,9 +226,9 @@
     {
       "key": "expansion_ms",
       "total": 545,
-      "generated": 0,
-      "pending": 545,
-      "coverage": 0.0
+      "generated": 75,
+      "pending": 470,
+      "coverage": 13.8
     },
     {
       "key": "expansion_l5_ms",

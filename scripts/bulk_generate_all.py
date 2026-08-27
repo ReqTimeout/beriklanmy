@@ -22,14 +22,41 @@ PROGRESS_FILE = os.path.join(DRAFTS_DIR, "_progress.json")
 ZEN_KEY_PATH = os.path.expanduser("~/.beriklan/zen-key")
 
 ZEN_URL = "https://opencode.ai/zen/v1/chat/completions"
-# Multi-model rotation. Each model has independent rate limit on free tier.
-MODELS = ["nemotron-3-ultra-free", "ling-3.0-flash-free", "north-mini-code-free", "deepseek-v4-flash-free", "mimo-v2.5-free", "laguna-s-2.1-free"]
-MAX_WORKERS = 5
+# TokenRouter free models. qwen3.8-max-free is a reasoning model — returns
+# content in `content` (with `reasoning_content` separate), needs large max_tokens
+# because reasoning consumes tokens before the answer. deepseek-v4-pro-0813-free
+# returned garbage (Chinese boilerplate) in testing, so it's excluded.
+TOKENROUTER_URL = "https://api.tokenrouter.com/v1/chat/completions"
+TOKENROUTER_KEY = "sk-ggb0nO6f0cMdIBkcWhsxwvry5F4Fc1oAmhV9gkL0yt0wMBWI"
+
+# Multi-endpoint pool: each free source has its OWN rate limit, so round-robining
+# across all of them lets us run many parallel workers without any single key
+# getting 429'd. ZEN has several models; TokenRouter adds qwen3.8-max-free.
+ZEN_MODELS = [
+    "ling-3.0-flash-free", "mimo-v2.5-free", "deepseek-v4-flash-free",
+    "laguna-s-2.1-free",
+]
+# Flat pool of (model, endpoint_name); endpoint_name indexes ENDPOINTS below.
+MODEL_POOL = []
+for _m in ZEN_MODELS:
+    MODEL_POOL.append((_m, "zen"))
+for _m in ["qwen/qwen3.8-max-free", "qwen/qwen3.8-max-free"]:
+    MODEL_POOL.append((_m, "tokenrouter"))
+
+ENDPOINTS = {
+    "zen":         {"url": ZEN_URL, "key": None},  # filled at runtime (read_zen_key)
+    "tokenrouter": {"url": TOKENROUTER_URL, "key": TOKENROUTER_KEY},
+}
+# Per-endpoint min interval (seconds). TokenRouter free ≈3 req/min; ZEN freer.
+ENDPOINT_MIN_INTERVAL = {"zen": 2, "tokenrouter": 20}
+_endpoint_last = {k: 0.0 for k in ENDPOINTS}
+_endpoint_pace_lock = threading.Lock()
+MAX_WORKERS = 10
 ERR_LOG = "/tmp/bulk_generate_err.log"
 
 # Per-model lockout timestamps (epoch seconds). If a model hits rate limit,
 # it's locked out for LOCKOUT_S seconds.
-model_lockout = {m: 0 for m in MODELS}
+model_lockout = [0] * len(MODEL_POOL)
 model_lock = threading.Lock()
 LOCKOUT_S = 15  # seconds to wait before retrying a rate-limited model
 
@@ -72,26 +99,37 @@ SERVICE_PATHS = {
 }
 
 def read_zen_key():
+    # env override wins (ZEN_API_KEY), then ~/.beriklan/zen-key
+    env_key = os.environ.get("ZEN_API_KEY")
+    if env_key:
+        return env_key.strip()
     try:
         return open(ZEN_KEY_PATH).read().strip()
     except:
-        print("ERROR: Zen API key not found at", ZEN_KEY_PATH)
-        sys.exit(1)
+        return None  # TokenRouter-only mode is fine if ZEN key absent
+
+# Round-robin cursor so concurrent threads spread evenly across all models
+# instead of all piling onto the first available one (that caused 503 storms).
+_rr_cursor = 0
 
 def get_model(attempt=0):
-    """Return a model that's not currently locked out. Rotate through MODELS."""
+    """Return (model, endpoint_name) that's not currently locked out. Round-robin across MODEL_POOL."""
+    global _rr_cursor
     now = time.time()
     with model_lock:
-        for m in MODELS:
-            if model_lockout[m] < now:
-                return m
+        for _ in range(len(MODEL_POOL)):
+            i = _rr_cursor % len(MODEL_POOL)
+            _rr_cursor += 1
+            if model_lockout[i] < now:
+                return MODEL_POOL[i]
     # All models locked out — pick the soonest-to-unlock one
     with model_lock:
-        return min(MODELS, key=lambda m: model_lockout[m])
+        i = min(range(len(MODEL_POOL)), key=lambda j: model_lockout[j])
+        return MODEL_POOL[i]
 
-def lock_model(model, seconds=LOCKOUT_S):
+def lock_model(idx, seconds=LOCKOUT_S):
     with model_lock:
-        model_lockout[model] = time.time() + seconds
+        model_lockout[idx] = time.time() + seconds
 
 def load_live_slugs():
     try:
@@ -103,7 +141,7 @@ def load_live_slugs():
 # Anti-doorway: deterministic per-keyword structure variants so the ~298k articles
 # do NOT share one identical heading template (scaled-content-abuse footprint).
 PROMPT_VARIANTS = [
-    ("600-750", [
+    ("350-450", [
         ("Introduction", "define {kw} in 1-2 short paragraphs with local {loc}/Malaysia context."),
         ("Key Benefits", "3-4 points in a <ul>."),
         ("How It Works", "3-4 steps in an <ol>."),
@@ -112,7 +150,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Conclusion", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("550-700", [
+    ("350-450", [
         ("What Is {kw}?", "explain the concept in 1-2 paragraphs for a Malaysian business owner."),
         ("Why It Matters for Malaysian Businesses", "2-3 paragraphs on real business impact."),
         ("Step-by-Step Process", "3-4 steps in an <ol>."),
@@ -120,7 +158,7 @@ PROMPT_VARIANTS = [
         ("Questions Business Owners Ask", "3 <h3> questions, each answered in a <p>."),
         ("Getting Started", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("650-800", [
+    ("350-450", [
         ("Overview", "introduce {kw} with {loc}/Malaysia context in 1-2 paragraphs."),
         ("Who Should Consider This", "describe the ideal business or situation in a <ul>."),
         ("Key Advantages", "3-4 points in a <ul>."),
@@ -129,7 +167,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Final Thoughts", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("600-750", [
+    ("350-450", [
         ("{kw}: A Practical Guide", "1-2 paragraph introduction with {loc}/Malaysia context."),
         ("Benefits You Can Expect", "3-4 points in a <ul>."),
         ("How We Approach It", "3-4 steps in an <ol>."),
@@ -138,7 +176,7 @@ PROMPT_VARIANTS = [
         ("Frequently Asked Questions", "3 <h3> questions, each answered in a <p>."),
         ("Next Steps", "1 paragraph, ending with a WhatsApp call to action."),
     ]),
-    ("550-700", [
+    ("350-450", [
         ("Understanding {kw}", "define it in 1-2 paragraphs with Malaysia context."),
         ("When to Use It", "2-3 scenarios in a <ul>."),
         ("Process & Timeline", "3-4 steps in an <ol>."),
@@ -184,6 +222,7 @@ Use these exact <h2> headings in order:
 {heading_block}
 
 Requirements:
+- STRICTLY keep the entire article between 350 and 450 words. Do NOT exceed 450 words — be concise.
 - Link twice to {ilink} with natural anchor text.
 - Link once to <a href="{elink}" rel="nofollow"> as an external reference.
 - Voice: the Beriklan team, an agency running ad campaigns since 2016.
@@ -200,16 +239,33 @@ def log_err(keyword, slug, reason):
         f.write(line + "\n")
     print(f"  ⚠ ERROR: {slug} — {reason}", file=sys.stderr)
 
-def call_zen(prompt, zen_key, timeout=90):
-    """Try models in rotation; lock out rate-limited ones."""
+def call_zen(prompt, zen_key=None, timeout=180):
+    """Try models in rotation across ALL endpoints; lock out rate-limited ones."""
     last_err = None
-    for attempt in range(4):
-        model = get_model(attempt)
+    for attempt in range(6):
+        model, ep_name = get_model(attempt)
+        ep = ENDPOINTS[ep_name]
+        key = ep["key"] if ep_name == "tokenrouter" else zen_key
+        if not key:
+            # no key for this endpoint — skip it
+            lock_model(MODEL_POOL.index((model, ep_name)), 60)
+            continue
+        # Pace per-endpoint to respect each free-tier's own rate limit
+        with _endpoint_pace_lock:
+            global _endpoint_last
+            wait = ENDPOINT_MIN_INTERVAL[ep_name] - (time.time() - _endpoint_last[ep_name])
+            if wait > 0:
+                time.sleep(wait)
+            _endpoint_last[ep_name] = time.time()
+        idx = MODEL_POOL.index((model, ep_name))
+        extra = {}
+        if ep_name == "tokenrouter":
+            extra = {"enable_thinking": False, "reasoning_effort": "low"}
         try:
-            r = requests.post(ZEN_URL,
-                headers={"Authorization": f"Bearer {zen_key}", "Content-Type": "application/json"},
+            r = requests.post(ep["url"],
+                headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                 json={"model": model, "messages": [{"role": "user", "content": prompt}],
-                      "max_tokens": 1500, "temperature": 0.6, "thinking": {"type": "disabled"}},
+                      "max_tokens": 900, "temperature": 0.4, **extra},
                 timeout=timeout)
             if r.status_code == 200:
                 try:
@@ -218,25 +274,41 @@ def call_zen(prompt, zen_key, timeout=90):
                     last_err = "json parse fail"
                     continue
                 if data.get("error"):
-                    err_type = data["error"].get("type", "")
-                    if "FreeUsageLimit" in err_type or "rate_limit" in err_type or "insufficient" in str(data["error"]).lower():
-                        lock_model(model, LOCKOUT_S)
-                        last_err = f"{model}: {err_type}"
+                    err_type = str(data.get("error", ""))
+                    if "FreeUsageLimit" in err_type or "rate_limit" in err_type or "insufficient" in err_type.lower() or "quota" in err_type.lower():
+                        lock_model(idx, LOCKOUT_S)
+                        last_err = f"{model}: {err_type[:80]}"
                         continue
-                    last_err = f"{model}: {data['error'].get('message','')[:100]}"
+                    last_err = f"{model}: {err_type[:100]}"
                     continue
-                text = (data.get("choices", [{}])[0].get("message", {}).get("content", "") or "").strip()
+                msg = data.get("choices", [{}])[0].get("message", {})
+                # reasoning model: answer is in `content` (not reasoning_content)
+                text = (msg.get("content") or "").strip()
                 if len(text) > 300:
                     return text
-                # Sometimes content is in reasoning_content
-                text2 = (data.get("choices", [{}])[0].get("message", {}).get("reasoning_content", "") or "").strip()
+                # fallback: some providers put the answer in reasoning_content
+                text2 = (msg.get("reasoning_content") or "").strip()
                 if len(text2) > 300:
                     return text2
+                # Empty/too-short reply often means the model is degraded — cool it off
+                lock_model(idx, LOCKOUT_S)
                 last_err = f"{model}: too short ({len(text)})"
                 continue
             elif r.status_code == 429:
-                lock_model(model, LOCKOUT_S)
-                last_err = f"{model}: 429"
+                ra = r.headers.get("Retry-After")
+                try:
+                    wait = int(float(ra))
+                except (TypeError, ValueError):
+                    wait = 30
+                wait = min(wait, 45)
+                lock_model(idx, wait)
+                time.sleep(wait)
+                last_err = f"{model}: 429 (backoff {wait}s)"
+                continue
+            elif r.status_code in (502, 503):
+                lock_model(idx, 8)
+                last_err = f"{model}: HTTP {r.status_code}"
+                time.sleep(1)
                 continue
             else:
                 last_err = f"{model}: HTTP {r.status_code}"
@@ -285,8 +357,8 @@ def make_article(item, zen_key, live_slugs):
         return None
 
     content = clean_html(raw)
-    # QC: retry once if too short (<450 words) for better quality
-    if len(content.split()) < 450:
+    # QC: retry once if too short (<200 words) for better quality
+    if len(content.split()) < 200:
         raw2 = call_zen(prompt, zen_key)
         if raw2 and len(clean_html(raw2).split()) > len(content.split()):
             content = clean_html(raw2)
@@ -319,7 +391,10 @@ def main():
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--workers", type=int, default=MAX_WORKERS)
+    parser.add_argument("--services", type=str, default="",
+                        help="Comma-separated service slugs to generate ONLY (e.g. tiktok-live-viewers,shopee-live-viewers)")
     args = parser.parse_args()
+    only_services = {s.strip() for s in args.services.split(",") if s.strip()} if args.services else None
     
     zen_key = read_zen_key()
     live_slugs = load_live_slugs()
@@ -335,6 +410,10 @@ def main():
     
     queue = json.load(open(QUEUE))
     pending = [x for x in queue if x.get("status") == "pending" and not x.get("has_post")]
+    if only_services:
+        before = len(pending)
+        pending = [x for x in pending if x.get("service") in only_services]
+        print(f"Service filter {sorted(only_services)}: {before} → {len(pending)} pending")
     print(f"Queue: {len(queue)} total, {len(pending)} pending, {len(live_slugs)} live slugs")
     
     pending = [x for x in pending if x.get("slug") not in processed and x.get("slug") not in live_slugs]

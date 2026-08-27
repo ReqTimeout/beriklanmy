@@ -7,6 +7,7 @@
     let allPosts = [];
     let loaded = false;
     let rootEl;
+    let visibleCount = 60;
 
     // Cluster mode: when visited via /blog/?tag=<T>&service=<S> (pillar cluster links)
     let clusterMode = false;
@@ -66,8 +67,9 @@
             const res = await fetch('/data/posts-index.json');
             if (res.ok) {
                 const data = await res.json();
-                // Take 24 most recent for the blog index
-                allPosts = data.slice(0, 24);
+                // Show all posts (load-more reveals the rest)
+                allPosts = data;
+                visibleCount = 60;
                 loaded = true;
             }
         } catch (e) {
@@ -106,13 +108,23 @@
         { id: 'tiktok', label: 'TikTok' },
         { id: 'google', label: 'Google Ads' },
         { id: 'youtube', label: 'YouTube' },
+        { id: 'website-development', label: 'Website Development' },
+        { id: 'landing-page-design', label: 'Landing Page' },
+        { id: 'digital-marketing', label: 'Digital Marketing' },
         { id: 'strategy', label: 'Strategy' },
         { id: 'case-study', label: 'Case Studies' },
+        { id: 'tiktok-live-viewers', label: 'TikTok Live' },
+        { id: 'shopee-live-viewers', label: 'Shopee Live' },
+        { id: 'youtube-live-viewers', label: 'YouTube Live' },
+        { id: 'twitch-live-viewers', label: 'Twitch Live' },
+        { id: 'instagram-live-viewers', label: 'IG Live' },
+        { id: 'live-stream-viewers', label: 'Live Streaming' },
     ];
 
     $: filteredPosts = activeCategory === 'all' ? allPosts : allPosts.filter(p => p.category === activeCategory);
     $: featuredPosts = filteredPosts.filter(p => p.featured);
     $: gridPosts = filteredPosts.filter(p => !p.featured);
+    $: displayedGrid = gridPosts.slice(0, visibleCount);
 </script>
 
 <div>
@@ -179,7 +191,7 @@
             {#each categories as cat}
                 <button
                     type="button"
-                    onclick={() => activeCategory = cat.id}
+                    onclick={() => { activeCategory = cat.id; visibleCount = 60; }}
                     class="px-4 py-2 rounded-full text-xs font-bold transition-all {activeCategory === cat.id ? 'bg-ink text-white' : 'bg-white text-ink border border-gray-200 hover:border-ink'}"
                 >
                     {cat.label}
@@ -222,7 +234,7 @@
 <div bind:this={rootEl}>
             <h3 class="text-xs font-bold uppercase tracking-wider text-muted mb-4">More Articles</h3>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal-stagger" data-reveal-stagger>
-                        {#each gridPosts as post}
+                        {#each displayedGrid as post}
                             <a href="/blog/{post.slug}" class="grid-card group">
                                 <div class="grid-thumb">
                                     <img src={getImage(post)} alt={post.title} class="absolute inset-0 w-full h-full object-cover" loading="lazy" onerror={(e) => onImgError(e, post.slug)} />
@@ -240,6 +252,13 @@
                 {/each}
             </div>
         </div>
+    {#if gridPosts.length > visibleCount}
+        <div class="mt-10 text-center">
+            <button type="button" onclick={() => visibleCount += 60} class="inline-flex items-center justify-center gap-2 bg-ink text-white px-7 py-3.5 rounded-full font-bold shadow-pop hover:shadow-lg transition-all">
+                Load more articles
+            </button>
+        </div>
+    {/if}
     {:else if filteredPosts.length === 0}
         <div class="text-center py-12">
             <p class="text-muted">No articles in this topic. Try another one.</p>

@@ -34,7 +34,7 @@
   "assets": {
     "binding": "ASSETS",
     "directory": "dist",
-    "run_worker_first": ["/sitemap-blog.xml", "/data/posts-index.json", "/facebook-ads-management/", "/instagram-ads-management/", "/tiktok-ads-management/", "/google-ads-management/", "/youtube-ads-management/", "/instagram-management/", "/tiktok-management/", "/website-development/", "/landing-page-design/", "/digital-marketing-agency/", "/live-stream-viewers/", "/tiktok-live-viewers/", "/shopee-live-viewers/", "/youtube-live-viewers/", "/twitch-live-viewers/", "/instagram-live-viewers/"]
+    "run_worker_first": ["/blog/*", "/data/*", "/news.xml", "/sitemap-blog.xml", "/facebook-ads-management/", "/instagram-ads-management/", "/tiktok-ads-management/", "/google-ads-management/", "/youtube-ads-management/", "/instagram-management/", "/tiktok-management/", "/website-development/", "/landing-page-design/", "/digital-marketing-agency/", "/live-stream-viewers/", "/tiktok-live-viewers/", "/shopee-live-viewers/", "/youtube-live-viewers/", "/twitch-live-viewers/", "/instagram-live-viewers/"]
   }
   // crons dilepas: akun CF free sudah 5/5 cron trigger (beriklan-app 3 + beriklanweb 2).
   // Pengganti: cron-job.org GET /api/cron/tick?token=ADMIN_TOKEN tiap jam (menit 0).

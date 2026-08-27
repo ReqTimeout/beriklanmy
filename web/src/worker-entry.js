@@ -424,6 +424,49 @@ export default {
       return await handleIndexNowSubmit(request, env);
     }
 
+    // News sitemap (.my — same pattern as .com, pagination ?page=N)
+    if (path === "/news.xml" || path === "/news.xml/") {
+      return await handleNewsSitemap(request, env);
+    }
+
+    // News sitemap ping (cron-job.org replaces CF cron yang penuh 5/5)
+    if (path === "/api/cron/news/ping" || path === "/api/cron/news/ping/") {
+      const token = new URL(request.url).searchParams.get("token");
+      if (token !== env.ADMIN_TOKEN) return new Response("Unauthorized", { status: 401 });
+      return await handleNewsPing(request, env);
+    }
+
+    // Multi-channel distribute (IndexNow + webhook + Telegram optional)
+    if (path === "/api/cron/distribute" || path === "/api/cron/distribute/") {
+      const token = new URL(request.url).searchParams.get("token");
+      if (token !== env.ADMIN_TOKEN) return new Response("Unauthorized", { status: 401 });
+      return await handleDistributeCron(request, env);
+    }
+
+    // Posts categories monitor (recategorize verification)
+    if (path === "/api/admin/posts/categories" || path === "/api/admin/posts/categories/") {
+      return await handleAdminPostsCategories(request, env);
+    }
+
+    // Posts index full (with category) — untuk regenerate posts-index.json
+    if (path === "/api/admin/posts/full" || path === "/api/admin/posts/full/") {
+      return await handleAdminPostsFull(request, env);
+    }
+
+    // Blog index / pagination / category — renderBlogIndex D1-first (mirror .com).
+    // STATIK blog.astro hanya fallback kalau D1 kosong / error.
+    const blogIdxRoot = path === "/blog" || path === "/blog/";
+    const blogPageM = path.match(/^\/blog\/page\/(\d+)\/?$/);
+    const blogCatM = path.match(/^\/blog\/category\/([a-z0-9-]+)(?:\/page\/(\d+))?\/?$/);
+    if (blogIdxRoot || blogPageM || blogCatM) {
+      const idxPage = blogPageM ? parseInt(blogPageM[1], 10) : (blogCatM && blogCatM[2] ? parseInt(blogCatM[2], 10) : 1);
+      const idxResp = await renderBlogIndex(env, idxPage, blogCatM ? blogCatM[1] : null);
+      if (idxResp) {
+        idxResp.headers.set("X-Worker-Rendered", "renderBlogIndex-v3");
+        return idxResp;
+      }
+    }
+
     // Static assets fallback
     try {
       // 1. Check _redirects (compiled at build time, inlined)
@@ -647,13 +690,6 @@ export default {
       // ── Growth: freshness mingguan — Senin 02:00 UTC ──
       if (new Date().getUTCDay() === 1 && h === 2) {
         ctx.waitUntil(run("growth-freshness", handleGrowthFreshness, "/api/cron/growth/freshness?token=beriklan-my-admin-2026&count=5&maxAgeDays=90", "growth-freshness"));
-      }
-      // ── Lead acquisition scrape harian (slot sendiri supaya tidak tumpang tindih) ──
-      if (h === 6) {
-        ctx.waitUntil(run("scrape-indonetwork", handleScrapeIndonetwork, "/api/cron/scrape/indonetwork?token=beriklan-my-admin-2026", "scrape-indonetwork"));
-      }
-      if (h === 7) {
-        ctx.waitUntil(run("scrape-google-places", handleScrapeGooglePlaces, "/api/cron/scrape/google-places?token=beriklan-my-admin-2026", "scrape-google-places"));
       }
       // ── Daily (00:00 UTC only) — Telegraph get rate-limited per day, so 1× per day prevents account churn ──
       if (h === 0) {
@@ -1881,7 +1917,7 @@ async function handleAdminSyncPosts(request, env) {
           const tags = JSON.stringify([draft.service, draft.city].filter(Boolean)).slice(0, 1000);
           await env.DB.prepare(
             "INSERT OR IGNORE INTO posts_meta (slug, title, excerpt, date, iso_date, category, readTime, tags, service, city, featured, generated, iso_updated) VALUES (?,?,?,?,?,?,?,?,?,?,0,1,datetime('now'))"
-          ).bind(draft.slug, title, excerpt.slice(0, 500), dateStr, nowIso, "trending", readTime, tags, draft.service || "", draft.city || "").run();
+          ).bind(draft.slug, title, excerpt.slice(0, 500), dateStr, nowIso, _resolveCategory(draft.service, title, "trending"), readTime, tags, draft.service || "", draft.city || "").run();
           await env.DB.prepare("INSERT OR IGNORE INTO posts_content (slug, content) VALUES (?,?)").bind(draft.slug, content).run();
           await env.DB.prepare("UPDATE generated_drafts SET status='committed', committed_at=datetime('now') WHERE slug=?").bind(draft.slug).run();
           try {
@@ -1964,25 +2000,25 @@ async function handleAdminSyncPosts(request, env) {
      // Add new drafts as posts (F4-12: inject internal links — 3 artikel cluster + 1 pillar)
      for (const draft of safeDrafts) {
        draft.content = await appendInternalLinks(env, draft);
-       if (!merged.has(draft.slug)) {
-         const dateStr = wibPublishStamp().date;
-         merged.set(draft.slug, {
-           slug: draft.slug,
-           title: draft.title,
-           excerpt: (draft.content || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().substring(0, 200),
-           content: draft.content,
-           date: dateStr,
-           iso_date: nowIso,
-           category: "trending",
-           readTime: Math.max(1, Math.round((draft.content || "").split(/\s+/).length / 200)) + " min",
-           tags: [draft.service, draft.city].filter(Boolean),
-           featured: false,
-           generated: true,
-           service: draft.service,
-           city: draft.city,
-           publish_date: dateStr,
-         });
-       }
+if (!merged.has(draft.slug)) {
+          const dateStr = wibPublishStamp().date;
+          merged.set(draft.slug, {
+            slug: draft.slug,
+            title: draft.title,
+            excerpt: (draft.content || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().substring(0, 200),
+            content: draft.content,
+            date: dateStr,
+            iso_date: nowIso,
+            category: _resolveCategory(draft.service, draft.title, "trending"),
+            readTime: Math.max(1, Math.round((draft.content || "").split(/\s+/).length / 200)) + " min",
+            tags: [draft.service, draft.city].filter(Boolean),
+            featured: false,
+            generated: true,
+            service: draft.service,
+            city: draft.city,
+            publish_date: dateStr,
+          });
+        }
      }
      const finalPosts = Array.from(merged.values()).sort((a, b) => (b.iso_date || "").localeCompare(a.iso_date || ""));
 
@@ -3035,6 +3071,28 @@ async function handleAdminMigrate(request, env) {
     `INSERT OR IGNORE INTO cron_settings (name, cron, enabled, label) VALUES ('scrape-google-places', '0 7 * * *', 1, 'Scrape Google Places (harian)')`,
     `INSERT OR IGNORE INTO cron_settings (name, cron, enabled, label) VALUES ('email-send', '*/15 * * * *', 1, 'Kirim antrian email (tiap 15 menit)')`,
     `ALTER TABLE cron_settings ADD COLUMN value TEXT DEFAULT ''`,
+    // 2026-08-27 — Recategorize posts_meta.category by title inference
+    // (miror fix dari beriklan.co.id — tanpa ini 177 post punya service=tiktok walaupun
+    // title bilang "Google Ads" / "YouTube Ads" / "Landing Page"). Sekarang
+    // category match dengan title → image featured benar + blog index chip benar.
+    `UPDATE posts_meta SET category = CASE
+       WHEN LOWER(title) LIKE '%landing page%' OR LOWER(title) LIKE '%landingpage%' THEN 'landing-page-design'
+       WHEN LOWER(title) LIKE '%pembuatan website%' OR LOWER(title) LIKE '%jasa website%' OR LOWER(title) LIKE '%jasa buat website%' OR LOWER(title) LIKE '%web developer%' OR LOWER(title) LIKE '%web design%' OR LOWER(title) LIKE '%website%' OR LOWER(title) LIKE '%web design%' THEN 'website-development'
+       WHEN LOWER(title) LIKE '%kelola instagram%' OR LOWER(title) LIKE '%instagram management%' OR LOWER(title) LIKE '%manage instagram%' OR LOWER(title) LIKE '%instagram manager%' THEN 'instagram-management'
+       WHEN LOWER(title) LIKE '%kelola tiktok%' OR LOWER(title) LIKE '%tiktok management%' OR LOWER(title) LIKE '%manage tiktok%' OR LOWER(title) LIKE '%tiktok manager%' THEN 'tiktok-management'
+       WHEN LOWER(title) LIKE '%jasa iklan facebook%' OR LOWER(title) LIKE '%facebook ads%' OR LOWER(title) LIKE '%facebook advertising%' OR LOWER(title) LIKE '%fb ads%' OR LOWER(title) LIKE '%meta ads%' OR LOWER(title) LIKE '%iklan facebook%' OR LOWER(title) LIKE '%facebook iklan%' THEN 'facebook-ads-management'
+       WHEN LOWER(title) LIKE '%jasa iklan instagram%' OR LOWER(title) LIKE '%instagram ads%' OR LOWER(title) LIKE '%ig ads%' OR LOWER(title) LIKE '%instagram advertising%' OR LOWER(title) LIKE '%iklan instagram%' OR LOWER(title) LIKE '%instagram iklan%' THEN 'instagram-ads-management'
+       WHEN LOWER(title) LIKE '%jasa iklan tiktok%' OR LOWER(title) LIKE '%tiktok ads%' OR LOWER(title) LIKE '%tiktok advertising%' OR LOWER(title) LIKE '%iklan tiktok%' OR LOWER(title) LIKE '%tiktok iklan%' THEN 'tiktok-ads-management'
+       WHEN LOWER(title) LIKE '%jasa iklan youtube%' OR LOWER(title) LIKE '%youtube ads%' OR LOWER(title) LIKE '%youtube advertising%' OR LOWER(title) LIKE '%iklan youtube%' OR LOWER(title) LIKE '%youtube iklan%' THEN 'youtube-ads-management'
+       WHEN LOWER(title) LIKE '%jasa iklan google%' OR LOWER(title) LIKE '%google ads%' OR LOWER(title) LIKE '%google advertising%' OR LOWER(title) LIKE '%adwords%' OR LOWER(title) LIKE '%iklan google%' OR LOWER(title) LIKE '%google iklan%' OR LOWER(title) LIKE '%google adwords%' THEN 'google-ads-management'
+       WHEN LOWER(title) LIKE '%view live%' OR LOWER(title) LIKE '%live streaming%' OR LOWER(title) LIKE '%live stream%' OR LOWER(title) LIKE '%live viewers%' OR LOWER(title) LIKE '%viewers%' OR LOWER(title) LIKE '%live boost%' OR LOWER(title) LIKE '%buzzer%' OR LOWER(title) LIKE '%view live tiktok%' OR LOWER(title) LIKE '%live tiktok%' OR LOWER(title) LIKE '%tiktok live%' THEN 'live-stream-viewers'
+       WHEN LOWER(title) LIKE '%digital marketing%' OR LOWER(title) LIKE '%digital agency%' OR LOWER(title) LIKE '%performance marketing%' OR LOWER(title) LIKE '%online marketing%' OR LOWER(title) LIKE '%digital marketing agency%' THEN 'digital-marketing-agency'
+       ELSE category
+     END
+     WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'`,
+    // 2026-08-27 — last_distributed_at untuk multi-channel distribute (IndexNow + Telegram)
+    `ALTER TABLE posts_meta ADD COLUMN last_distributed_at TEXT`,
+    `CREATE INDEX IF NOT EXISTS idx_posts_meta_distributed ON posts_meta (last_distributed_at, iso_date)`,
     // scrape.beriklan.my — consumer trial system
     `CREATE TABLE IF NOT EXISTS scrape_users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12452,6 +12510,10 @@ async function handleIndexNowSubmit(request, env) {
 // ─── Template cache: fetches reference Astro blog post — auto-syncs CSS/JS hashes ───
 let _blogTpl = null;
 
+// 2026-08-27 — rewrite ke pattern .com: capture head + bodyPre + islands.
+// Sebelumnya split pakai `setTimeout(window.__loadAdSense, 3000)` marker — kalau
+// marker hilang dari homepage, _getBlogTpl return null → renderBlogIndex silent
+// fail → static Astro blog.astro yang serve (stale data).
 async function _getBlogTpl(env) {
   if (_blogTpl) return _blogTpl;
   try {
@@ -12459,13 +12521,23 @@ async function _getBlogTpl(env) {
     const refResp = await env.ASSETS.fetch(refReq);
     if (!refResp.ok) return null;
     const html = await refResp.text();
-    const splitMarker = 'setTimeout(window.__loadAdSense, 3000);\n    </script>';
-    const splitIdx = html.indexOf(splitMarker);
-    if (splitIdx < 0) return null;
-    const prefix = html.substring(0, splitIdx + splitMarker.length);
-    const footerIdx = html.indexOf('<footer class="bg-ink');
-    if (footerIdx < 0) return null;
-    _blogTpl = { prefix, suffix: html.substring(footerIdx) };
+    const headEnd = html.indexOf('</head>');
+    const footerStart = html.indexOf('<footer class="bg-ink');
+    if (headEnd < 0 || footerStart < 0) return null;
+    const bodyOpen = html.indexOf('<body');
+    const bodyOpenEnd = bodyOpen >= 0 ? html.indexOf('>', bodyOpen) + 1 : -1;
+    const prefix = html.substring(0, headEnd + '</head>'.length) +
+      '\n<body lang="ms" class="scroll-smooth">\n';
+    const suffix = html.substring(footerStart);
+    const bodyMid = bodyOpenEnd > 0 ? html.substring(bodyOpenEnd, footerStart) : '';
+    const firstIslandAt = bodyMid.indexOf('<astro-island');
+    const bodyPre = firstIslandAt > 0 ? bodyMid.substring(0, firstIslandAt) : '';
+    // Hanya chrome islands (Navbar/StickyCTA/FloatingWhatsApp/CookieBanner) — JANGAN
+    // inject HeroVisual/PainPoints/Services/dll (rusak layout blog).
+    const KEEP_ISLANDS = /Navbar|StickyCTA|FloatingWhatsApp|CookieBanner/;
+    const allIslands = bodyMid.match(/<astro-island[\s\S]*?<\/astro-island>/g) || [];
+    const islands = allIslands.filter(blk => KEEP_ISLANDS.test(blk)).join('\n');
+    _blogTpl = { prefix, suffix, islands, bodyPre };
     return _blogTpl;
   } catch (e) {
     console.error('Blog template fetch error:', e);
@@ -12487,11 +12559,17 @@ const SVC_IMG = {
   "website-development": "jasapembuatanwebsite",
   "landing-page-design": "jasapembuatanwebsite",
   "live-stream-viewers": "jasaviewlivetiktok",
+  "live-stream-viewers-tiktok": "jasaviewlivetiktok",
+  "live-stream-viewers-youtube": "jasaviewliveyoutube",
+  "live-stream-viewers-instagram": "jasaviewliveinstagram",
+  "live-stream-viewers-shopee": "jasaviewliveshopee",
+  "live-stream-viewers-twitch": "jasaviewlivetwitch",
   "tiktok-live-viewers": "jasaviewlivetiktok",
   "shopee-live-viewers": "jasaviewliveshopee",
   "youtube-live-viewers": "jasaviewliveyoutube",
   "twitch-live-viewers": "jasaviewlivetwitch",
   "instagram-live-viewers": "jasaviewliveinstagram",
+  "facebook-live-viewers": "jasafacebokads",
 };
 function _inferSvcFromTitle(title) {
   const t = (title || "").toLowerCase();
@@ -12510,7 +12588,518 @@ function _inferSvcFromTitle(title) {
   for (const [kw, svc] of rules) if (t.includes(kw)) return svc;
   return "";
 }
+
+// 2026-08-27 — SPECIFICITY-ordered category resolution (mirror .com fix).
+// Tanpa ini, artikel "How Much Does Facebook Ads Services Cost For Cafe" dengan
+// draft.service='jasa-iklan-tiktok' (default template) akan di-label tiktok (salah).
+const _CAT_SPECIFICITY = {
+    "landing-page-design": 5,
+    "website-development": 4,
+    "facebook-ads-management": 3,
+    "google-ads-management": 3,
+    "tiktok-ads-management": 3,
+    "instagram-ads-management": 3,
+    "youtube-ads-management": 3,
+    "instagram-management": 2,
+    "tiktok-management": 2,
+    "digital-marketing-agency": 1,
+    "live-stream-viewers": 0,
+};
+function _resolveCategory(service, title, fallback) {
+    const inferred = _inferSvcFromTitle(title || "");
+    const svc = (service || "").toLowerCase();
+    if (!svc || svc === "digital-marketing-agency") return inferred || fallback || "trending";
+    // View-live platform-specific always wins from inferred (mirrors .com)
+    if (inferred && (inferred.startsWith("live-stream-viewers-") || inferred.endsWith("-live-viewers"))) {
+      return inferred;
+    }
+    if (inferred && (_CAT_SPECIFICITY[inferred] || 0) > (_CAT_SPECIFICITY[svc] || 0)) return inferred;
+    return svc;
+}
+
+// ─── News Sitemap (Google News + Bing News) ───
+// /news.xml — top 1000 freshest per file, pagination ?page=N.
+// Same handler pattern as beriklan.co.id, diadaptasi untuk URL .my.
+async function handleNewsSitemap(request, env) {
+  if (!env.DB) return new Response("DB unavailable", { status: 503 });
+  const url = new URL(request.url);
+  const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10));
+  const PAGE_SIZE = 1000;
+  const offset = (page - 1) * PAGE_SIZE;
+  try {
+    const articles = await env.DB.prepare(
+      `SELECT slug, title, excerpt, iso_date, service, city, category, tags
+       FROM posts_meta
+       WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'
+         AND iso_date IS NOT NULL AND iso_date != ''
+       ORDER BY iso_date DESC LIMIT ? OFFSET ?`
+    ).bind(PAGE_SIZE, offset).all();
+    const rows = articles.results || [];
+    if (rows.length === 0) {
+      return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`,
+        { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=1800" } });
+    }
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${rows.map(a => {
+      const dateIso = (a.iso_date || '').replace(' ', 'T');
+      const dateStamp = dateIso.slice(0, 16) + (dateIso.length > 16 ? 'Z' : ':00Z');
+      const tagsArr = (() => { try { return JSON.parse(a.tags || '[]'); } catch { return []; } })();
+      const kw = [a.service, a.city, ...(Array.isArray(tagsArr) ? tagsArr.slice(0, 3) : [])].filter(Boolean).join(',');
+      const img = _featuredImageFor(a);
+      return `  <url>
+    <loc>https://beriklan.my/blog/${escHtml(a.slug)}/</loc>
+    <lastmod>${escHtml(dateStamp)}</lastmod>
+    <image:image><image:loc>https://beriklan.my${escHtml(img)}</image:loc></image:image>
+    <news:news>
+      <news:publication>
+        <news:name>Beriklan.my</news:name>
+        <news:language>en-my</news:language>
+      </news:publication>
+      <news:publication_date>${escHtml(dateStamp)}</news:publication_date>
+      <news:title>${escHtml(a.title || a.slug)}</news:title>
+      ${kw ? `<news:keywords>${escHtml(kw.slice(0, 250))}</news:keywords>` : ''}
+      <news:genres>Blog</news:genres>
+    </news:news>
+  </url>`;
+    }).join('\n')}
+</urlset>`;
+    return new Response(xml, {
+      headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=1800" }
+    });
+  } catch (e) {
+    console.error('handleNewsSitemap error:', e);
+    return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`,
+      { headers: { "Content-Type": "application/xml; charset=utf-8" } });
+  }
+}
+
+// ─── News sitemap ping + IndexNow push ───
+// Triggered via cron-job.org tiap 2 jam (pengganti CF cron yang penuh 5/5).
+async function handleNewsPing(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401 });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "no db" }), { status: 503 });
+  const results = { sitemap: "https://beriklan.my/news.xml" };
+  try {
+    const fresh = await env.DB.prepare(
+      `SELECT slug FROM posts_meta WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'
+       ORDER BY iso_date DESC LIMIT 100`
+    ).all();
+    const urls = (fresh.results || []).map(r => `https://beriklan.my/blog/${r.slug}/`);
+    const key = env.INDEXNOW_KEY || "2dac33f6303f4041b9ec7e2f2910ea80";
+    const body = JSON.stringify({ host: "beriklan.my", key, urlList: urls });
+    const in_responses = [];
+    for (const ep of ["https://www.bing.com/indexnow", "https://api.indexnow.org/indexnow"]) {
+      try {
+        const r = await fetch(ep, { method: "POST", headers: { "Content-Type": "application/json" }, body });
+        in_responses.push({ endpoint: ep, status: r.status });
+      } catch (e) { in_responses.push({ endpoint: ep, error: e.message }); }
+    }
+    results.indexnow = { submitted: urls.length, responses: in_responses };
+  } catch (e) { results.indexnow = { error: e.message }; }
+  return new Response(JSON.stringify({ ok: true, ...results }, null, 2),
+    { headers: { "Content-Type": "application/json" } });
+}
+
+// ─── Multi-channel distribute (IndexNow + optional webhook/Telegram) ───
+// Triggered via cron-job.org tiap 3 jam.
+async function handleDistributeCron(request, env) {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  if (token !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), { status: 401 });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ ok: false, error: "no db" }), { status: 503 });
+  try {
+    const dry = url.searchParams.get("dry") === "1";
+    const limit = Math.min(parseInt(url.searchParams.get("limit") || "30", 10), 100);
+    const rows = await env.DB.prepare(
+      `SELECT slug, title, excerpt, service, city
+       FROM posts_meta
+       WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'
+         AND iso_date >= datetime('now', '-24 hours')
+         AND (last_distributed_at IS NULL OR last_distributed_at < iso_date)
+       ORDER BY iso_date DESC LIMIT ?`
+    ).bind(limit).all();
+    const articles = rows.results || [];
+    const results = { submitted: 0, channels: {}, dry };
+    if (articles.length === 0) {
+      return new Response(JSON.stringify({ ok: true, ...results, message: "no new articles" }, null, 2),
+        { headers: { "Content-Type": "application/json" } });
+    }
+    const channels = ["indexnow"];
+    if (env.DISTRIBUTE_WEBHOOK) channels.push("webhook");
+    if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHANNEL_ID) channels.push("telegram");
+    for (const ch of channels) results.channels[ch] = { ok: 0, fail: 0, samples: [] };
+    for (const a of articles) {
+      const link = `https://beriklan.my/blog/${a.slug}/`;
+      const text = `${a.title}\n\n${a.excerpt || ''}\n\n${link}`;
+      try {
+        if (!dry) {
+          const key = env.INDEXNOW_KEY || "2dac33f6303f4041b9ec7e2f2910ea80";
+          await fetch("https://www.bing.com/indexnow", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ host: "beriklan.my", key, urlList: [link] }),
+          }).catch(() => {});
+        }
+        results.channels.indexnow.ok++;
+        if (results.channels.indexnow.samples.length < 2) results.channels.indexnow.samples.push(link);
+      } catch (e) { results.channels.indexnow.fail++; }
+      if (env.DISTRIBUTE_WEBHOOK) {
+        try {
+          if (!dry) {
+            await fetch(env.DISTRIBUTE_WEBHOOK, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title: a.title, text, link, slug: a.slug, service: a.service, city: a.city }),
+            }).catch(() => {});
+          }
+          results.channels.webhook.ok++;
+        } catch (e) { results.channels.webhook.fail++; }
+      }
+      if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHANNEL_ID) {
+        try {
+          if (!dry) {
+            await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                chat_id: env.TELEGRAM_CHANNEL_ID,
+                text: `<b>${a.title}</b>\n\n${link}`,
+                parse_mode: "HTML",
+                disable_web_page_preview: false,
+              }),
+            }).catch(() => {});
+          }
+          results.channels.telegram.ok++;
+        } catch (e) { results.channels.telegram.fail++; }
+      }
+      if (!dry) {
+        await env.DB.prepare("UPDATE posts_meta SET last_distributed_at = datetime('now') WHERE slug = ?").bind(a.slug).run();
+      }
+      results.submitted++;
+    }
+    return new Response(JSON.stringify({ ok: true, ...results }, null, 2),
+      { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: e.message }), { status: 500 });
+  }
+}
+
+// ─── Posts Categories Monitor (mirror .com) ───
+// Returns dist + sample of live posts categorized. Useful untuk verifikasi
+// recategorize migration + monitoring health.
+async function handleAdminPostsCategories(request, env) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("token") !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ error: "no db" }), { status: 503 });
+  try {
+    const dist = await env.DB.prepare(
+      "SELECT category, COUNT(*) c FROM posts_meta WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%' AND category IS NOT NULL AND category != '' GROUP BY category ORDER BY c DESC LIMIT 30"
+    ).all();
+    const sample = await env.DB.prepare(
+      "SELECT slug, title, category FROM posts_meta WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%' AND (LOWER(title) LIKE '%landing page%' OR LOWER(title) LIKE '%website%' OR LOWER(title) LIKE '%ads%' OR LOWER(title) LIKE '%live%') LIMIT 15"
+    ).all();
+    return new Response(JSON.stringify({ ok: true, dist: dist.results || [], sample: sample.results || [] }, null, 2),
+      { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ─── Posts index full (with category + featured image) — untuk regenerate posts-index.json ───
+async function handleAdminPostsFull(request, env) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("token") !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  if (!env.DB) return new Response(JSON.stringify({ error: "no db" }), { status: 503 });
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "500", 10), 5000);
+  try {
+    const rows = await env.DB.prepare(
+      `SELECT slug, title, excerpt, date, iso_date, category, readTime, tags, service, city
+       FROM posts_meta
+       WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'
+         AND title IS NOT NULL AND title != ''
+       ORDER BY iso_date DESC LIMIT ?`
+    ).bind(limit).all();
+    const posts = (rows.results || []).map(p => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt || p.title || '',
+      date: (p.date || '').slice(0, 12),
+      iso_date: p.iso_date || '',
+      category: p.category || 'trending',
+      readTime: p.readTime || '3 min',
+      tags: (() => { try { return JSON.parse(p.tags || '[]'); } catch { return []; } })(),
+      featured: false,
+    }));
+    return new Response(JSON.stringify({ ok: true, count: posts.length, posts }, null, 2),
+      { headers: { "Content-Type": "application/json" } });
+  } catch (e) {
+    return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
+}
+
+// ─── BLOG_CAT_META (.my labels — EN with BM where natural) ───
+const BLOG_CAT_META = {
+  'meta': { label: 'Facebook & Instagram' },
+  'tiktok': { label: 'TikTok' },
+  'google': { label: 'Google Ads' },
+  'youtube': { label: 'YouTube' },
+  'facebook-ads-management': { label: 'Facebook Ads' },
+  'instagram-ads-management': { label: 'Instagram Ads' },
+  'tiktok-ads-management': { label: 'TikTok Ads' },
+  'google-ads-management': { label: 'Google Ads Mgmt' },
+  'youtube-ads-management': { label: 'YouTube Ads' },
+  'digital-marketing-agency': { label: 'Digital Marketing' },
+  'live-stream-viewers': { label: 'Live Viewers' },
+  'live-stream-viewers-tiktok': { label: 'Live TikTok' },
+  'live-stream-viewers-youtube': { label: 'Live YouTube' },
+  'live-stream-viewers-instagram': { label: 'Live Instagram' },
+  'live-stream-viewers-shopee': { label: 'Live Shopee' },
+  'live-stream-viewers-twitch': { label: 'Live Twitch' },
+  'website-development': { label: 'Website Dev' },
+  'landing-page-design': { label: 'Landing Page' },
+  'instagram-management': { label: 'Instagram Mgmt' },
+  'tiktok-management': { label: 'TikTok Mgmt' },
+  'strategy': { label: 'Strategy' },
+  'trending': { label: 'Trending' },
+  'case-study': { label: 'Case Study' },
+};
+
+function _biPageWindow(current, last) {
+  const set = new Set([1, 2, last - 1, last, current - 1, current, current + 1]);
+  const pages = [...set].filter((p) => p >= 1 && p <= last).sort((a, b) => a - b);
+  const out = [];
+  let prev = 0;
+  for (const p of pages) {
+    if (p - prev > 1) out.push('…');
+    out.push(p);
+    prev = p;
+  }
+  return out;
+}
+
+// ─── Render Blog Index (D1-first — mirror .com) ───
+// Routes:
+//   /blog/                                  → page 1
+//   /blog/page/N/                           → page N
+//   /blog/category/<slug>/                  → page 1
+//   /blog/category/<slug>/page/N/           → page N
+// Single source of truth = posts_meta di D1. Tanpa ini: blog index pakai static Astro
+// blog.astro dengan posts-index.json stale (24 post) vs paginated (4.306) — inkonsisten.
+async function renderBlogIndex(env, pageNum, category) {
+  if (!env.DB) return null;
+  // 2026-08-27 DEBUG — wrap entire body in try/catch and return fallback on any error
+  try {
+    return await _renderBlogIndexInner(env, pageNum, category);
+  } catch (e) {
+    console.error('[renderBlogIndex] error:', e && (e.stack || e.message) || String(e));
+    return new Response("DEBUG renderBlogIndex error: " + (e && (e.stack || e.message) || String(e)), {
+      status: 500,
+      headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' }
+    });
+  }
+}
+
+async function _renderBlogIndexInner(env, pageNum, category) {
+  try {
+    const knownCat = category && BLOG_CAT_META[category] ? category : (category || null);
+    const catFilter = knownCat;
+    const where = catFilter
+      ? "WHERE category = ? AND slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'"
+      : "WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%'";
+    const bindArgs = catFilter ? [catFilter] : [];
+    const countRow = await env.DB.prepare(
+      `SELECT COUNT(*) c FROM posts_meta ${where}`
+    ).bind(...bindArgs).first();
+    const total = countRow?.c || 0;
+    if (category && !BLOG_CAT_META[category] && total === 0) return null;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    const page = Math.min(Math.max(1, pageNum || 1), totalPages);
+    const offset = (page - 1) * PAGE_SIZE;
+    const rows = await env.DB.prepare(
+      `SELECT slug, title, excerpt, date, iso_date, category, readTime, tags, service FROM posts_meta ${where} ORDER BY iso_date DESC LIMIT ${PAGE_SIZE} OFFSET ${offset}`
+    ).bind(...bindArgs).all();
+    const posts = rows.results || [];
+    let catRows = [];
+    try {
+      const cr = await env.DB.prepare(
+        "SELECT category, COUNT(*) c FROM posts_meta WHERE slug NOT LIKE 'seed-%' AND slug NOT LIKE 'exp-%' AND category IS NOT NULL AND category != '' GROUP BY category ORDER BY c DESC LIMIT 14"
+      ).all();
+      catRows = cr.results || [];
+    } catch {}
+
+    const tpl = await _getBlogTpl(env);
+    const catLabel = catFilter ? (BLOG_CAT_META[catFilter]?.label || catFilter) : null;
+    const base = "https://beriklan.my";
+    const selfUrl = catFilter
+      ? `${base}/blog/category/${catFilter}/` + (page > 1 ? `page/${page}/` : '')
+      : (page > 1 ? `${base}/blog/page/${page}/` : `${base}/blog/`);
+    const prevUrl = page === 1 ? null : (page === 2
+      ? (catFilter ? `${base}/blog/category/${catFilter}/` : `${base}/blog/`)
+      : (catFilter ? `${base}/blog/category/${catFilter}/page/${page - 1}/` : `${base}/blog/page/${page - 1}/`));
+    const nextUrl = page < totalPages
+      ? (catFilter ? `${base}/blog/category/${catFilter}/page/${page + 1}/` : `${base}/blog/page/${page + 1}/`)
+      : null;
+    const title = catFilter
+      ? `${catLabel} Articles — Page ${page} of ${totalPages} | Beriklan.my`
+      : (page > 1 ? `Blog Malaysia — Page ${page} of ${totalPages} | Beriklan.my` : 'Blog Malaysia — Digital Marketing Tips & Guides | Beriklan.my');
+    const desc = catFilter
+      ? `${catLabel} articles from Beriklan.my — ${total} guides and tips based on real campaign experience in Malaysia since 2016.`
+      : `Digital marketing tips, guides, and case studies from Beriklan.my — ${total} articles on Facebook Ads, Google Ads, TikTok Ads, and performance marketing in Malaysia.`;
+
+    let prefix = tpl ? tpl.prefix : _fallbackPrefix(selfUrl, title, desc, title, `${base}/og-image.png`);
+    const suffix = tpl ? tpl.suffix : _fallbackSuffix();
+    prefix = prefix
+      .replace(/<title>[^<]*<\/title>/, `<title>${escHtml(title)}</title>`)
+      .replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${escHtml(desc)}"`)
+      .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${selfUrl}"`)
+      .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${escHtml(title)}"`)
+      .replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${escHtml(desc)}"`)
+      .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${selfUrl}"`)
+      .replace(/<meta property="og:type" content="[^"]*"/, `<meta property="og:type" content="website"`);
+    if (prevUrl) prefix = prefix.replace('</head>', `<link rel="prev" href="${prevUrl}">\n</head>`);
+    if (nextUrl) prefix = prefix.replace('</head>', `<link rel="next" href="${nextUrl}">\n</head>`);
+    prefix = _injectPageExtras(prefix, tpl ? tpl.islands : '', tpl ? tpl.bodyPre : '');
+
+    const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const start = offset + (posts.length ? 1 : 0);
+    const end = offset + posts.length;
+
+    const chips = [`<a href="/blog/" class="bi-chip${!catFilter ? ' on' : ''}">All Topics<span class="n">${fmt(total)}</span></a>`]
+      .concat(catRows.map(r => {
+        const lab = BLOG_CAT_META[r.category]?.label || r.category;
+        return `<a href="/blog/category/${escHtml(r.category)}/" class="bi-chip${catFilter === r.category ? ' on' : ''}">${escHtml(lab)}<span class="n">${fmt(r.c)}</span></a>`;
+      })).join('');
+
+    const cards = posts.map(p => {
+      const lab = BLOG_CAT_META[p.category]?.label || p.category || 'Blog';
+      const img = _featuredImageFor(p);
+      return `<a href="/blog/${escHtml(p.slug)}/" class="bi-card group">
+  <div class="bi-thumb"><img src="${img}" alt="${escHtml(p.title || p.slug)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.display='none';"><span class="bi-cat">${escHtml(lab)}</span></div>
+  <div class="bi-body">
+    <h3>${escHtml(p.title || p.slug)}</h3>
+    <div class="bi-meta"><span>${escHtml((p.date || '').slice(0, 10))}</span><span>${escHtml(p.readTime || '3 min')}</span></div>
+  </div>
+</a>`;
+    }).join('\n');
+
+    const adTop = `<div class="my-6 p-3 bg-soft/30 rounded-xl border border-gray-100">
+  <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-2">Advertisement</p>
+  <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>`;
+    const adBottom = `<div class="mt-10 p-3 bg-soft/30 rounded-xl border border-gray-100">
+  <p class="text-[10px] font-bold uppercase tracking-wider text-muted text-center mb-2">Advertisement</p>
+  <ins class="adsbygoogle" style="display:block;text-align:center;" data-ad-layout="in-article" data-ad-format="fluid"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>`;
+
+    const pgBtn = (p) => p === page
+      ? `<span class="pg-btn pg-current" aria-current="page">${p}</span>`
+      : `<a href="${p === 1 ? (catFilter ? `/blog/category/${catFilter}/` : '/blog/') : (catFilter ? `/blog/category/${catFilter}/page/${p}/` : `/blog/page/${p}/`)}" class="pg-btn">${p}</a>`;
+    const pagination = totalPages > 1 ? `<nav class="mt-12" aria-label="Blog archive navigation">
+  <div class="flex items-center justify-center gap-1.5 flex-wrap">
+    ${prevUrl ? `<a href="${prevUrl}" rel="prev" class="pg-btn pg-nav">← Previous</a>` : `<span class="pg-btn pg-disabled" aria-disabled="true">← Previous</span>`}
+    ${_biPageWindow(page, totalPages).map(p => p === '…' ? `<span class="px-2 text-sm text-muted select-none">…</span>` : pgBtn(p)).join('')}
+    ${nextUrl ? `<a href="${nextUrl}" rel="next" class="pg-btn pg-next">Next →</a>` : `<span class="pg-btn pg-disabled" aria-disabled="true">Next →</span>`}
+  </div>
+  <p class="text-center text-xs text-muted mt-4">Page ${page} of ${fmt(totalPages)} · ${fmt(total)} articles</p>
+</nav>` : '';
+
+    const middle = `<style>
+  .bi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  @media(min-width:1024px){.bi-grid{grid-template-columns:repeat(3,1fr);gap:24px;}}
+  .bi-card{background:#fff;border:1px solid #f1f3f8;border-radius:1rem;overflow:hidden;display:block;transition:all .3s ease;}
+  .bi-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px -8px rgba(15,30,61,.14);border-color:#f59e0b;}
+  .bi-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,#0f1e3d,#1a2f5c);}
+  .bi-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s cubic-bezier(.22,1,.36,1);}
+  .bi-card:hover .bi-thumb img{transform:scale(1.05);}
+  .bi-cat{position:absolute;left:8px;top:8px;background:rgba(255,255,255,.95);color:#0b1426;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:9999px;}
+  .bi-body{padding:12px;}
+  @media(min-width:768px){.bi-body{padding:20px;}}
+  .bi-body h3{font-weight:700;font-size:13px;line-height:1.4;color:#0b1426;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px;transition:color .2s;}
+  @media(min-width:768px){.bi-body h3{font-size:16px;}}
+  .bi-card:hover h3{color:#f59e0b;}
+  .bi-meta{font-size:10px;color:#6b7280;display:flex;gap:10px;}
+  .bi-chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .bi-chips::-webkit-scrollbar{display:none;}
+  .bi-chip{flex:0 0 auto;padding:8px 14px;border-radius:9999px;border:1px solid #e5e7eb;background:#fff;color:#0b1426;font-size:11px;font-weight:700;text-decoration:none;transition:all .2s;}
+  .bi-chip:hover{border-color:#f59e0b;color:#f59e0b;}
+  .bi-chip.on{background:#0b1426;color:#fff;border-color:#0b1426;}
+  .bi-chip .n{color:#9ca3af;font-weight:600;margin-left:5px;}
+  .bi-chip.on .n{color:rgba(255,255,255,.6);}
+  .pg-btn{display:inline-flex;align-items:center;gap:6px;min-width:38px;height:38px;padding:0 12px;justify-content:center;border-radius:9999px;border:1px solid #e5e7eb;background:#fff;color:#0b1426;font-size:12px;font-weight:700;transition:all .2s ease;text-decoration:none;}
+  a.pg-btn:hover{border-color:#f59e0b;color:#f59e0b;}
+  .pg-current,.pg-next{background:#0b1426;border-color:#0b1426;color:#fff;}
+  a.pg-next:hover{background:#1a2f5c;border-color:#1a2f5c;color:#fff;}
+  a.pg-nav:hover{border-color:#0b1426;color:#0b1426;}
+  .pg-disabled{color:#9ca3af;background:#f9fafb;cursor:default;}
+  </style>
+<header class="relative pt-28 md:pt-40 pb-10 md:pb-14 overflow-hidden bg-gradient-to-br from-white via-soft to-beige">
+  <div class="absolute inset-0 opacity-[0.4] pointer-events-none hero-grid"></div>
+  <div class="container mx-auto px-6 max-w-3xl text-center relative z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-ink font-semibold rounded-full text-xs tracking-wider uppercase shadow-sm mb-6">
+      Blog · Digital Marketing Malaysia
+    </div>
+    <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] tracking-tight mb-5">
+      ${catFilter ? `${escHtml(catLabel)} Articles` : 'Digital Marketing<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-2 to-accent">Tips from Real Campaigns.</span>'}
+    </h1>
+    <p class="text-base md:text-lg text-muted leading-relaxed">
+      Tips, guides, and case studies from the Beriklan team — based on real
+      campaign experience across Malaysia since 2016.
+    </p>
+  </div>
+</header>
+<section class="py-10 md:py-14 bg-white">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div class="bi-chips mb-6">${chips}</div>
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-8 px-5 py-3.5 rounded-2xl bg-soft border border-gray-100">
+      <p class="text-sm text-muted">Showing articles <span class="font-bold text-ink">${fmt(start)}–${fmt(end)}</span> of <span class="font-bold text-ink">${fmt(total)}</span>${catFilter ? ` in <span class="font-bold text-ink">${escHtml(catLabel)}</span>` : ''}.</p>
+    </div>
+    ${adTop}
+    ${posts.length ? `<div class="bi-grid mt-6">${cards}</div>` : '<div class="text-center py-16 border border-dashed border-gray-200 rounded-2xl"><p class="text-muted">No articles in this topic yet. Try another topic.</p></div>'}
+    ${pagination}
+    ${adBottom}
+    <div class="mt-12 rounded-2xl border border-gray-100 bg-soft/60 p-6 md:p-8">
+      <h2 class="font-display font-bold text-sm text-ink uppercase tracking-[0.15em] mb-4">Continue with our services</h2>
+      <div class="flex flex-wrap gap-2">
+        <a href="/facebook-ads-management/" class="inline-block px-4 py-2 rounded-full bg-white border border-gray-200 text-xs font-bold text-ink hover:border-accent hover:text-accent transition-colors">Facebook Ads Management</a>
+        <a href="/google-ads-management/" class="inline-block px-4 py-2 rounded-full bg-white border border-gray-200 text-xs font-bold text-ink hover:border-accent hover:text-accent transition-colors">Google Ads Management</a>
+        <a href="/tiktok-ads-management/" class="inline-block px-4 py-2 rounded-full bg-white border border-gray-200 text-xs font-bold text-ink hover:border-accent hover:text-accent transition-colors">TikTok Ads Management</a>
+        <a href="/landing-page-design/" class="inline-block px-4 py-2 rounded-full bg-white border border-gray-200 text-xs font-bold text-ink hover:border-accent hover:text-accent transition-colors">Landing Page Design</a>
+        <a href="/digital-marketing-agency/" class="inline-block px-4 py-2 rounded-full bg-white border border-gray-200 text-xs font-bold text-ink hover:border-accent hover:text-accent transition-colors">Digital Marketing Agency</a>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+    return new Response(prefix + middle + suffix, {
+      headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300', 'CF-Cache-Tag': 'beriklanmy-blog' }
+    });
+  } catch (e) {
+    console.error('renderBlogIndex error:', e);
+    return null;
+  }
+}
+
 function _featuredImageFor(meta) {
+  // 2026-08-27 — category-first (miror fix .com). Kalau category match SVC_IMG,
+  // pakai itu langsung. Tanpa ini: artikel "Google Ads Untuk Hartanah" dengan
+  // service=jasa-iklan-tiktok di-DB keluar image TikTok Ads (salah).
+  const catRaw = (meta?.category || "").toLowerCase();
+  if (catRaw && SVC_IMG[catRaw]) return `/images/blog/${SVC_IMG[catRaw]}.webp`;
   const svcRaw = (meta?.service || "").toLowerCase();
   const inferred = _inferSvcFromTitle(meta?.title);
   const svc = (!svcRaw || svcRaw === "digital-marketing-agency") ? (inferred || svcRaw) : svcRaw;

@@ -14,7 +14,6 @@ for (const line of content.split('\n')) {
   const src = parts[0];
   const dst = parts[1];
   map[src] = dst;
-  // Add no-extension variants for .html URLs
   if (src.endsWith('.html')) {
     const noExt = src.slice(0, -5);
     if (!map[noExt]) map[noExt] = dst;
