@@ -398,23 +398,40 @@ export default {
     const blogMatch = path.match(/^\/blog\/([^\/]+)\/?$/);
     if (blogMatch && !path.startsWith("/blog/category") && !path.startsWith("/blog/tag")) {
       const slug = blogMatch[1];
-      const exists = await env.DB.prepare(
-        "SELECT 1 FROM generated_drafts WHERE slug=?"
-      ).bind(slug).first();
-      if (exists) {
-        const dynamic = await renderBlogPost(slug, env);
-        if (dynamic) return dynamic;
+      let exists = null;
+      try {
+        exists = await env.DB.prepare(
+          "SELECT 1 FROM generated_drafts WHERE slug=?"
+        ).bind(slug).first();
+      } catch (e) {
+        // debug: if D1 throws, fall through to asset try
       }
+      if (exists) {
+        const dynamic = await renderBlogPost(slug, env, ctx);
+        if (dynamic) return dynamic;
+        // if renderBlogPost returned null, fall through to asset 404 handler which will retry render (without exists check)
+      }
+    }
+
+    // /sitemap.xml alias → serve sitemap-index.xml (allow all, point ke sitemap)
+    if (path === "/sitemap.xml" || path === "/sitemap.xml/") {
+      try {
+        const sitemapIdx = await env.ASSETS.fetch(new Request('https://beriklan.my/sitemap-index.xml'));
+        if (sitemapIdx.ok) {
+          const body = await sitemapIdx.text();
+          return new Response(body, { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
+        }
+      } catch {}
     }
 
     // Dynamic posts-index.json (daftar semua artikel untuk BlogFilter)
     if (path === "/data/posts-index.json") {
-      return await handlePostsIndex(env);
+      return await handlePostsIndex(request, env, ctx);
     }
 
     // Dynamic sitemap-blog.xml — includes committed drafts from queue
     if (path === "/sitemap-blog.xml") {
-      return await handleBlogSitemap(env);
+      return await handleBlogSitemap(request, env, ctx);
     }
 
     // IndexNow trigger — submit new URLs
@@ -426,7 +443,7 @@ export default {
 
     // News sitemap (.my — same pattern as .com, pagination ?page=N)
     if (path === "/news.xml" || path === "/news.xml/") {
-      return await handleNewsSitemap(request, env);
+      return await handleNewsSitemap(request, env, ctx);
     }
 
     // News sitemap ping (cron-job.org replaces CF cron yang penuh 5/5)
@@ -453,16 +470,27 @@ export default {
       return await handleAdminPostsFull(request, env);
     }
 
-    // Blog index / pagination / category — renderBlogIndex D1-first (mirror .com).
+    // Blog index / pagination / category — renderBlogIndex D1-first (mirror .com) + edge cache.
     // STATIK blog.astro hanya fallback kalau D1 kosong / error.
     const blogIdxRoot = path === "/blog" || path === "/blog/";
     const blogPageM = path.match(/^\/blog\/page\/(\d+)\/?$/);
     const blogCatM = path.match(/^\/blog\/category\/([a-z0-9-]+)(?:\/page\/(\d+))?\/?$/);
     if (blogIdxRoot || blogPageM || blogCatM) {
+      const _biCacheKey = new Request(url.toString(), { method: 'GET' });
+      try {
+        const _biCached = await caches.default.match(_biCacheKey);
+        if (_biCached) {
+          const hit = new Response(_biCached.body, _biCached);
+          hit.headers.set('X-Cache', 'HIT');
+          return hit;
+        }
+      } catch {}
       const idxPage = blogPageM ? parseInt(blogPageM[1], 10) : (blogCatM && blogCatM[2] ? parseInt(blogCatM[2], 10) : 1);
       const idxResp = await renderBlogIndex(env, idxPage, blogCatM ? blogCatM[1] : null);
       if (idxResp) {
         idxResp.headers.set("X-Worker-Rendered", "renderBlogIndex-v3");
+        if (!idxResp.headers.has('X-Cache')) idxResp.headers.set('X-Cache', 'MISS');
+        try { ctx && ctx.waitUntil(caches.default.put(_biCacheKey, idxResp.clone())); } catch {}
         return idxResp;
       }
     }
@@ -489,7 +517,7 @@ export default {
       if (assetResp.status === 404) {
         const blogMatch = path.match(/^\/blog\/([^\/]+)\/?$/);
         if (blogMatch) {
-          const dynamic = await renderBlogPost(blogMatch[1], env);
+          const dynamic = await renderBlogPost(blogMatch[1], env, ctx);
           if (dynamic) return dynamic;
         }
       }
@@ -508,7 +536,7 @@ export default {
       // Last resort: try dynamic blog post render
       const blogMatch = path.match(/^\/blog\/([^\/]+)\/?$/);
       if (blogMatch) {
-        const dynamic = await renderBlogPost(blogMatch[1], env);
+        const dynamic = await renderBlogPost(blogMatch[1], env, ctx);
         if (dynamic) return dynamic;
       }
       return new Response("Not Found", { status: 404, headers: { "Content-Type": "text/html; charset=utf-8" } });
@@ -3093,6 +3121,10 @@ async function handleAdminMigrate(request, env) {
     // 2026-08-27 — last_distributed_at untuk multi-channel distribute (IndexNow + Telegram)
     `ALTER TABLE posts_meta ADD COLUMN last_distributed_at TEXT`,
     `CREATE INDEX IF NOT EXISTS idx_posts_meta_distributed ON posts_meta (last_distributed_at, iso_date)`,
+    `CREATE INDEX IF NOT EXISTS idx_posts_meta_service_iso ON posts_meta (service, iso_date DESC)`,
+    `CREATE INDEX IF NOT EXISTS idx_posts_meta_category_iso ON posts_meta (category, iso_date DESC)`,
+    `CREATE INDEX IF NOT EXISTS idx_posts_meta_iso ON posts_meta (iso_date DESC)`,
+    `CREATE INDEX IF NOT EXISTS idx_email_queue_status_sent ON email_queue (status, sent_at)`,
     // scrape.beriklan.my — consumer trial system
     `CREATE TABLE IF NOT EXISTS scrape_users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12395,9 +12427,29 @@ ${(users.results||[]).map(u => `<tr><td>${u.id}</td><td>${escHtml(u.name)}</td><
   return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
 
-// ─── Dynamic posts-index.json (BlogFilter runtime) ─────────────────
-async function handlePostsIndex(env) {
-  if (!env.DB) return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+// ─── Dynamic posts-index.json (BlogFilter runtime) — edge cached + static fallback ─
+async function handlePostsIndex(request, env, ctx) {
+  const cache = caches.default;
+  const cacheKey = new Request(request.url, { method: 'GET' });
+  try {
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      const hit = new Response(cached.body, cached);
+      hit.headers.set('X-Cache', 'HIT');
+      return hit;
+    }
+  } catch {}
+  if (!env.DB) {
+    try {
+      const fb = await env.ASSETS.fetch(new Request('https://beriklan.my/data/posts-index.json'));
+      if (fb.ok) {
+        const r = new Response(fb.body, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300', 'X-Cache': 'MISS', 'X-Fallback': 'static' } });
+        try { ctx && ctx.waitUntil(cache.put(cacheKey, r.clone())); } catch {}
+        return r;
+      }
+    } catch {}
+    return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+  }
   try {
     const existing = await env.DB.prepare(
       "SELECT slug, title, excerpt, date, iso_date, category, readTime, tags, featured FROM posts_meta ORDER BY iso_date DESC"
@@ -12424,17 +12476,48 @@ async function handlePostsIndex(env) {
         });
       }
     }
-    return new Response(JSON.stringify(Array.from(map.values())), {
-      headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=300" }
+    const body = JSON.stringify(Array.from(map.values()));
+    const resp = new Response(body, {
+      headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=300", "X-Cache": "MISS" }
     });
+    try { ctx && ctx.waitUntil(cache.put(cacheKey, resp.clone())); } catch {}
+    return resp;
   } catch {
-    return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+    try {
+      const fb = await env.ASSETS.fetch(new Request('https://beriklan.my/data/posts-index.json'));
+      if (fb.ok) {
+        const r = new Response(fb.body, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300', 'X-Cache': 'MISS', 'X-Fallback': 'static' } });
+        try { ctx && ctx.waitUntil(cache.put(cacheKey, r.clone())); } catch {}
+        return r;
+      }
+    } catch {}
+    return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json", "X-Cache": "MISS" } });
   }
 }
 
-// ─── Dynamic sitemap-blog.xml ───────────────────────────────────
-async function handleBlogSitemap(env) {
-  if (!env.DB) return new Response("DB unavailable", { status: 503 });
+// ─── Dynamic sitemap-blog.xml — edge cached + static fallback (6060 URLs) ──
+async function handleBlogSitemap(request, env, ctx) {
+  const cache = caches.default;
+  const cacheKey = new Request(request.url, { method: 'GET' });
+  try {
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      const hit = new Response(cached.body, cached);
+      hit.headers.set('X-Cache', 'HIT');
+      return hit;
+    }
+  } catch {}
+  if (!env.DB) {
+    try {
+      const fb = await env.ASSETS.fetch(new Request('https://beriklan.my/sitemap-blog.xml'));
+      if (fb.ok) {
+        const r = new Response(fb.body, { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600', 'X-Cache': 'MISS', 'X-Fallback': 'static' } });
+        try { ctx && ctx.waitUntil(cache.put(cacheKey, r.clone())); } catch {}
+        return r;
+      }
+    } catch {}
+    return new Response("DB unavailable", { status: 503 });
+  }
   try {
     const posts = await env.DB.prepare("SELECT slug, iso_date FROM posts_meta ORDER BY iso_date DESC").all();
     const drafts = await env.DB.prepare("SELECT slug, committed_at FROM generated_drafts WHERE status='committed'").all();
@@ -12457,9 +12540,19 @@ ${urls.map(u => `  <url>
     <priority>0.8</priority>
   </url>`).join('\n')}
 </urlset>`;
-    return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
+    const resp = new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=3600", "X-Cache": "MISS" } });
+    try { ctx && ctx.waitUntil(cache.put(cacheKey, resp.clone())); } catch {}
+    return resp;
   } catch(e) {
-    return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`, { headers: { "Content-Type": "application/xml; charset=utf-8" } });
+    try {
+      const fb = await env.ASSETS.fetch(new Request('https://beriklan.my/sitemap-blog.xml'));
+      if (fb.ok) {
+        const r = new Response(fb.body, { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600', 'X-Cache': 'MISS', 'X-Fallback': 'static' } });
+        try { ctx && ctx.waitUntil(cache.put(cacheKey, r.clone())); } catch {}
+        return r;
+      }
+    } catch {}
+    return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`, { headers: { "Content-Type": "application/xml; charset=utf-8", "X-Cache": "MISS" } });
   }
 }
 
@@ -12517,7 +12610,10 @@ let _blogTpl = null;
 async function _getBlogTpl(env) {
   if (_blogTpl) return _blogTpl;
   try {
-    const refReq = new Request('https://beriklan.my/');
+    // Use explicit /index.html — bare "/" returns 404 ("error code 1042") in
+    // some CF Workers / wrangler combos because the asset binding does not
+    // auto-resolve "/" to "index.html" for internal fetches.
+    const refReq = new Request('https://beriklan.my/index.html');
     const refResp = await env.ASSETS.fetch(refReq);
     if (!refResp.ok) return null;
     const html = await refResp.text();
@@ -12620,7 +12716,17 @@ function _resolveCategory(service, title, fallback) {
 // ─── News Sitemap (Google News + Bing News) ───
 // /news.xml — top 1000 freshest per file, pagination ?page=N.
 // Same handler pattern as beriklan.co.id, diadaptasi untuk URL .my.
-async function handleNewsSitemap(request, env) {
+async function handleNewsSitemap(request, env, ctx) {
+  const cache = caches.default;
+  const cacheKey = new Request(request.url, { method: 'GET' });
+  try {
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      const hit = new Response(cached.body, cached);
+      hit.headers.set('X-Cache', 'HIT');
+      return hit;
+    }
+  } catch {}
   if (!env.DB) return new Response("DB unavailable", { status: 503 });
   const url = new URL(request.url);
   const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10));
@@ -12666,13 +12772,15 @@ ${rows.map(a => {
   </url>`;
     }).join('\n')}
 </urlset>`;
-    return new Response(xml, {
-      headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=1800" }
+    const resp = new Response(xml, {
+      headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=1800", "X-Cache": "MISS" }
     });
+    try { ctx && ctx.waitUntil(cache.put(cacheKey, resp.clone())); } catch {}
+    return resp;
   } catch (e) {
     console.error('handleNewsSitemap error:', e);
     return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`,
-      { headers: { "Content-Type": "application/xml; charset=utf-8" } });
+      { headers: { "Content-Type": "application/xml; charset=utf-8", "X-Cache": "MISS" } });
   }
 }
 
@@ -12850,6 +12958,7 @@ async function handleAdminPostsFull(request, env) {
   }
 }
 
+const PAGE_SIZE = 12; // blog index pagination
 // ─── BLOG_CAT_META (.my labels — EN with BM where natural) ───
 const BLOG_CAT_META = {
   'meta': { label: 'Facebook & Instagram' },
@@ -13389,7 +13498,17 @@ function _buildArticleBody(slug, meta, content, relatedRows) {
 }
 
 // ─── Dynamic blog post render (fallback when static page doesn't exist) ───
-async function renderBlogPost(slug, env) {
+async function renderBlogPost(slug, env, ctx) {
+  const _cacheKey = `https://beriklan.my/blog/${slug}/`;
+  try {
+    const _cached = await caches.default.match(new Request(_cacheKey));
+    if (_cached) {
+      const hit = new Response(_cached.body, _cached);
+      hit.headers.set('X-Cache', 'HIT');
+      hit.headers.set('X-Worker-Rendered', 'renderBlogPost-cache');
+      return hit;
+    }
+  } catch {}
   if (!env.DB) return null;
   try {
     let meta = await env.DB.prepare(
@@ -13431,9 +13550,16 @@ async function renderBlogPost(slug, env) {
     let relatedRows = [];
     try {
       const related = await env.DB.prepare(
-        "SELECT slug, title, date, readTime, excerpt FROM posts_content WHERE slug != ? AND (service = ? OR ? = '' OR category LIKE ?) ORDER BY RANDOM() LIMIT 3"
-      ).bind(slug, meta.service||'', meta.service||'', '%' + (meta.category||'Blog') + '%').all();
+        "SELECT slug, title, date, readTime, excerpt FROM posts_meta WHERE slug != ? AND service = ? ORDER BY iso_date DESC LIMIT 3"
+      ).bind(slug, meta.service||'').all();
       if (related.results?.length) relatedRows = related.results;
+      if (relatedRows.length < 3 && meta.category) {
+        const fallback = await env.DB.prepare(
+          "SELECT slug, title, date, readTime, excerpt FROM posts_meta WHERE slug != ? AND category = ? ORDER BY iso_date DESC LIMIT ?"
+        ).bind(slug, meta.category, 3 - relatedRows.length).all();
+        const seen = new Set(relatedRows.map(r => r.slug));
+        for (const r of (fallback.results || [])) if (!seen.has(r.slug)) relatedRows.push(r);
+      }
     } catch (e) {}
 
     const tpl = await _getBlogTpl(env);
@@ -13454,14 +13580,20 @@ async function renderBlogPost(slug, env) {
         .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${ogTitle}"`)
         .replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${excerpt}"`)
         .replace(/<meta name="twitter:url" content="[^"]*"/, `<meta name="twitter:url" content="${canonical}"`);
+      // Inject chrome islands (Navbar/StickyCTA/FloatingWhatsApp/CookieBanner)
+      // + bodyPre scripts (CF email-decode, GTM noscript, Astro hydration
+      // controller) right after <body> opening tag.
+      prefix = prefix.replace(/<body[^>]*>/, (m) => `${m}\n${tpl.bodyPre || ''}${tpl.islands || ''}`);
     }
 
     const middle = _buildArticleBody(slug, meta, content, relatedRows);
     const html = prefix + middle + suffix;
 
-    return new Response(html, {
-      headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600" }
+    const resp = new Response(html, {
+      headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600", "X-Cache": "MISS", "X-Worker-Rendered": "renderBlogPost" }
     });
+    try { ctx && ctx.waitUntil(caches.default.put(new Request(_cacheKey), resp.clone())); } catch {}
+    return resp;
   } catch (e) {
     console.error('renderBlogPost error:', e);
     return null;
@@ -13471,8 +13603,8 @@ async function renderBlogPost(slug, env) {
 // ─── Fallback prefix/suffix when ASSETS fetch fails ───
 function _fallbackPrefix(canonical, ogTitle, excerpt, title, ogImg) {
   const _ogImg = ogImg || "https://beriklan.my/og-image.png";
-  const orgJson = JSON.stringify({"@context":"https://schema.org","@type":"ProfessionalService","name":"Beriklan.my","description":"Agency digital marketing Indonesia — Facebook Ads, Google Ads, TikTok Ads, Landing Page, dan social media management.","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","image":"https://beriklan.my/logoweb.webp","priceRange":"Rp 2.500.000 - Rp 10.000.000","telephone":"+62-22-XXXXXXX","address":{"@type":"PostalAddress","addressCountry":"ID","addressLocality":"Bandung","addressRegion":"Jawa Barat"},"areaServed":{"@type":"Country","name":"Indonesia"},"openingHours":"Mo-Sa 09:00-18:00","knowsAbout":["Facebook Ads","Google Ads","TikTok Ads","Performance Marketing","Landing Page","Conversion Optimization"]});
-  const org2Json = JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"Beriklan.my","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","description":"Agency performance marketing Indonesia berbasis di Bandung — mengelola campaign sejak 2016.","foundingDate":"2016","sameAs":["https://www.instagram.com/beriklan.my","https://www.facebook.com/beriklan.my"]});
+  const orgJson = JSON.stringify({"@context":"https://schema.org","@type":"ProfessionalService","name":"Beriklan.my","description":"Performance marketing agency serving Malaysia — Facebook Ads, Google Ads, TikTok Ads, landing pages and social media management.","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","image":"https://beriklan.my/logoweb.webp","priceRange":"RM 790 - RM 6,999","telephone":"+62811919328","address":{"@type":"PostalAddress","addressCountry":"MY","addressLocality":"Kuala Lumpur","addressRegion":"Kuala Lumpur"},"areaServed":{"@type":"Country","name":"Malaysia"},"openingHours":"Mo-Sa 09:00-18:00","knowsAbout":["Facebook Ads","Google Ads","TikTok Ads","Performance Marketing","Landing Page","Conversion Optimization"]});
+  const org2Json = JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"Beriklan.my","url":"https://beriklan.my","logo":"https://beriklan.my/logoweb.webp","description":"Performance marketing agency serving Malaysia — managing paid media campaigns since 2016.","foundingDate":"2016","sameAs":["https://www.instagram.com/beriklan.my","https://www.facebook.com/beriklan.my"]});
   const gtm = 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-7RB4G5GC1X\');gtag(\'config\',\'G-PBQF8MMN40\');gtag("config","AW-18065868782",{allow_enhanced_conversions:true});function gtag_report_conversion(url){var cb=function(){if(typeof(url)!="undefined"){window.location=url;}};gtag("event","conversion",{send_to:"AW-18065868782/2EboCKa6odkcEO6PvaZD",value:1000.0,currency:"IDR",event_callback:cb});return false;}document.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body){if(t.tagName==="A"||t.tagName==="BUTTON")break;t=t.parentElement;}if(!t||t===document.body)return;var href=((t.href||(t.getAttribute&&t.getAttribute("href"))||"")+"").toLowerCase();if(href.indexOf("wa.me/")===-1&&href.indexOf("whatsapp")===-1)return;try{gtag("event","conversion",{send_to:"AW-18065868782/2EboCKa6odkcEO6PvaZD",value:1000.0,currency:"IDR",transport_type:"beacon"});}catch(err){}},true);';
   return `<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="google-adsense-account" content="ca-pub-4438184351486735"><title>${title} — Blog Beriklan.my</title><meta name="description" content="${excerpt}"><meta name="robots" content="index,follow"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${excerpt}"><meta property="og:image" content="${_ogImg}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="${canonical}"><meta name="twitter:title" content="${ogTitle}"><meta name="twitter:description" content="${excerpt}"><meta name="twitter:image" content="${_ogImg}"><link rel="stylesheet" href="/fonts/fonts.css"><script type="application/ld+json">${orgJson}</script><script type="application/ld+json">${org2Json}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-7RB4G5GC1X"></script><script>${gtm}</script></head><body class="font-sans text-primary bg-white antialiased">`;
 }

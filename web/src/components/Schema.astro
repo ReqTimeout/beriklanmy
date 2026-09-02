@@ -94,7 +94,7 @@ const { faq, breadcrumb, service, localBusiness } = Astro.props as Props;
     description: service.description,
     url: service.url,
     serviceType: service.serviceType || service.name,
-    areaServed: service.areaServed ? { '@type': 'Country', name: service.areaServed } : { '@type': 'Country', name: 'Indonesia' },
+    areaServed: service.areaServed ? { '@type': 'Country', name: service.areaServed } : { '@type': 'Country', name: 'Malaysia' },
     provider: service.provider ? {
       '@type': 'Organization',
       name: service.provider.name,
@@ -103,7 +103,7 @@ const { faq, breadcrumb, service, localBusiness } = Astro.props as Props;
     offers: service.priceRange ? {
       '@type': 'Offer',
       priceRange: service.priceRange,
-      priceCurrency: 'IDR'
+      priceCurrency: 'MYR'
     } : undefined
   })}></script>
 )}
